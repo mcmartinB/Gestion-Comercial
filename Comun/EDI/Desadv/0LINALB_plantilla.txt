@@ -1,0 +1,101 @@
+IDCAB#Campo de enlace con la tabla de cabeceras.
+IDEMB#Campo de enlace con la tabla de embalajes.
+IDLIN#Identificación de línea de albarán.
+EAN#Código EAN-13 del artículo.
+#
+#
+#
+#
+NUMEXP#Número de Unidad de Expedición. ¿¿¿??? El Corte Ingles Gran consumo
+DESCRIP#Descripción en formato libre del producto.
+TIPART#Descripción del artículo codificada. ¿DU = Unidad de expedición?
+CENVFAC# Cantidad enviada total. En caso de productos de PESO VARIABLE, indicar el total de KGS servidos.
+#
+#
+CUEXP#Número de Unidades de consumo en unidad de expedición.
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+PESTOTBRULIN#Peso Total Bruto de la Línea
+#
+#
+#
+#
+#

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/11/23 10:06:32.566.pas,C:\Delphi2007\GComer\GComerBAG\Formularios\Dialogos\DConfigMailFactura.pas=</Transaction>
+    <Transaction>2020/11/23 10:06:32.566.dfm,C:\Delphi2007\GComer\GComerBAG\Formularios\Dialogos\DConfigMailFactura.dfm=</Transaction>
+    <Transaction>2020/11/23 10:11:48.506.pas,C:\Delphi2007\GComer\GComerBAG\Formularios\Dialogos\DConfigMail.pas=</Transaction>
+    <Transaction>2020/11/23 10:11:48.506.dfm,C:\Delphi2007\GComer\GComerBAG\Formularios\Dialogos\DConfigMail.dfm=</Transaction>
+    <Transaction>2020/11/23 10:45:30.882.pas,C:\Delphi2007\GComer\GComerBAG\Formularios\Dialogos\DConfigMailFactura.pas=</Transaction>
+    <Transaction>2020/11/23 10:45:30.882.dfm,C:\Delphi2007\GComer\GComerBAG\Formularios\Dialogos\DConfigMailFactura.dfm=</Transaction>
+    <Transaction>2020/11/23 10:49:04.050.pas,C:\Delphi2007\GComer\GComerBAG\Formularios\Dialogos\DConfigMailFactura.pas=</Transaction>
+    <Transaction>2020/11/23 10:49:04.050.dfm,C:\Delphi2007\GComer\GComerBAG\Formularios\Dialogos\DConfigMailFactura.dfm=</Transaction>
+    <Transaction>2021/05/17 15:46:36.485.pas,C:\Delphi2007\GComer\GComerBAG\Code\Salidas\CFLIntrastat.pas=</Transaction>
+    <Transaction>2021/05/17 15:46:36.485.dfm,C:\Delphi2007\GComer\GComerBAG\Code\Salidas\CFLIntrastat.dfm=</Transaction>
+    <Transaction>2021/05/17 15:47:40.619.pas,C:\Delphi2007\GComer\GComerBAG\Code\Salidas\CQLIntrastat.pas=</Transaction>
+    <Transaction>2021/05/17 15:47:40.619.dfm,C:\Delphi2007\GComer\GComerBAG\Code\Salidas\CQLIntrastat.dfm=</Transaction>
+  </Transactions>
+</BorlandProject>

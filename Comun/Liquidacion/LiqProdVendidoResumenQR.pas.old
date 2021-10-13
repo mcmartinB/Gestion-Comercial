@@ -1,0 +1,153 @@
+unit LiqProdVendidoResumenQR;
+
+interface
+
+uses Classes, Controls, StdCtrls, ExtCtrls, SysUtils,
+  Quickrpt, Graphics, Qrctrls, Db, DBTables, grimgctrl;
+type
+  TQRLiqProdVendidoResumen = class(TQuickRep)
+    qrbndBandaDetalle: TQRBand;
+    ColumnHeaderBand1: TQRBand;
+    QRLabel3: TQRLabel;
+    QRBand1: TQRBand;
+    PsQRLabel4: TQRLabel;
+    PsQRSysData1: TQRSysData;
+    QRLabel6: TQRLabel;
+    qtxtempresa_liq: TQRDBText;
+    qtxtproducto_ent: TQRDBText;
+    qrlbl15: TQRLabel;
+    qrdbtxtfecha_fin: TQRDBText;
+    qtxtkilos_pri: TQRDBText;
+    qtxtkilos_ter: TQRDBText;
+    qtxtkilos_des: TQRDBText;
+    qtxtkilos_mer: TQRDBText;
+    qtxtgastos_fac_liq: TQRDBText;
+    qtxtdescuentos_fac_liq: TQRDBText;
+    qtxtimporte_liq: TQRDBText;
+    qtxtkilos_liq: TQRDBText;
+    qtxtgastos_fac_liq1: TQRDBText;
+    qtxtcostes_sec_transito_liq: TQRDBText;
+    qrgrpCentro: TQRGroup;
+    qrlbl1: TQRLabel;
+    qtxtcentro_ent: TQRDBText;
+    qrlbl28: TQRLabel;
+    qrlbl29: TQRLabel;
+    qrlbl30: TQRLabel;
+    qrlbl36: TQRLabel;
+    qrlbl2: TQRLabel;
+    qrlbl4: TQRLabel;
+    qrlbl5: TQRLabel;
+    qrlbl6: TQRLabel;
+    qrlbl7: TQRLabel;
+    qrlbl8: TQRLabel;
+    qrlbl9: TQRLabel;
+    anysem_liq: TQRDBText;
+    qtxtkilos_merma: TQRDBText;
+    qtxtkilos_disponibles: TQRDBText;
+    qrlbl10: TQRLabel;
+    procedure qtxtempresa_liqPrint(sender: TObject; var Value: String);
+    procedure qtxtproducto_entPrint(sender: TObject; var Value: String);
+    procedure qtxtcentro_entPrint(sender: TObject; var Value: String);
+    procedure qtxtkilos_mermaPrint(sender: TObject;
+      var Value: String);
+    procedure qtxtkilos_disponiblesPrint(sender: TObject;
+      var Value: String);
+  private
+
+  public
+
+  end;
+
+  procedure Imprimir;
+
+implementation
+
+uses
+  LiqProdVendidoDM, UDMAuxDB, DPreview;
+
+{$R *.DFM}
+
+procedure Imprimir;
+var
+  QRLiqProdVendidoResumen: TQRLiqProdVendidoResumen;
+begin
+  QRLiqProdVendidoResumen:= TQRLiqProdVendidoResumen.Create( nil );
+  try
+    Preview( QRLiqProdVendidoResumen );
+  except
+    FreeAndNil( QRLiqProdVendidoResumen );
+  end;
+end;
+
+procedure TQRLiqProdVendidoResumen.qtxtempresa_liqPrint(
+  sender: TObject; var Value: String);
+begin
+  Value:= Value + ' - '  + desEmpresa( Value );
+end;
+
+procedure TQRLiqProdVendidoResumen.qtxtproducto_entPrint(
+  sender: TObject; var Value: String);
+begin
+  Value:= Value + ' - '  + desProducto( DataSet.FieldByName('empresa').AsString, Value );
+end;
+
+procedure TQRLiqProdVendidoResumen.qtxtcentro_entPrint(sender: TObject;
+  var Value: String);
+begin
+  Value:= Value + ' - '  + descentro( DataSet.FieldByName('empresa').AsString, Value );
+end;
+
+(*77
+  kmtSemana.FieldDefs.Add('codigo', ftInteger, 0, False);
+  kmtSemana.FieldDefs.Add('keySem', ftString, 15, False);
+  kmtSemana.FieldDefs.Add('', ftString, 3, False);
+  kmtSemana.FieldDefs.Add('', ftString, 3, False);
+  kmtSemana.FieldDefs.Add('', ftString, 3, False);
+  kmtSemana.FieldDefs.Add('', ftString, 6, False);
+  kmtSemana.FieldDefs.Add('', ftDate, 0, False);
+  kmtSemana.FieldDefs.Add('', ftDate, 0, False);
+  kmtSemana.FieldDefs.Add('', ftDate, 0, False);
+  kmtSemana.FieldDefs.Add('', ftString, 5, False);
+
+  kmtSemana.FieldDefs.Add('precio_coste_comercial', ftFloat, 0, False);
+  kmtSemana.FieldDefs.Add('precio_coste_produccion', ftFloat, 0, False);
+  kmtSemana.FieldDefs.Add('precio_coste_administracion', ftFloat, 0, False);
+
+  kmtSemana.FieldDefs.Add('', ftFloat, 0, False);
+  kmtSemana.FieldDefs.Add('', ftFloat, 0, False);
+  kmtSemana.FieldDefs.Add('', ftFloat, 0, False);
+  kmtSemana.FieldDefs.Add('', ftFloat, 0, False);
+  kmtSemana.FieldDefs.Add('', ftFloat, 0, False);
+  kmtSemana.FieldDefs.Add('', ftFloat, 0, False);
+  kmtSemana.FieldDefs.Add('', ftFloat, 0, False);
+  *)
+
+procedure TQRLiqProdVendidoResumen.qtxtkilos_mermaPrint(
+  sender: TObject; var Value: String);
+begin
+  if DataSet.FieldByName('kilos_merma').AsFloat >= 0  then
+  begin
+    qtxtkilos_merma.Color:= clWhite;
+  end
+  else
+  begin
+    qtxtkilos_merma.Color:= clSilver;
+  end;
+
+end;
+
+procedure TQRLiqProdVendidoResumen.qtxtkilos_disponiblesPrint(
+  sender: TObject; var Value: String);
+begin
+
+  if Abs( DataSet.FieldByName('kilos_objetivo').AsFloat - DataSet.FieldByName('kilos_disponibles').AsFloat) < 1  then
+  begin
+    qtxtkilos_disponibles.Color:= clWhite;
+  end
+  else
+  begin
+    qtxtkilos_disponibles.Color:= clSilver;
+  end;
+end;
+
+end.

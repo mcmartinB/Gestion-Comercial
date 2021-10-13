@@ -1,0 +1,2523 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{fb608386-2839-41e5-9ce5-38de555b31de}</ProjectGuid>
+    <MainSource>GComerBAG.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>GComerBAG.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Define>DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">3082</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">GComerBAG.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="GComerBAG.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\bLibrary\bDialogs.pas" />
+    <DCCReference Include="BAG\Entradas\DRecibirEntregasCentral.pas">
+      <Form>FDRecibirEntregasCentral</Form>
+    </DCCReference>
+    <DCCReference Include="BAG\Envases\CostesDeEnvasadoMensual.pas">
+      <Form>FCostesDeEnvasadoMensual</Form>
+    </DCCReference>
+    <DCCReference Include="BAG\Envases\CostesDeEnvasadoMensualReport.pas">
+      <Form>QRCostesDeEnvasadoMensual</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="BAG\FOB\DatosExcelFOBReportPlataforma.pas">
+      <Form>QRDatosExcelFOBReportPlataforma</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="BAG\Transitos\DRecepcionTransitos.pas">
+      <Form>FDRecepcionTransitos</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\CContabilizacion.pas" />
+    <DCCReference Include="Comercial\Facturacion\CFactura.pas" />
+    <DCCReference Include="Comercial\Facturacion\UDFactura.pas">
+      <Form>DFactura</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFAltaFacturas.pas">
+      <Form>FAltaFacturas</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFAnuFacturas.pas">
+      <Form>FAnuFacturas</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFBusFacturas.pas">
+      <Form>FBusFacturas</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFConstantesFacturacion.pas" />
+    <DCCReference Include="Comercial\Facturacion\UFConsultaExperta.pas">
+      <Form>FConsultaExperta</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFConsultaExpertaRem.pas">
+      <Form>FConsultaExpertaRem</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFConsultaRem.pas">
+      <Form>FConsultaRem</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFContFacturas.pas">
+      <Form>FContFacturas</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFFacturarEdi.pas">
+      <Form>FFacturarEdi</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFImprimirFactura.pas">
+      <Form>FImprimirFactura</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFLupas.pas">
+      <Form>FLupas</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFManFacturas.pas">
+      <Form>FManFacturas</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFManRemesas.pas">
+      <Form>FManRemesas</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFMarcaContable.pas">
+      <Form>FMarcaContable</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFNotasFactura.pas">
+      <Form>FNotasFactura</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFProcFacturacion.pas">
+      <Form>FProcFacturacion</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFProformaFac.pas">
+      <Form>FProformaFac</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFRejillaAnulacion.pas">
+      <Form>FRejillaAnulacion</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFRejillaAnuladas.pas">
+      <Form>FRejillaAnuladas</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFRejillaFacturacion.pas">
+      <Form>FRejillaFacturacion</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFRejillaProforma.pas">
+      <Form>FRejillaProforma</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFRepFacturacion.pas">
+      <Form>FRepFacturacion</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\UFRepFacturacionCont.pas">
+      <Form>FRepFacturacionCont</Form>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\URFactura.pas">
+      <Form>RFactura</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\URFactura2.pas">
+      <Form>RFactura2</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comercial\Facturacion\URRemesa.pas">
+      <Form>RRemesa</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\DetalleInventariosReport.pas">
+      <Form>QRDetalleInventarios</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\DListadoControlEntregas.pas">
+      <Form>FDListadoControlEntregas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\DMListadoControlEntregas.pas">
+      <Form>DMListadoControlEntregasForm</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\DMRecibirEntregasCentral.pas">
+      <Form>FDMRecibirEntregasCentral</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\ExistenciasLameFD.pas">
+      <Form>FDExistenciasLame</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\ExistenciasLameQR.pas">
+      <Form>QRExistenciasLame</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\ParteProduccionControlDL.pas">
+      <Form>DLParteProduccionControl</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\ParteProduccionDetQL.pas">
+      <Form>QLParteProduccionDet</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\ParteProduccionDL.pas">
+      <Form>DLParteProduccion</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\ParteProduccionFL.pas">
+      <Form>FLParteProduccion</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\ParteProduccionQL.pas">
+      <Form>QLParteProduccion</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\ParteProduccionStockConfQL.pas">
+      <Form>QLParteProduccionStockConf</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\ParteProduccionStockProvQL.pas">
+      <Form>QLParteProduccionStockProv</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\QListadoControlEntregasApaisado.pas">
+      <Form>QRListadoControlEntregasApaisado</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\ResumenInventariosData.pas">
+      <Form>DMResumenInventarios</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Almacen\ResumenInventariosReport.pas">
+      <Form>QRResumenInventarios</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\BaseDatos\UDMAuxDB.pas">
+      <Form>DMAuxDB</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\BaseDatos\UDMBaseDatos.pas">
+      <Form>DMBaseDatos</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\BaseDatos\UDMMaster.pas">
+      <Form>DMMaster</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\CapturadorFirmas\SignatureForm.pas">
+      <Form>Form2</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\CapturadorFirmas\wgssSTU_TLB.pas" />
+    <DCCReference Include="Comun\Clientes\DescuentosClientesFD.pas">
+      <Form>FDDescuentosClientes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\DescuentosClientesProductoFD.pas">
+      <Form>FDDescuentosClientesProducto</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\GastosClientesFD.pas">
+      <Form>FDGastosClientes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\ImportarClientesFD.pas">
+      <Form>FDImportarClientes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\ImportarClientesMD.pas">
+      <Form>DMImportarClientes</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\LDatosCobroCliente.pas">
+      <Form>QRLDatosCobroCliente</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\LDescuentosCliente.pas">
+      <Form>QRLDescuentosCliente</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\LEAN13Edi.pas">
+      <Form>QRLEan13Edi</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\LEnvasesCliente.pas">
+      <Form>QRLEnvasesCliente</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\LFDatosCobroCliente.pas">
+      <Form>FLDatosCobroCliente</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\LFDescuentosCliente.pas">
+      <Form>FLDescuentosCliente</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\LFEnvasesCliente.pas">
+      <Form>FLEnvasesCliente</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\MEAN13Edi.pas">
+      <Form>FMEAN13Edi</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\MEAN13EdiItem.pas">
+      <Form>FMEAN13EdiItem</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\RecargoClientesFD.pas">
+      <Form>FDRecargoClientes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\RiesgoClientesFD.pas">
+      <Form>FDRiesgoClientes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Clientes\TesoreriaClientesFD.pas">
+      <Form>FDTesoreriaClientes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Codigo\CAuxiliarDB.pas" />
+    <DCCReference Include="Comun\Codigo\CBancos.pas" />
+    <DCCReference Include="Comun\Codigo\CGlobal.pas" />
+    <DCCReference Include="Comun\Codigo\CMySQL.pas" />
+    <DCCReference Include="Comun\Codigo\CSistema.pas" />
+    <DCCReference Include="Comun\Codigo\CVariables.pas" />
+    <DCCReference Include="Comun\Comerciales\MComerciales.pas">
+      <Form>FMComerciales</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\CambiarCodigoEntregaFD.pas">
+      <Form>FDCambiarCodigoEntrega</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\CambiarCodigoEntregaMD.pas">
+      <Form>DMCambiarCodigoEntrega</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\CargaDirectaDL.pas">
+      <Form>DLCargaDirecta</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\ComprobacionGastosEntregasFL.pas">
+      <Form>FLComprobacionGastosEntregas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\ComprobacionGastosEntregasQL.pas">
+      <Form>QLComprobacionGastosEntregas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\ControlImportesLineasDR.pas">
+      <Form>DRControlImportesLineas</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\ControlImportesLineasFR.pas">
+      <Form>FRControlImportesLineas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\ControlImportesLineasQR.pas">
+      <Form>QRControlImportesLineas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\FacturasGastosEntregasFL.pas">
+      <Form>FLFacturasGastosEntregas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\FacturasGastosEntregasQL.pas">
+      <Form>QLFacturasGastosEntregas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaEntregaClientesQL.pas">
+      <Form>QLLiquidaEntregaClientes</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaEntregaDL.pas">
+      <Form>DLLiquidaEntrega</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaEntregaProveedoresQL.pas">
+      <Form>QLLiquidaEntregaProveedores</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaIncidenciasDL.pas">
+      <Form>DLLiquidaIncidencias</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaIncidenciasQL.pas">
+      <Form>QLLiquidaIncidencias</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaInformeFL.pas">
+      <Form>FLLiquidaInforme</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaPlatanoInformeFL.pas">
+      <Form>FLLiquidaPlatanoInforme</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaResumenClientesQL.pas">
+      <Form>QLLiquidaResumenClientes</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaResumenQL.pas">
+      <Form>QLLiquidaResumen</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaValorarCargaDirectaFL.pas">
+      <Form>FLLiquidaValoraCargaDirecta</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaValorarCargaDirectaQL.pas">
+      <Form>QLLiquidaValorarCargaDirecta</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaValorarPaletsFL.pas">
+      <Form>FLLiquidaValorarPalets</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaValorarPaletsQL.pas">
+      <Form>QLLiquidaValorarPalets</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LiquidaVerdeInformeFL.pas">
+      <Form>FLLiquidaVerdeInforme</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\LPrevCostesProducto.pas">
+      <Form>QRLPrevCostesProducto</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\MargenBCargadosQL.pas">
+      <Form>QLMargenBCargados</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\MargenBCodeComunDL.pas">
+      <Form>DLMargenBCodeComun</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\MargenBConfeccionadoQL.pas">
+      <Form>QLMargenBConfeccionado</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\MargenBConfeccionDL.pas">
+      <Form>DLMargenBConfeccion</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\MargenBPeriodoFL.pas">
+      <Form>FLMargenBPeriodo</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\MargenBProveedorDL.pas">
+      <Form>DLMargenBProveedor</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\MargenBResultadosQL.pas">
+      <Form>QLMargenBResultados</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\MargenBVentasDL.pas">
+      <Form>DLMargenBVentas</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\MargenBVentasQL.pas">
+      <Form>QLMargenBVentas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\MargenBVolcadosQL.pas">
+      <Form>QLMargenBVolcados</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\MPrevCostesProducto.pas">
+      <Form>FMPrevCostesProducto</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\PrecioLiquidacion.pas">
+      <Form>FPrecioLiquidacion</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\PutPrecioLineaEntregaFD.pas">
+      <Form>FDPutPrecioLineaEntrega</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\VerificarKilosEntregadosDL.pas">
+      <Form>DLVerificarKilosEntregados</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\VerificarKilosEntregadosFL.pas">
+      <Form>FLVerificarKilosEntregados</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Compras\VerificarKilosEntregadosQL.pas">
+      <Form>QLVerificarKilosEntregados</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Despegables\UFCamiones.pas">
+      <Form>FCamiones</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Despegables\UFClientes.pas">
+      <Form>FClientes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Despegables\UFEnvases.pas">
+      <Form>FEnvases</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Despegables\UFFormaPago.pas">
+      <Form>FFormaPago</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Despegables\UFProveedores.pas">
+      <Form>FProveedores</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Despegables\UFTransportistas.pas">
+      <Form>FTransportistas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\AdvertenciaFD.pas">
+      <Form>FDAdvertencia</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\FichaListadoFD.pas">
+      <Form>FDFichaListado</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\MostrarLogFD.pas">
+      <Form>FDMostrarLog</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarAgrupacionFD.pas">
+      <Form>FDSeleccionarAgrupacion</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarAltaClonarFD.pas">
+      <Form>FDSeleccionarAltaClonar</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarAltaEnvaseFD.pas">
+      <Form>FDSeleccionarAltaEnvase</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarCentroAgrupacionFD.pas">
+      <Form>FDSeleccionarCentroAgrupacion</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarCentroProductoFD.pas">
+      <Form>FDSeleccionarCentroProducto</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarClonarClienteFD.pas">
+      <Form>FDSeleccionarClonarCliente</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarClonarProveedorFD.pas">
+      <Form>FDSeleccionarClonarProveedor</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarClonarSuministroFD.pas">
+      <Form>FDSeleccionarClonarSuministro</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarComercialFD.pas">
+      <Form>FDSeleccionarComercial</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarFechaFD.pas">
+      <Form>FDSeleccionarFecha</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarProductoFD.pas">
+      <Form>FDSeleccionarProducto</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Dialogos\SeleccionarTipoAltaFD.pas">
+      <Form>FDSeleccionarTipoAlta</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\EDI\DesadvAhorramasDM.pas">
+      <Form>DMDesadvAhorramas</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\EDI\DesadvCorteInglesDM.pas">
+      <Form>DMDesadvCorteIngles</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\EDI\VerificarDesadvFD.pas">
+      <Form>FDVerificarDesadv</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\EDI\VerOrdenFD.pas">
+      <Form>FDVerOrden</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\ArticuloDesglose.pas">
+      <Form>FArticuloDesglose</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\CliEnvases.pas">
+      <Form>FCliEnvases</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\CosteEnvasadoPromedioDM.pas">
+      <Form>DMCosteEnvasadoPromedio</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\CosteKgEnvasadoMensual.pas">
+      <Form>FCosteKgEnvasadoMensual</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\CostesAgrupaProductoFD.pas">
+      <Form>FDCostesAgrupaProducto</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\CostesDeEnvasadoResumenReport.pas">
+      <Form>QRCostesDeEnvasadoResumen</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\EnvasesDL.pas">
+      <Form>DLEnvases</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\EnvasesRL.pas">
+      <Form>RLEnvases</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\EnvasesSinCosteEnvasado.pas">
+      <Form>FEnvasesSinCosteEnvasado</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\EnvasesSinCosteEnvasadoData.pas">
+      <Form>DMEnvasesSinCosteEnvasado</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\EnvasesSinCosteEnvasadoReport.pas">
+      <Form>QREnvasesSinCosteEnvasado</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\ImportarEan13FD.pas">
+      <Form>FDImportarEan13</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\ImportarEan13MD.pas">
+      <Form>DMImportarEan13</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\ImportarEnvasesFD.pas">
+      <Form>FDImportarEnvases</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\ImportarEnvasesMD.pas">
+      <Form>DMImportarEnvases</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\ImportarPaletFD.pas">
+      <Form>FDImportarPalet</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\ImportarPaletMD.pas">
+      <Form>DMImportarPalet</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\LEnvases.pas">
+      <Form>QRLEnvases</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\LTipoPalets.pas">
+      <Form>QRLTipoPalets</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\MEnvases.pas">
+      <Form>FMEnvases</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\MTipoPalets.pas">
+      <Form>FMTipoPalets</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\PrecioVenta.pas">
+      <Form>FPrecioVenta</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\PrecioVentaAsignacion.pas">
+      <Form>FPrecioVentaAsignacion</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\TablaAnualCosteKgEnvasado.pas">
+      <Form>FTablaAnualCosteKgEnvasado</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\TablaAnualCosteKgEnvasadoReport.pas">
+      <Form>QRTablaAnualCosteKgEnvasado</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\UComerToSgpDM.pas">
+      <Form>DMComerToSgp</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\UDMEnvases.pas">
+      <Form>DMEnvases</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\VerificarCosteEnvasado.pas">
+      <Form>FVerificarCosteEnvasado</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\VerificarCosteEnvasadoData.pas">
+      <Form>DMVerificarCosteEnvasado</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Envases\VerificarCosteEnvasadoReport.pas">
+      <Form>QRVerificarCosteEnvasado</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\AgingDL.pas">
+      <Form>DLAging</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\AgingFL.pas">
+      <Form>FLAging</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\AgingQL.pas">
+      <Form>QLAging</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\AlbaranesAsociadosFacDM.pas">
+      <Form>DMAlbaranesAsociadosFac</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\AlbaranesFacturadosEn.pas">
+      <Form>FAlbaranesFacturadosEn</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\AlbaranesFacturadosEnData.pas">
+      <Form>DMAlbaranesFacturadosEn</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\AlbaranesFacturadosEnReport.pas">
+      <Form>QRAlbaranesFacturadosEn</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\CFLFacturasPendientes.pas">
+      <Form>DFLFacturasPendientes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\CMLFacturasPendientes.pas">
+      <Form>DMLFacturasPendientes</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\ContadoresEmpresaFD.pas">
+      <Form>FDContadoresEmpresa</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\CQLFacturasPendientes.pas">
+      <Form>DQLFacturasPendientes</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\CQLFacturasPendientesCarrefour.pas">
+      <Form>QLFacturasPendientesCarrefour</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\DAlbaranesFactura.pas">
+      <Form>FDAlbaranesFactura</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\DiasCobroFL.pas">
+      <Form>FLDiasCobro</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\DiasCobroQL.pas">
+      <Form>QLDiasCobro</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\ExtractoCobroFL.pas">
+      <Form>FLExtractoCobro</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\ExtractoCobroQL.pas">
+      <Form>QLExtractoCobro</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\FacturasParaAnticipar.pas">
+      <Form>FFacturasParaAnticipar</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\FacturasParaAnticiparData.pas">
+      <Form>DMFacturasParaAnticipar</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\FacturasParaAnticiparReport.pas">
+      <Form>QRFacturasParaAnticipar</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\FacturasSinContabilizarDM.pas">
+      <Form>DMFacturasSinContabilizar</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\FacturasSinContabilizarFD.pas">
+      <Form>FDFacturasSinContabilizar</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\FacturasSinContabilizarQR.pas">
+      <Form>QRFacturasSinContabilizar</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\LDAlbaranesSinFacturar.pas">
+      <Form>DLAlbaranesSinFacturar</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\LFAlbaranesSinFacturar.pas">
+      <Form>FLAlbaranesSinFacturar</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\LFNotificacionCredito.pas">
+      <Form>FLNotificacionCredito</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\ListadoFacturasFD.pas">
+      <Form>FDListadoFacturas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\ListadoFacturasQR.pas">
+      <Form>QRListadoFacturas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\LNotificacionCredito.pas">
+      <Form>QRLNotifcacionCredito</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\LQAlbaranesSinFacturar.pas">
+      <Form>QLAlbaranesSinFacturar</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\LRemesasBanco.pas">
+      <Form>FLRemesasBanco</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\LResumenRemesas.pas">
+      <Form>FLResumenRemesas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\LResumenRemesasReport.pas">
+      <Form>QRResumenRemesas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\QLRemesasBancoDetalle.pas">
+      <Form>QRLRemesasBancoDetalle</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\QLRemesasBancoTotal.pas">
+      <Form>QRLRemesasBancoTotal</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\RiesgoClienteDL.pas">
+      <Form>DLRiesgoCliente</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\RiesgoClienteFL.pas">
+      <Form>FLRiesgoCliente</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\RiesgoDL.pas">
+      <Form>DLRiesgo</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\RiesgoQL.pas">
+      <Form>QLRiesgo</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\RiesgoTodosClienteQL.pas">
+      <Form>QLRiesgoTodosCliente</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\SeriesFacturaFD.pas">
+      <Form>FDSeriesFactura</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\VentasPeriodoFD.pas">
+      <Form>FDVentasPeriodo</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Facturacion\VentasPeriodoQR.pas">
+      <Form>QRVentasPeriodo</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\FormatoPaletsDM.pas">
+      <Form>DMFormatoPalets</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\FormatoPaletsFM.pas">
+      <Form>FMFormatoPalets</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\FormatoPaletsQM.pas">
+      <Form>QMFormatoPalets</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\ImportarCamionFD.pas">
+      <Form>FDImportarCamion</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\ImportarCamionMD.pas">
+      <Form>DMImportarCamion</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\ImportarMarcaFD.pas">
+      <Form>FDImportarMarca</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\ImportarMarcaMD.pas">
+      <Form>DMImportarMarca</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\ImportarPlantacionesFD.pas">
+      <Form>FDImportarPlantaciones</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\ImportarPlantacionesMD.pas">
+      <Form>DMImportarPlantaciones</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\ImportarProveedorFD.pas">
+      <Form>FDImportarProveedor</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\ImportarProveedorMD.pas">
+      <Form>DMImportarProveedor</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\ImportarTransportistaFD.pas">
+      <Form>FDImportarTransportista</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\ImportarTransportistaMD.pas">
+      <Form>DMImportarTransportista</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\LCamiones.pas">
+      <Form>QRLCamiones</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\LClientesAlm.pas">
+      <Form>QRLClientesAlm</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\LProveedoresEx.pas">
+      <Form>QRLProveedoresEx</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\LTipoCostes.pas">
+      <Form>QRLTipoCostes</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\MAccesoWeb.pas">
+      <Form>FMAccesoWeb</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\MClientes.pas">
+      <Form>FMClientes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\MClientesAlm.pas">
+      <Form>FMClientesAlm</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\MEmpresas.pas">
+      <Form>FMEmpresas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\MFlota.pas">
+      <Form>FMFlota</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\MMarcas.pas">
+      <Form>FMMarcas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\MProveedores.pas">
+      <Form>FMProveedores</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\MSeccContables.pas">
+      <Form>FMSeccContables</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\MTipoCostes.pas">
+      <Form>FMTipoCostes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Ficheros\MTransportistas.pas">
+      <Form>FMTransportistas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\CosteEstructuralDM.pas">
+      <Form>DMCosteEstructural</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\CosteMedioMateriaPrimaDM.pas">
+      <Form>DMCosteMedioMateriaPrima</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\DatosExcelFOB.pas">
+      <Form>FDatosExcelFOB</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\DatosExcelFOBReport.pas">
+      <Form>QRDatosExcelFOBReport</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\DatosExcelFOBReportEx.pas">
+      <Form>QRDatosExcelFOBReportEx</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\LCostesIndirectos.pas">
+      <Form>QRLCostesIndirectos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\LResumenFOBAmpliado.pas">
+      <Form>QLResumenFOBAmpliado</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\LVentasLineaProductoCliente.pas">
+      <Form>FLVentasLineaProductoCliente</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\LVentasLineaProductoClienteReport.pas">
+      <Form>QLVentasLineaProductoClienteReport</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\MakeFOBData.pas">
+      <Form>DMMakeFOBData</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\MCostesIndirectos.pas">
+      <Form>FMCostesIndirectos</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\ResumenListFobDM.pas">
+      <Form>DMResumenListFob</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\TablaListFobDM.pas">
+      <Form>DMTablaListFob</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\FOB\TablaTemporalFOBData.pas">
+      <Form>kkkkk</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Generico\GetFiltroFM.pas">
+      <Form>FMGetFiltro</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Generico\ListaCodigoValorCB.pas" />
+    <DCCReference Include="comun\Generico\UActualizar.pas" />
+    <DCCReference Include="Comun\Generico\UDMConfig.pas">
+      <Form>DMConfig</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Generico\UFAyuda.pas">
+      <Form>FAyuda</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Generico\UFAyudaWeb.pas">
+      <Form>FAyudaWeb</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Generico\UPieChart.pas" />
+    <DCCReference Include="Comun\Liquidacion\LiqAsignaTransitosMD.pas">
+      <Form>DMLiqAsignaTransitos</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\LoadMaestros\LoadAlmacenProveedorDM.pas">
+      <Form>DMLoadAlmacenProveedor</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\LoadMaestros\LoadAlmacenProveedorlFD.pas">
+      <Form>FDLoadAlmacenProveedor</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\LoadMaestros\LoadProductosProveedorDM.pas">
+      <Form>DMLoadProductosProveedor</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\LoadMaestros\LoadProductosProveedorlFD.pas">
+      <Form>FDLoadProductosProveedor</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\LoadMaestros\LoadProveedoresDM.pas">
+      <Form>DMLoadProveedores</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\LoadMaestros\LoadProveedorFD.pas">
+      <Form>FDLoadProveedor</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Margen\MargenCargaRFAlmacenDL.pas">
+      <Form>DLMargenCargaRFAlmacen</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Margen\MargenCargaRFAlmacenFL.pas">
+      <Form>FLMargenCargaRFAlmacen</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Margen\MargenCargaRFAlmacenPaletsQL.pas">
+      <Form>QLMargenCargaRFAlmacenPalets</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Master\LBancos.pas">
+      <Form>QRLBancos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Master\LCambioDivisas.pas">
+      <Form>QRLCambioDivisas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Master\LClienteTipos.pas">
+      <Form>QRLClienteTipos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Master\LFormaPago.pas">
+      <Form>QRLFormaPago</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Master\MBancos.pas">
+      <Form>FMBancos</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Master\MCambioMonedas.pas">
+      <Form>FMCambioMonedas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Master\MClienteTipos.pas">
+      <Form>FMClienteTipos</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Master\MFormasPago.pas">
+      <Form>FMFormaPago</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Master\UDMCambioMoneda.pas">
+      <Form>DMCambioMoneda</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Menus\CUAMenuFicheros.pas" />
+    <DCCReference Include="Comun\Productos\ImportarProductosFD.pas">
+      <Form>FDImportarProductos</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Productos\ImportarProductosMD.pas">
+      <Form>DMImportarProductos</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Productos\LProducto.pas">
+      <Form>QRLProducto</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Productos\MProductos.pas">
+      <Form>FMProductos</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Remesas\EstadoCobroClienteDM.pas">
+      <Form>DMEstadoCobroCliente</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Remesas\EstadoCobroClientesFL.pas">
+      <Form>FLEstadoCobroClientes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Remesas\EstadoCobroClientesQL.pas">
+      <Form>QLEstadoCobroClientes</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\RF\ResumenConsumosClienteQL.pas">
+      <Form>QLResumenConsumosCliente</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\RF\ResumenConsumosDL.pas">
+      <Form>DLResumenConsumos</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\RF\ResumenConsumosEntregaQL.pas">
+      <Form>QLResumenConsumosEntrega</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\RF\ResumenConsumosFL.pas">
+      <Form>FLResumenConsumos</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\AlbaranEntreCentrosMercadonaDM.pas">
+      <Form>DMAlbaranEntreCentrosMercadona</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\AlbaranEntreCentrosMercadonaQR.pas">
+      <Form>QRAlbaranEntreCentrosMercadona</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\AlbaranSalidaEnvasesDM.pas">
+      <Form>DMAlbaranSalidaEnvases</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\AlbaranSalidaEnvasesQR.pas">
+      <Form>QRAlbaranSalidaEnvases</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\ArticuloDesgloseGruMod.pas">
+      <Form>FArticuloDesgloseGruMod</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\ArticuloDesgloseSal.pas">
+      <Form>FArticuloDesgloseSal</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\ArticuloDesgloseSalMod.pas">
+      <Form>FArticuloDesgloseSalMod</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\CDAsignarGastosServicioVenta.pas">
+      <Form>DAsignarGastosServicioVenta</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\DClienteCMR.pas">
+      <Form>FDClienteCMR</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\DEnvioAlbSal.pas">
+      <Form>FDEnvioAlbSal</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\DFacturaProforma.pas">
+      <Form>FDFacturaProforma</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\FacturasGastosSalidasFL.pas">
+      <Form>FLFacturasGastosSalidas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\FacturasGastosSalidasQL.pas">
+      <Form>QLFacturasGastosSalidas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\FacturasGastosTransporteQL.pas">
+      <Form>QLFacturasGastosTransporte</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LAlbaranesEnviados.pas">
+      <Form>QRLAlbaranesEnviados</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LAlbaranesSalida.pas">
+      <Form>QRAlbaranesSalida</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LCMREdeka.pas">
+      <Form>QRLCMREdeka</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LCMRInyeccion.pas">
+      <Form>QRLCMRInyeccion</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LComprobacionGastosSalidasBAG.pas">
+      <Form>QRLComprobacionGastosSalidasBAG</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LDSalidasResumenDinamico.pas">
+      <Form>DMSalidasResumenDinamico</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LExpediciones.pas">
+      <Form>QRLExpediciones</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LExpedicionesResumen.pas">
+      <Form>QRLExpedicionesResumen</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LFacturaProforma.pas">
+      <Form>QRLFacturaProforma</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LFAlbaranesEnviados.pas">
+      <Form>FLAlbaranesEnviados</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LFComprobacionGastosSalidasBAG.pas">
+      <Form>FLComprobacionGastosSalidasBAG</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LFExpediciones.pas">
+      <Form>FLExpediciones</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LReporteEnvio.pas">
+      <Form>QRReporteEnvio</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LRSalidasResumenDinamicoVer.pas">
+      <Form>QLSalidasResumenDinamicoVer</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\LSalidasResumenDinamico.pas">
+      <Form>FLSalidasResumenDinamico</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\ResumenSalidasProductoFL.pas">
+      <Form>FLResumenSalidasProducto</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\ResumenSalidasProductoQL.pas">
+      <Form>QRLResumenSalidasProducto</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UCAlbaran.pas" />
+    <DCCReference Include="Comun\Salidas\UDMCmr.pas">
+      <Form>DMCmr</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UDQAlbaranSalida.pas">
+      <Form>DQAlbaranSalida</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UFDAsignarGastosServicioVenta.pas">
+      <Form>FDAsignarGastosServicioVenta</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UFLTablaSalidas.pas">
+      <Form>FLTablaSalidas</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UFMGastosServicioVenta.pas">
+      <Form>FMGastosServicioVenta</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UFMSalidasServiciosVenta.pas">
+      <Form>FMSalidasServiciosVenta</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UFMServicioVenta.pas">
+      <Form>FMServicioVenta</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UFSalidasLPR.pas">
+      <Form>FSalidasLPR</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UQLTablaSalidas.pas">
+      <Form>QLTablaSalidas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UQRAlbaranAlemaniaNoVar.pas">
+      <Form>QRAlbaranAlemaniaNoVar</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UQRAlbaranExportacion.pas">
+      <Form>QRAlbaranExportacion</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UQRAlbaranExportacionIngles.pas">
+      <Form>QRAlbaranExportacionIngles</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UQRAlbaranGenerico.pas">
+      <Form>QRAlbaranGenerico</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UQRAlbaranInglesVal.pas">
+      <Form>QRAlbaranInglesVal</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UQRAlbaranSat.pas">
+      <Form>QRAlbaranSat</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UQRAlbaranSinValorar.pas">
+      <Form>QRAlbaranSinValorar</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UQRAlbaranSinValorarDPS.pas">
+      <Form>QRAlbaranSinValorarDPS</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UQRAlbaranValorado.pas">
+      <Form>QRAlbaranValorado</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UQRServicioVenta.pas">
+      <Form>QRServicioVenta</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\uSalidaUtils.pas" />
+    <DCCReference Include="Comun\Salidas\VentasSuministroDL.pas">
+      <Form>DLVentasSuministro</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\VentasSuministroFL.pas">
+      <Form>FLVentasSuministro</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\VentasSuministroQL.pas">
+      <Form>QLVentasSuministro</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
+    <DCCReference Include="Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
+    <DCCReference Include="Comun\SincronizacionWeb\ConexionInformix.pas" />
+    <DCCReference Include="Comun\SincronizacionWeb\ConexionInformixConstantes.pas" />
+    <DCCReference Include="Comun\SincronizacionWeb\MSincronizacionWeb.pas">
+      <Form>FMSincronizacionWeb</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\SincronizacionWeb\Sincronizacion.pas" />
+    <DCCReference Include="Comun\SincronizacionWeb\SincronizacionBonny.pas" />
+    <DCCReference Include="Comun\Sincronizar\ComerToFitosanitarios.pas">
+      <Form>DMComerToFitosanitarios</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Sincronizar\ControlEnvioAlbaranesDR.pas">
+      <Form>DRControlEnvioAlbaranes</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Sincronizar\ControlEnvioAlbaranesFR.pas">
+      <Form>FRControlEnvioAlbaranes</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Sincronizar\ControlEnvioAlbaranesQR.pas">
+      <Form>QRControlEnvioAlbaranes</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Sincronizar\USincronizarTablas.pas" />
+    <DCCReference Include="Comun\SuperUser\SuperUserUtilsDP.pas">
+      <Form>DPSuperUserUtils</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\SuperUser\SuperUserUtilsFP.pas">
+      <Form>FPSuperUserUtils</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\SuperUser\SuperUserUtilsQP.pas">
+      <Form>QPSuperUserUtils</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Transitos\CartaTransitoDL.pas">
+      <Form>DLCartaTransito</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Transitos\CartaTransitoQL.pas">
+      <Form>QMCartaTransito</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Transitos\FacturasGastosTransitosFL.pas">
+      <Form>FLFacturasGastosTransitos</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Transitos\FacturasGastosTransitosQL.pas">
+      <Form>QLFacturasGastosTransitos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Transitos\FacturasGastosTransTransporteQL.pas">
+      <Form>QLFacturasGastosTransTransporte</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Transitos\PDTransitoActivar.pas">
+      <Form>DPTransitoActivar</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Transitos\PFTransitoActivar.pas">
+      <Form>FPTransitoActivar</Form>
+    </DCCReference>
+    <DCCReference Include="Comun\Transitos\UDMTransitos.pas">
+      <Form>DMTransitos</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Almacen\DMRecepcion.pas">
+      <Form>DMRecepcionForm</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Almacen\ListadoSalidasPaletsForm.pas">
+      <Form>FListadoSalidasPaletsForm</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Almacen\ListadoSalidasPaletsReport.pas">
+      <Form>QRListadoSalidasPaletsReport</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\AlbaranFactura\AlbaranFacturaSimpleCB.pas" />
+    <DCCReference Include="GComerBAG\Code\AlbaranFactura\AlbaranFacturaSimpleDL.pas">
+      <Form>DLAlbaranFacturaSimple</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\AlbaranFactura\AlbaranFacturaSimpleFL.pas">
+      <Form>FLAlbaranFacturaSimple</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\AlbaranFactura\AlbaranFacturaSimpleQL.pas">
+      <Form>QLAlbaranFacturaSimple</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\AlbaranFactura\SalidasPorFacturaDL.pas">
+      <Form>DLSalidasPorFactura</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\AlbaranFactura\SalidasPorFacturaFL.pas">
+      <Form>FLSalidasPorFactura</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\AlbaranFactura\SalidasPorFacturaQL.pas">
+      <Form>QLSalidasPorFactura</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Clientes\ComisionRepresentanteFD.pas">
+      <Form>FDComisionRepresentante</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Comer\FDPedidos.pas">
+      <Form>frmDPedidos</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Comer\UFFormatoCliente.pas">
+      <Form>FFormatoClientes</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Comer\UFProductosProveedor.pas">
+      <Form>FProductosProveedor</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Comer\UFSuministros.pas">
+      <Form>FSuministros</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\BeneficioProductoDL.pas">
+      <Form>DLBeneficioProducto</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\BeneficioProductoFL.pas">
+      <Form>FLBeneficioProducto</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\BeneficioProductoQL.pas">
+      <Form>QLBeneficioProducto</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\CDBEntregas.pas">
+      <Form>DBEntregas</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\CFPCamionEntrega.pas">
+      <Form>FPCamionEntrega</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ComparaFechasComerRadioDL.pas">
+      <Form>DLComparaFechasComerRadio</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ComparaFechasComerRadioFL.pas">
+      <Form>FLComparaFechasComerRadio</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ComparaFechasComerRadioQL.pas">
+      <Form>QLComparaFechasComerRadio</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ComparaKilosComerRadioDL.pas">
+      <Form>DLComparaKilosComerRadio</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ComparaKilosComerRadioFL.pas">
+      <Form>FLComparaKilosComerRadio</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ComparaKilosComerRadioQL.pas">
+      <Form>QLComparaKilosComerRadio</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ComprasProductoProveedorDL.pas">
+      <Form>DLComprasProductoProveedor</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ComprasProductoProveedorFL.pas">
+      <Form>FLComprasProductoProveedor</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ComprasProductoProveedorQL.pas">
+      <Form>QLComprasProductoProveedor</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ControlIntrastatDL.pas">
+      <Form>DLControlIntrastat</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ControlIntrastatFL.pas">
+      <Form>FLControlIntrastat</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ControlIntrastatQL.pas">
+      <Form>QLControlIntrastat</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\CosteFrutaProductoDL.pas">
+      <Form>DLCosteFrutaProducto</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\CosteFrutaProductoFL.pas">
+      <Form>FLCosteFrutaProducto</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\CosteFrutaProductoQL.pas">
+      <Form>QLCosteFrutaProducto</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\CosteFrutaProveedorDL.pas">
+      <Form>DLCosteFrutaProveedor</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\CosteFrutaProveedorFL.pas">
+      <Form>FLCosteFrutaProveedor</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\CosteFrutaProveedorQL.pas">
+      <Form>QLCosteFrutaProveedor</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\CuadreAlmacenSemanalFL.pas">
+      <Form>FLCuadreAlmacenSemanal</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\CuadreAlmacenSemanalQL.pas">
+      <Form>QLCuadreAlmacenSemanal</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\CuadreAlmacenSemanalResumenQL.pas">
+      <Form>QLCuadreAlmacenSemanalResumen</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\DestrioFrutaRFDL.pas">
+      <Form>DLDestrioFrutaRF</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\DestrioFrutaRFFL.pas">
+      <Form>FLDestrioFrutaRF</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\DestrioFrutaRFQL.pas">
+      <Form>QLDestrioFrutaRF</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\EntregasCB.pas" />
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\EntregasPendientesDL.pas">
+      <Form>DLEntregasPendientes</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\EntregasPendientesFL.pas">
+      <Form>FLEntregasPendientes</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\EntregasPendientesMasetDL.pas">
+      <Form>DLEntregasPendientesMaset</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\EntregasPendientesMasetQL.pas">
+      <Form>QLEntregasPendientesMaset</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\EntregasPendientesQL.pas">
+      <Form>QLEntregasPendientes</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\EntregasSinFacturarFL.pas">
+      <Form>FLEntregasSinFacturar</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\EntregasSinFacturarQL.pas">
+      <Form>QLEntregasSinFacturar</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\IntrastatEntradaDL.pas">
+      <Form>DLIntrastatEntrada</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\IntrastatEntradaFL.pas">
+      <Form>FLIntrastatEntrada</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\IntrastatEntradaQL.pas">
+      <Form>QLIntrastatEntrada</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\LiquidacionEntregaDL.pas">
+      <Form>DLLiquidacionEntrega</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\LiquidacionEntregaFL.pas">
+      <Form>FLLiquidacionEntrega</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\LiquidacionEntregaQL.pas">
+      <Form>QLLiquidacionEntrega</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ListEntregasFL.pas">
+      <Form>FLListEntregas</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ListEntregasQL.pas">
+      <Form>QLListEntregas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\MargenBeneficiosCentralDL.pas">
+      <Form>DLMargenBeneficiosCentral</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\MargenBeneficiosDL.pas">
+      <Form>DLMargenBeneficios</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\MargenPeriodoCentralQL.pas">
+      <Form>QLMargenPeriodoCentral</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\MargenPeriodoFL.pas">
+      <Form>FLMargenPeriodo</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\MargenPeriodoQL.pas">
+      <Form>QLMargenPeriodo</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\MargenSemanalCentralQL.pas">
+      <Form>QLMargenSemanalCentral</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\MargenSemanalFL.pas">
+      <Form>FLMargenSemanal</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\MargenSemanalQL.pas">
+      <Form>QLMargenSemanal</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\PaletsConfeccionadosFL.pas">
+      <Form>FLPaletsConfeccionados</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\PaletsVolcadosEntregaFL.pas">
+      <Form>FLPaletsVolcadosEntrega</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ResumenEntregasFL.pas">
+      <Form>FLResumenEntregas</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ResumenEntregasMasetFL.pas">
+      <Form>FLResumenEntregasMaset</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ResumenEntregasMasetQL.pas">
+      <Form>QLResumenEntregasMaset</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ResumenEntregasQL.pas">
+      <Form>QLResumenEntregas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaConfeccionadaDL.pas">
+      <Form>DLStockFrutaConfeccionada</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaConfeccionadaFL.pas">
+      <Form>FLStockFrutaConfeccionada</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaConfeccionadaMasetDL.pas">
+      <Form>DLStockFrutaConfeccionadaMaset</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaConfeccionadaMasetFL.pas">
+      <Form>FLStockFrutaConfeccionadaMaset</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaConfeccionadaMasetQL.pas">
+      <Form>QLStockFrutaConfeccionadaMaset</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaConfeccionadaQL.pas">
+      <Form>QLStockFrutaConfeccionada</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaPlantaDL.pas">
+      <Form>DLStockFrutaPlanta</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaPlantaFL.pas">
+      <Form>FLStockFrutaPlanta</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaPlantaMasetApaisadoQL.pas">
+      <Form>QLStockFrutaPlantaMasetApaisado</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaPlantaMasetDL.pas">
+      <Form>DLStockFrutaPlantaMaset</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaPlantaMasetNormalQL.pas">
+      <Form>QLStockFrutaPlantaMasetNormal</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\StockFrutaPlantaQL.pas">
+      <Form>QLStockFrutaPlanta</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\UFDPrecioFacturaPlatano.pas">
+      <Form>FDPrecioFacturaPlatano</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\UFMComparaEntregaVsRF.pas">
+      <Form>FMComparaEntregaVsRF</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\UFMEntregasFacturasPlatano.pas">
+      <Form>FMEntregasFacturasPlatano</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\UFMEntregasGastos.pas">
+      <Form>FMEntregasGastos</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\UFMEntregasProveedor.pas">
+      <Form>FMEntregasProveedor</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\UFMFacturasEntregasPlatano.pas">
+      <Form>FMFacturasEntregasPlatano</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\UMDEntregas.pas">
+      <Form>MDEntregas</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\UQREntregas.pas">
+      <Form>QREntregas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\UQREntregasMaset.pas">
+      <Form>QREntregasMaset</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\UQRFacturaEntregaPlatano.pas">
+      <Form>QRFacturaEntregaPlatano</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ValorarFrutaPlantaDL.pas">
+      <Form>DLValorarFrutaPlanta</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ValorarFrutaPlantaFL.pas">
+      <Form>FLValorarFrutaPlanta</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ValorarFrutaPlantaQL.pas">
+      <Form>QLValorarFrutaPlanta</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ValorarStockConfeccionadoDL.pas">
+      <Form>DLValorarStockConfeccionado</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ValorarStockConfeccionadoFL.pas">
+      <Form>FLValorarStockConfeccionado</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ValorarStockConfeccionadoQL.pas">
+      <Form>QLValorarStockConfeccionado</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ValorarStockProveedorDL.pas">
+      <Form>DLValorarStockProveedor</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ValorarStockProveedorFL.pas">
+      <Form>FLValorarStockProveedor</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\EntregasTerceros\ValorarStockProveedorQL.pas">
+      <Form>QLValorarStockProveedor</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envasado\CosteEnvasado.pas">
+      <Form>FCosteEnvasado</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\EnvSeccionesContables.pas">
+      <Form>FEnvSeccionesContables</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\GetFechaDiarioEnvases.pas">
+      <Form>FDGetFechaDiarioEnvases</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\GetPrecioDiarioEnvases.pas">
+      <Form>FDGetPrecioDiarioEnvases</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\LAjustesEnvComerciales.pas">
+      <Form>QRLAjustesEnvComerciales</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\LEntradasEnvComerciales.pas">
+      <Form>QRLEntradasEnvComerciales</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\LEnvasesComerciales.pas">
+      <Form>QRLEnvasesComerciales</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\LFacturaLogifruit.pas">
+      <Form>QRLFacturaLogifruit</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\LFFacturaLogifruit.pas">
+      <Form>FLFacturaLogifruit</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\LFMovimientosEnvComerciales.pas">
+      <Form>FLMovimientosEnvComerciales</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\LInventarioEnvComerciales.pas">
+      <Form>QRLInventarioEnvComerciales</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\LMovimientosEnvComerciales.pas">
+      <Form>QRLMovimientosEnvComerciales</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\LPrecioDiarioEnvases.pas">
+      <Form>QRLPrecioDiarioEnvases</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\LTransitosEnvComerciales.pas">
+      <Form>QRLTransitosEnvComerciales</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\MAjustesEnvComerciales.pas">
+      <Form>FMAjustesEnvComerciales</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\MEntradasEnvComerciales.pas">
+      <Form>FMEntradasEnvComerciales</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\MEnvasesComerciales.pas">
+      <Form>FMEnvasesComerciales</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\MInventarioEnvComerciales.pas">
+      <Form>FMInventarioEnvComerciales</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\MTransitosEnvComerciales.pas">
+      <Form>FMTransitosEnvComerciales</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Envases\PrecioDiarioEnvases.pas">
+      <Form>FPrecioDiarioEnvases</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Facturacion\AbonoDetallesDL.pas">
+      <Form>DLAbonoDetalles</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Facturacion\AbonoDetallesFL.pas">
+      <Form>FLAbonoDetalles</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Facturacion\AbonoDetallesQL.pas">
+      <Form>QLAbonoDetalles</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Facturacion\FacturacionCB.pas" />
+    <DCCReference Include="GComerBAG\Code\Facturacion\ListProductoSinFacturarDL.pas">
+      <Form>DLListProductoSinFacturar</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Facturacion\ListProductoSinFacturarFL.pas">
+      <Form>FLListProductoSinFacturar</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Facturacion\ListProductoSinFacturarQL.pas">
+      <Form>QLListProductoSinFacturar</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\EnvasesFOB.pas">
+      <Form>FEnvasesFob</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\EnvasesFOBData.pas">
+      <Form>DMEnvasesFOBData</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\EnvasesFOBReport.pas">
+      <Form>QREnvasesFOBReport</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\EnvasesFOBReport3.pas">
+      <Form>QREnvasesFOBReport3</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\LDPromedioVentasNetoProduccion.pas">
+      <Form>DLPromedioVentasNetoProduccion</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\LFFobCalibres.pas">
+      <Form>FFobCalibres</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\LFFobCalibresData.pas">
+      <Form>FFobCalibresData</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\LFFobCalibresReport2.pas">
+      <Form>FFobCalibresReport2</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\LFPromedioVentasNetoProduccion.pas">
+      <Form>FLPromedioVentasNetoProduccion</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\LQPromedioVentasNetoProduccion.pas">
+      <Form>QLPromedioVentasNetoProduccion</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\PreciosFOBVentaDL.pas">
+      <Form>DLPreciosFOBVenta</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Fob\RFOBSemanal.pas">
+      <Form>QRFOBSemanal</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Informes\EstadisticasEnvase\LDEstadisticasEnvase.pas">
+      <Form>DLEstadisticasEnvase</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Informes\EstadisticasEnvase\LFEstadisticasEnvase.pas">
+      <Form>FLEstadisticasEnvase</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Informes\EstadisticasEnvase\LQEstadisticasEnvase.pas">
+      <Form>QLEstadisticasEnvase</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Informes\GastosEntregas\LDGastosEntregas.pas">
+      <Form>DLGastosEntregas</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Informes\GastosEntregas\LFGastosEntregas.pas">
+      <Form>FLGastosEntregas</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Informes\GastosEntregas\LQGastosEntregas.pas">
+      <Form>QLGastosEntregas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Informes\GastosEntregas\LQGastosEntregasEx.pas">
+      <Form>QLGastosEntregasEx</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Informes\GastosEntregas\LQTablaGastosEntregas.pas">
+      <Form>QLTablaGastosEntregas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\OrdenCarga\ListPackingOrdenDL.pas">
+      <Form>DLListPackingOrden</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\OrdenCarga\ListPackingOrdenFL.pas">
+      <Form>FLListPackingOrden</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\OrdenCarga\ListPackingOrdenQL.pas">
+      <Form>QLListPackingOrden</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\AlbaranAPedidoDL.pas">
+      <Form>DLAlbaranAPedido</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\AlbaranAPedidoFL.pas">
+      <Form>FLAlbaranAPedido</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\AlbaranAPedidoQL.pas">
+      <Form>QLAlbaranAPedido</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\ConfirmaRecepcionDL.pas">
+      <Form>DLConfirmaRecepcion</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\ConfirmaRecepcionFL.pas">
+      <Form>FLConfirmaRecepcion</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\ConfirmaRecepcionQL.pas">
+      <Form>QLConfirmaRecepcion</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\DMPedidosFormato.pas">
+      <Form>dtmMPedidosFormato</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\FMPedidosFormato.pas">
+      <Form>frmMPedidosFormato</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosDM.pas">
+      <Form>DMPedidos</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosEnvaseDL.pas">
+      <Form>DLPedidosEnvase</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosEnvaseFL.pas">
+      <Form>FLPedidosEnvase</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosEnvaseQL.pas">
+      <Form>QLPedidosEnvase</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosFL.pas">
+      <Form>FLPedidos</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosFM.pas">
+      <Form>FMPedidos</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosQM.pas">
+      <Form>QMPedidos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosResumenDL.pas">
+      <Form>DLPedidosResumen</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosResumenFL.pas">
+      <Form>FLPedidosResumen</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosResumenQL.pas">
+      <Form>QLPedidosResumen</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosSalidasDL.pas">
+      <Form>DLPedidosSalidas</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosSalidasFL.pas">
+      <Form>FLPedidosSalidas</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosSalidasQL.pas">
+      <Form>QLPedidosSalidas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosSinAsignarDL.pas">
+      <Form>DLPedidosSinAsignar</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosSinAsignarFL.pas">
+      <Form>FLPedidosSinAsignar</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\PedidosSinAsignarQL.pas">
+      <Form>QLPedidosSinAsignar</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\QMPedidosFormato.pas">
+      <Form>qrpMPedidosFormato</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\RecadvDL.pas">
+      <Form>DLRecadv</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\RecadvDM.pas">
+      <Form>DMRecadv</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\RecadvFilterFL.pas">
+      <Form>FLRecadvFilter</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\RecadvFL.pas">
+      <Form>FLRecadv</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\RecadvFM.pas">
+      <Form>FMRecadv</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\RecadvImportarDL.pas">
+      <Form>DLRecadvImportar</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\RecadvQL.pas">
+      <Form>QLRecadv</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\RecadvQM.pas">
+      <Form>QMRecadv</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\Recadv_DL.pas">
+      <Form>DLRecadv_</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Pedidos\Recadv_QL.pas">
+      <Form>QLRecadv_</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Salidas\CartaPorteDL.pas">
+      <Form>DLCartaPorte</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Salidas\CartaPorteQL.pas">
+      <Form>QMCartaPorte</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Salidas\CDMTablaFOB.pas">
+      <Form>DMTablaFOB</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Salidas\UDQAlbaranSalidaWEB.pas">
+      <Form>DQAlbaranSalidaWEB</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Salidas\UQRAlbaranSalidaWEB.pas">
+      <Form>QRAlbaranSalidaWEB</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Sincronizar\SincroDiarioFP.pas">
+      <Form>FPSincroDiario</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Sincronizar\SincroDiarioMasterUNT.pas" />
+    <DCCReference Include="GComerBAG\Code\Sincronizar\SincroDiarioMDetailUNT.pas" />
+    <DCCReference Include="GComerBAG\Code\Sincronizar\SincroMensualFP.pas">
+      <Form>FPSincroMensual</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Sincronizar\SincroMensualMasterUNT.pas" />
+    <DCCReference Include="GComerBAG\Code\Sincronizar\SincroResumenFD.pas">
+      <Form>FDSincroResumen</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Sincronizar\SincroResumenQD.pas">
+      <Form>QDSincroResumen</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\Sincronizar\SincroTransitosUNT.pas" />
+    <DCCReference Include="GComerBAG\Code\Sincronizar\SincroVarUNT.pas" />
+    <DCCReference Include="GComerBAG\Code\VentasSuministro\SalidasSuministroDL.pas">
+      <Form>DLSalidasSuministro</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\VentasSuministro\SalidasSuministroFL.pas">
+      <Form>FLSalidasSuministro</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Code\VentasSuministro\SalidasSuministroQL.pas">
+      <Form>QLSalidasSuministro</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Datos\DLServiciosTransporteEntregas.pas">
+      <Form>DMLServiciosTransporteEntregas</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Datos\DLServiciosTransporteSalidas.pas">
+      <Form>DMLServiciosTransporteSalidas</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Datos\DLServiciosTransporteTransitos.pas">
+      <Form>DMLServiciosTransporteTransitos</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Datos\UTransitosEnvList_MD.pas">
+      <Form>TransitosEnvList_MD</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Detalles\MSalidas.pas">
+      <Form>FMSalidas</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Detalles\MTransitosSimple.pas">
+      <Form>FMTransitosSimple</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DAsigDua.pas">
+      <Form>FDAsigDua</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DAsignarAlbFac.pas">
+      <Form>FDAsignarAlbFac</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DConfigMail.pas">
+      <Form>FDConfigMail</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DConfigMailFactura.pas">
+      <Form>FDConfigMailFactura</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DConfigPrinter.pas">
+      <Form>FDConfigPrinter</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DConversor.pas">
+      <Form>FDConversor</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DCuentasCorreo.pas">
+      <Form>FDCuentasCorreo</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DError.pas">
+      <Form>FDError</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DInfSalidasPreguntar.pas">
+      <Form>FDInfSalidasPreguntar</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DInfSalidasSelect.pas">
+      <Form>FDInfSalidasSelect</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DInfTransitosPreguntar.pas">
+      <Form>FDInfTransitosPreguntar</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DInfTransitosSelect.pas">
+      <Form>FDInfTransitosSelect</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\dlgAcercaDe.pas">
+      <Form>DAcercaDe</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DNoEuro.pas">
+      <Form>FDNoEuro</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DObservaciones.pas">
+      <Form>FDObservaciones</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DPassword.pas">
+      <Form>FDPassword</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DPreview.pas">
+      <Form>FDPreview</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DSeleccionImpresoras.pas">
+      <Form>FDSeleccionImpresoras</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Dialogos\DSelectFactura.pas">
+      <Form>FDSelectFactura</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\CFLComSemVen.pas">
+      <Form>DFLComSemVen</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LCuentasVenta.pas">
+      <Form>FLCuentasVenta</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LCuentasVentaFactura.pas">
+      <Form>FLCuentasVentaFactura</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFacturaTransitoProforma.pas">
+      <Form>QRLFacturaTransitoProforma</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFComprobacionGastos.pas">
+      <Form>FLComprobacionGastos</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFFactSuministro.pas">
+      <Form>FLFactSuministro</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFFacturasCliente.pas">
+      <Form>FLFacturasCliente</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFSalidas.pas">
+      <Form>FLSalidas</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFSalidasCatCal.pas">
+      <Form>FLSalidasCatCal</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFSalidasCliente.pas">
+      <Form>FLSalidasCliente</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFSalidasEnvases.pas">
+      <Form>FLSalidasEnvases</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFSalidasEnvases2.pas">
+      <Form>FLSalidasEnvases2</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFVentas.pas">
+      <Form>FLVentas</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFVentasMensual.pas">
+      <Form>FLVentasMensual</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFVentasNetoSem.pas">
+      <Form>FLVentasSem</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LFVentasPorCliente.pas">
+      <Form>FLVentasPorCliente</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LInformeVentasSemanal.pas">
+      <Form>FLInformeVentasSemanal</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LMercadonaVentasSemanal.pas">
+      <Form>FLMercadonaVentasSemanal</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LServiciosTransporteEntregas.pas">
+      <Form>FLServiciosTransporteEntregas</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LServiciosTransporteSalidas.pas">
+      <Form>FLServiciosTransporteSalidas</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LServiciosTransporteTransitos.pas">
+      <Form>FLServiciosTransporteTransitos</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\LVentasPorPais.pas">
+      <Form>FLVentasPorPais</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Informes\UTransitosEnvList_FC.pas">
+      <Form>TransitosEnvList_FC</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MAduanas.pas">
+      <Form>FMAduanas</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MAgrupacionesEnvase.pas">
+      <Form>FMAgrupacionesEnvase</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MAgrupacionesGasto.pas">
+      <Form>FMAgrupacionesGasto</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MCentros.pas">
+      <Form>FMCentros</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MClientes_edi.pas">
+      <Form>FMClientes_Edi</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MCodigosEAN13.pas">
+      <Form>FCodigosMEAN13</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MCuentasCorreo.pas">
+      <Form>FMCuentasCorreo</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MGastosSalida.pas">
+      <Form>FMGastosSalida</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MGastosTransitos.pas">
+      <Form>FMGastosTransitosOld</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MImpuestos.pas">
+      <Form>FMImpuestos</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MLineasProductos.pas">
+      <Form>FMLineasProductos</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MMonedas.pas">
+      <Form>FMMonedas</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MProvincias.pas">
+      <Form>FMProvincias</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MRepresentantes.pas">
+      <Form>FMRepresentantes</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MTipoGastos.pas">
+      <Form>FMTipogastos</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MTipoVia.pas">
+      <Form>FMTipoVia</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Formularios\Maestros\MUniConsumo.pas">
+      <Form>FMUniConsumo</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Menu\CDAMenuUtils.pas">
+      <Form>DAMenuUtils</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Menu\CUAMenuAlmacen.pas" />
+    <DCCReference Include="GComerBAG\Menu\CUAMenuCompras.pas" />
+    <DCCReference Include="GComerBAG\Menu\CUAMenuFacturacion.pas" />
+    <DCCReference Include="GComerBAG\Menu\CUAMenuPedidos.pas" />
+    <DCCReference Include="GComerBAG\Menu\CUAMenuSalidas.pas" />
+    <DCCReference Include="GComerBAG\Menu\CUAMenuTransitos.pas" />
+    <DCCReference Include="GComerBAG\Menu\CUAMenuTransmision.pas" />
+    <DCCReference Include="GComerBAG\Menu\CUAMenuUtiles.pas" />
+    <DCCReference Include="GComerBAG\Menu\CUAMenuUtils.pas" />
+    <DCCReference Include="GComerBAG\Modulos\CGestionPrincipal.pas" />
+    <DCCReference Include="GComerBAG\Modulos\CMaestro.pas" />
+    <DCCReference Include="GComerBAG\Modulos\CMaestroDetalle.pas" />
+    <DCCReference Include="GComerBAG\Modulos\CReportes.pas" />
+    <DCCReference Include="GComerBAG\NCode\Correo\UFDEnviarCorreo.pas">
+      <Form>FDEnviarCorreo</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\NCode\Paises\PaisesDM.pas">
+      <Form>DMPaises</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\NCode\Paises\PaisesFM.pas">
+      <Form>FMPaises</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\NCode\Paises\PaisesQM.pas">
+      <Form>QMPaises</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Principal.pas">
+      <Form>FPrincipal</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\CQLComSemVen.pas">
+      <Form>DQLComSemVen</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LComprobacionGastos.pas">
+      <Form>QRLComprobacionGastos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LCuentasVentaFacturaQR.pas">
+      <Form>QLCuentasVentaFacturaQR</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LEntradasPeriodo.pas">
+      <Form>QRLEntradasPeriodo</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LFacturasCliDes.pas">
+      <Form>QRLFacturasCliDes</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LFacturasCliente.pas">
+      <Form>QRLFActurasCliente</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LFacturasCliSem.pas" />
+    <DCCReference Include="GComerBAG\Reports\Informes\LSalidas.pas">
+      <Form>QRLSalidas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LSalidasCatCal.pas">
+      <Form>QRLSalidasCatCal</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LSalidasCliente.pas">
+      <Form>QRLSalidasCliente</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LSalidasEnvases.pas">
+      <Form>QRLSalidasEnvases</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LSalidasEnvases2.pas">
+      <Form>QRLSalidasEnvases2</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LVentas.pas">
+      <Form>QRLVentas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LVentasMensualCat.pas">
+      <Form>QRLVentasMensualCat</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LVentasNetoSem.pas">
+      <Form>QRLVentasSem</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\LVentasPorCliente.pas">
+      <Form>QRLVentasPorCliente</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\QLAlbaranTransito2.pas">
+      <Form>QRLAlbaranTransito2</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\QLCuentasVenta.pas">
+      <Form>QRLCuentasVentas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\QLFactSuministro.pas">
+      <Form>QFactSuministro</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\QLInformeVentasSemanal.pas">
+      <Form>QRLInformeVentasSemanal</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\QLMercadonaVentasSemanal.pas">
+      <Form>QRLMercadonaVentasSemanal</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\QLServiciosTransporteEntregas.pas">
+      <Form>QRLServiciosTransporteEntregas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\QLServiciosTransporteSalidas.pas">
+      <Form>QRLServiciosTransporteSalidas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\QLServiciosTransporteTransitos.pas">
+      <Form>QRLServiciosTransporteTransitos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\QLVentasPorPais.pas">
+      <Form>QRLVentasPorPais</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Informes\UTransitosEnvList_QR.pas">
+      <Form>TransitosEnvList_QR</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LAduanas.pas">
+      <Form>QRLAduanas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LAgrupacionesEnvase.pas">
+      <Form>QLAgrupacionesEnvase</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LAgrupacionesGasto.pas">
+      <Form>QLAgrupacionesGasto</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LAgrupaPrecalibrado.pas">
+      <Form>qrpAgrupaPrecalibrado</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LCentros.pas">
+      <Form>QRLCentros</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LClientes.pas">
+      <Form>QRLClientes</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LClientes_Edi.pas">
+      <Form>QRLClientes_Edi</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LCodigosEAN13.pas">
+      <Form>QRLCodigosEan13</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LDProveedores.pas">
+      <Form>FDProveedores</Form>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LEmpresas.pas">
+      <Form>QRLEmpresas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LImpuestos.pas">
+      <Form>QRLImpuestos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LLineasProductos.pas">
+      <Form>QRLLineasProductos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LMarcas.pas">
+      <Form>QRLMarcas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LMonedas.pas">
+      <Form>QRLMonedas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LProvincias.pas">
+      <Form>QRLProvincias</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LRepresentantes.pas">
+      <Form>QRLRepresentantes</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LSeccContable.pas">
+      <Form>QRLSeccContable</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LTipoGastos.pas">
+      <Form>QRLTiposGastos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LTiposVia.pas">
+      <Form>QRLTiposVia</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LTransportistas.pas">
+      <Form>QRLTransportistas</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerBAG\Reports\Listados\LUndConsumo.pas">
+      <Form>QRLUndConsumo</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Code\Intrastat\ListControlIntrasatDL.pas">
+      <Form>DLListControlIntrasat</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Code\Intrastat\ListControlIntrasatFL.pas">
+      <Form>FLListControlIntrasat</Form>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Code\Intrastat\ListControlIntrasatQL.pas">
+      <Form>QLListControlIntrasat</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Code\Transitos\UDMCalculoPosei.pas">
+      <Form>DMCalculoPosei</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Formularios\Informes\LIntrastat.pas">
+      <Form>FLIntrastat</Form>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Formularios\Maestros\MCampos.pas">
+      <Form>FMCampos</Form>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Formularios\Maestros\MCosecheros.pas">
+      <Form>FMCosecheros</Form>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Formularios\Maestros\MEAN13.pas">
+      <Form>FMEAN13</Form>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Formularios\Maestros\MEAN13_old.pas">
+      <Form>FMEAN13_old</Form>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Formularios\Maestros\MFederaciones.pas">
+      <Form>FMFederaciones</Form>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Formularios\Maestros\MPesos.pas">
+      <Form>FMPesos</Form>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Formularios\Maestros\MPlantaciones.pas">
+      <Form>FMPlantaciones</Form>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Formularios\Maestros\MTiposCaja.pas">
+      <Form>FMTiposCaja</Form>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Reports\Informes\QLIntrastat.pas">
+      <Form>QRLIntrastat</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Reports\Listados\LCampos.pas">
+      <Form>QRLCampos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Reports\Listados\LCosechero.pas">
+      <Form>QRLCosecheros</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Reports\Listados\LEAN13.pas">
+      <Form>QRLEan13</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Reports\Listados\LEAN13_old.pas">
+      <Form>QRLEAN13_old</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Reports\Listados\LPesos.pas">
+      <Form>QRLPesos</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Reports\Listados\LPlantaciones.pas">
+      <Form>QRLPlantaciones</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="GComerSAT\Reports\Listados\LTiposCaja.pas">
+      <Form>QLTiposCaja</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="SAT\Ficheros\LAgrupacionesComerciales.pas">
+      <Form>QLAgrupacionesComerciales</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
+    <DCCReference Include="SAT\Ficheros\MAgrupacionesComerciales.pas">
+      <Form>FMAgrupacionesComerciales</Form>
+    </DCCReference>
+  </ItemGroup>
+</Project>

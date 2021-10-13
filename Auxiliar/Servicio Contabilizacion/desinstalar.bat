@@ -1,0 +1,1 @@
+ServicioConta.exe /UnINSTALL

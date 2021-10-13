@@ -1,0 +1,1 @@
+REGSVR32 midas.dll /s

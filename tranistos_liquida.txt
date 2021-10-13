@@ -1,0 +1,40 @@
+
+delete from tliq_semanas;
+delete from tliq_liquida_det;
+
+
+--select * from tliq_semanas;
+select codigo_liq, linea_liq, origen_ent, n_entrada, categoria_ent, kilos_ent, origen_sal, 
+       nvl(n_transito,n_salida) n_salida, facturado_sal, kilos_liq, liquido_liq
+from tliq_liquida_det
+where codigo_liq = 2 --empresa_ent = '050' and centro_ent = '6' and producto_ent= 'F' 
+order by 1,2
+
+
+select empresa_tra, centro_tra, fecha_tra, n_transito, producto_ent 
+ from tliq_liquida_det 
+ where empresa_tra = '050'
+ and origen_sal = 'T' 
+ and facturado_sal = 0 
+ and producto_ent = 'F'
+ and fecha_tra between '2/1/2016' and '15/1/2016'
+ group by empresa_tra, centro_tra, fecha_tra, n_transito, producto_ent 
+ order by empresa_tra, centro_tra, fecha_tra, n_transito, producto_ent 
+
+//Salientes de tenerife
+select * 
+from tliq_liquida_det 
+where empresa_tra = '050' 
+and centro_tra = '6'
+and fecha_tra = '4/1/2017' -- '5/1/2017' '12/1/2017'
+and n_transito = 607560 -- 607563 607580
+and producto_ent = 'F'
+
+//Entrantes
+select * 
+  from tliq_liquida_det 
+  where empresa_ent = '050' 
+  and centro_origen_ent = '6'
+  and fecha_origen_ent = '4/1/2017' -- '5/1/2017' '12/1/2017' 
+  and n_entrada = 607560 -- 607563 607580 
+  and producto_ent = 'F'

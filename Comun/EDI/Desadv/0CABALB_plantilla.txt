@@ -1,0 +1,95 @@
+IDCAB#Clave del registro de cabeceras
+NUMDES#Número de Aviso de Expedición
+TIPO#351
+FUNCION#9
+FECDES#Fecha o Fecha/Hora del Aviso de Expedición --> AAAAMMDDHHmm
+FECENT#Fecha o Fecha/Hora del Aviso de Entrega --> AAAAMMDDHHmm (Optativo)
+#
+#
+#
+#
+NUMALB#Número de Albarán
+FECALB#Fecha del Albarán
+NUMPED#Número de pedido
+FECPED#Fecha de Pedido (Optativo)
+#
+#
+ORIGEN#Código EAN-13 origen del mensaje. (BONNYSA)
+DESTINO#Código EAN-13 destino del mensaje.
+PROVEEDOR#Código EAN-13 del proveedor de las mercancías. (BONNYSA)
+COMPRADOR#Código EAN-13 del comprador
+DPTO#Código del departamento que pide la mercancía. (OBLIGATORIO CORTE INGLES)
+RECEPTOR#Código EAN-13 del receptor de la entrega
+#
+#
+EXPEDIDOR#Código EAN-13 del expedidor (Optativo --> Bonnysa)
+#
+#
+#
+#
+#
+#
+#
+#
+TOTQTY#Sumatorio de las cantidades indicadas los campo CENVFAC al nivel de línea.
+IDENTIF#X6 -> Indica si el palet viene identificado por un SSCC o matricula (Obligatorio Corte Ingles)
+#
+CIP#Código Interno de Proveedor (solo Alcampo)
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+PESBRUTOT#Peso Bruto Total del Envío(Opativo -> Obligatorio Corte ingles perecederos)
+PESNETTOT#Peso Neto Total del Envío(Opativo -> Obligatorio Corte ingles perecederos)
+NUMTOTBUL#Número Total de Bultos (Opativo -> Obligatorio Corte ingles perecederos)
+#
+#
+#
+#
+#
+#
+#
+#

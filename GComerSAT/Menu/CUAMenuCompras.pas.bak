@@ -1,0 +1,59 @@
+unit CUAMenuCompras;
+
+interface
+
+uses
+  CUAMenuUtils, CDAMenuUtils, Forms;
+
+procedure EjecutarMenuCompras( const AForm: TForm; const AOpcion: string );
+
+implementation
+
+uses
+  Dialogs,
+  UDMConfig, UFMEntregasProveedor, ListEntregasFL, ResumenEntregasFL,
+  ListEntregasSinAsociarFL, DListadoControlEntregas,
+  UEntradaDatos,  GastosProveedorFL, EntregasSinFacturarFL, 
+  MInventarioMaterialProveedor, LFMoviEnvasesProveedor,FacturasGastosEntregasFL;
+
+procedure EjecutarMenuCompras( const AForm: TForm; const AOpcion: string );
+begin
+  CDAMenuUtils.MenuLog( AOpcion );
+
+  if ( AOpcion = 'mnuEntEntregas' )  or ( AOpcion = 'btnEntregas' )  then
+  begin
+    CrearVentana( AForm, TFMEntregasProveedor);
+  end
+  else
+  if AOpcion = 'mnuEntLstEntregas' then
+    CrearVentana( AForm, TFLListEntregas)
+  else
+  if AOpcion = 'mnuEntLstControlEntregas' then
+    CrearVentana( AForm, TFDListadoControlEntregas )
+  else
+  if AOpcion = 'mnuEntResEntregas' then
+    CrearVentana( AForm, TFLResumenEntregas)
+  else
+  if AOpcion = 'mnuEntEntregasSinAsociar' then
+    CrearVentana( AForm, TFLListEntregasSinAsociar)
+  else
+  if AOpcion = 'mnuEntLstFacturasProveedorNew' then
+    CrearVentana( AForm, TFLGastosProveedor )
+  else
+  if AOpcion = 'mnuEntEntregasSinFacturar' then
+    CrearVentana( AForm, TFLEntregasSinFacturar )
+  else
+  if AOpcion = 'mnuEntInventarioMaterialProveedor' then
+    //SIN USAR
+    CrearVentana( AForm, TFMInventarioMaterialProveedor )
+  else
+  if AOpcion = 'mnuEntMovimentosMaterialProveedor' then
+    //SIN USAR
+    CrearVentana( AForm, TFMoviEnvasesProveedor )
+  else
+  if AOpcion = 'mnuEntLstFacturasGastosEntregas' then
+    CrearVentana( AForm, TFLFacturasGastosEntregas );
+end;
+
+end.
+

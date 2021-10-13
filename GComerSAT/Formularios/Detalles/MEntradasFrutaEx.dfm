@@ -1,0 +1,1759 @@
+object FMEntradasFrutaEx: TFMEntradasFrutaEx
+  Left = 412
+  Top = 255
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = '  ENTRADAS DE FRUTA - CABECERA'
+  ClientHeight = 577
+  ClientWidth = 944
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poScreenCenter
+  Visible = True
+  WindowState = wsMaximized
+  OnActivate = FormActivate
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDeactivate = FormDeactivate
+  OnKeyDown = FormKeyDown
+  PixelsPerInch = 96
+  TextHeight = 13
+  object PMaestro: TPanel
+    Left = 0
+    Top = 0
+    Width = 944
+    Height = 197
+    Align = alTop
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    BevelWidth = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    object linCajas: TLabel
+      Left = 221
+      Top = 167
+      Width = 87
+      Height = 13
+      Caption = 'Cajas en las lineas'
+      Visible = False
+    end
+    object taraCajas: TLabel
+      Left = 222
+      Top = 167
+      Width = 44
+      Height = 13
+      Caption = 'taraCajas'
+      Visible = False
+    end
+    object LEmpresa_p: TLabel
+      Left = 397
+      Top = 41
+      Width = 78
+      Height = 18
+      AutoSize = False
+      Caption = ' Centro'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object BGBCentro_ec: TBGridButton
+      Left = 513
+      Top = 40
+      Width = 13
+      Height = 20
+      Action = ARejillaFlotante
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00000000000000000000000000000000000000
+        0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF0000000000000000000000000000000000000000000000
+        000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+      ParentShowHint = False
+      ShowHint = True
+      Control = centro_ec
+      Grid = RejillaFlotante
+      GridAlignment = taDownRight
+      GridWidth = 250
+      GridHeigth = 200
+    end
+    object Label1: TLabel
+      Left = 45
+      Top = 41
+      Width = 78
+      Height = 18
+      AutoSize = False
+      Caption = ' Empresa'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object BGBEmpresa_ec: TBGridButton
+      Left = 161
+      Top = 40
+      Width = 13
+      Height = 20
+      Action = ARejillaFlotante
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00000000000000000000000000000000000000
+        0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF0000000000000000000000000000000000000000000000
+        000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+      ParentShowHint = False
+      ShowHint = True
+      Control = empresa_ec
+      Grid = RejillaFlotante
+      GridAlignment = taDownRight
+      GridWidth = 230
+      GridHeigth = 200
+    end
+    object Label2: TLabel
+      Left = 45
+      Top = 93
+      Width = 78
+      Height = 18
+      AutoSize = False
+      Caption = ' Producto'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object BGBProducto_ec: TBGridButton
+      Left = 161
+      Top = 92
+      Width = 13
+      Height = 20
+      Action = ARejillaFlotante
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00000000000000000000000000000000000000
+        0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF0000000000000000000000000000000000000000000000
+        000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+      ParentShowHint = False
+      ShowHint = True
+      Control = producto_ec
+      Grid = RejillaFlotante
+      GridAlignment = taDownRight
+      GridWidth = 240
+      GridHeigth = 200
+    end
+    object Label3: TLabel
+      Left = 45
+      Top = 119
+      Width = 78
+      Height = 18
+      AutoSize = False
+      Caption = ' Transporte'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object lblFecha: TLabel
+      Left = 397
+      Top = 93
+      Width = 78
+      Height = 18
+      AutoSize = False
+      Caption = ' Fecha'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object lblHora: TLabel
+      Left = 570
+      Top = 93
+      Width = 78
+      Height = 19
+      AutoSize = False
+      Caption = ' Hora'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object Label6: TLabel
+      Left = 45
+      Top = 145
+      Width = 78
+      Height = 18
+      AutoSize = False
+      Caption = ' Total Palets'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object Label7: TLabel
+      Left = 222
+      Top = 145
+      Width = 78
+      Height = 19
+      AutoSize = False
+      Caption = ' Total Cajas'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object Label8: TLabel
+      Left = 400
+      Top = 145
+      Width = 78
+      Height = 18
+      AutoSize = False
+      Caption = ' Peso Bruto'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object Label9: TLabel
+      Left = 577
+      Top = 145
+      Width = 78
+      Height = 19
+      AutoSize = False
+      Caption = ' Peso Neto'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object BCBFecha_ec: TBCalendarButton
+      Left = 550
+      Top = 92
+      Width = 13
+      Height = 20
+      Hint = 'Pulse F2 para desplegar un calendario.. '
+      Action = ARejillaFlotante
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00000000000000000000000000000000000000
+        0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF0000000000000000000000000000000000000000000000
+        000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+      ParentShowHint = False
+      ShowHint = True
+      Control = fecha_ec
+      Calendar = CalendarioFlotante
+      CalendarAlignment = taDownRight
+      CalendarWidth = 197
+      CalendarHeigth = 152
+    end
+    object BGBTransportista_ec: TBGridButton
+      Left = 161
+      Top = 118
+      Width = 13
+      Height = 20
+      Action = ARejillaFlotante
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00000000000000000000000000000000000000
+        0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF0000000000000000000000000000000000000000000000
+        000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+      ParentShowHint = False
+      ShowHint = True
+      Control = transportista_ec
+      Grid = RejillaFlotante
+      GridAlignment = taDownCenter
+      GridWidth = 300
+      GridHeigth = 200
+    end
+    object LAno_semana_p: TLabel
+      Left = 45
+      Top = 68
+      Width = 90
+      Height = 18
+      AutoSize = False
+      Caption = ' N'#186' Entrada'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object taraCamion: TLabel
+      Left = 400
+      Top = 122
+      Width = 38
+      Height = 13
+      Caption = 'TARA ='
+      Visible = False
+    end
+    object linKilos: TLabel
+      Left = 578
+      Top = 167
+      Width = 83
+      Height = 13
+      Caption = 'Kilos en las lineas'
+      Visible = False
+    end
+    object taraPalets: TLabel
+      Left = 45
+      Top = 167
+      Width = 47
+      Height = 13
+      Caption = 'taraPalets'
+      Visible = False
+    end
+    object taraTotal: TLabel
+      Left = 400
+      Top = 167
+      Width = 42
+      Height = 13
+      Caption = 'taraTotal'
+      Visible = False
+    end
+    object lblNombre1: TLabel
+      Left = 397
+      Top = 67
+      Width = 78
+      Height = 18
+      AutoSize = False
+      Caption = ' Tipo Entrada'
+      Color = cl3DLight
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object tipo_entrada: TLabel
+      Left = 479
+      Top = 71
+      Width = 15
+      Height = 13
+      AutoSize = False
+    end
+    object lblLiquida: TLabel
+      Left = 397
+      Top = 12
+      Width = 338
+      Height = 22
+      Alignment = taCenter
+      AutoSize = False
+      Caption = ' Fecha liquidaci'#243'n definitiva 31/12/2013'
+      Color = clSilver
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+      Visible = False
+    end
+    object btnFechaHasta: TBCalendarButton
+      Left = 723
+      Top = 114
+      Width = 13
+      Height = 20
+      Action = ARejillaFlotante
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00000000000000000000000000000000000000
+        0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF0000000000000000000000000000000000000000000000
+        000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+      ParentShowHint = False
+      ShowHint = True
+      Visible = False
+      Control = edtFechaHasta
+      Calendar = CalendarioFlotante
+      CalendarAlignment = taDownLeft
+      CalendarWidth = 197
+      CalendarHeigth = 152
+    end
+    object lblCalidad2: TLabel
+      Left = 657
+      Top = 71
+      Width = 15
+      Height = 13
+      AutoSize = False
+    end
+    object centro_ec: TBDEdit
+      Tag = 1
+      Left = 475
+      Top = 40
+      Width = 38
+      Height = 21
+      ColorEdit = clMoneyGreen
+      Zeros = True
+      Required = True
+      RequiredMsg = 'El c'#243'digo de centro es de obligada inserci'#243'n.'
+      OnRequiredTime = RequiredTime
+      MaxLength = 1
+      TabOrder = 2
+      OnChange = PonNombreCab
+      OnExit = centro_ecExit
+      DataField = 'centro_ec'
+      DataSource = DSMaestro
+      Modificable = False
+      PrimaryKey = True
+    end
+    object STCentro_ec: TStaticText
+      Left = 527
+      Top = 41
+      Width = 208
+      Height = 17
+      AutoSize = False
+      BorderStyle = sbsSunken
+      TabOrder = 3
+    end
+    object empresa_ec: TBDEdit
+      Tag = 1
+      Left = 123
+      Top = 40
+      Width = 38
+      Height = 21
+      ColorEdit = clMoneyGreen
+      Zeros = True
+      Required = True
+      RequiredMsg = 'El c'#243'digo de empresa es de obligada inserci'#243'n.'
+      OnRequiredTime = RequiredTime
+      MaxLength = 3
+      TabOrder = 1
+      OnChange = PonNombreCab
+      OnExit = empresa_ecExit
+      DataField = 'empresa_ec'
+      DataSource = DSMaestro
+      Modificable = False
+      PrimaryKey = True
+    end
+    object STEmpresa_ec: TStaticText
+      Left = 175
+      Top = 42
+      Width = 208
+      Height = 17
+      AutoSize = False
+      BorderStyle = sbsSunken
+      TabOrder = 4
+    end
+    object producto_ec: TBDEdit
+      Tag = 1
+      Left = 123
+      Top = 92
+      Width = 38
+      Height = 21
+      ColorEdit = clMoneyGreen
+      Required = True
+      RequiredMsg = 'El c'#243'digo de producto es de obligada inserci'#243'n.'
+      OnRequiredTime = RequiredTime
+      MaxLength = 3
+      TabOrder = 8
+      OnChange = PonNombreCab
+      DataField = 'producto_ec'
+      DataSource = DSMaestro
+      Modificable = False
+    end
+    object STProducto_ec: TStaticText
+      Left = 175
+      Top = 94
+      Width = 208
+      Height = 17
+      AutoSize = False
+      BorderStyle = sbsSunken
+      TabOrder = 11
+    end
+    object transportista_ec: TBDEdit
+      Left = 123
+      Top = 118
+      Width = 38
+      Height = 21
+      ColorEdit = clMoneyGreen
+      Required = True
+      RequiredMsg = 'El c'#243'digo del transportista es de obligada inserci'#243'n.'
+      OnRequiredTime = RequiredTime
+      InputType = itInteger
+      MaxLength = 4
+      TabOrder = 13
+      OnChange = PonNombreCab
+      DataField = 'transportista_ec'
+      DataSource = DSMaestro
+    end
+    object fecha_ec: TBDEdit
+      Left = 475
+      Top = 92
+      Width = 74
+      Height = 21
+      ColorEdit = clMoneyGreen
+      Required = True
+      RequiredMsg = 'La fecha de la entrada es de obligada inserci'#243'n.'
+      OnRequiredTime = RequiredTime
+      InputType = itDate
+      MaxLength = 10
+      TabOrder = 9
+      DataField = 'fecha_ec'
+      DataSource = DSMaestro
+      PrimaryKey = True
+    end
+    object hora_ec: TBDEdit
+      Left = 648
+      Top = 92
+      Width = 87
+      Height = 21
+      ColorEdit = clMoneyGreen
+      Required = True
+      RequiredMsg = 'La hora de la entrada es de obligada inserci'#243'n.'
+      OnRequiredTime = RequiredTime
+      MaxLength = 5
+      TabOrder = 10
+      DataField = 'hora_ec'
+      DataSource = DSMaestro
+    end
+    object total_palets_ec: TBDEdit
+      Left = 123
+      Top = 144
+      Width = 79
+      Height = 21
+      ColorEdit = clMoneyGreen
+      Required = True
+      RequiredMsg = 'El numero de palets es de obligada inserci'#243'n.'
+      OnRequiredTime = RequiredTime
+      InputType = itInteger
+      TabOrder = 15
+      OnChange = total_palets_ecChange
+      DataField = 'total_palets_ec'
+      DataSource = DSMaestro
+    end
+    object total_cajas_ec: TBDEdit
+      Left = 300
+      Top = 144
+      Width = 79
+      Height = 21
+      ColorEdit = clMoneyGreen
+      Required = True
+      RequiredMsg = 'El n'#250'mero total de cajas es de obligada inserci'#243'n.'
+      OnRequiredTime = RequiredTime
+      InputType = itInteger
+      TabOrder = 16
+      OnChange = total_cajas_ecChange
+      DataField = 'total_cajas_ec'
+      DataSource = DSMaestro
+    end
+    object peso_bruto_ec: TBDEdit
+      Left = 478
+      Top = 144
+      Width = 79
+      Height = 21
+      ColorEdit = clMoneyGreen
+      RequiredMsg = 'El peso bruto de la entrada es de obligada inserci'#243'n.'
+      InputType = itReal
+      MaxDecimals = 2
+      MaxLength = 10
+      TabOrder = 17
+      OnChange = peso_bruto_ecChange
+      DataField = 'peso_bruto_ec'
+      DataSource = DSMaestro
+    end
+    object peso_neto_ec: TBDEdit
+      Left = 656
+      Top = 144
+      Width = 79
+      Height = 21
+      ColorEdit = clMoneyGreen
+      Required = True
+      RequiredMsg = 'El peso neto de la entrada es de obligada inserci'#243'n.'
+      OnRequiredTime = RequiredTime
+      InputType = itReal
+      MaxDecimals = 2
+      MaxLength = 10
+      TabOrder = 18
+      OnChange = peso_neto_ecChange
+      DataField = 'peso_neto_ec'
+      DataSource = DSMaestro
+    end
+    object numero_entrada_ec: TBDEdit
+      Left = 123
+      Top = 66
+      Width = 87
+      Height = 21
+      ColorEdit = clMoneyGreen
+      Required = True
+      RequiredMsg = 'El n'#250'mero de entrada es de obligada inserci'#243'n.'
+      OnRequiredTime = RequiredTime
+      InputType = itInteger
+      TabOrder = 5
+      OnChange = numero_entrada_ecChange
+      OnEnter = numero_entrada_ecEnter
+      OnExit = numero_entrada_ecExit
+      DataField = 'numero_entrada_ec'
+      DataSource = DSMaestro
+      Modificable = False
+      PrimaryKey = True
+    end
+    object STTransportista_ec: TStaticText
+      Left = 175
+      Top = 120
+      Width = 208
+      Height = 17
+      AutoSize = False
+      BorderStyle = sbsSunken
+      TabOrder = 14
+    end
+    object stTipoEntrada: TStaticText
+      Left = 475
+      Top = 67
+      Width = 170
+      Height = 17
+      AutoSize = False
+      BorderStyle = sbsSunken
+      TabOrder = 7
+    end
+    object dbedtliquidacion_definitiva_ec: TDBEdit
+      Left = 397
+      Top = 11
+      Width = 78
+      Height = 21
+      DataField = 'liquidacion_definitiva_ec'
+      DataSource = DSMaestro
+      ReadOnly = True
+      TabOrder = 0
+      Visible = False
+      OnChange = dbedtliquidacion_definitiva_ecChange
+    end
+    object edtFechaHasta: TBDEdit
+      Left = 648
+      Top = 114
+      Width = 74
+      Height = 21
+      ColorEdit = clMoneyGreen
+      OnRequiredTime = RequiredTime
+      InputType = itDate
+      Visible = False
+      MaxLength = 10
+      TabOrder = 12
+      DataField = 'fecha_ec'
+      DataSource = DSMaestro
+    end
+    object cbbCalidad: TComboBox
+      Left = 648
+      Top = 66
+      Width = 87
+      Height = 21
+      Style = csDropDownList
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 6
+      Text = 'Indiferente '
+      OnKeyPress = cbbCalidadKeyPress
+      Items.Strings = (
+        'Indiferente '
+        'Primera'
+        'Segunda')
+    end
+  end
+  object PDetalle: TPanel
+    Left = 0
+    Top = 197
+    Width = 944
+    Height = 380
+    Align = alClient
+    TabOrder = 2
+    object PDetalleEdit: TPanel
+      Left = 1
+      Top = 1
+      Width = 942
+      Height = 93
+      Align = alTop
+      BevelInner = bvLowered
+      TabOrder = 0
+      object Label15: TLabel
+        Left = 120
+        Top = 15
+        Width = 68
+        Height = 18
+        AutoSize = False
+        Caption = ' Cosechero'
+        Color = cl3DLight
+        ParentColor = False
+        Layout = tlCenter
+      end
+      object BGBCosechero_e2l: TBGridButton
+        Left = 228
+        Top = 14
+        Width = 13
+        Height = 20
+        Action = ARejillaFlotante
+        Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000000000000000000000000000000000000FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00000000000000000000000000000000000000
+          0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF0000000000000000000000000000000000000000000000
+          000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+        ParentShowHint = False
+        ShowHint = True
+        Control = cosechero_e2l
+        Grid = RejillaFlotante
+        GridAlignment = taDownRight
+        GridWidth = 300
+        GridHeigth = 200
+      end
+      object Label16: TLabel
+        Left = 120
+        Top = 36
+        Width = 68
+        Height = 18
+        AutoSize = False
+        Caption = ' Plantaci'#243'n'
+        Color = cl3DLight
+        ParentColor = False
+        Layout = tlCenter
+      end
+      object BGBPlantacion_e2l: TBGridButton
+        Left = 228
+        Top = 35
+        Width = 13
+        Height = 20
+        Action = ARejillaFlotante
+        Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000000000000000000000000000000000000FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00000000000000000000000000000000000000
+          0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF0000000000000000000000000000000000000000000000
+          000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+        ParentShowHint = False
+        ShowHint = True
+        Control = plantacion_e2l
+        Grid = RejillaFlotante
+        GridAlignment = taDownCenter
+        GridWidth = 355
+        GridHeigth = 200
+      end
+      object Label17: TLabel
+        Left = 480
+        Top = 15
+        Width = 68
+        Height = 18
+        AutoSize = False
+        Caption = ' Cajas'
+        Color = cl3DLight
+        ParentColor = False
+        Layout = tlCenter
+      end
+      object Label18: TLabel
+        Left = 480
+        Top = 37
+        Width = 68
+        Height = 18
+        AutoSize = False
+        Caption = ' Kilos'
+        Color = cl3DLight
+        ParentColor = False
+        Layout = tlCenter
+      end
+      object Label10: TLabel
+        Left = 120
+        Top = 57
+        Width = 68
+        Height = 18
+        AutoSize = False
+        Caption = ' Sectores'
+        Color = cl3DLight
+        ParentColor = False
+        Layout = tlCenter
+      end
+      object lbl3: TLabel
+        Left = 480
+        Top = 58
+        Width = 68
+        Height = 18
+        AutoSize = False
+        Caption = ' Kilos caja'
+        Color = cl3DLight
+        ParentColor = False
+        Layout = tlCenter
+      end
+      object dlblKilosCaja: TDBText
+        Left = 551
+        Top = 61
+        Width = 85
+        Height = 13
+        Alignment = taRightJustify
+        DataField = 'kilos_caja'
+        DataSource = DSDetalle
+      end
+      object cosechero_e2l: TBDEdit
+        Tag = 1
+        Left = 190
+        Top = 14
+        Width = 38
+        Height = 21
+        ColorEdit = clMoneyGreen
+        RequiredMsg = 'El c'#243'digo de cosechero es de obligada inserci'#243'n.'
+        OnRequiredTime = RequiredTime
+        InputType = itInteger
+        MaxLength = 3
+        TabOrder = 0
+        OnChange = PonNombreLin
+        DataField = 'cosechero_e2l'
+        DataSource = DSDetalle
+        Modificable = False
+        PrimaryKey = True
+      end
+      object plantacion_e2l: TBDEdit
+        Tag = 1
+        Left = 190
+        Top = 35
+        Width = 38
+        Height = 21
+        ColorEdit = clMoneyGreen
+        RequiredMsg = 'El c'#243'digo de plantaci'#243'n es de obligada inserci'#243'n.'
+        OnRequiredTime = RequiredTime
+        InputType = itInteger
+        MaxLength = 3
+        TabOrder = 3
+        OnChange = PonNombreLin
+        DataField = 'plantacion_e2l'
+        DataSource = DSDetalle
+        Modificable = False
+        PrimaryKey = True
+      end
+      object total_cajas_e2l: TBDEdit
+        Left = 551
+        Top = 14
+        Width = 85
+        Height = 21
+        ColorEdit = clMoneyGreen
+        RequiredMsg = 'El n'#250'mero de cajas del palet es de obligada inserci'#243'n.'
+        OnRequiredTime = RequiredTime
+        InputType = itInteger
+        TabOrder = 1
+        OnChange = total_cajas_e2lChange
+        DataField = 'total_cajas_e2l'
+        DataSource = DSDetalle
+      end
+      object total_kgs_e2l: TBDEdit
+        Left = 551
+        Top = 36
+        Width = 85
+        Height = 21
+        ColorEdit = clMoneyGreen
+        RequiredMsg = 'El c'#243'digo del palet es de obligada inserci'#243'n.'
+        OnRequiredTime = RequiredTime
+        InputType = itReal
+        MaxDecimals = 2
+        MaxLength = 13
+        TabOrder = 4
+        DataField = 'total_kgs_e2l'
+        DataSource = DSDetalle
+      end
+      object STCosechero_e2l: TStaticText
+        Left = 243
+        Top = 16
+        Width = 210
+        Height = 17
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'STCosechero_e2l'
+        TabOrder = 2
+      end
+      object STPlantacion_e2l: TStaticText
+        Left = 243
+        Top = 38
+        Width = 210
+        Height = 17
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'STPlantacion_e2l'
+        TabOrder = 5
+      end
+      object sectores_e2l: TBDEdit
+        Left = 190
+        Top = 56
+        Width = 85
+        Height = 21
+        ColorEdit = clMoneyGreen
+        OnRequiredTime = RequiredTime
+        MaxLength = 10
+        TabOrder = 6
+        DataField = 'sectores_e2l'
+        DataSource = DSDetalle
+      end
+    end
+    object RVisualizacion: TDBGrid
+      Left = 1
+      Top = 94
+      Width = 942
+      Height = 34
+      Align = alClient
+      DataSource = DSDetalle
+      Options = [dgTitles, dgIndicator, dgColLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ano_sem_planta_e2l'
+          Title.Alignment = taCenter
+          Title.Caption = 'A'#241'o/Sem.'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'cosechero_e2l'
+          Title.Caption = ' '
+          Width = 33
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'des_cosechero'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cosechero'
+          Width = 179
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'plantacion_e2l'
+          Title.Caption = ' '
+          Width = 34
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'des_plantacion'
+          Title.Alignment = taCenter
+          Title.Caption = 'Plantaci'#243'n'
+          Width = 191
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'sectores_e2l'
+          Title.Alignment = taCenter
+          Title.Caption = 'Sectores'
+          Width = 71
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'total_cajas_e2l'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cajas'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'total_kgs_e2l'
+          Title.Alignment = taCenter
+          Title.Caption = 'Kgs.'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'kilos_caja'
+          Title.Alignment = taRightJustify
+          Title.Caption = 'Kilos Caja'
+          Width = 57
+          Visible = True
+        end>
+    end
+    object pgcSubDetalle: TPageControl
+      Left = 1
+      Top = 128
+      Width = 942
+      Height = 251
+      ActivePage = tsSalidas
+      Align = alBottom
+      TabOrder = 2
+      TabWidth = 100
+      object tsEscandallos: TTabSheet
+        Caption = 'Escandallos'
+        ImageIndex = 1
+        object lblTipoEntrada: TLabel
+          Left = 622
+          Top = 4
+          Width = 93
+          Height = 13
+          Caption = 'TIPO ENTRADA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object dbgEscandallos: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 618
+          Height = 223
+          Align = alLeft
+          DataSource = dsEscandallos
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'Cosechero_e'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cosechero'
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'Plantacion_e'
+              Title.Alignment = taCenter
+              Title.Caption = 'Plantaci'#243'n'
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'anyo_semana_e'
+              Title.Alignment = taCenter
+              Title.Caption = 'A'#241'o/Sem'
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'tipo_entrada_e'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo'
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'porcen_primera_e'
+              Title.Alignment = taCenter
+              Title.Caption = 'Primera'
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'porcen_segunda_e'
+              Title.Alignment = taCenter
+              Title.Caption = 'Segunda'
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'porcen_tercera_e'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tercera'
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'porcen_destrio_e'
+              Title.Alignment = taCenter
+              Title.Caption = 'Destr'#237'o'
+              Visible = True
+            end>
+        end
+        object btnSeleccionado: TButton
+          Left = 622
+          Top = 24
+          Width = 150
+          Height = 20
+          Caption = 'Seleccionado'
+          TabOrder = 2
+          OnClick = btnSeleccionadoClick
+        end
+        object btnIndustria: TButton
+          Left = 622
+          Top = 68
+          Width = 150
+          Height = 20
+          Caption = 'Industria'
+          TabOrder = 5
+          OnClick = btnIndustriaClick
+        end
+        object btnCompra: TButton
+          Left = 622
+          Top = 89
+          Width = 150
+          Height = 20
+          Caption = 'Compra'
+          TabOrder = 6
+          OnClick = btnCompraClick
+        end
+        object btnNormal: TButton
+          Left = 622
+          Top = 111
+          Width = 150
+          Height = 20
+          Caption = 'Escandallo Normal'
+          TabOrder = 7
+          OnClick = btnNormalClick
+        end
+        object btnBorrarEscandallo: TButton
+          Left = 774
+          Top = 24
+          Width = 150
+          Height = 20
+          Caption = 'Borrar Escandallo'
+          TabOrder = 3
+          OnClick = btnBorrarEscandalloClick
+        end
+        object dbedtTipoEntrada: TDBEdit
+          Left = 649
+          Top = 0
+          Width = 121
+          Height = 21
+          DataField = 'tipo_entrada_e'
+          DataSource = dsEscandallos
+          TabOrder = 1
+          Visible = False
+          OnChange = dbedtTipoEntradaChange
+        end
+        object btnP4H: TButton
+          Left = 622
+          Top = 46
+          Width = 150
+          Height = 20
+          Caption = 'Escandallo P4H'
+          TabOrder = 4
+          OnClick = btnP4HClick
+        end
+        object btnPendiente: TButton
+          Left = 774
+          Top = 111
+          Width = 150
+          Height = 20
+          Caption = 'Escandallo Pendiente'
+          TabOrder = 8
+          OnClick = btnPendienteClick
+        end
+      end
+      object tsSalidas: TTabSheet
+        Caption = 'Salidas'
+        object pnlSalidas: TPanel
+          Left = 0
+          Top = 0
+          Width = 934
+          Height = 223
+          Align = alClient
+          TabOrder = 0
+          object dlblilosTotal: TDBText
+            Left = 714
+            Top = 100
+            Width = 65
+            Height = 13
+            DataField = 'kilos_total_es'
+            DataSource = dsTotalSalidas
+          end
+          object lbl1: TLabel
+            Left = 627
+            Top = 100
+            Width = 83
+            Height = 13
+            Caption = 'Kilos Asignados ='
+          end
+          object lblKilosEntrada: TLabel
+            Left = 763
+            Top = 100
+            Width = 36
+            Height = 13
+            Caption = 'de XXX'
+          end
+          object dlblenviado_es: TDBText
+            Left = 714
+            Top = 43
+            Width = 90
+            Height = 13
+            Alignment = taCenter
+            DataField = 'enviado_es'
+            DataSource = dsTotalSalidas
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clNavy
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+          end
+          object lbl2: TLabel
+            Left = 714
+            Top = 31
+            Width = 90
+            Height = 13
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'Enviado el'
+            Transparent = True
+          end
+          object gridSalidas: TDBGrid
+            Left = 1
+            Top = 1
+            Width = 618
+            Height = 135
+            Align = alCustom
+            DataSource = dsSalidas
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            ReadOnly = True
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'centro_salida_es'
+                Title.Alignment = taCenter
+                Title.Caption = 'Centro Salida'
+                Width = 70
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'n_salida_es'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#186' Salida'
+                Width = 70
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'fecha_salida_es'
+                Title.Alignment = taCenter
+                Title.Caption = 'Fecha Salida'
+                Width = 70
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'tipo'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tipo'
+                Visible = True
+              end
+              item
+                Alignment = taRightJustify
+                Expanded = False
+                FieldName = 'kilos_es'
+                Title.Alignment = taRightJustify
+                Title.Caption = 'Kilos'
+                Width = 70
+                Visible = True
+              end
+              item
+                Alignment = taRightJustify
+                Expanded = False
+                FieldName = 'liquida_es'
+                Title.Alignment = taRightJustify
+                Title.Caption = 'Euros'
+                Width = 70
+                Visible = True
+              end>
+          end
+          object btnAltaSalida: TButton
+            Left = 622
+            Top = 4
+            Width = 90
+            Height = 25
+            Caption = 'A'#241'adir Salida'
+            TabOrder = 1
+            OnClick = btnAltaSalidaClick
+          end
+          object btnBorrarSalidas: TButton
+            Left = 622
+            Top = 31
+            Width = 90
+            Height = 25
+            Caption = 'Borrar Salida'
+            TabOrder = 3
+            OnClick = btnBorrarSalidasClick
+          end
+          object btnAccion: TButton
+            Left = 714
+            Top = 4
+            Width = 90
+            Height = 25
+            Caption = 'Valorar Entrada'
+            TabOrder = 2
+            OnClick = btnAccionClick
+          end
+          object btnSinAsignar: TButton
+            Left = 627
+            Top = 115
+            Width = 173
+            Height = 17
+            Caption = 'Listado Asignacion de Entradas'
+            TabOrder = 4
+            OnClick = btnSinAsignarClick
+          end
+          object nota_liquidacion_ec: TDBMemo
+            Left = 1
+            Top = 136
+            Width = 932
+            Height = 86
+            TabStop = False
+            Align = alBottom
+            DataField = 'nota_liquidacion_ec'
+            DataSource = DSMaestro
+            ReadOnly = True
+            ScrollBars = ssVertical
+            TabOrder = 5
+          end
+        end
+      end
+    end
+  end
+  object RejillaFlotante: TBGrid
+    Left = 8
+    Top = 56
+    Width = 41
+    Height = 57
+    Color = clInfoBk
+    FixedColor = clInfoText
+    Options = [dgTabs, dgRowSelect, dgCancelOnExit]
+    ReadOnly = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Visible = False
+  end
+  object CalendarioFlotante: TBCalendario
+    Left = 698
+    Top = 199
+    Width = 212
+    Height = 143
+    AutoSize = True
+    Date = 36748.414724467590000000
+    ShowToday = False
+    TabOrder = 3
+    Visible = False
+    WeekNumbers = True
+    BControl = fecha_ec
+  end
+  object DSMaestro: TDataSource
+    DataSet = QEntradaFrutas
+    Left = 296
+    Top = 8
+  end
+  object ACosecheros: TActionList
+    Images = DMBaseDatos.ImgBotones
+    Left = 476
+    Top = 4
+    object ARejillaFlotante: TAction
+      Hint = 'Pulse F2 para ver una lista de valores validos. '
+      ImageIndex = 0
+      ShortCut = 113
+      OnExecute = ARejillaFlotanteExecute
+    end
+  end
+  object DSDetalle: TDataSource
+    DataSet = TLinInFrutasOficina
+    Left = 264
+    Top = 352
+  end
+  object QTotalesLineas: TQuery
+    DatabaseName = 'BDProyecto'
+    DataSource = DSMaestro
+    Left = 495
+    Top = 22
+  end
+  object QEntradaFrutas: TQuery
+    AfterOpen = QEntradaFrutasAfterOpen
+    BeforeClose = QEntradaFrutasBeforeClose
+    AfterEdit = QEntradaFrutasAfterEdit
+    BeforePost = QEntradaFrutasBeforePost
+    AfterPost = QEntradaFrutasAfterPost
+    OnPostError = QEntradaFrutasPostError
+    DatabaseName = 'BDProyecto'
+    RequestLive = True
+    SQL.Strings = (
+      
+        'SELECT empresa_ec, centro_ec, numero_entrada_ec, producto_ec, fe' +
+        'cha_ec, hora_ec, transportista_ec, total_cajas_ec, total_palets_' +
+        'ec, peso_bruto_ec, peso_neto_ec'
+      'FROM frf_entradas_c Frf_entradas_c'
+      'ORDER BY empresa_ec, centro_ec, numero_entrada_ec')
+    Left = 264
+    Top = 8
+  end
+  object TLinInFrutasOficina: TTable
+    OnCalcFields = TLinInFrutasOficinaCalcFields
+    DatabaseName = 'BDProyecto'
+    IndexFieldNames = 'empresa_e2l;centro_e2l;numero_entrada_e2l;fecha_e2l'
+    MasterFields = 'empresa_ec;centro_ec;numero_entrada_ec;fecha_ec'
+    MasterSource = DSMaestro
+    TableName = 'frf_entradas2_l'
+    Left = 232
+    Top = 352
+    object TLinInFrutasOficinaempresa_e2l: TStringField
+      FieldName = 'empresa_e2l'
+      Required = True
+      FixedChar = True
+      Size = 3
+    end
+    object TLinInFrutasOficinacentro_e2l: TStringField
+      FieldName = 'centro_e2l'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object TLinInFrutasOficinanumero_entrada_e2l: TIntegerField
+      FieldName = 'numero_entrada_e2l'
+      Required = True
+    end
+    object TLinInFrutasOficinacosechero_e2l: TSmallintField
+      FieldName = 'cosechero_e2l'
+      Required = True
+    end
+    object TLinInFrutasOficinaplantacion_e2l: TSmallintField
+      FieldName = 'plantacion_e2l'
+      Required = True
+    end
+    object TLinInFrutasOficinaano_sem_planta_e2l: TStringField
+      FieldName = 'ano_sem_planta_e2l'
+      Required = True
+      FixedChar = True
+      Size = 6
+    end
+    object TLinInFrutasOficinatotal_cajas_e2l: TIntegerField
+      FieldName = 'total_cajas_e2l'
+    end
+    object TLinInFrutasOficinatotal_kgs_e2l: TFloatField
+      FieldName = 'total_kgs_e2l'
+      Required = True
+    end
+    object TLinInFrutasOficinaproducto_e2l: TStringField
+      DisplayWidth = 3
+      FieldName = 'producto_e2l'
+      FixedChar = True
+      Size = 3
+    end
+    object TLinInFrutasOficinasectores_e2l: TStringField
+      FieldName = 'sectores_e2l'
+      FixedChar = True
+      Size = 10
+    end
+    object TLinInFrutasOficinades_cosechero: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'des_cosechero'
+      Size = 30
+      Calculated = True
+    end
+    object TLinInFrutasOficinades_plantacion: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'des_plantacion'
+      Size = 30
+      Calculated = True
+    end
+    object TLinInFrutasOficinakilos_caja: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'kilos_caja'
+      Calculated = True
+    end
+  end
+  object QTipoEntrada: TQuery
+    DatabaseName = 'BDProyecto'
+    DataSource = DSMaestro
+    RequestLive = True
+    SQL.Strings = (
+      
+        'SELECT empresa_ec, centro_ec, numero_entrada_ec, producto_ec, fe' +
+        'cha_ec, hora_ec, transportista_ec, total_cajas_ec, total_palets_' +
+        'ec, peso_bruto_ec, peso_neto_ec'
+      'FROM frf_entradas_c Frf_entradas_c'
+      'ORDER BY empresa_ec, centro_ec, numero_entrada_ec')
+    Left = 365
+    Top = 62
+  end
+  object qrySalidas: TQuery
+    DatabaseName = 'BDProyecto'
+    DataSource = DSMaestro
+    Left = 28
+    Top = 474
+  end
+  object dsSalidas: TDataSource
+    DataSet = qrySalidas
+    Left = 60
+    Top = 473
+  end
+  object qryTotalSalidas: TQuery
+    DatabaseName = 'BDProyecto'
+    DataSource = DSMaestro
+    Left = 25
+    Top = 503
+  end
+  object dsTotalSalidas: TDataSource
+    DataSet = qryTotalSalidas
+    Left = 63
+    Top = 507
+  end
+  object qryEscandallos: TQuery
+    DatabaseName = 'BDProyecto'
+    DataSource = DSMaestro
+    Left = 148
+    Top = 474
+  end
+  object dsEscandallos: TDataSource
+    DataSet = qryEscandallos
+    Left = 180
+    Top = 473
+  end
+  object qryEditEscandallo: TQuery
+    DatabaseName = 'BDProyecto'
+    DataSource = DSMaestro
+    Left = 148
+    Top = 506
+  end
+end

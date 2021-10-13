@@ -1,0 +1,27 @@
+AMBAS
+*************************
+SELECT STOCK_CAMPO.IdProductoBase, sum(STOCK_CAMPO.peso) peso
+FROM   SGP_BONNYSA_HOST.dbo.STOCK_CAMPO STOCK_CAMPO
+group by IdProductoBase
+ORDER BY STOCK_CAMPO.IdProductoBase
+
+
+
+SGP
+**************
+
+select idproductobase,idcategoria,sum(palets) palets,sum(pesoneto) kilos 
+from vista_stock_intermedia_fecha 
+group by idproductobase,idcategoria 
+order by idproductobase,idcategoria
+
+SGP HOST
+**************
+
+SELECT  empresa_e EMPRESA, centro_cab CENTRO, producto_p PRODUCTO, envase_det ENVASE, 
+        ( SELECT MIN(ISNULL(E13.CATEGORIA_E,'1')) FROM  frf_ean13 E13 WHERE STOCK.EMPRESA_E = E13.EMPRESA_E AND STOCK.EAN13_DET = E13.CODIGO_E ) AS CATEGORIA,
+        PESO, KILOS
+        --, SUM(peso) PESO, SUM(ISNULL(kilos,PESO)) KILOS
+FROM  rF_STOCK_PC STOCK
+--GROUP BY empresa_e, centro_cab, producto_p, envase_det, CATEGORIA
+--ORDER BY 1,2,3,4, CATEGORIA

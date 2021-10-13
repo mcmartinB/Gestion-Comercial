@@ -1,0 +1,40 @@
+IDCAB#Campo de enlace con la tabla de cabeceras.
+IDEMB#Identificador de embalajes.
+CPS#32 Número de identificación en la jerarquía de niveles de empaquetamiento. (secuencial)
+CPSPADRE#Nivel jerárquico del que depende el nivel actual.
+CANTEMB#Número de paquetes dentro de esta unidad de embalaje.
+#
+#
+TIPEMB#Tipo de embalaje. (201 = Palet ISO 1 (80 x 120 cm.))
+#
+#
+PESON#Peso Neto Total -> Corte Ingles para Peso variable
+PESOB#Peso Bruto Total. -> Corte Ingles para Peso variable
+PESONU#Peso Neto Unitario. -> Corte Ingles para Peso variable
+PESOBU#Peso Bruto Unitario. -> Corte Ingles para Peso variable
+UNIPESO#KGMUnidad de Medida de Pesos 
+#
+#
+#
+#
+#
+#
+#
+SSCC1#SSCC de la Unidad de Expedición descrita 1. Para ECI (gran consumo) es obligatorio a nivel de PALET
+#
+#
+#
+#
+#
+TIPO2#Tipo de embalaje contenido (únicamente cuando estamos a nivel de PALET)
+TCAJAS#Número total de cajas contenidas (únicamente cuando estamos a nivel de PALET)
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#

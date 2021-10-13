@@ -1,0 +1,57 @@
+select  * 
+from frf_orden_carga_c
+where empresa_occ = 'F18' and centro_salida_occ = '1' and fecha_occ = '14/4/2014' and n_albaran_occ = 26563
+
+select  * 
+from frf_orden_carga_c
+where orden_occ = 31991
+
+
+select  * 
+from rf_palet_pc_cab
+where orden_carga_cab = 31991 and status_cab = 'C'
+
+
+select  empresa_cab, centro_cab, ean128_cab, tipo_palet_cab, cliente_cab, dirsum_cab,
+        ean13_det, envase_det, unidades_det, peso_det, caducidad, lote 
+from rf_palet_pc_cab, rf_palet_pc_det
+where orden_carga_cab = 31991 
+and status_cab = 'C'
+and ean128_cab = ean128_det
+
+select codigo_e, producto_e producto_base_e, descripcion_e, ean14_e  
+from frf_ean13
+where empresa_e = 'F18' 
+and envase_e = 661 
+and agrupacion_e = 2
+and producto_e = ( select producto_base_p from frf_productos 
+                   where empresa_p = 'F18' and producto_p = 'T' )
+
+select empresa_e, envase_e, descripcion_e, ean13_e, peso_envase_e, peso_neto_e, peso_variable_e,
+       unidades_e, unidades_variable_e, producto_base_e, tipo_unidad_e, descripcion1_uc, 
+       ean13_uc, peso_envase_uc, peso_producto_uc, peso_variable_uc
+
+from frf_envases left join frf_und_consumo on empresa_uc = empresa_e
+                                           and codigo_uc = tipo_unidad_e
+where empresa_e = 'F18' 
+and envase_e = 661 
+and ( ( producto_base_e is null ) or 
+      ( producto_base_e = ( select producto_base_p from frf_productos 
+                            where empresa_p = 'F18' and producto_p = 'T' ) ) )
+
+--De la empresa
+select codigo_ean_e
+from frf_empresas
+where empresa_e = 'F18' 
+
+
+select * 
+from frf_ean13_edi
+where empresa_ee = 'F18' and cliente_fac_ee = 'SOC' 
+and envase_ee = 661 and producto_base_ee = ( select producto_base_p from frf_productos 
+                                             where empresa_p = 'F18' and producto_p = 'T' )
+
+
+select codigo_ce, aquiensefactura_ce, quienpide_ce, quienrecibe_ce, quienpaga_ce 
+from frf_clientes_edi
+where empresa_ce = 'F18' and cliente_ce = 'SOC' and dir_sum_ce = 'LEV'

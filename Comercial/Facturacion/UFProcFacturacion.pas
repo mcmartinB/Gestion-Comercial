@@ -1,0 +1,1747 @@
+unit UFProcFacturacion;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  CMaestroDetalle, Dialogs, 
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  cxContainer, cxEdit,  ComCtrls,
+  dxCore, cxDateUtils, Menus, ActnList,
+  dxStatusBar, cxCheckBox, cxGroupBox, cxRadioGroup, StdCtrls, cxButtons,
+  SimpleSearch, cxMaskEdit, cxDropDownEdit, cxCalendar, cxTextEdit,
+  cxLabel, Gauges, ExtCtrls, cxCheckListBox,
+
+  dxSkinsdxStatusBarPainter, dxSkinBlue, dxSkinFoggy,dxSkinsCore, dxSkinMoneyTwins,
+  dxSkinBlueprint, dxSkinBlack, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom,
+  dxSkinDarkSide, dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle,
+  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis,
+  dxSkinMetropolisDark, dxSkinOffice2007Black, dxSkinOffice2007Blue,
+  dxSkinOffice2007Green, dxSkinOffice2007Pink, dxSkinOffice2007Silver,
+  dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver,
+  dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray, dxSkinOffice2013White,
+  dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
+  dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010,
+  dxSkinWhiteprint, dxSkinXmas2008Blue;
+
+
+type
+  TFProcFacturacion = class(TForm)
+    pnl1: TPanel;
+    gbCriterios: TcxGroupBox;
+    lb2: TcxLabel;
+    txtDesdeAlbaran: TcxTextEdit;
+    lb3: TcxLabel;
+    txtHastaAlbaran: TcxTextEdit;
+    lb4: TcxLabel;
+    txtFechaDesde: TcxDateEdit;
+    gbCopias: TcxGroupBox;
+    cbOriginal: TcxCheckBox;
+    cbEmpresa: TcxCheckBox;
+    gbPerdidas: TcxGroupBox;
+    cbFacturasPerdidas: TcxCheckBox;
+    lb6: TcxLabel;
+    txtFactura: TcxTextEdit;
+    btAceptar: TcxButton;
+    btCancelar: TcxButton;
+    st1: TdxStatusBar;
+    Gauge1: TGauge;
+    lb7: TcxLabel;
+    lbFacturas: TcxLabel;
+    lbCliente: TcxLabel;
+    txtCliente: TcxTextEdit;
+    ssCliente: TSimpleSearch;
+    txDesCliente: TcxTextEdit;
+    lb1: TcxLabel;
+    txtFechaFactura: TcxDateEdit;
+    tx1: TcxTextEdit;
+    cxlb9: TcxLabel;
+    txtPedido: TcxTextEdit;
+    gbPrincipal: TcxGroupBox;
+    cxEmpresa: TcxLabel;
+    txtEmpresa: TcxTextEdit;
+    ssEmpresa: TSimpleSearch;
+    txDesEmpresa: TcxTextEdit;
+    rgTipo: TcxRadioGroup;
+    ActionList: TActionList;
+    ACancelar: TAction;
+    AAceptar: TAction;
+    cxlbl1: TcxLabel;
+    txtFechaHasta: TcxDateEdit;
+    cxLabel1: TcxLabel;
+    txtSerie: TcxTextEdit;
+    ssSerie: TSimpleSearch;
+    procedure PonNombre(Sender: TObject);
+    procedure btCancelarClick(Sender: TObject);
+    procedure btAceptarClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
+    procedure cbFacturasPerdidasClick(Sender: TObject);
+    procedure rgTipoFactura1PropertiesChange(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
+    procedure AAceptarExecute(Sender: TObject);
+    procedure ssSerieAntesEjecutar(Sender: TObject);
+    procedure txtClientePropertiesChange(Sender: TObject);
+
+  private
+    sEmpresa, sCliente, sPedido, sSerie: string;
+    sAlbDesde, sAlbHasta: string;
+    sFechaDesde, sFechaHasta, sFechaFactura: string;
+    dFechaDesde, dFechaHasta, dFechaFactura: TDateTime;
+    sFactura: string;
+    iFactura: Integer;
+    bFacturasPerdidas, bFacturaPedido: boolean;
+
+
+    function Parametros(var ponerFoco: TcxCustomTextEdit): boolean;
+    function EstaCambioGrabado: boolean;
+    function VerificarAnyoContador: boolean;
+    procedure Limpiar;
+    procedure ProcesoFacturacion;
+    function EsClienteExtranjero(codEmp, codCliente: string ): boolean;
+    function RellenaTabla: boolean;
+    function NumeraFacturas: boolean;
+    function CanFacturarFecha(AEmpresa, ADate, ASerie: string): Boolean;
+    function ComprobarCuentas: Boolean;
+    function MostrarRejillaFacturas : boolean;
+    function Rellenafacturas: boolean;
+    procedure Previsualizar;
+    function HaySeleccion : Boolean;
+    function FacturarPor(const empresa, cliente: string): integer;
+    procedure AsignaFacturaTempCab(ClaveFactura: string; FacturaNumero: integer);
+    procedure AsignaFacturaTempDet(ClaveFactura: string);
+    procedure AsignaFacturaTempGas(ClaveFactura: string);
+    procedure AsignaFacturaTempBas(ClaveFactura: string);
+    function AsuntoFactura: string;
+    function  NumeroCopias: Integer;
+    procedure RellenarDatosIni;
+    procedure OrdenaMemFacturas;
+    function  EstaLaSerieCerrada( const AEmpresa, ASerie: string; const AAnyo: Integer ): Boolean;
+
+  public
+
+
+  end;
+
+  procedure ProcesoFacturacionAlb( const AEmpresa, ACentro, ACliente, ASerie: string; const AFecha: TDateTime; const ANumero: integer );
+
+var
+  FProcFacturacion: TFProcFacturacion;
+
+implementation
+
+{$R *.dfm}
+
+uses bDialogs, CAuxiliarDB, CVariables, UDMAuxDB, UDMBaseDatos, UDMCambioMoneda,
+     CFactura, bSQLUtils, Principal, UFRejillaFacturacion, UDFactura,
+     URFactura, UDMConfig,DConfigMail, CGlobal, DError, DPreview, CGestionPrincipal, BonnyQuery;
+
+
+procedure ProcesoFacturacionAlb( const AEmpresa, ACentro, ACliente, ASerie: string; const AFecha: TDateTime; const ANumero: integer );
+begin
+  Application.CreateForm( TFProcFacturacion, FProcFacturacion );
+  try
+    with FProcFacturacion do
+    begin
+      sEmpresa:= AEmpresa;
+      sSerie := ASerie;
+      sCliente:= ACliente;
+      sPedido:= '';
+      sAlbDesde:= IntToStr( ANumero );
+      sAlbHasta:= IntToStr( ANumero );
+
+      dFechaDesde:= AFecha;
+      dFechaHasta:= AFecha;
+      dFechaFactura:= Now;
+      sFechaDesde:= FormatFloat('dd/mm/yyyy', dFechaDesde);
+      sFechaHasta:= FormatFloat('dd/mm/yyyy', dFechaHasta);
+      sFechaFactura:= FormatFloat('dd/mm/yyyy', dFechaFactura);
+
+      sFactura:= '';
+      iFactura:= 0;
+      bFacturasPerdidas:= False;
+      bFacturaPedido:= False;
+
+      if not EstaCambioGrabado then
+      begin
+        Exit;
+      end;
+
+{ Se puede facturar albaranes de distintos años 10/01/2018
+      //Comprobaciones año-contador
+      if not VerificarAnyoContador then
+      begin
+        txtCliente.SetFocus;
+        Exit;
+      end;
+}
+      Limpiar;
+
+      //Rellenamos tabla temporal lineas
+      if not RellenaTabla then
+      begin
+       Limpiar;
+       Exit;
+      end;
+
+      //Separacion en facturas (Tanto positivas como negativas)
+      if not NumeraFacturas then
+      begin
+        Limpiar;
+        Exit;
+      end;
+
+
+      if not CanFacturarFecha(sEmpresa, sFechaFactura, sSerie ) then
+      begin
+        Limpiar;
+        Exit;
+      end;
+
+      //Comprobar que los clientes tienen las cuentas de venta/ingresos???
+      if not ComprobarCuentas then
+      begin
+        Limpiar;
+        Exit;
+      end;
+      //Rellenamos tabla temporal cabecera, gastos y Bases
+      PreparaFacturacion(False);
+
+      if not MostrarRejillaFacturas then
+      begin
+        Limpiar;
+        exit;
+      end;
+
+      if not Rellenafacturas then
+      begin
+        Limpiar;
+        Exit;
+      end;
+
+      showmessage('Proceso de Facturacion finalizado correctamente.');
+      Previsualizar;
+      //La consulta tarda mucho
+      //  ComprobarRiesgoCliente( sEmpresa, txCliente.Text );
+    end;
+  finally
+    FreeAndNil( FProcFacturacion );
+  end;
+end;
+
+procedure TFProcFacturacion.PonNombre(Sender: TObject);
+begin
+  txtSerie.Text := txtEmpresa.Text;
+  txDesEmpresa.Text := desEmpresa(txtEmpresa.Text);
+  txDesCliente.Text := desCliente(txtCliente.Text);
+end;
+
+procedure TFProcFacturacion.btCancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TFProcFacturacion.btAceptarClick(Sender: TObject);
+var temp: TcxCustomTextEdit;
+begin
+
+  //Datos del formulario correctos
+  if not Parametros(temp) then
+  begin
+    temp.SetFocus;
+    Exit;
+  end;
+
+  if not EstaCambioGrabado then
+  begin
+    Exit;
+  end;
+
+{ Se puede facturar albaranes de distintos años 10/01/2018
+  //Comprobaciones año-contador
+  if not VerificarAnyoContador then
+  begin
+    txtCliente.SetFocus;
+    Exit;
+  end;
+}
+
+  Limpiar;
+
+//  if not CerrarForm(true) then Exit;
+
+  ProcesoFacturacion;
+
+  CFactura.LimpiarTemporales;
+//  RellenarDatosIni;
+//  Limpiar;
+end;
+
+function TFProcFacturacion.Parametros(var ponerFoco: TcxCustomTextEdit): boolean;
+var
+  iAnyo1, iAnyo2, iMes, iDia: Word;
+begin
+     //Comprobar que el campo empresa tiene valor
+  if (txDesEmpresa.Text = '') then
+  begin
+    ShowError('Falta el código de la empresa o es incorrecto.');
+    ponerFoco := txtEmpresa;
+    Parametros := false;
+    Exit;
+  end;
+  sEmpresa:= txtEmpresa.Text;
+
+  //comprobar que existe la serie
+  if not ExisteSerie(txtEmpresa.Text, txtSerie.Text, txtFechaFactura.Text) then
+  begin
+    ShowError('No existe la serie de facturación indicada.');
+    ponerFoco := txtSerie;
+    Parametros := false;
+    Exit;
+  end;
+  sSerie := txtSerie.Text;
+
+  //Comprobar que el cliente tiene valor
+  if txDesCliente.Text = '' then
+  begin
+    ShowError('Falta el código del cliente o es incorrecto.');
+    ponerFoco := txtCliente;
+    Parametros := false;
+    Exit;
+  end;
+  sCliente:= txtCliente.Text;
+
+  if not TryStrToDate( txtFechaFactura.Text, dFechaFactura ) then
+  begin
+    ShowError('La fecha de "Fecha Factura" es incorrecta.');
+    ponerFoco := txtFechaFactura;
+    Parametros := false;
+    Exit;
+  end;
+  sFechaFactura:= txtFechaFactura.Text;
+
+  // Numero de Pedido
+  bFacturaPedido:= rgTipo.Properties.Items[rgTipo.ItemIndex].Value = 'P';
+  if bFacturaPedido then
+  begin
+    if txtPedido.Text = '' then
+    begin
+      ShowError('Falta introducir el numero de pedido.');
+      ponerFoco := txtPedido;
+      Parametros := false;
+      Exit;
+    end;
+    sPedido:= txtPedido.Text;
+  end
+  else
+  begin
+    sPedido:= '';
+  end;
+
+  if not bFacturaPedido then
+  begin
+       //Comprobar que el albaran tiene valor
+    if (trim(txtDesdeAlbaran.Text) = '') then
+    begin
+      ShowError('Es necesario que rellene el albarán a imprimir.');
+      ponerFoco := txtDesdeAlbaran;
+      Parametros := false;
+      Exit;
+    end;
+    sAlbDesde:= txtDesdeAlbaran.Text;
+
+       //Si no hemos puesto nada rellenar automaticamente
+    if (trim(txtHastaAlbaran.Text) = '') then
+    begin
+      txtHastaAlbaran.Text := txtDesdeAlbaran.Text;
+    end;
+    sAlbHasta:= txtHastaAlbaran.Text;
+
+    if not TryStrToDate( txtFechaDesde.Text, dFechaDesde ) then
+    begin
+      ShowError('La fecha de "Facturar Desde" es incorrecta.');
+      ponerFoco := txtFechaDesde;
+      Parametros := false;
+      Exit;
+    end;
+    sFechaDesde:= txtFechaDesde.Text;
+    if not TryStrToDate( txtFechaHasta.Text, dFechaHasta ) then
+    begin
+      ShowError('La fecha de "Facturar Hasta" es incorrecta.');
+      ponerFoco := txtFechaHasta;
+      Parametros := false;
+      Exit;
+    end;
+    sFechaHasta:= txtFechaHasta.Text;
+    if dFechaDesde > dFechaHasta then
+    begin
+      ShowError('La fecha "Facturar Hasta" no puede se menor que la fecha "Facturar Desde".');
+      ponerFoco := txtFechaHasta;
+      Parametros := false;
+      Exit;
+    end;
+
+    if dFechaHasta > dFechaFactura then
+    begin
+      ShowError('La fecha "Facturar Hasta" no puede se mayor que la fecha "Fecha Factura".');
+      ponerFoco := txtFechaHasta;
+      Parametros := false;
+      Exit;
+    end;
+
+    DecodeDate( dFechaDesde, iAnyo1, iMes, iDia );
+    DecodeDate( dFechaHasta, iAnyo2, iMes, iDia );
+{
+    if iAnyo1 <> iAnyo2 then
+    begin
+      ShowError('No se pueden facturar juntos albaranes de dos años diferentes.');
+      ponerFoco := txtFechaDesde;
+      Parametros := false;
+      Exit;
+    end;
+}
+  end;
+
+
+      // Comprobar contador facturas perdidas
+  bFacturasPerdidas:= cbFacturasPerdidas.Checked;
+  if (bFacturasPerdidas) and (trim(txtFactura.Text) = '') then
+  begin
+    ShowError('Al activar contador de Facturas Perdidas, se debe indicar un Número de Factura');
+    ponerFoco := txtFactura;
+    Parametros := false;
+    Exit;
+  end;
+  sFactura:= trim(txtFactura.Text);
+
+  ponerFoco := nil;
+  Parametros := true;
+end;
+
+function TFProcFacturacion.EstaCambioGrabado: boolean;
+var
+    sMoneda: string;
+begin
+    result:= true;
+
+  //Mirar a ver si el cambio del dia esta grabado
+  //solamente exportacion
+  if esClienteExtranjero( sEmpresa, sCliente ) then
+  with DFactura.QAux do
+  begin
+    if Active then
+    begin
+      Cancel;
+      Close;
+    end;
+    SQL.Clear;
+    SQL.Add('select distinct moneda_sc from frf_salidas_c ');
+    SQL.Add('where empresa_sc = :empresa ');
+    SQL.Add('  and cliente_fac_sc = :cliente ');
+    SQL.Add('  and fecha_sc between :fechaini and :fechafin ');
+    SQL.Add('  and n_factura_sc is null ');
+    SQL.Add('  and moneda_sc <> ''EUR'' ');
+
+    ParamByName('empresa').AsString:= sEmpresa;
+    ParamByName('cliente').AsString:= sCliente;
+    ParamByName('fechaini').AsDateTime:= dFechaDesde;
+    ParamByName('fechafin').AsDateTime:= dFechaHasta;
+    Open;
+
+    if not IsEmpty then
+    begin
+      while not Eof and result do
+      begin
+        sMoneda:= Fields[0].AsString;
+        if not ChangeExist( sMoneda, dFechaFactura ) then
+        begin
+          result:= False;
+          sMoneda:= 'No se puede facturar si no esta el cambio del día grabado.' + #13 + #10 +
+                    'Falta grabar el cambio del "' + sFechaFactura + '" para ''' + sMoneda + '''';
+          ShowMessage( sMoneda );
+        end;
+        next;
+      end;
+    end;
+
+    Close;
+  end;
+end;
+
+function TFProcFacturacion.EstaLaSerieCerrada( const AEmpresa, ASerie: string; const AAnyo: Integer ): Boolean;
+begin
+  DFactura.QAux.SQL.Clear;
+  DFactura.QAux.SQL.Add(' SELECT nvl(serie_cerrada_fs,0) serie_cerrada_fs ' +
+              ' FROM frf_facturas_serie ' +
+              '    join frf_empresas_serie on cod_serie_es = cod_serie_fs and anyo_es = anyo_fs ' +
+              ' WHERE cod_empresa_es = :empresa ' +
+              ' and anyo_es = :anyo ' +
+              ' and cod_serie_es = :serie ');
+  DFactura.QAux.ParamByName('empresa').AsString := AEmpresa;
+  DFactura.QAux.ParamByName('anyo').AsInteger := AAnyo;
+  DFactura.QAux.ParamByName('serie').AsString := ASerie;
+  DFactura.QAux.Open;
+  Result:= DFactura.QAux.FieldByName('serie_cerrada_fs').AsInteger = 1;
+  DFactura.QAux.Close;
+end;
+
+
+function TFProcFacturacion.VerificarAnyoContador: boolean;
+var
+  iAux, iYear, iMonth, iDay: word;
+begin
+  result:= false;
+  with DFactura.QGeneral do
+  begin
+    Sql.Clear;
+    SQL.Add(' SELECT year(fecha_sc) year');
+    SQL.Add(' FROM frf_salidas_c Frf_salidas_c');
+
+    SQL.Add(' WHERE (cliente_fac_sc = :Cliente)');
+
+    SQL.Add(' AND  (n_factura_sc IS NULL)');
+    SQL.Add(' AND  (cliente_sal_sc <> "RET")');
+    SQL.Add(' AND  (cliente_sal_sc <> "REA")');
+    SQL.Add(' AND  (cliente_sal_sc <> "0BO")');
+    SQL.Add(' AND  (cliente_sal_sc <> "EG")');
+    if Trim(sPedido) <> '' then
+      SQL.Add(' AND  (n_pedido_sc = :pedido)')
+    else
+    begin
+      SQL.Add(' AND  (empresa_sc = :empresa)');
+      SQL.Add(' AND  (n_albaran_sc BETWEEN :albaranDesde AND :albaranHasta)');
+      SQL.Add(' AND  (fecha_sc BETWEEN :fechadesde AND :fechahasta)');
+    end;
+
+    SQL.Add(' group by 1 order by 1');
+
+    ParamByName('Cliente').AsString := sCliente;
+    if Trim(sPedido) <> '' then
+      ParamByName('pedido').AsString := sPedido
+    else
+    begin
+      ParamByName('empresa').AsString := sEmpresa;
+      ParamByName('albaranDesde').AsString := sAlbDesde;
+      ParamByName('albaranHasta').AsString := sAlbHasta;
+      ParamByName('fechadesde').AsDate := dFechaDesde;
+      ParamByName('fechahasta').AsDate := dFechaHasta;
+    end;
+
+    Open;
+    if IsEmpty then
+    begin
+      Advertir('No existen albaranes por facturar que cumplan el criterio seleccionado.');
+    end
+    else
+    begin
+      DecodeDate( dFechaFactura, iYear, iMonth, iDay );
+
+      iAux:= FieldByName('year').AsInteger;
+      Next;
+      if iAux <> FieldByName('year').AsInteger then
+      begin
+        Advertir('No se puede facturar albaranes de dos años diferentes a la vez [' + IntToStr( iAux) + '  -  ' + IntToStr( FieldByName('year').AsInteger) + '].');
+      end
+      else
+      begin
+        if iAux <> iYear then
+        begin
+          if not EstaLaSerieCerrada( sEmpresa, sSerie, iAux )then
+            Advertir('No se puede facturar albaranes del año ' + IntToStr( iAux) + ' con fecha del ' + IntToStr( iYear) + '.')
+          else
+            Result:= True;
+        end
+        else
+        begin
+          Result:= True;
+        end;
+      end;
+      (*
+      else
+      begin
+        Next;
+        iAux:= FieldByName('year').AsInteger;
+        If iAux <> iYear then
+        begin
+
+        end
+        else
+        begin
+
+        end;
+      end;
+      *)
+    end;
+    Close;
+  end;
+end;
+
+procedure TFProcFacturacion.Limpiar;
+begin
+     //BORRAR CONTENIDO DE LA TABLAs
+  LimpiarTemporales;
+
+     //Cerrar todos ls datastes abiertos
+  DMBaseDatos.DBBaseDatos.CloseDataSets;
+
+  Gauge1.progress:=0;
+  Gauge1.maxvalue:=0;
+end;
+
+
+procedure TFProcFacturacion.ProcesoFacturacion;
+begin
+
+     //Rellenamos tabla temporal lineas
+  if not RellenaTabla then
+  begin
+    Limpiar;
+    Exit;
+  end;
+
+     //Separacion en facturas (Tanto positivas como negativas)
+  if not NumeraFacturas then
+  begin
+    Limpiar;
+    Exit;
+  end;
+
+
+  if not CanFacturarFecha(sEmpresa, sFechaFactura, sSerie ) then
+  begin
+    Limpiar;
+    Exit;
+  end;
+
+     //Comprobar que los clientes tienen las cuentas de venta/ingresos???
+  if not ComprobarCuentas then
+  begin
+    Limpiar;
+    Exit;
+  end;
+      //Rellenamos tabla temporal cabecera, gastos y Bases
+  PreparaFacturacion(False);
+
+  if not MostrarRejillaFacturas then
+  begin
+    Limpiar;
+    exit;
+  end;
+
+  if not Rellenafacturas then
+  begin
+    Limpiar;
+    Exit;
+  end;
+
+  showmessage('Proceso de Facturacion finalizado correctamente.');
+  Previsualizar;
+//La consulta tarda mucho
+//  ComprobarRiesgoCliente( sEmpresa, txCliente.Text );
+end;
+
+function TFProcFacturacion.EsClienteExtranjero(codEmp, codCliente: string): boolean;
+begin
+  with DFactura.QAux do
+  begin
+    SQL.Text := ' select pais_c from frf_clientes ' +
+      ' where cliente_c=' + QuotedStr(codCliente);
+    try
+      try
+        Open;
+        if IsEmpty then esClienteExtranjero := false
+        else esClienteExtranjero := (Fields[0].AsString <> 'ES') and (Fields[0].AsString <> '');
+      except
+        esClienteExtranjero := false;
+      end;
+    finally
+      Cancel;
+      Close;
+    end;
+  end;
+end;
+
+function TFProcFacturacion.RellenaTabla: boolean;
+begin
+     //LINEAS
+  if not HaySeleccion then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  with DFactura.QGeneral do
+  begin
+    if Active then
+    begin
+      Cancel;
+      Close;
+    end;
+
+    SQL.Clear;
+    SQL.Add(' SELECT  empresa_sc, centro_salida_sc, n_albaran_sc, fecha_sc, cliente_sal_sc, porte_bonny_sc,           ');
+    SQL.Add('         dir_sum_sc, n_pedido_sc, fecha_pedido_sc, vehiculo_sc, moneda_sc, incoterm_sc, plaza_incoterm_sc, facturable_sc, ');
+    SQL.Add('         emp_procedencia_sl, centro_origen_sl,                                                           ');
+    SQL.Add('         producto_sl, envase_sl, categoria_sl, calibre_sl, marca_sl, unidades_caja_sl,                   ');
+    SQL.Add('         unidad_precio_sl, precio_sl, tipo_iva_sl, porc_iva_sl, comercial_sl,                            ');
+
+    SQL.Add('         pais_fac_c, representante_c, frf_productos.descripcion_p, frf_productos.descripcion2_p,         ');
+
+    SQL.Add('         descripcion_e, descripcion2_e, tipo_iva_e,                                                      ');
+
+    SQL.Add('         SUM(cajas_sl) cajas_sl, SUM(kilos_sl) kilos_sl, SUM(n_palets_sl) palets_sl, SUM(importe_neto_sl) importe_neto_sl, sum(kilos_posei_sl) kilos_posei_sl  ');
+
+    SQL.Add(', ' + QuotedStr(sEmpresa) + ' empresaFacturacion ');
+    SQL.Add(', ' + QuotedStr(sSerie) + ' serieFacturacion ');
+    SQL.Add(', ' + SQLDate(sFechaFactura ) + ' fechaFacturacion ');
+    SQL.Add(', ' + QuotedStr(sCliente) + ' clienteFacturacion ');
+
+    SQL.Add('FROM frf_salidas_c, frf_salidas_l, frf_clientes, frf_productos, frf_envases ');
+
+    SQL.Add('WHERE cliente_fac_sc = :cliente ');
+
+    SQL.Add('AND n_factura_sc IS NULL ');
+    SQL.Add('AND cliente_sal_sc <> "RET" ');
+    SQL.Add('AND cliente_sal_sc <> "REA" ');
+    SQL.Add('AND cliente_sal_sc <> "0BO" ');
+    SQL.Add('AND cliente_sal_sc <> "EG" ');
+
+    if Trim(sPedido) <> '' then
+      SQL.Add('AND n_pedido_sc = :pedido ')
+    else
+    begin
+      SQL.Add('AND empresa_sc = :empresa ');
+      SQL.Add('AND n_albaran_sc BETWEEN :albaranDesde AND :albaranHasta ');
+      SQL.Add('AND fecha_sc BETWEEN :fechadesde AND :fechahasta ');
+    end;
+
+
+    SQL.Add('AND empresa_sl = empresa_sc ');
+    SQL.Add('AND centro_salida_sl = centro_salida_sc ');
+    SQL.Add('AND n_albaran_sl = n_albaran_sc ');
+    SQL.Add('AND fecha_sl = fecha_sc ');
+
+    SQL.Add('AND cliente_c = cliente_fac_sc ');
+
+    SQL.Add('AND producto_p = producto_sl ');
+
+    SQL.Add('AND envase_e = envase_sl ');
+    SQL.Add('AND (producto_e = producto_p OR producto_e IS NULL) ');
+    SQL.Add('AND  (facturable_sc <> 0 ) ');        //Solo Albaranes Facturables 1- Facturas 2 -Abonos
+
+    SQL.Add('GROUP BY empresa_sc, centro_salida_sc, n_albaran_sc, fecha_sc, cliente_sal_sc, porte_bonny_sc,  tipo_iva_sl, ');
+    SQL.Add('         dir_sum_sc, n_pedido_sc, fecha_pedido_sc, vehiculo_sc, moneda_sc, incoterm_sc, plaza_incoterm_sc, facturable_sc,');
+    SQL.Add('         emp_procedencia_sl, centro_origen_sl, ');
+    SQL.Add('       	producto_sl, envase_sl, categoria_sl, calibre_sl, marca_sl, color_sl, unidades_caja_sl, ');
+    SQL.Add('       	unidad_precio_sl, precio_sl,porc_iva_sl, comercial_sl, pais_fac_c, representante_c, ');
+    SQL.Add('       	frf_productos.descripcion_p, frf_productos.descripcion2_p, ');
+    SQL.Add('       	descripcion_e, descripcion2_e, tipo_iva_e ');
+    SQL.Add('ORDER BY  facturable_sc, fecha_sc, tipo_iva_sl, dir_sum_sc, n_pedido_sc, n_albaran_sc, producto_sl, envase_sl ');
+
+
+
+         //PARAMETROS
+    ParamByName('Cliente').AsString := sCliente;
+    if Trim(sPedido) <> '' then
+      ParamByName('pedido').AsString := sPedido
+    else
+    begin
+      ParamByName('empresa').AsString := sEmpresa;
+      ParamByName('albaranDesde').AsString := sAlbDesde;
+      ParamByName('albaranHasta').AsString := sAlbHasta;
+      ParamByName('fechadesde').AsDate := dFechaDesde;
+      ParamByName('fechahasta').AsDate := dFechaHasta;
+    end;
+
+    try
+      Open;
+      if isEmpty then
+      begin
+        Advertir('No existen albaranes por facturar que cumplan el criterio seleccionado.');
+        Result := false;
+        Exit;
+      end;
+    except
+      Result := false;
+      Exit;
+    end;
+
+    //Rellenamos tabla en memoria - Lineas facturas mtFacturas_Det
+    RellenaMemLineasFacturas(False);
+
+  Result := True;
+  end;
+end;
+
+function TFProcFacturacion.NumeraFacturas: boolean;
+var
+  bFacturar: boolean;
+  sCliente, sPedido, sAlbaran, sDirSuministro: string;
+  sMoneda, sImpuesto: string;
+  sIncoterm, sPlazaIncoterm: string;
+  sFacturable, contador, iNumLinea: integer;
+  rSumLineas: Real;
+begin
+  bFacturar := true;
+  if bFacturasPerdidas then
+    iFactura:= StrToInt(sFactura);
+
+  with DFactura.mtFacturas_Det do
+  begin
+    if RecordCount = 0 then
+    begin
+      ShowError('No hay facturas a calcular para los datos introducidos');
+      Result := false;
+      Exit;
+    end;
+
+    contador := 1;
+    iNumLinea := 1;
+    rSumLineas := 0;
+    Sort([]);
+    First;
+    while not Eof do
+    begin
+      case FacturarPor(FieldByName('cod_empresa_fac_fd').AsString, FieldByName('cod_cliente_fac_fd').AsString) of
+        0:
+          begin
+                    //UNA FACTURA PARA TODOS LOS ALBARANES PENDIENTES
+            bFacturar := true;
+            sCliente := FieldByName('cod_cliente_fac_fd').AsString;
+            sMoneda := FieldByName('moneda_fd').AsString;
+            sImpuesto := FieldByName('tipo_iva_fd').AsString;
+            sIncoterm := FieldByName('incoterm_fd').AsString;
+            sPlazaIncoterm := FieldByName('plaza_incoterm_fd').AsString;
+            sFacturable := FieldByName('facturable_fd').AsInteger;
+            repeat
+              if bFacturar then
+              begin
+                if (sMoneda <> FieldByName('moneda_fd').AsString) and
+                  (sCliente = FieldByName('cod_cliente_fac_fd').AsString) then
+                begin
+                  bFacturar := false;
+                  showerror('No se puede facturar al cliente "' +
+                    FieldByName('cod_cliente_fac_fd').AsString +
+                    '" por tener albaranes en distintas monedas.');
+                end
+                else
+                begin
+                  edit;
+                  FieldByName('fac_interno_fd').AsInteger := contador;
+                  FieldByName('num_linea_fd').AsInteger := iNumLinea;
+                  inc(iNumLinea);
+                  rSumLineas := rSumLineas + FieldByName('importe_total_fd').AsFloat;
+                  post;
+                end;
+              end;
+              Next;
+            until (sCliente <> FieldByName('cod_cliente_fac_fd').AsString) or
+              (sImpuesto <> FieldByName('tipo_iva_fd').AsString) or
+              (sIncoterm <> FieldByName('incoterm_fd').AsString) or
+              (sPlazaIncoterm <> FieldByName('plaza_incoterm_fd').AsString) or
+              (sFacturable <> FieldByName('facturable_fd').AsInteger) or
+              EOF;
+          end;
+        1:
+          begin
+                    //OTROS UNA FACTURA POR ALBARAN
+            sCliente := FieldByName('cod_cliente_fac_fd').AsString;
+            sPedido := FieldByName('pedido_fd').AsString;
+
+            sAlbaran := FieldByName('n_albaran_fd').AsString;
+            repeat
+              edit;
+              FieldByName('fac_interno_fd').AsInteger := contador;
+              FieldByName('num_linea_fd').AsInteger := iNumLinea;
+              inc(iNumLinea);
+              rSumLineas := rSumLineas + FieldByName('importe_total_fd').AsFloat;
+              post;
+              Next;
+            until (sCliente <> FieldByName('cod_cliente_fac_fd').AsString) or
+              (sPedido <> FieldByName('pedido_fd').AsString) or
+              (sAlbaran <> FieldByName('n_albaran_fd').AsString) or EOF;
+          end;
+        2:
+          begin
+                    //UNA FACTURA PARA TODOS LOS ALBARANES PENDIENTES  de la misma DIRECCION SUMINISTRO
+                    //POR DIRECCION SUMINISTRO
+            bFacturar := true;
+            sCliente := FieldByName('cod_cliente_fac_fd').AsString;
+            sDirSuministro := FieldByName('cod_dir_sum_fd').AsString;
+            sMoneda := FieldByName('moneda_fd').AsString;
+            sImpuesto := FieldByName('tipo_iva_fd').AsString;
+            sIncoterm := FieldByName('incoterm_fd').AsString;
+            sPlazaIncoterm := FieldByName('plaza_incoterm_fd').AsString;
+            sFacturable := FieldByName('facturable_fd').AsInteger;
+            repeat
+              if bFacturar then
+              begin
+                if (sMoneda <> FieldByName('moneda_fd').AsString) and
+                  (sCliente = FieldByName('cod_cliente_fac_fd').AsString) then
+                begin
+                  bFacturar := false;
+                  showerror('No se puede facturar al cliente "' +
+                    FieldByName('cod_cliente_fac_fd').AsString +
+                    '" por tener albaranes en distintas monedas.');
+                end
+                else
+                begin
+                  edit;
+                  FieldByName('fac_interno_fd').AsInteger := contador;
+                  FieldByName('num_linea_fd').AsInteger := iNumLinea;
+                  inc(iNumLinea);
+                  rSumLineas := rSumLineas + FieldByName('importe_total_fd').AsFloat;
+                  post;
+                end;
+              end;
+              Next;
+            until (sCliente <> FieldByName('cod_cliente_fac_fd').AsString) or
+              (sDirSuministro <> FieldByName('cod_dir_sum_fd').AsString) or
+              (sImpuesto <> FieldByName('tipo_iva_fd').AsString) or
+              (sIncoterm <> FieldByName('incoterm_fd').AsString) or
+              (sPlazaIncoterm <> FieldByName('plaza_incoterm_fd').AsString) or
+              (sFacturable <> FieldByName('facturable_fd').AsInteger) or
+              EOF;
+          end;
+        3:
+          begin
+                //OTROS UNA FACTURA POR PEDIDO
+                //POR PEDIDO, VEHICULO O AMBOS
+            bFacturar := true;
+            sCliente := FieldByName('cod_cliente_fac_fd').AsString;
+            sMoneda := FieldByName('moneda_fd').AsString;
+            sImpuesto := FieldByName('tipo_iva_fd').AsString;
+            sPedido := FieldByName('pedido_fd').AsString;
+            sIncoterm := FieldByName('incoterm_fd').AsString;
+            sPlazaIncoterm := FieldByName('plaza_incoterm_fd').AsString;
+            repeat
+              if bFacturar then
+              begin
+                if (sMoneda <> FieldByName('moneda_fd').AsString) and
+                   (sCliente = FieldByName('cod_cliente_fac_fd').AsString) then
+                begin
+                  bFacturar := false;
+                  showerror('No se puede facturar al cliente "' +
+                    FieldByName('cod_cliente_fac_fd').AsString +
+                    '" por tener albaranes en distintas monedas.');
+                end
+                else
+                begin
+                  edit;
+                  FieldByName('fac_interno_fd').AsInteger := contador;
+                  FieldByName('num_linea_fd').AsInteger := iNumLinea;
+                  inc(iNumLinea);
+                  rSumLineas := rSumLineas + FieldByName('importe_total_fd').AsFloat;
+                  post;
+                end;
+              end;
+              Next;
+            until (sCliente <> FieldByName('cod_cliente_fac_fd').AsString) or
+              (sPedido <> FieldByName('pedido_fd').AsString) or
+              (sImpuesto <> FieldByName('tipo_iva_fd').AsString) or
+              (sIncoterm <> FieldByName('incoterm_fd').AsString) or
+              (sPlazaIncoterm <> FieldByName('plaza_incoterm_fd').AsString) or
+              EOF;
+          end;
+      end;
+      contador := contador + 1;
+      iNumLinea := 1;
+    end;
+    Filter := '';
+    Filtered := false;
+
+  end;
+  if bFacturasPerdidas then
+  begin
+    if contador > 2 then
+    begin
+      ShowError('Se ha generado mas de una factura con los datos indicados.');
+      result := False;
+      Exit;
+    end
+    else if (rSUmLineas > 0) and ((iFactura >= 300000) and (iFactura <= 499999)) then
+    begin
+      ShowError('El número de factura perdida esta en el rago de ABONOS y el importe de la factura es positivo.');
+      result := False;
+      Exit;
+    end
+    else if (rSUmLineas < 0) and ((iFactura >= 1) and (iFactura <= 299999)) then
+    begin
+      ShowError('El número de factura perdida esta en el rago de FACTURAS y el importe de la factura es negativo.');
+      result := False;
+      Exit;
+    end;
+  end;
+  result := bFacturar;
+end;
+
+function TFProcFacturacion.CanFacturarFecha(AEmpresa, ADate, ASerie: string): Boolean;
+  var
+  iYear, iMonth, iDay: Word;
+  sTipoFactura: String;
+begin
+  Result := true;
+  DecodeDate( StrToDateDef(ADate, Date), iYear, iMonth, iDay );
+  with DFactura.mtFacturas_Det do
+  begin
+    First;
+    while not Eof do
+    begin
+      if bFacturasPerdidas then
+      begin
+        if (iFactura >= 300000) and (iFactura <= 499999) then
+          sTipoFactura := '381'
+        else
+          sTipoFactura := '380';
+
+        if ExisteFacturaPerdida(AEmpresa, ASerie, iFactura, ADate) then
+        begin
+          ShowError('El número de factura indicado en el contador de facturas perdidas ya existe.');
+          Result := false;
+          break;
+        end;
+        if ErrorFacturaPerdida(AEmpresa, ASerie, iFactura, ADate,
+                               Copy(FieldByName('tipo_iva_fd').AsString,1,1),
+                               sTipoFactura) then
+        begin
+          ShowError('El número de factura indicado en el contador de facturas perdidas es incorrecto. ');
+          Result := false;
+          break;
+        end;
+        if not ValidarFecFactPerdidas(AEmpresa, ASerie, iFactura, ADate, Copy(FieldByName('tipo_iva_fd').AsString,1,1), sTipoFactura) then
+        begin
+          ShowError('La fecha "Fecha Factura" es incorrecta para el contador de facturas perdidas.');
+          Result := false;
+          break;
+        end;
+      end
+      else
+       (*FACTAÑOS*)
+       //IVA
+        if Copy(FieldByName('tipo_iva_fd').AsString, 1, 1) = 'I' then
+        begin
+          DFactura.QAux.SQL.Clear;
+          DFactura.QAux.SQL.Add(' SELECT fecha_fac_iva_fs, serie_cerrada_fs ' +
+              ' FROM frf_facturas_serie ' +
+              '    join frf_empresas_serie on cod_serie_es = cod_serie_fs and anyo_es = anyo_fs ' +
+              ' WHERE cod_empresa_es = :empresa ' +
+              ' and anyo_es = :anyo ' +
+              ' and cod_serie_es = :serie ');
+          DFactura.QAux.ParamByName('empresa').AsString := AEmpresa;
+          DFactura.QAux.ParamByName('anyo').AsInteger := iYear;
+          DFactura.QAux.ParamByName('serie').AsString := ASerie;
+          DFactura.QAux.Open;
+
+          if DFactura.QAux.FieldByName('serie_cerrada_fs').AsInteger = 1 then
+          begin
+            ShowError('La serie de facturación del año ' + IntToStr( iYear ) + ' ya esta cerrada.');
+            DFactura.QAux.Close;
+            Result := false;
+            Exit;
+          end;
+
+          if DFactura.QAux.FieldByName('fecha_fac_iva_fs').AsDateTime >
+            StrToDate(ADate) then
+          begin
+            ShowError('La fecha de facturación es incorrecta para la serie de IVA.');
+            DFactura.QAux.Close;
+            Result := false;
+            break;
+          end;
+        end
+        else
+          if Copy(FieldByName('tipo_iva_fd').AsString, 1, 1) = 'G' then
+          begin
+            DFactura.QAux.SQL.Clear;
+            DFactura.QAux.SQL.Add(' SELECT fecha_fac_igic_fs, serie_cerrada_fs ' +
+              ' FROM frf_facturas_serie ' +
+              '    join frf_empresas_serie on cod_serie_es = cod_serie_fs and anyo_es = anyo_fs ' +
+              ' WHERE cod_empresa_es = :empresa ' +
+              ' and anyo_es = :anyo '+
+              ' and cod_serie_es = :serie ');
+            DFactura.QAux.ParamByName('empresa').AsString := Aempresa;
+            DFactura.QAux.ParamByName('anyo').AsInteger := iYear;
+            DFactura.QAux.ParamByName('serie').AsString := ASerie;
+            DFactura.QAux.Open;
+
+            if DFactura.QAux.FieldByName('serie_cerrada_fs').AsInteger = 1 then
+            begin
+              ShowError('La serie de facturación del año ' + IntToStr( iYear ) + ' ya esta cerrada.');
+              DFactura.QAux.Close;
+              Result := false;
+              Exit;
+            end;
+
+            if DFactura.QAux.FieldByName('fecha_fac_igic_fs').AsDateTime >
+              StrToDate(ADate) then
+            begin
+              ShowError('La fecha de facturación es incorrecta para la serie de IGIC.');
+              DFactura.QAux.Close;
+              Result := false;
+              break;
+            end;
+          end;
+    Next;
+    end;
+  end;
+end;
+
+function TFProcFacturacion.ComprobarCuentas: Boolean;
+var
+  aux: string;
+begin
+  result := true;
+  with DFactura.QGeneral do
+  begin
+    if Active then
+    begin
+      Cancel;
+      Close;
+    end;
+
+    SQL.Clear;
+    SQL.Add(' select cliente_c, cta_cliente_c, cta_ingresos_pgc_c ');
+    SQL.Add('  from frf_clientes ');
+    SQL.Add(' where cliente_c = :cliente ');
+    ParamByName('cliente').AsString := sCliente;
+    Open;
+
+    if (FieldByName('cta_cliente_c').AsString = '') or
+       (FieldByName('cta_ingresos_pgc_c').AsString = '') then
+    begin
+      aux := '';
+      if (fieldbyname('cta_cliente_c').AsString = '') then
+      begin
+        aux := aux + '  * Falta la cuenta del cliente. ' + #13 + #10;
+      end;
+
+      if (fieldbyname('cta_ingresos_pgc_c').AsString = '') then
+      begin
+        aux := aux + '  * Falta la cuenta de ingresos del cliente. ' + #13 + #10;
+      end;
+
+      Advertir(' No se puede facturar al cliente "' +
+        fieldbyname('cliente_c').AsString +
+        '"' + #13 + #10 + aux +
+        ' CONSULTE CON EL DEPARTAMENTO DE CONTABILIDAD.');
+      result := false;
+    end;
+  end;
+end;
+
+function TFProcFacturacion.MostrarRejillaFacturas: boolean;
+begin
+  Result := false;
+
+  if not DFactura.mtFacturas_Cab.IsEmpty then
+  begin
+    FRejillaFacturacion:= TFRejillaFacturacion.Create( self );
+    try
+      FRejillaFacturacion.txEmpresa.Text := sEmpresa;
+      FRejillaFacturacion.txSerie.Text := sSerie;
+      FRejillaFacturacion.txDesempresa.Text := DesEmpresa(sEmpresa);
+      FRejillaFacturacion.txCliente.Text := sCliente;
+      FRejillaFacturacion.txDesCliente.Text := desCliente(sCliente);
+      FRejillaFacturacion.txFechaFactura.Text := sFechaFactura;
+      if not bFacturaPedido then
+      begin
+        FRejillaFacturacion.txDesdeAlbaran.Text := sAlbDesde;
+        FRejillaFacturacion.txHastaAlbaran.Text := sAlbHasta;
+        FRejillaFacturacion.txFechaDesde.Text := sFechaDesde;
+        FRejillaFacturacion.txFechaHasta.Text := sFechaHasta;
+
+        FRejillaFacturacion.lb13.Visible := false;
+        FRejillaFacturacion.txPedido.Visible := false;
+      end
+      else
+      begin
+        FRejillaFacturacion.lb13.Left := 439;
+        FRejillaFacturacion.lb13.Top := 24;
+        FRejillaFacturacion.txPedido.Left := 540;
+        FRejillaFacturacion.txPedido.Top := 22;
+        FRejillaFacturacion.txPedido.Text := sPedido;
+
+        FRejillaFacturacion.lb10.Visible := false;
+        FRejillaFacturacion.lb11.Visible := false;
+        FRejillaFacturacion.lb12.Visible := false;
+        FRejillaFacturacion.cxlbl1.Visible := false;
+        FRejillaFacturacion.txDesdeAlbaran.Visible := false;
+        FRejillaFacturacion.txHastaAlbaran.Visible := false;
+        FRejillaFacturacion.txFechaDesde.Visible := false;
+        FRejillaFacturacion.txFechaHasta.Visible := false;
+      end;
+
+      FRejillaFacturacion.cxLabel1.visible := bFacturasPerdidas;
+      FRejillaFacturacion.txFactura.Visible := bFacturasPerdidas;
+      FRejillaFacturacion.txFactura.Text := sFactura;
+
+      FRejillaFacturacion.ShowModal;
+
+    finally
+      result := (FRejillaFacturacion.ModalResult = mrOk);
+      FreeAndNil(FRejillaFacturacion );
+    end;
+  end;
+end;
+
+function TFProcFacturacion.Rellenafacturas: boolean;
+var  iFacturaNumero, iFacturas, iInsertadas: Integer;
+     sClaveFactura, sAux: string;
+begin
+
+  iFacturaNumero := -1;
+  iInsertadas := 0;
+  iFacturas := DFactura.mtFacturas_Cab.Recordcount;
+  Gauge1.maxvalue:=DFactura.mtFacturas_Cab.Recordcount;
+  Lbfacturas.Caption:= 'Total facturas: '+formatfloat(',0',iFacturas);
+
+        //Recorrer tablas y actualizar datos
+  DFactura.mtFacturas_Cab.First;
+  while not DFactura.mtFacturas_Cab.Eof do
+  begin
+             //ABRIR TRANSACCION
+    if not AbrirTransaccion(DMBaseDatos.DBBaseDatos) then
+      break;
+
+    try
+                //Actualiza contador y fecha facturas de empresa
+      if bFacturasPerdidas then
+      begin
+        iFacturaNumero := iFactura;
+      end
+      else
+      begin
+        iFacturaNumero := GetNumeroFactura(DFactura.mtFacturas_Cab.FieldByName('cod_empresa_fac_fc').AsString,
+                                           DFactura.mtFacturas_Cab.FieldByName('tipo_factura_fc').asString,
+                                           DFactura.mtFacturas_Cab.FieldByName('impuesto_fc').AsString,
+                                           DFactura.mtFacturas_Cab.FieldByName('cod_serie_fac_fc').AsString,
+                                           DFactura.mtFacturas_Cab.FieldByName('fecha_factura_fc').AsDateTime, sAux);
+      end;
+      if iFacturaNumero = -1 then
+      begin
+        ShowError( sAux );
+        CancelarTransaccion(DMBaseDatos.DBBaseDatos);
+        Break;
+      end;
+
+      sClaveFactura := NewCodigoFactura(DFactura.mtFacturas_Cab.FieldByName('cod_empresa_fac_fc').AsString,
+                                        DFactura.mtFacturas_Cab.FieldByName('tipo_factura_fc').AsString,
+                                        DFactura.mtFacturas_Cab.FieldByName('impuesto_fc').AsString,
+                                        DFactura.mtFacturas_Cab.FieldByName('cod_serie_fac_fc').AsString,
+                                        DFactura.mtFacturas_Cab.FieldByName('fecha_factura_fc').AsDateTime,
+                                        iFacturaNumero );
+
+                //Recorremos Cabecera de Factura (mtFacturas_Cab) y Asignamos ClaveFactura
+      AsignaFacturaTempCab(sClaveFactura, iFacturaNumero);
+
+                //Recorremos Lineas de Factura (mtFacturas_Det) y Asignamos ClaveFactura
+      AsignaFacturaTempDet(sClaveFactura);
+
+                //Recorremos Gastos de Factura (mtFacturas_Gas)) y Asignamos ClaveFactura
+      AsignaFacturaTempGas(sClaveFactura);
+
+                //Recorremos Bases de Factura (mtFacturas_Bas)) y Asignamos ClaveFactura
+      AsignaFacturaTempBas(sClaveFactura);
+
+    except
+      CancelarTransaccion(DMBaseDatos.DBBaseDatos);
+      break;
+    end;
+
+          // Insertamos en tfacturas_cab (BD)
+    if not InsertaFacturaCabecera(sClaveFactura, iFacturaNumero) then
+      break;
+
+          // Insertamos en tfacturas_gas (BD)
+    if not InsertaFacturaGastos(sClaveFactura) then
+      break;
+
+          // Insertamos en tfacturas_det (BD)
+    if not InsertaFacturaDetalle(sClaveFactura, iFacturaNumero, True) then
+      Break;
+
+         // Insertamos en tfacturas_bas (BD)
+    if not InsertaFacturaBase(sClaveFactura) then
+      Break;
+
+    AceptarTransaccion(DMBaseDatos.DBBaseDatos);
+
+    DFactura.mtFacturas_Cab.Next;
+
+    Inc(iInsertadas);
+    Gauge1.progress:=Gauge1.progress+1;
+  end;
+
+  if (iInsertadas < iFacturas) or (iInsertadas = 0) then
+  begin
+    if iInsertadas = 0 then
+    begin
+      ShowError('No se ha podido realizar la operacion.');
+      Rellenafacturas := false;
+      Exit;
+    end
+    else
+    begin
+      ShowError('No se ha podido realizar la operación completa.' +
+        ' Se han insertado ' + IntToStr(iInsertadas) + ' facturas de ' +
+        IntToStr(iFacturas) + ' posibles.');
+      Rellenafacturas := false;
+      Exit;
+    end;
+  end;
+
+  Rellenafacturas := true;
+
+end;
+
+procedure TFProcFacturacion.Previsualizar;
+begin
+
+  OrdenaMemFacturas;
+
+  DConfigMail.sAsunto:= AsuntoFactura;
+  DConfigMail.sEmpresaConfig:= sEmpresa;
+  DConfigMail.sClienteConfig:= sCliente;
+
+  RFactura := TRFactura.Create(Application);
+{ TODO : Creo que se puede quitar la asignacion de labelfecha. Mirar }
+  RFactura.LabelFecha.Caption := sFechaFactura;
+  RFactura.definitivo := true;
+  RFactura.bProforma := false;
+
+  RFactura.Configurar(sEmpresa, sCliente);
+  RFactura.printOriginal := cbOriginal.Checked;
+  RFactura.printEmpresa := cbEmpresa.Checked;
+
+  DPreview.bCanSend := (DMConfig.EsLaFont);
+  if cbOriginal.Checked then
+    RFactura.Tag:= 1
+  else
+  if cbEmpresa.Checked then
+    RFactura.Tag:= 2
+  else
+    RFactura.Tag:= 3;
+  Preview(RFactura, NumeroCopias, False, True);
+
+end;
+
+function TFProcFacturacion.HaySeleccion: Boolean;
+begin
+  Result := true;
+  with DFactura.QAux do
+  begin
+    if Active then
+    begin
+      Cancel;
+      Close;
+    end;
+
+    SQL.Clear;
+    SQL.Add(' SELECT count(*) registros');
+    SQL.Add('   FROM frf_salidas_c ');
+    SQL.Add('  WHERE cliente_fac_sc = :cliente ');
+
+    SQL.Add('    AND n_factura_sc IS NULL ');
+    SQL.Add('    AND cliente_sal_sc <> "RET" ');
+    SQL.Add('    AND cliente_sal_sc <> "REA" ');
+    SQL.Add('    AND cliente_sal_sc <> "0BO" ');
+    SQL.Add('    AND cliente_sal_sc <> "EG" ');
+
+    SQL.Add('    AND  (facturable_sc <> 0 ) ');        //Solo Albaranes Facturables
+
+    if Trim(sPedido) <> '' then
+      SQL.Add('  AND n_pedido_sc = :pedido ')
+    else
+    begin
+      SQL.Add('  AND empresa_sc = :empresa ');
+      SQL.Add('  AND n_albaran_sc BETWEEN :albaranDesde AND :albaranHasta ');
+      SQL.Add('  AND fecha_sc BETWEEN :fechadesde and :fechahasta ');
+    end;
+
+    ParamByName('Cliente').AsString := sCliente;
+    if Trim(sPedido) <> '' then
+      ParamByName('pedido').AsString := sPedido
+    else
+    begin
+      ParamByName('empresa').AsString := sEmpresa;
+      ParamByName('albaranDesde').AsString := sAlbDesde;
+      ParamByName('albaranHasta').AsString := sAlbHasta;
+      ParamByName('fechadesde').AsDate := dFechaDesde;
+      ParamByName('fechahasta').AsDate := dFechaHasta;
+    end;
+
+    Open;
+    try
+      if FieldByName('registros').AsInteger = 0 then
+      begin
+        Advertir('No existen albaranes por facturar que cumplan el criterio seleccionado.');
+        Result := false;
+        Exit;
+      end;
+        // Control de albaranes a facturar para contador de facturas perdidas
+      if bFacturasPerdidas then
+      begin
+        if ( FacturarPor(sEmpresa, sCliente) = 1 ) and (Fieldbyname('registros').AsInteger > 1) then
+        begin
+          Advertir('ATENCION: Se ha encontrado más de un albaran para facturar con el filtro indicado. Nº Albaranes seleccionados: ' +
+                    FieldByName('registros').AsString);
+          Result := false;
+          Exit;
+        end;
+      end;
+    finally
+      Close;
+    end;
+  end;
+end;
+
+function TFProcFacturacion.FacturarPor(const empresa, cliente: string): integer;
+begin
+  //0 Facturar todos los albaranes pendientes
+  //1 Un albaran una factura
+  //2 Agrupacion albaranes por dir. suministro
+  //3 Un pedido una factura
+  if Trim(sPedido) <> '' then
+  begin
+    result := 3;
+  end
+  else
+  begin
+    DFactura.QTemp.SQL.Clear;
+    DFactura.QTemp.SQL.Add(' select NVL( albaran_factura_c, 0 ) ');
+    DFactura.QTemp.SQL.Add(' from frf_clientes ');
+    DFactura.QTemp.SQL.Add(' where cliente_c ' + SQLEqualS(cliente));
+    DFactura.QTemp.Open;
+    if DFactura.QTemp.Fields[0].AsInteger = 0 then
+      result := 0
+    else if DFactura.QTemp.Fields[0].AsInteger = 1 then
+      result := 1
+    else
+      result := 2;
+    DFactura.QTemp.Close;
+  end;
+end;
+
+
+procedure TFProcFacturacion.AsignaFacturaTempDet(ClaveFactura: string);
+begin
+       //Recorremos Lineas de Factura
+  with DFactura.mtFacturas_Det do
+  begin
+    Filter := ' fac_interno_fd = ' + QuotedStr(DFactura.mtFacturas_Cab.FieldByName('fac_interno_fc').AsString);
+    Filtered := True;
+
+    First;
+    while not Eof do
+    begin
+      Edit;
+      FieldByName('cod_factura_fd').AsString := ClaveFactura;
+
+      Post;
+
+      Next;
+    end;
+    Filter := '';
+    Filtered := False;
+  end;
+end;
+
+procedure TFProcFacturacion.AsignaFacturaTempGas(ClaveFactura: string);
+begin
+       //Recorremos Gastos de Factura
+  with DFactura.mtFacturas_Gas do
+  begin
+    Filter := ' fac_interno_fg = ' + QuotedStr(DFactura.mtFacturas_Cab.FieldByName('fac_interno_fc').AsString);
+    // Añadir empresa y fecha factura!!!!
+    Filtered := True;
+
+    First;
+    while not Eof do
+    begin
+      Edit;
+      FieldByName('cod_factura_fg').AsString := ClaveFactura;
+
+      Post;
+
+      Next;
+    end;
+    Filter := '';
+    Filtered := False;
+  end;
+end;
+
+function TFProcFacturacion.AsuntoFactura: string;
+var sIniFactura, sFinFactura, sIniCliente, sFinCliente: string;
+begin
+
+    DFactura.mtFacturas_Cab.First;
+    sIniFactura := DFactura.mtFacturas_Cab.fieldbyname('n_factura_fc').AsString;
+    DFactura.mtFacturas_Cab.Last;
+    sFinFactura := DFactura.mtFacturas_Cab.fieldbyname('n_factura_fc').AsString;
+
+    sIniCliente := DFactura.mtFacturas_Cab.fieldbyname('cod_cliente_fc').AsString;
+    sFinCliente := DFactura.mtFacturas_Cab.fieldbyname('cod_cliente_fc').AsString;
+
+    if sIniFactura <> sFinFactura then
+    begin
+      result:= 'Envío facturas ' + sIniFactura + '-' + sFinFactura;
+      if sIniCliente <> sFinCliente then
+      begin
+        result:= result + ' [' + sIniCliente + '-' + sFinCliente + ']';
+      end
+      else
+      begin
+        result:= result + ' [' + desCliente( sIniCliente ) + ']';
+      end;
+    end
+    else
+    begin
+      result:= 'Envío factura ' + sIniFactura + ' [' + desCliente( sIniCliente ) + ']';
+    end;
+
+end;
+
+function TFProcFacturacion.NumeroCopias: Integer;
+var aux : integer;
+begin
+  with DFactura.QAux do
+  begin
+    if Active then
+    begin
+      Cancel;
+      Close;
+    end;
+
+    SQL.Clear;
+    SQL.Add(' SELECT MAX(n_copias_fac_c) ');
+    SQL.Add('   FROM frf_clientes ');
+    SQL.Add('  WHERE cliente_c = :cliente ');
+
+    ParamByName('cliente').AsString := sCliente;
+
+    try
+      AbrirConsulta(DFactura.QAux);
+    except
+             //
+    end;
+    aux := Fields[0].AsInteger;
+    if (aux > 1) and not cbOriginal.Checked then Dec(aux);
+    if (aux > 1) and not cbEmpresa.Checked then Dec(aux);
+    NumeroCopias := aux;
+  end;
+end;
+
+procedure TFProcFacturacion.FormActivate(Sender: TObject);
+begin
+//  Top := 1;
+end;
+
+procedure TFProcFacturacion.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  if FPrincipal.MDIChildCount = 1 then
+  begin
+    FormType := tfDirector;
+    BHFormulario;
+  end;
+
+  Limpiar;
+
+  BEMensajes('');
+  Action := caFree;
+end;
+
+procedure TFProcFacturacion.FormCreate(Sender: TObject);
+begin
+  FormType := tfOther;
+  BHFormulario;
+
+  txtEmpresa.Tag := kEmpresa;
+  txtCliente.Tag := kCliente;
+  txtFechaDesde.Tag := kCalendar;
+  txtFechaHasta.Tag := kCalendar;
+  txtFechaFactura.Tag := kCalendar;
+
+  txDesEmpresa.Text := '';
+end;
+
+procedure TFProcFacturacion.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  case key of
+    $0D, $28: //vk_return,vk_down
+      begin
+        Key := 0;
+        PostMessage(Handle, WM_NEXTDLGCTL, 0, 0);
+        Exit;
+      end;
+    $26: //vk_up
+      begin
+        Key := 0;
+        PostMessage(Handle, WM_NEXTDLGCTL, 1, 0);
+        Exit;
+      end;
+  end;
+end;
+
+procedure TFProcFacturacion.FormShow(Sender: TObject);
+begin
+  RellenarDatosIni;
+end;
+
+procedure TFProcFacturacion.cbFacturasPerdidasClick(Sender: TObject);
+begin
+  if cbFacturasPerdidas.Checked then
+  begin
+    txtFactura.Enabled := True;
+    txtFactura.Style.LookAndFeel.NativeStyle := True;
+    txtFactura.Style.Color := clWindow;
+    txtFactura.SetFocus;
+  end
+  else
+    begin
+    txtFactura.Enabled := False;
+    txtFactura.Text := '';
+    txtFactura.Style.LookAndFeel.NativeStyle := False;
+    txtFactura.Style.Color := clBtnFace;
+    end;
+end;
+
+procedure TFProcFacturacion.RellenarDatosIni;
+var
+  iAnyo, iMes, iDia: Word;
+begin
+   //Rellenamos datos iniciales
+  txtEmpresa.Text := gsDefEmpresa;
+  txtSerie.Text := gsDefEmpresa;
+  txtCliente.Text := '';
+//  txCliente.Text := gsDefCliente;
+  txtDesdeAlbaran.Text := '1';
+  txtHastaAlbaran.Text := '999999';
+  txtFechaHasta.Text := DateToStr(Date);
+  DecodeDate(Date, iAnyo, iMes, iDia );
+  txtFechaDesde.Text := DateToStr(EncodeDate( iAnyo, 1, 1 ) );
+  txtFechaFactura.Text := DateToStr(Date);
+  cbFacturasPerdidas.Checked := False;
+  txtFactura.Text := '';
+  txtFactura.Enabled := False;
+  rgTipo.ItemIndex := 0;
+  txtPedido.Enabled := false;
+  txtPedido.Text := '';
+
+  Gauge1.progress:=0;
+  Gauge1.maxvalue:=0;
+  lbFacturas.Caption := 'Total Facturas: 0';
+
+  cbFacturasPerdidasClick(Self);
+  txtEmpresa.SetFocus;
+end;
+
+
+procedure TFProcFacturacion.AsignaFacturaTempCab(ClaveFactura: string; FacturaNumero: integer);
+begin
+        //Actualizamos Cabecera (mtFacturas_Cab)
+  DFactura.mtFacturas_Cab.Edit;
+  DFactura.mtFacturas_Cab.FieldByName('cod_factura_fc').AsString := ClaveFactura;
+  DFactura.mtFacturas_Cab.FieldByName('n_factura_fc').AsInteger := FacturaNumero;
+  DFactura.mtFacturas_Cab.Post;
+end;
+
+procedure TFProcFacturacion.OrdenaMemFacturas;
+begin
+  DFactura.mtFacturas_Gas.SortOn('cod_factura_fg;fecha_albaran_fg;n_albaran_fg;cod_tipo_gasto_fg', []);
+  DFactura.mtFacturas_Det.SortOn('cod_factura_fd;fecha_albaran_fd;cod_dir_sum_fd;pedido_fd;n_albaran_fd;cod_producto_fd;cod_envase_fd', []);
+  DFactura.mtFacturas_Cab.sortOn('cod_factura_fc', []);
+end;
+
+procedure TFProcFacturacion.rgTipoFactura1PropertiesChange(
+  Sender: TObject);
+var
+  iAnyo, iMes, iDia: Word;
+begin
+  if rgTipo.Properties.Items[rgTipo.ItemIndex].Value = 'F' then
+  begin
+    txtPedido.Text := '';
+    txtPedido.Enabled := False;
+
+    txtDesdeAlbaran.Enabled := True;
+    txtHastaAlbaran.Enabled := True;
+    txtFechaDesde.Enabled := True;
+    txtFechaHasta.Enabled := True;
+
+    txtDesdeAlbaran.SetFocus;
+  end
+  else
+  begin
+    txtPedido.Enabled := true;
+
+    txtDesdeAlbaran.Text := '1';
+    txtHastaAlbaran.Text := '999999';
+    DecodeDate(Date, iAnyo, iMes, iDia );
+    txtFechaDesde.Text := DateToStr(EncodeDate( iAnyo, 1, 1 ) );
+    txtFechaHasta.Text := DateToStr(Date);
+
+    txtDesdeAlbaran.Enabled := False;
+    txtHastaAlbaran.Enabled := False;
+    txtFechaDesde.Enabled := False;
+    txtFechaHasta.Enabled := False;
+
+    txtPedido.SetFocus;
+  end;
+end;
+
+procedure TFProcFacturacion.ssSerieAntesEjecutar(Sender: TObject);
+begin
+    ssSerie.SQLAdi := '';
+    ssSerie.SQLAdi := ' anyo_es >= year(today) -1 ';
+    if txtEmpresa.Text <> '' then
+      ssSerie.SQLAdi := ssSerie.SQLAdi + ' and cod_empresa_es = ' +  QuotedStr(txtEmpresa.Text);
+end;
+
+procedure TFProcFacturacion.txtClientePropertiesChange(Sender: TObject);
+begin
+  txDesCliente.Text := desCliente(txtCliente.Text);
+end;
+
+procedure TFProcFacturacion.AsignaFacturaTempBas(ClaveFactura: string);
+begin
+       //Recorremos Bases de Factura
+  with DFactura.mtFacturas_Bas do
+  begin
+    Filter := ' fac_interno_fb = ' + QuotedStr(DFactura.mtFacturas_Cab.FieldByName('fac_interno_fc').AsString);
+    // Añadir empresa y fecha factura!!!!
+    Filtered := True;
+
+    First;
+    while not Eof do
+    begin
+      Edit;
+      FieldByName('cod_factura_fb').AsString := ClaveFactura;
+
+      Post;
+
+      Next;
+    end;
+    Filter := '';
+    Filtered := False;
+  end;
+end;
+
+procedure TFProcFacturacion.ACancelarExecute(Sender: TObject);
+begin
+  btCancelar.Click;
+end;
+
+procedure TFProcFacturacion.AAceptarExecute(Sender: TObject);
+begin
+  btAceptar.Click;
+end;
+
+end.
+
+

@@ -1,0 +1,211 @@
+unit ListControlIntrasatFL;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Buttons, nbLabels, StdCtrls, BEdit;
+
+type
+  TFLListControlIntrasat = class(TForm)
+    btnAceptar: TSpeedButton;
+    btnCancelar: TSpeedButton;
+    edtEmpresa: TBEdit;
+    lblEmpresa: TnbLabel;
+    etqEmpresa: TnbStaticText;
+    lblFechaDesde: TnbLabel;
+    edtFechaDesde: TBEdit;
+    lblFechaHasta: TnbLabel;
+    edtFechaHasta: TBEdit;
+    cbxTipo: TComboBox;
+    edtPais: TBEdit;
+    etqPais: TnbStaticText;
+    cbbEmpresa: TComboBox;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure btnAceptarClick(Sender: TObject);
+    procedure edtEmpresaChange(Sender: TObject);
+    procedure cbxTipoChange(Sender: TObject);
+    procedure edtPaisChange(Sender: TObject);
+    procedure cbbEmpresaChange(Sender: TObject);
+  private
+    { Private declarations }
+    function ValidarEntrada: Boolean;
+  public
+    { Public declarations }
+  end;
+
+implementation
+
+{$R *.dfm}
+
+uses UDMAuxDB, Principal, CGestionPrincipal, CVariables, bTimeUtils,
+     ListControlIntrasatQL, ListControlIntrasatDL, DB;
+
+procedure TFLListControlIntrasat.FormCreate(Sender: TObject);
+var
+  fecha: TDateTime;
+begin
+  FormType := tfOther;
+  BHFormulario;
+
+  edtEmpresa.Text := '050';
+  fecha:= LunesAnterior( Date );
+  edtFechaDesde.Text := DateToStr(fecha - 7);
+  edtFechaHasta.Text := DateToStr(fecha - 1);
+
+  ListControlIntrasatQL.LoadReport( Self );
+end;
+
+procedure TFLListControlIntrasat.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  BEMensajes('');
+  if FPrincipal.MDIChildCount = 1 then
+  begin
+    FormType := tfDirector;
+    BHFormulario;
+  end;
+  Action := caFree;
+
+  ListControlIntrasatQL.UnloadReport;
+end;
+
+procedure TFLListControlIntrasat.FormKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  case key of
+    vk_escape:
+      begin
+        btnCancelar.Click;
+      end;
+  end;
+end;
+
+procedure TFLListControlIntrasat.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+    // Tecla ENTER - Cambio entre los Controles de Datos en modo edición
+    //               y entre los Campos de Búsqueda en la localización
+  case key of
+    vk_Return, vk_down:
+      begin
+        Key := 0;
+        PostMessage(Handle, WM_NEXTDLGCTL, 0, 0);
+      end;
+    vk_up:
+      begin
+        Key := 0;
+        PostMessage(Handle, WM_NEXTDLGCTL, 1, 0);
+      end;
+    vk_escape:
+      begin
+        btnCancelar.Click;
+      end;
+    vk_f1:
+      begin
+        btnAceptar.Click;
+      end;
+  end;
+end;
+
+function TFLListControlIntrasat.ValidarEntrada: Boolean;
+var
+  desde, hasta: TDate;
+begin
+  result := false;
+  //El codigo de empresa es obligatorio
+  if cbbEmpresa.ItemIndex = 1 then
+  begin
+    if Trim( edtEmpresa.Text ) = '' then
+    begin
+      edtEmpresa.SetFocus;
+      ShowMessage('Falta el código de empresa es incorrecto.');
+      Exit;
+    end;
+  end;
+
+  //Comprobar que las fechas sean correctas
+  try
+    desde := StrToDate(edtFechaDesde.Text);
+  except
+    edtFechaDesde.SetFocus;
+    ShowMessage('Fecha incorrecta.');
+    Exit;
+  end;
+  try
+    hasta := StrToDate(edtFechaHasta.Text);
+  except
+    edtFechaHasta.SetFocus;
+    ShowMessage('Fecha incorrecta.');
+    Exit;
+  end;
+
+  //Comprobar que el rango sea correcto
+  if desde > hasta then
+  begin
+    edtFechaDesde.SetFocus;
+    ShowMessage('Rango de fechas incorrecto.');
+    Exit;
+  end;
+  result := true;
+end;
+
+procedure TFLListControlIntrasat.btnCancelarClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TFLListControlIntrasat.btnAceptarClick(Sender: TObject);
+var
+  Parametros: RParametrosListControlIntrasat;
+begin
+  if ValidarEntrada then
+  begin
+    Parametros.bSat:= cbbEmpresa.ItemIndex = 0;
+    if Parametros.bSat then
+      Parametros.sEmpresa:= ''
+    else
+      Parametros.sEmpresa:= edtEmpresa.Text;
+    Parametros.dFechaDesde:= StrToDate( edtFechaDesde.Text );
+    Parametros.dFechaHasta:= StrToDate( edtFechaHasta.Text );
+    Parametros.iTipo:= cbxTipo.ItemIndex;
+    Parametros.sPais:= edtPais.Text;
+    ListControlIntrasatQL.ExecuteReport( Self, Parametros );
+  end;
+end;
+
+procedure TFLListControlIntrasat.edtEmpresaChange(Sender: TObject);
+begin
+  etqEmpresa.Caption:= desEmpresa( edtEmpresa.Text );
+end;
+
+procedure TFLListControlIntrasat.cbxTipoChange(Sender: TObject);
+begin
+  if cbxTipo.ItemIndex = 3 then
+  begin
+    edtPais.Enabled:= True;
+  end
+  else
+  begin
+    edtPais.Enabled:= False;
+    edtPais.Text:= '';
+  end;
+end;
+
+procedure TFLListControlIntrasat.edtPaisChange(Sender: TObject);
+begin
+  etqPais.Caption:= desPais( edtPais.Text );
+end;
+
+procedure TFLListControlIntrasat.cbbEmpresaChange(Sender: TObject);
+begin
+  edtEmpresa.Enabled:= cbbEmpresa.ItemIndex <> 0;
+end;
+
+end.

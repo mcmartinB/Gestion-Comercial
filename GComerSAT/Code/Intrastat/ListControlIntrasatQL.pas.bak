@@ -1,0 +1,263 @@
+unit ListControlIntrasatQL;
+
+interface
+
+uses Windows, SysUtils, Messages, Classes, Graphics, Controls,
+  StdCtrls, ExtCtrls, Forms, Quickrpt, QRCtrls, Db, DBTables, ListControlIntrasatDL;
+
+type
+  TQLListControlIntrasat = class(TQuickRep)
+    bndTitulo: TQRBand;
+    bndDetalle: TQRBand;
+    bndPiePagina: TQRBand;
+    lblImpresoEl: TQRSysData;
+    lblTitulo: TQRSysData;
+    lblPaginaNum: TQRSysData;
+    QRGroup1: TQRGroup;
+    QRDBText1: TQRDBText;
+    QRGroup2: TQRGroup;
+    QRDBText2: TQRDBText;
+    QRGroup3: TQRGroup;
+    QRDBText3: TQRDBText;
+    QRGroup4: TQRGroup;
+    QRGroup5: TQRGroup;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRDBText10: TQRDBText;
+    QRDBText11: TQRDBText;
+    QRDBText12: TQRDBText;
+    QRDBText13: TQRDBText;
+    QRDBText14: TQRDBText;
+    QRDBText15: TQRDBText;
+    QRBand2: TQRBand;
+    QRBand3: TQRBand;
+    QRBand4: TQRBand;
+    QRBand5: TQRBand;
+    QRBand6: TQRBand;
+    QRDBText16: TQRDBText;
+    QRDBText17: TQRDBText;
+    QRDBText18: TQRDBText;
+    QRDBText19: TQRDBText;
+    QRDBText20: TQRDBText;
+    QRExpr1: TQRExpr;
+    QRExpr2: TQRExpr;
+    QRExpr3: TQRExpr;
+    QRExpr4: TQRExpr;
+    QRExpr5: TQRExpr;
+    SummaryBand1: TQRBand;
+    QRExpr6: TQRExpr;
+    QRLabel1: TQRLabel;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    QRShape5: TQRShape;
+    QRShape6: TQRShape;
+    QRShape12: TQRShape;
+    QRShape7: TQRShape;
+    QRShape8: TQRShape;
+    QRShape9: TQRShape;
+    QRShape10: TQRShape;
+    QRShape11: TQRShape;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel7: TQRLabel;
+    lblRangoFechas: TQRLabel;
+    lblTipo: TQRLabel;
+    procedure QRDBText12Print(sender: TObject; var Value: String);
+    procedure QRDBText2Print(sender: TObject; var Value: String);
+    procedure QRDBText13Print(sender: TObject; var Value: String);
+    procedure QRDBText4Print(sender: TObject; var Value: String);
+    procedure QRDBText14Print(sender: TObject; var Value: String);
+    procedure QRDBText15Print(sender: TObject; var Value: String);
+    procedure QRDBText7Print(sender: TObject; var Value: String);
+    procedure QRDBText20Print(sender: TObject; var Value: String);
+    procedure QRDBText19Print(sender: TObject; var Value: String);
+    procedure QRDBText18Print(sender: TObject; var Value: String);
+    procedure QRDBText17Print(sender: TObject; var Value: String);
+    procedure QRDBText16Print(sender: TObject; var Value: String);
+
+  private
+    sEmpresa: string;
+  public
+
+  end;
+
+procedure LoadReport( APadre: TComponent );
+procedure UnloadReport;
+procedure ExecuteReport( APadre: TComponent; AParametros: RParametrosListControlIntrasat );
+
+implementation
+
+{$R *.DFM}
+
+uses UDMAuxDB, CReportes, Dpreview, Dialogs;
+
+var
+  QLListControlIntrasat: TQLListControlIntrasat;
+  iContadorUso: integer = 0;
+
+procedure LoadReport( APadre: TComponent );
+begin
+  Inc( iContadorUso );
+  if iContadorUso = 1 then
+  begin
+    try
+      QLListControlIntrasat:= TQLListControlIntrasat.Create( APadre );
+    except
+      iContadorUso:= 0;
+      raise;
+    end;
+  end;
+  ListControlIntrasatDL.LoadModule( APadre );
+end;
+
+procedure UnloadReport;
+begin
+  if iContadorUso > 0  then
+  begin
+    Dec( iContadorUso );
+    if iContadorUso = 0 then
+    begin
+      if QLListControlIntrasat <> nil then
+        FreeAndNil( QLListControlIntrasat );
+    end;
+  end;
+  ListControlIntrasatDL.UnloadModule;
+end;
+
+procedure ExecuteReport( APadre: TComponent; AParametros: RParametrosListControlIntrasat );
+begin
+  LoadReport( APadre );
+  if ListControlIntrasatDL.OpenData( APadre, AParametros) <> 0 then
+  begin
+    QLListControlIntrasat.ReportTitle:= 'CONTROL INTRASTAT';
+    if AParametros.bSat then
+      QLListControlIntrasat.sEmpresa:= '050'
+    else
+      QLListControlIntrasat.sEmpresa:= AParametros.sEmpresa;
+    QLListControlIntrasat.lblRangoFechas.Caption:= 'Del ' + DateToStr( AParametros.dFechaDesde ) +
+      ' al ' + DateToStr( AParametros.dFechaHasta );
+    case AParametros.iTipo of
+      0: QLListControlIntrasat.lblTipo.Caption:= '';
+      1: QLListControlIntrasat.lblTipo.Caption:= 'SÓLO COMUNITARIOS';
+      2: QLListControlIntrasat.lblTipo.Caption:= 'SÓLO NO COMUNITARIOS';
+      3: QLListControlIntrasat.lblTipo.Caption:= DesPais( AParametros.sPais );
+    end;
+    PonLogoGrupoBonnysa( QLListControlIntrasat, AParametros.sEmpresa );
+    Previsualiza( QLListControlIntrasat );
+  end
+  else
+  begin
+    ShowMessage('Sin datos para mostrar para los parametros de selección introducidos.');
+  end;
+  UnloadReport;
+end;
+
+
+procedure TQLListControlIntrasat.QRDBText12Print(sender: TObject;
+  var Value: String);
+begin
+  Value:= desCentro( sEmpresa, Value );
+end;
+
+procedure TQLListControlIntrasat.QRDBText2Print(sender: TObject;
+  var Value: String);
+begin
+  if Value = 'S' then
+    Value:= 'CLIENTES COMUNITARIOS'
+  else
+    Value:= 'CLIENTES NO COMUNITARIOS';
+end;
+
+procedure TQLListControlIntrasat.QRDBText13Print(sender: TObject;
+  var Value: String);
+begin
+  Value:= DesPais( Value );
+end;
+
+procedure TQLListControlIntrasat.QRDBText4Print(sender: TObject;
+  var Value: String);
+begin
+  if Value = 'S' then
+    Value:= 'TOMATES FRESCOS'
+  else
+    Value:= 'OTROS PRODUCTOS';
+end;
+
+procedure TQLListControlIntrasat.QRDBText14Print(sender: TObject;
+  var Value: String);
+begin
+  Value:= DesProducto( sEmpresa, Value );
+end;
+
+procedure TQLListControlIntrasat.QRDBText15Print(sender: TObject;
+  var Value: String);
+begin
+  if DataSet.FieldByName('transito').AsString = '0' then
+  begin
+    Value:= DesCliente( Value );
+  end
+  else
+  begin
+    Value:= DesCentro( sEmpresa, Value );
+  end;
+end;
+
+procedure TQLListControlIntrasat.QRDBText7Print(sender: TObject;
+  var Value: String);
+begin
+  if Value = '0' then
+    Value:= 'S'
+  else
+    Value:= 'T';
+end;
+
+procedure TQLListControlIntrasat.QRDBText20Print(sender: TObject;
+  var Value: String);
+begin
+  Value:= 'KGS TOTALES DE ' + Value + ' "' + DesProducto( sEmpresa, Value ) + '" A ' +
+    DesPais( DataSet.FieldByName('pais').AsString )  + ' DESDE EL CENTRO ' +
+    DataSet.FieldByName('centro').AsString;;
+end;
+
+procedure TQLListControlIntrasat.QRDBText19Print(sender: TObject;
+  var Value: String);
+begin
+  if Value = 'S' then
+    Value:= 'KGS TOTALES DE TOMATES FRESCOS A ' + DesPais( DataSet.FieldByName('pais').AsString )
+       + ' DESDE EL CENTRO ' + DataSet.FieldByName('centro').AsString
+  else
+    Value:= 'KGS TOTALES DE OTROS PRODUCTOS A ' + DesPais( DataSet.FieldByName('pais').AsString )
+       + ' DESDE EL CENTRO ' + DataSet.FieldByName('centro').AsString;
+end;
+
+procedure TQLListControlIntrasat.QRDBText18Print(sender: TObject;
+  var Value: String);
+begin
+  Value:= 'KGS TOTALES DE PRODUCTO A ' + DesPais( DataSet.FieldByName('pais').AsString ) +
+    ' DESDE EL CENTRO ' + DataSet.FieldByName('centro').AsString;
+end;
+
+procedure TQLListControlIntrasat.QRDBText17Print(sender: TObject;
+  var Value: String);
+begin
+  if Value = 'S' then
+    Value:= 'TOTAL EXPORTACIONES COMUNITARIAS CENTRO ' + DataSet.FieldByName('centro').AsString
+  else
+    Value:= 'TOTAL EXPORTACIONES NO COMUNITARIAS CENTRO ' + DataSet.FieldByName('centro').AsString;
+end;
+
+procedure TQLListControlIntrasat.QRDBText16Print(sender: TObject;
+  var Value: String);
+begin
+    Value:= 'TOTAL EXPORTACIONES DEL CENTRO ' + DataSet.FieldByName('centro').AsString;
+end;
+
+end.

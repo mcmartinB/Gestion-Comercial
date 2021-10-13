@@ -1,0 +1,212 @@
+object DPSuperUserUtils: TDPSuperUserUtils
+  OldCreateOrder = False
+  Height = 348
+  Width = 411
+  object qryAux: TQuery
+    DatabaseName = 'BDProyecto'
+    Left = 45
+    Top = 111
+  end
+  object qryTempo: TQuery
+    DatabaseName = 'BDProyecto'
+    Left = 109
+    Top = 111
+  end
+  object dbBAG: TDatabase
+    AliasName = 'comer.bag'
+    DatabaseName = 'dbaBag'
+    LoginPrompt = False
+    Params.Strings = (
+      'SERVER NAME=iserver1'
+      'DATABASE NAME=comerbag'
+      'USER NAME=informix'
+      'OPEN MODE=READ/WRITE'
+      'SCHEMA CACHE SIZE=8'
+      'LANGDRIVER=DB850ES0'
+      'SQLQRYMODE='
+      'SQLPASSTHRU MODE=SHARED AUTOCOMMIT'
+      'LOCK MODE=5'
+      'DATE MODE=0'
+      'DATE SEPARATOR=/'
+      'SCHEMA CACHE TIME=-1'
+      'MAX ROWS=-1'
+      'BATCH COUNT=200'
+      'ENABLE SCHEMA CACHE=FALSE'
+      'SCHEMA CACHE DIR='
+      'ENABLE BCD=FALSE'
+      'LIST SYNONYMS=NONE'
+      'DBNLS='
+      'COLLCHAR='
+      'BLOBS TO CACHE=64'
+      'BLOB SIZE=32'
+      'PASSWORD=informix')
+    SessionName = 'Default'
+    Left = 35
+    Top = 26
+  end
+  object dbF17: TDatabase
+    AliasName = 'comer.alc_chanita'
+    DatabaseName = 'dbaF17'
+    LoginPrompt = False
+    Params.Strings = (
+      'SERVER NAME=ids_maset01'
+      'DATABASE NAME=chanita'
+      'USER NAME=informix'
+      'OPEN MODE=READ/WRITE'
+      'SCHEMA CACHE SIZE=8'
+      'LANGDRIVER='
+      'SQLQRYMODE=SERVER'
+      'SQLPASSTHRU MODE=SHARED AUTOCOMMIT'
+      'LOCK MODE=5'
+      'DATE MODE=1'
+      'DATE SEPARATOR=/'
+      'SCHEMA CACHE TIME=-1'
+      'MAX ROWS=-1'
+      'BATCH COUNT=200'
+      'ENABLE SCHEMA CACHE=FALSE'
+      'SCHEMA CACHE DIR='
+      'ENABLE BCD=FALSE'
+      'LIST SYNONYMS=NONE'
+      'DBNLS='
+      'COLLCHAR='
+      'BLOBS TO CACHE=64'
+      'BLOB SIZE=32'
+      'PASSWORD=Unix1q2w')
+    SessionName = 'Default'
+    Left = 86
+    Top = 36
+  end
+  object dbF18: TDatabase
+    AliasName = 'comer.alc_p4h'
+    DatabaseName = 'dbaF18'
+    LoginPrompt = False
+    Params.Strings = (
+      'SERVER NAME=ids_fti1'
+      'DATABASE NAME=comer'
+      'USER NAME=informix'
+      'OPEN MODE=READ/WRITE'
+      'SCHEMA CACHE SIZE=8'
+      'LANGDRIVER=DB850ES0'
+      'SQLQRYMODE=SERVER'
+      'SQLPASSTHRU MODE=SHARED AUTOCOMMIT'
+      'LOCK MODE=5'
+      'DATE MODE=1'
+      'DATE SEPARATOR=/'
+      'SCHEMA CACHE TIME=-1'
+      'MAX ROWS=-1'
+      'BATCH COUNT=200'
+      'ENABLE SCHEMA CACHE=FALSE'
+      'SCHEMA CACHE DIR='
+      'ENABLE BCD=FALSE'
+      'LIST SYNONYMS=NONE'
+      'DBNLS='
+      'COLLCHAR='
+      'BLOBS TO CACHE=64'
+      'BLOB SIZE=32'
+      'PASSWORD=Unix1q2w')
+    SessionName = 'Default'
+    Left = 131
+    Top = 30
+  end
+  object dbF21_old: TDatabase
+    AliasName = 'comer.alzira'
+    DatabaseName = 'dbaF21'
+    LoginPrompt = False
+    Params.Strings = (
+      'SERVER NAME=iserver13'
+      'DATABASE NAME=comerbag'
+      'USER NAME=informix'
+      'OPEN MODE=READ/WRITE'
+      'SCHEMA CACHE SIZE=8'
+      'LANGDRIVER=DB850ES0'
+      'SQLQRYMODE=SERVER'
+      'SQLPASSTHRU MODE=SHARED AUTOCOMMIT'
+      'LOCK MODE=5'
+      'DATE MODE=1'
+      'DATE SEPARATOR=/'
+      'SCHEMA CACHE TIME=-1'
+      'MAX ROWS=-1'
+      'BATCH COUNT=200'
+      'ENABLE SCHEMA CACHE=FALSE'
+      'SCHEMA CACHE DIR='
+      'ENABLE BCD=FALSE'
+      'LIST SYNONYMS=NONE'
+      'DBNLS='
+      'COLLCHAR='
+      'BLOBS TO CACHE=64'
+      'BLOB SIZE=32'
+      'PASSWORD=informix')
+    SessionName = 'Default'
+    Left = 178
+    Top = 54
+  end
+  object dbF23: TDatabase
+    AliasName = 'comer.tfe_maset'
+    DatabaseName = 'dbaF23'
+    LoginPrompt = False
+    Params.Strings = (
+      'SERVER NAME=iserver2'
+      'DATABASE NAME=bagtfe'
+      'USER NAME=informix'
+      'OPEN MODE=READ/WRITE'
+      'SCHEMA CACHE SIZE=8'
+      'LANGDRIVER=DB850ES0'
+      'SQLQRYMODE=SERVER'
+      'SQLPASSTHRU MODE=SHARED AUTOCOMMIT'
+      'LOCK MODE=5'
+      'DATE MODE=1'
+      'DATE SEPARATOR=/'
+      'SCHEMA CACHE TIME=-1'
+      'MAX ROWS=-1'
+      'BATCH COUNT=200'
+      'ENABLE SCHEMA CACHE=FALSE'
+      'SCHEMA CACHE DIR='
+      'ENABLE BCD=FALSE'
+      'LIST SYNONYMS=NONE'
+      'DBNLS='
+      'COLLCHAR='
+      'BLOBS TO CACHE=64'
+      'BLOB SIZE=32'
+      'PASSWORD=informix')
+    SessionName = 'Default'
+    Left = 226
+    Top = 28
+  end
+  object dbF24_old: TDatabase
+    AliasName = 'comer.sevilla'
+    DatabaseName = 'dbaF24'
+    LoginPrompt = False
+    Params.Strings = (
+      'SERVER NAME=iserver15'
+      'DATABASE NAME=masetsev'
+      'USER NAME=informix'
+      'OPEN MODE=READ/WRITE'
+      'SCHEMA CACHE SIZE=8'
+      'LANGDRIVER=DB850ES0'
+      'SQLQRYMODE=SERVER'
+      'SQLPASSTHRU MODE=SHARED AUTOCOMMIT'
+      'LOCK MODE=5'
+      'DATE MODE=1'
+      'DATE SEPARATOR=/'
+      'SCHEMA CACHE TIME=-1'
+      'MAX ROWS=-1'
+      'BATCH COUNT=200'
+      'ENABLE SCHEMA CACHE=FALSE'
+      'SCHEMA CACHE DIR='
+      'ENABLE BCD=FALSE'
+      'LIST SYNONYMS=NONE'
+      'DBNLS='
+      'COLLCHAR='
+      'BLOBS TO CACHE=64'
+      'BLOB SIZE=32'
+      'PASSWORD=informix')
+    SessionName = 'Default'
+    Left = 276
+    Top = 51
+  end
+  object qryUpdate: TQuery
+    DatabaseName = 'BDProyecto'
+    Left = 179
+    Top = 107
+  end
+end

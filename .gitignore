@@ -1,0 +1,3 @@
+#ignorar archivos de compilacion
+*.dcu
+*.exe

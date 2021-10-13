@@ -1,0 +1,212 @@
+object FDGetEscandallo: TFDGetEscandallo
+  Left = 251
+  Top = 222
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = '    ESCANDALLO'
+  ClientHeight = 235
+  ClientWidth = 227
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnKeyUp = FormKeyUp
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label2: TLabel
+    Left = 35
+    Top = 28
+    Width = 89
+    Height = 19
+    AutoSize = False
+    Caption = 'Primera'
+    Color = cl3DLight
+    ParentColor = False
+    Layout = tlCenter
+  end
+  object LEmpresa_p: TLabel
+    Left = 35
+    Top = 52
+    Width = 90
+    Height = 19
+    AutoSize = False
+    Caption = 'Segunda'
+    Color = cl3DLight
+    ParentColor = False
+    Layout = tlCenter
+  end
+  object Label11: TLabel
+    Left = 35
+    Top = 76
+    Width = 89
+    Height = 19
+    AutoSize = False
+    Caption = 'Tercera'
+    Color = cl3DLight
+    ParentColor = False
+    Layout = tlCenter
+  end
+  object lblDestrio: TLabel
+    Left = 35
+    Top = 100
+    Width = 89
+    Height = 19
+    AutoSize = False
+    Caption = 'Destr'#237'o'
+    Color = cl3DLight
+    ParentColor = False
+    Layout = tlCenter
+  end
+  object lblTotal: TLabel
+    Left = 35
+    Top = 140
+    Width = 89
+    Height = 19
+    AutoSize = False
+    Caption = 'Falta'
+    Color = cl3DLight
+    ParentColor = False
+    Layout = tlCenter
+  end
+  object lblTotal1: TLabel
+    Left = 130
+    Top = 140
+    Width = 50
+    Height = 19
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Total'
+    Color = cl3DLight
+    ParentColor = False
+    Layout = tlCenter
+  end
+  object lbl1: TLabel
+    Left = 182
+    Top = 100
+    Width = 9
+    Height = 19
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = '%'
+    Color = cl3DLight
+    ParentColor = False
+    Layout = tlCenter
+  end
+  object lbl2: TLabel
+    Left = 182
+    Top = 28
+    Width = 9
+    Height = 19
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = '%'
+    Color = cl3DLight
+    ParentColor = False
+    Layout = tlCenter
+  end
+  object lbl3: TLabel
+    Left = 182
+    Top = 52
+    Width = 9
+    Height = 19
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = '%'
+    Color = cl3DLight
+    ParentColor = False
+    Layout = tlCenter
+  end
+  object lbl4: TLabel
+    Left = 182
+    Top = 76
+    Width = 9
+    Height = 19
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = '%'
+    Color = cl3DLight
+    ParentColor = False
+    Layout = tlCenter
+  end
+  object lbl5: TLabel
+    Left = 182
+    Top = 140
+    Width = 9
+    Height = 19
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = '%'
+    Color = cl3DLight
+    ParentColor = False
+    Layout = tlCenter
+  end
+  object btnAceptar: TButton
+    Left = 35
+    Top = 173
+    Width = 77
+    Height = 25
+    Caption = 'Aceptar'
+    TabOrder = 4
+    OnClick = btnAceptarClick
+  end
+  object btnCancelar: TButton
+    Left = 114
+    Top = 173
+    Width = 77
+    Height = 25
+    Caption = 'Cancelar'
+    TabOrder = 5
+    OnClick = btnCancelarClick
+  end
+  object edtPrimera: TBEdit
+    Left = 130
+    Top = 27
+    Width = 50
+    Height = 21
+    InputType = itReal
+    MaxDecimals = 2
+    MaxLength = 6
+    TabOrder = 0
+    OnChange = edtPrimeraChange
+  end
+  object edtSegunda: TBEdit
+    Left = 130
+    Top = 51
+    Width = 50
+    Height = 21
+    InputType = itReal
+    MaxDecimals = 2
+    MaxLength = 6
+    TabOrder = 1
+    OnChange = edtPrimeraChange
+  end
+  object edtTercera: TBEdit
+    Left = 130
+    Top = 75
+    Width = 50
+    Height = 21
+    InputType = itReal
+    MaxDecimals = 2
+    MaxLength = 6
+    TabOrder = 2
+    OnChange = edtPrimeraChange
+  end
+  object edtDestrio: TBEdit
+    Left = 130
+    Top = 99
+    Width = 50
+    Height = 21
+    InputType = itReal
+    MaxDecimals = 2
+    MaxLength = 6
+    TabOrder = 3
+    OnChange = edtPrimeraChange
+  end
+end

@@ -1,0 +1,1 @@
+ServicioSincroWeb.exe /UnINSTALL

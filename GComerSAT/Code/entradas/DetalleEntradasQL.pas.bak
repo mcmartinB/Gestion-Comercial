@@ -1,0 +1,223 @@
+unit DetalleEntradasQL;
+
+interface
+
+uses Windows, SysUtils, Messages, Classes, Graphics, Controls,
+  StdCtrls, ExtCtrls, Forms, Quickrpt, QRCtrls, Db, DBTables;
+
+type
+  TQLDetalleEntradas = class(TQuickRep)
+    TitleBand1: TQRBand;
+    lblTitulo: TQRLabel;
+    PsQRSysData1: TQRSysData;
+    lblProducto: TQRLabel;
+    ColumnHeaderBand1: TQRBand;
+    QRLabel2: TQRLabel;
+    DIFF: TQRLabel;
+    bndEntrega: TQRBand;
+    qrefecha_e1l: TQRDBText;
+    QRBand1: TQRBand;
+    QRSysData1: TQRSysData;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    lblRango: TQRLabel;
+    lblCentro: TQRLabel;
+    QRLabel9: TQRLabel;
+    lblVar: TQRLabel;
+    lblCal: TQRLabel;
+    qrgPlantacion: TQRGroup;
+    qreproducto_e1l: TQRDBText;
+    qrecosechero_e1l: TQRDBText;
+    qreplantacion_e1l: TQRDBText;
+    qrenumero_entrada_e1l: TQRDBText;
+    qreformato_e1l: TQRDBText;
+    qrecodigo_palet_e1l: TQRDBText;
+    qrecategoria_e1l: TQRDBText;
+    qrecalibre_e1l: TQRDBText;
+    qretotal_cajas_e1l: TQRDBText;
+    bndTotalcos: TQRBand;
+    qrxCajasPlantacion: TQRExpr;
+    qrgEntrega: TQRGroup;
+    bndPieEntrega: TQRBand;
+    qrxCajasEntrega: TQRExpr;
+    qrs1: TQRShape;
+    qtxttotal_cajas_e1l: TQRDBText;
+    qrlbl1: TQRLabel;
+    qrxpr1: TQRExpr;
+    qrxpr2: TQRExpr;
+    procedure qrecategoria_e1lPrint(sender: TObject; var Value: String);
+    procedure qrecalibre_e1lPrint(sender: TObject; var Value: String);
+    procedure qreformato_e1lPrint(sender: TObject; var Value: String);
+    procedure qrecosechero_e1lPrint(sender: TObject; var Value: String);
+    procedure qreplantacion_e1lPrint(sender: TObject; var Value: String);
+    procedure qreproducto_e1lPrint(sender: TObject; var Value: String);
+    procedure bndEntregaBeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure qrefecha_e1lPrint(sender: TObject; var Value: String);
+    procedure qrenumero_entrada_e1lPrint(sender: TObject;
+      var Value: String);
+    procedure QuickRepBeforePrint(Sender: TCustomQuickRep;
+      var PrintReport: Boolean);
+    procedure qrgEntregaBeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+  private
+    bFlag: boolean;
+    sEntrada: string;
+
+  public
+
+    procedure PreparaListado( const AEmpresa, ACentro, AProducto: string; const AFechaIni, AFechaFin: TDateTime;
+                              const ACosechero, APlantacion, AFormato, ALogifruit, ACategoria, ACalibre: integer );
+  end;
+
+  function VerDetalleEntradas( const AOwner: TComponent; const AEmpresa, ACentro, AProducto: string;
+                               const AFechaIni, AFechaFin: TDateTime;
+                               const ACosechero, APlantacion, AFormato, ALogifruit, ACategoria, ACalibre: integer ): Boolean;
+
+implementation
+
+{$R *.DFM}
+
+uses
+  CReportes, DetalleEntradasDL, DPreview, UDMAuxDB, bMath;
+
+var
+  QLDetalleEntradas: TQLDetalleEntradas;
+
+
+function VerDetalleEntradas( const AOwner: TComponent; const AEmpresa, ACentro, AProducto: string;
+                             const AFechaIni, AFechaFin: TDateTime;
+                             const ACosechero, APlantacion, AFormato, ALogifruit, ACategoria, ACalibre: integer ): Boolean;
+var
+  sEmpresa, sCentro: string;
+  dFechaIni, dFechaFin: TDateTime;
+begin
+  try
+    sEmpresa:= AEmpresa;
+    sCentro:= ACentro;
+    dFechaIni:= AFechaIni;
+    dFechaFin:= AFechaFin;
+    result:= DetalleEntradasDL.ObtenerDatosDetalle( AOwner, AEmpresa, ACentro, AProducto, AFechaIni, AFechaFin,
+                                 ACosechero, APlantacion, AFormato, ALogifruit, ACategoria, ACalibre );
+    if result then
+    begin
+      QLDetalleEntradas:= TQLDetalleEntradas.Create( AOwner );
+      try
+        QLDetalleEntradas.PreparaListado( AEmpresa, ACentro, AProducto, AFechaIni, AFechaFin,
+                                          ACosechero, APlantacion, AFormato, ALogifruit, ACategoria, ACalibre );
+        Previsualiza( QLDetalleEntradas );
+      finally
+        FreeAndNil( QLDetalleEntradas );
+      end;
+    end;
+  finally
+    DetalleEntradasDL.CerrarTablas;
+  end;
+end;
+
+procedure TQLDetalleEntradas.PreparaListado( const AEmpresa, ACentro, AProducto: string; const AFechaIni, AFechaFin: TDateTime;
+                              const ACosechero, APlantacion, AFormato, ALogifruit, ACategoria, ACalibre: integer );
+begin
+  PonLogoGrupoBonnysa( self, AEmpresa );
+  lblCentro.Caption:= DesCentro( AEmpresa, ACentro );
+
+  if AProducto <> '' then
+    lblProducto.Caption:= AProducto + ' ' + desProducto( AEmpresa, AProducto )
+  else
+    lblProducto.Caption:= 'TODOS LOS PRODUCTOS';
+
+  lblRango.Caption:= 'Del ' + DateToStr( AFechaIni ) + ' al ' + DateToStr( AFechaFin );
+end;
+
+procedure TQLDetalleEntradas.qrecategoria_e1lPrint(sender: TObject;
+  var Value: String);
+begin
+  if Value = '1' then
+    Value:= '1ª'
+  else
+  if Value = '2' then
+    Value:= '2ª'
+  else
+    Value:= '';
+end;
+
+procedure TQLDetalleEntradas.qrecalibre_e1lPrint(sender: TObject;
+  var Value: String);
+begin
+  if Value = '1' then
+    Value:= 'GR'
+  else
+  if Value = '0' then
+    Value:= 'PQ'
+  else
+    Value:= '';
+end;
+
+procedure TQLDetalleEntradas.qreformato_e1lPrint(sender: TObject;
+  var Value: String);
+begin
+  Value:= Value + ' ' + desFormatoEntrada( DataSet.FieldByName('empresa_e1l').AsString,
+                             DataSet.FieldByName('centro_e1l').AsString,
+                             DataSet.FieldByName('producto_e1l').AsString, Value );
+end;
+
+procedure TQLDetalleEntradas.qrecosechero_e1lPrint(sender: TObject;
+  var Value: String);
+begin
+  Value:= Value + ' ' + desCosechero( DataSet.FieldByName('empresa_e1l').AsString,  Value );
+end;
+
+procedure TQLDetalleEntradas.qreplantacion_e1lPrint(sender: TObject;
+  var Value: String);
+begin
+  Value:= Value + ' ' + desPlantacion( DataSet.FieldByName('empresa_e1l').AsString,
+                         DataSet.FieldByName('producto_e1l').AsString,
+                         DataSet.FieldByName('cosechero_e1l').AsString,
+                         Value, DataSet.FieldByName('ano_sem_planta_e1l').AsString );
+end;
+
+procedure TQLDetalleEntradas.qreproducto_e1lPrint(sender: TObject;
+  var Value: String);
+begin
+  Value:= Value + ' ' + desProducto( DataSet.FieldByName('empresa_e1l').AsString,  Value );
+end;
+
+procedure TQLDetalleEntradas.QuickRepBeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+begin
+  sEntrada:= '';
+end;
+
+procedure TQLDetalleEntradas.bndEntregaBeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  bFlag:= sEntrada <> ( DataSet.FieldByName('fecha_e1l').AsString +
+                        DataSet.FieldByName('numero_entrada_e1l').AsString );
+  if bFlag then
+  begin
+    sEntrada := ( DataSet.FieldByName('fecha_e1l').AsString +
+                  DataSet.FieldByName('numero_entrada_e1l').AsString );
+  end;
+end;
+
+procedure TQLDetalleEntradas.qrefecha_e1lPrint(sender: TObject;
+  var Value: String);
+begin
+  if not bFlag then
+    Value:= '';
+end;
+
+procedure TQLDetalleEntradas.qrenumero_entrada_e1lPrint(sender: TObject;
+  var Value: String);
+begin
+  if not bFlag then
+    Value:= '';
+end;
+
+procedure TQLDetalleEntradas.qrgEntregaBeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  qrgEntrega.Height:= 0;
+end;
+
+end.

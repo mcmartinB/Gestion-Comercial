@@ -1,0 +1,252 @@
+unit LiqProdVendidoResumenDM;
+
+interface
+
+uses
+  SysUtils, Classes, DB, DBTables;
+
+type
+  TDMLiqProdVendidoResumen = class(TDataModule)
+    qrySemanas: TQuery;
+    qryResumen: TQuery;
+    dsSemanas: TDataSource;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+    sEmpresa, sCentro, sProducto: string;
+    dDesde, dHasta: TDateTime;
+    rkilos_facturados, rkilos_Alb: real;
+
+    function HaySemanas: boolean;
+    procedure GrabarPromedios;
+    procedure GrabarPromediosCat( const ACategoria: string);
+    procedure GrabarPromediosTotales;
+
+  public
+    { Public declarations }
+     procedure CalculoPromedios( const AEmpresa, ACentro, AProducto: string; const ADesde, AHasta: TDateTime );
+  end;
+
+var
+  DMLiqProdVendidoResumen: TDMLiqProdVendidoResumen;
+
+implementation
+
+{$R *.dfm}
+
+procedure TDMLiqProdVendidoResumen.DataModuleCreate(Sender: TObject);
+begin
+  qryResumen.SQL.clear;
+  qryResumen.SQL.Add(' select categoria_ent, ');
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then kilos_ent else 0 end) kilos_ent_fac, ');
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then kilos_liq else 0 end) kilos_liq_fac, ');
+  qryResumen.SQL.Add('        sum(kilos_ent) kilos_ent, sum(kilos_liq) kilos_liq, ');
+
+  qryResumen.SQL.Add('        sum(importe_liq) importe_liq, ');
+  qryResumen.SQL.Add('        sum(descuentos_fac_liq) descuentos_fac_liq, sum(gastos_fac_liq) gastos_fac_liq, ');
+  qryResumen.SQL.Add('        sum(descuentos_nofac_liq) descuentos_nofac_liq, sum(gastos_nofac_liq) gastos_nofac_liq, ');
+  qryResumen.SQL.Add('        sum(costes_envasado_liq) costes_envasado_liq, ');
+  qryResumen.SQL.Add('        sum(gastos_transito_liq) gastos_transito_liq, sum(costes_sec_transito_liq) costes_sec_transito_liq, ');
+  qryResumen.SQL.Add('        sum(costes_abonos_liq) costes_abonos_liq, sum(costes_financiero_liq) costes_financiero_liq, ');
+
+
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then importe_liq else 0 end)importe_liq_fac, ');
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then descuentos_fac_liq else 0 end) descuentos_fac_liq_fac, ');
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then gastos_fac_liq else 0 end) gastos_fac_liq_fac, ');
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then descuentos_nofac_liq else 0 end) descuentos_nofac_liq_fac, ');
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then gastos_nofac_liq else 0 end) gastos_nofac_liq_fac, ');
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then costes_envasado_liq else 0 end) costes_envasado_liq_fac, ');
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then gastos_transito_liq else 0 end) gastos_transito_liq_fac, ');
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then costes_sec_transito_liq else 0 end) costes_sec_transito_liq_fac, ');
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then costes_abonos_liq else 0 end) costes_abonos_liq_fac, ');
+  qryResumen.SQL.Add('        sum(case when facturado_sal = 1 then costes_financiero_liq else 0 end) costes_financiero_liq_fac, ');
+
+  qryResumen.SQL.Add('        sum(importe_liq)importe_liq_alb, ');
+  qryResumen.SQL.Add('        sum(descuentos_fac_liq) descuentos_fac_liq_alb, ');
+  qryResumen.SQL.Add('        sum(gastos_fac_liq) gastos_fac_liq_alb, ');
+  qryResumen.SQL.Add('        sum(descuentos_nofac_liq) descuentos_nofac_liq_alb, ');
+  qryResumen.SQL.Add('        sum(gastos_nofac_liq) gastos_nofac_liq_alb, ');
+  qryResumen.SQL.Add('        sum(costes_envasado_liq) costes_envasado_liq_alb, ');
+  qryResumen.SQL.Add('        sum(gastos_transito_liq) gastos_transito_liq_alb, ');
+  qryResumen.SQL.Add('        sum(costes_sec_transito_liq) costes_sec_transito_liq_alb, ');
+  qryResumen.SQL.Add('        sum(costes_abonos_liq) costes_abonos_liq_alb, ');
+  qryResumen.SQL.Add('        sum(costes_financiero_liq) costes_financiero_liq_alb ');
+
+  qryResumen.SQL.Add(' from tliq_liquida_det ');
+  qryResumen.SQL.Add(' where codigo_liq = :codigo ');
+  qryResumen.SQL.Add(' group by categoria_ent ');
+
+end;
+
+procedure TDMLiqProdVendidoResumen.CalculoPromedios( const AEmpresa, ACentro, AProducto: string; const ADesde, AHasta: TDateTime );
+begin
+  sEmpresa:= AEmpresa;
+  sCentro:= ACentro;
+  sProducto:= AProducto;
+  dDesde:= ADesde;
+  dHasta:= AHasta;
+  try
+    if HaySemanas then
+    begin
+      while not qrySemanas.Eof do
+      begin
+        GrabarPromedios;
+        qrySemanas.Next;
+      end;
+    end;
+  finally
+    qrySemanas.Close;
+  end;
+end;
+
+function TDMLiqProdVendidoResumen.HaySemanas: boolean;
+begin
+  qrySemanas.SQL.clear;
+  qrySemanas.SQL.Add(' select * ');
+  qrySemanas.SQL.Add(' from tliq_semanas ');
+  if sEmpresa = 'SAT' then
+    qrySemanas.SQL.Add(' where empresa = ''SAT'' ')
+  else
+    qrySemanas.SQL.Add(' where empresa = :empresa ');
+  if sCentro <> '' then
+    qrySemanas.SQL.Add(' and centro = :centro ');
+  if sProducto <> '' then
+    qrySemanas.SQL.Add(' and producto = :producto ');
+  qrySemanas.SQL.Add(' and fecha_ini between :fechaini and :fechafin ');
+  qrySemanas.SQL.Add(' and centro in (1, 6) ');
+
+  if sEmpresa <> 'SAT' then
+    qrySemanas.ParamByName('empresa').AssTRING:= sEmpresa;
+  qrySemanas.ParamByName('fechaini').AsDateTime:= dDesde;
+  qrySemanas.ParamByName('fechafin').AsDateTime:= dHasta;
+  if sCentro <> '' then
+    qrySemanas.ParamByName('centro').AssTRING:= sCentro;
+  if sProducto <> '' then
+    qrySemanas.ParamByName('producto').AssTRING:= sProducto;
+
+  qrySemanas.Open;
+  result:= not qrySemanas.isempty;
+end;
+
+procedure TDMLiqProdVendidoResumen.GrabarPromedios;
+begin
+  rkilos_facturados:= 0;
+  rkilos_alb:= 0;
+
+  try
+    qryResumen.open;
+    if not qryResumen.isempty then
+    begin
+      qrySemanas.Edit;
+      while not qryResumen.Eof do
+      begin
+        rkilos_facturados:= rkilos_facturados + qryResumen.FieldByName('kilos_liq_fac').AsFloat;
+        rkilos_alb:= rkilos_alb + qryResumen.FieldByName('kilos_liq').AsFloat;
+
+        GrabarPromediosCat( qryResumen.FieldByName('categoria_ent').AsString );
+        qryResumen.Next;
+      end;
+      GrabarPromediosTotales;
+      qrySemanas.Post;
+    end;
+  finally
+    qryResumen.Close
+  end;
+end;
+
+
+procedure TDMLiqProdVendidoResumen.GrabarPromediosTotales;
+begin
+  qrySemanas.FieldByName('kilos_facturados').AsFloat:= rkilos_facturados;
+  qrySemanas.FieldByName('kilos_alb').AsFloat:= rKilos_alb;
+  if rKilos_alb <> 0 then
+  begin
+    qrySemanas.FieldByName('porcentaje_facturado').AsFloat:= ( rkilos_facturados/rKilos_alb ) * 100;
+  end
+  else
+  begin
+    qrySemanas.FieldByName('porcentaje_facturado').AsFloat:= 100;
+  end
+end;
+
+procedure TDMLiqProdVendidoResumen.GrabarPromediosCat( const ACategoria: string);
+var
+  rKiloAux, rGasto: real;
+begin
+  //Precio kilo entregado facturado
+  (*
+  qrySemanas.FieldByName('facturados' + ACategoria ).AsFloat:= qryResumen.FieldByName('kilos_ent_fac').AsFloat;
+  qrySemanas.FieldByName('pendientes' + ACategoria).AsFloat:= qryResumen.FieldByName('kilos_ent').AsFloat-
+                                                  qryResumen.FieldByName('kilos_ent_fac').AsFloat;
+  if qryResumen.FieldByName('kilos_ent').AsFloat > 0 then
+  begin
+    qrySemanas.FieldByName('porcentaje' + ACategoria).AsFloat:= qryResumen.FieldByName('kilos_ent_fac').AsFloat /
+                                                     qryResumen.FieldByName('kilos_ent').AsFloat;
+  end;
+  rKiloAux:= qryResumen.FieldByName('kilos_ent_fac').AsFloat;
+  *)
+
+
+
+  //Precio kilo liquidado facturado
+  qrySemanas.FieldByName('facturados' + ACategoria ).AsFloat:= qryResumen.FieldByName('kilos_liq_fac').AsFloat;
+  qrySemanas.FieldByName('pendientes' + ACategoria).AsFloat:= qryResumen.FieldByName('kilos_liq').AsFloat-
+                                                  qryResumen.FieldByName('kilos_liq_fac').AsFloat;
+  if qryResumen.FieldByName('kilos_liq').AsFloat > 0 then
+  begin
+    qrySemanas.FieldByName('porcentaje' + ACategoria).AsFloat:= qryResumen.FieldByName('kilos_liq_fac').AsFloat /
+                                                     qryResumen.FieldByName('kilos_liq').AsFloat;
+  end;
+  rKiloAux:= qryResumen.FieldByName('kilos_liq_fac').AsFloat;
+
+  if rKiloAux <> 0 then
+  begin
+    qrySemanas.FieldByName('importe' + ACategoria).AsFloat:= qryResumen.FieldByName('importe_liq_fac').AsFloat / rKiloAux;
+    rGasto:= qryResumen.FieldByName('descuentos_fac_liq_fac').AsFloat +
+             qryResumen.FieldByName('gastos_fac_liq_fac').AsFloat +
+             qryResumen.FieldByName('descuentos_nofac_liq_fac').AsFloat +
+             qryResumen.FieldByName('gastos_nofac_liq_fac').AsFloat +
+             qryResumen.FieldByName('costes_envasado_liq_fac').AsFloat +
+             qryResumen.FieldByName('gastos_transito_liq_fac').AsFloat +
+             qryResumen.FieldByName('costes_sec_transito_liq_fac').AsFloat +
+             qryResumen.FieldByName('costes_abonos_liq_fac').AsFloat +
+             qryResumen.FieldByName('costes_financiero_liq_fac').AsFloat;
+    qrySemanas.FieldByName('gastos' + ACategoria).AsFloat:= rGasto / rKiloAux;
+    qrySemanas.FieldByName('liquido' + ACategoria).AsFloat:= qrySemanas.FieldByName('importe' + ACategoria).AsFloat -
+                                                qrySemanas.FieldByName('gastos' + ACategoria).AsFloat;
+  end
+  else
+  begin
+    qrySemanas.FieldByName('importe' + ACategoria).AsFloat:= 0;
+    qrySemanas.FieldByName('gastos' + ACategoria).AsFloat:= 0;
+    qrySemanas.FieldByName('liquido' + ACategoria).AsFloat:= 0;
+  end;
+
+  //Precio kilo a liquidar
+  qrySemanas.FieldByName('kilos_alb' + trim(ACategoria) ).AsFloat:= qryResumen.FieldByName('kilos_liq').AsFloat;
+  rKiloAux:= qryResumen.FieldByName('kilos_liq').AsFloat;
+  if rKiloAux <> 0 then
+  begin
+    qrySemanas.FieldByName('importe_alb' + ACategoria).AsFloat:= qryResumen.FieldByName('importe_liq_alb').AsFloat / rKiloAux;
+    rGasto:= qryResumen.FieldByName('descuentos_fac_liq_alb').AsFloat +
+             qryResumen.FieldByName('gastos_fac_liq_alb').AsFloat +
+             qryResumen.FieldByName('descuentos_nofac_liq_alb').AsFloat +
+             qryResumen.FieldByName('gastos_nofac_liq_alb').AsFloat +
+             qryResumen.FieldByName('costes_envasado_liq_alb').AsFloat +
+             qryResumen.FieldByName('gastos_transito_liq_alb').AsFloat +
+             qryResumen.FieldByName('costes_sec_transito_liq_alb').AsFloat +
+             qryResumen.FieldByName('costes_abonos_liq_alb').AsFloat +
+             qryResumen.FieldByName('costes_financiero_liq_alb').AsFloat;
+    qrySemanas.FieldByName('gastos_alb' + ACategoria).AsFloat:= rGasto / rKiloAux;
+    qrySemanas.FieldByName('liquido_alb' + ACategoria).AsFloat:= qrySemanas.FieldByName('importe_alb' + ACategoria).AsFloat -
+                                                qrySemanas.FieldByName('gastos_alb' + ACategoria).AsFloat;
+  end
+  else
+  begin
+    qrySemanas.FieldByName('importe_alb' + ACategoria).AsFloat:= 0;
+    qrySemanas.FieldByName('gastos_alb' + ACategoria).AsFloat:= 0;
+    qrySemanas.FieldByName('liquido_alb' + ACategoria).AsFloat:= 0;
+  end;
+end;
+
+end.

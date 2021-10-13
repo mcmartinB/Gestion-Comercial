@@ -1,0 +1,291 @@
+unit VentasPeriodoQR;
+
+interface
+
+uses Windows, SysUtils, Messages, Classes, Graphics, Controls,
+  StdCtrls, ExtCtrls, Forms, Quickrpt, QRCtrls;
+
+type
+  TQRVentasPeriodo = class(TQuickRep)
+    cabecera: TQRBand;
+    detalle: TQRBand;
+    pie: TQRBand;
+    descripcion_p: TQRDBText;
+    kilos: TQRDBText;
+    QRSysData1: TQRSysData;
+    QRBand1: TQRBand;
+    qrdbtxtcajas: TQRDBText;
+    qrlblPeriodo: TQRLabel;
+    qrlblCentro: TQRLabel;
+    QRSysData2: TQRSysData;
+    lblTitulo: TQRLabel;
+    qrdbtxtcajas1: TQRDBText;
+    qrdbtxtdes_producto: TQRDBText;
+    qrdbtxtproducto: TQRDBText;
+    qrdbtxtdes_producto1: TQRDBText;
+    qrbndColumnHeaderBand1: TQRBand;
+    qrlbl3: TQRLabel;
+    qrlblPsQRLabel1: TQRLabel;
+    qrlbl2: TQRLabel;
+    qrlblLKilos: TQRLabel;
+    qrlblLPais: TQRLabel;
+    qrlbl1: TQRLabel;
+    qrlblEmpresa: TQRLabel;
+    qrlbl4: TQRLabel;
+    qrdbtxtproducto1: TQRDBText;
+    qrdbtxtdes_producto2: TQRDBText;
+    qrdbtxtenvase: TQRDBText;
+    qrdbtxtdes_envase: TQRDBText;
+    qrdbtxtproducto2: TQRDBText;
+    qrdbtxtcod_factura: TQRDBText;
+    qrdbtxtfecha_factura: TQRDBText;
+    qrdbtxtcod_pais: TQRDBText;
+    qrdbtxtcod_producto: TQRDBText;
+    qrdbtxtcod_pais1: TQRDBText;
+    qrlbl5: TQRLabel;
+    qrlbl6: TQRLabel;
+    qrlbl7: TQRLabel;
+    qrlbl8: TQRLabel;
+    qrlbl9: TQRLabel;
+    qrlbl10: TQRLabel;
+    qrlbl11: TQRLabel;
+    qrlbl12: TQRLabel;
+    qrlbl13: TQRLabel;
+    qrlbl14: TQRLabel;
+    qrlbl15: TQRLabel;
+    qrlblCliente: TQRLabel;
+    qrxpr1: TQRExpr;
+    qrxpr2: TQRExpr;
+    qrxpr3: TQRExpr;
+    qrxpr4: TQRExpr;
+    qrxpr5: TQRExpr;
+    qrshp1: TQRShape;
+    qrxpr6: TQRExpr;
+    qrxpr7: TQRExpr;
+    qrlbl16: TQRLabel;
+    qrbl1: TQRLabel;
+    QRDBText1: TQRDBText;
+    qrbl2: TQRLabel;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRLabel1: TQRLabel;
+    procedure qrdbtxtcod_pais1Print(sender: TObject; var Value: String);
+    procedure QRBand1BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure qrdbtxtdes_producto2Print(sender: TObject;
+      var Value: String);
+    procedure QuickRepBeforePrint(Sender: TCustomQuickRep;
+      var PrintReport: Boolean);
+  private
+
+  public
+    provincia: string;
+    fecha: string;
+  end;
+
+implementation
+
+uses UDMAuxDB;
+
+{$R *.DFM}
+
+procedure TQRVentasPeriodo.qrdbtxtcod_pais1Print(sender: TObject;
+  var Value: String);
+begin
+  if not ( Exporting and ( Pos( 'XLS', UpperCase( ExportFilter.ClassName ) ) > 0 ) ) then
+    Value:= '';
+end;
+
+procedure TQRVentasPeriodo.QRBand1BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  PrintBand:= not ( Exporting and ( Pos( 'XLS', UpperCase( ExportFilter.ClassName ) ) > 0 ) );
+end;
+
+procedure TQRVentasPeriodo.qrdbtxtdes_producto2Print(sender: TObject;
+  var Value: String);
+begin
+  if DataSet.FieldByName('cod_factura').AsString = '' then
+    Value:= '';
+end;
+
+procedure TQRVentasPeriodo.QuickRepBeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+var
+  bAux: Boolean;
+begin
+(*
+    qrlbl1.AutoSize:= False;
+    qrlbl5.AutoSize:= False;
+    qrlbl6.AutoSize:= False;
+    qrlbl10.AutoSize:= False;
+    qrlblLPais.AutoSize:= False;
+    qrlbl8.AutoSize:= False;
+    qrlbl9.AutoSize:= False;
+    qrlbl11.AutoSize:= False;
+    qrlbl7.AutoSize:= False;
+    qrlbl12.AutoSize:= False;
+    qrlbl13.AutoSize:= False;
+    qrlbl1.AutoSize:= False;
+    qrlbl15.AutoSize:= False;
+    qrlblLKilos.AutoSize:= False;
+    qrlblPsQRLabel1.AutoSize:= False;
+    qrlbl2.AutoSize:= False;
+    qrlbl3.AutoSize:= False;
+    qrlbl3.AutoSize:= False;
+
+    qrlbl1.Width:= qrdbtxtcod_pais.Width;
+    qrlbl5.Width:= qrdbtxtcod_producto.Width;
+    qrlbl6.Width:= qrdbtxtcod_factura.Width;
+    qrlbl10.Width:= qrdbtxtfecha_factura.Width;
+    qrlblLPais.Width:= qrdbtxtproducto1.Width;
+    qrlbl8.Width:= qrdbtxtdes_producto2.Width;
+    qrlbl9.Width:= qrdbtxtenvase.Width;
+    qrlbl11.Width:= qrdbtxtdes_envase.Width;
+    qrlbl7.Width:= qrdbtxtproducto2.Width;
+    qrlbl12.Width:= qrdbtxtdes_producto.Width;
+    qrlbl13.Width:= descripcion_p.Width;
+    qrlbl1.Width:= qrdbtxtproducto.Width;
+    qrlbl15.Width:= qrdbtxtdes_producto1.Width;
+    qrlblLKilos.Width:= qrdbtxtcajas.Width;
+    qrlblPsQRLabel1.Width:= qrdbtxtcajas1.Width;
+    qrlbl2.Width:= kilos.Width;
+    qrlbl3.Width:= qrxpr6.Width;
+    qrlbl3.Width:= qrxpr7.Width;
+
+    qrlbl1.Left:= qrdbtxtcod_pais.Left;
+    qrlbl5.Left:= qrdbtxtcod_producto.Left;
+    qrlbl6.Left:= qrdbtxtcod_factura.Left;
+    qrlbl10.Left:= qrdbtxtfecha_factura.Left;
+    qrlblLPais.Left:= qrdbtxtproducto1.Left;
+    qrlbl8.Left:= qrdbtxtdes_producto2.Left;
+    qrlbl9.Left:= qrdbtxtenvase.Left;
+    qrlbl11.Left:= qrdbtxtdes_envase.Left;
+    qrlbl7.Left:= qrdbtxtproducto2.Left;
+    qrlbl12.Left:= qrdbtxtdes_producto.Left;
+    qrlbl13.Left:= descripcion_p.Left;
+    qrlbl1.Left:= qrdbtxtproducto.Left;
+    qrlbl15.Left:= qrdbtxtdes_producto1.Left;
+    qrlblLKilos.Left:= qrdbtxtcajas.Left;
+    qrlblPsQRLabel1.Left:= qrdbtxtcajas1.Left;
+    qrlbl2.Left:= kilos.Left;
+    qrlbl3.Left:= qrxpr6.Left;
+    qrlbl3.Left:= qrxpr7.Left;
+
+    qrlbl1.Alignment:= qrdbtxtcod_pais.Alignment;
+    qrlbl5.Alignment:= qrdbtxtcod_producto.Alignment;
+    qrlbl6.Alignment:= qrdbtxtcod_factura.Alignment;
+    qrlbl10.Alignment:= qrdbtxtfecha_factura.Alignment;
+    qrlblLPais.Alignment:= qrdbtxtproducto1.Alignment;
+    qrlbl8.Alignment:= qrdbtxtdes_producto2.Alignment;
+    qrlbl9.Alignment:= qrdbtxtenvase.Alignment;
+    qrlbl11.Alignment:= qrdbtxtdes_envase.Alignment;
+    qrlbl7.Alignment:= qrdbtxtproducto2.Alignment;
+    qrlbl12.Alignment:= qrdbtxtdes_producto.Alignment;
+    qrlbl13.Alignment:= descripcion_p.Alignment;
+    qrlbl1.Alignment:= qrdbtxtproducto.Alignment;
+    qrlbl15.Alignment:= qrdbtxtdes_producto1.Alignment;
+    qrlblLKilos.Alignment:= qrdbtxtcajas.Alignment;
+    qrlblPsQRLabel1.Alignment:= qrdbtxtcajas1.Alignment;
+    qrlbl2.Alignment:= kilos.Alignment;
+    qrlbl3.Alignment:= qrxpr6.Alignment;
+    qrlbl3.Alignment:= qrxpr7.Alignment;
+*)
+  bAux:= ( Exporting and ( Pos( 'XLS', UpperCase( ExportFilter.ClassName ) ) > 0 ) );
+    qrlbl1.AutoSize:= bAux;
+    qrlbl5.AutoSize:= bAux;
+    qrlbl6.AutoSize:= bAux;
+    qrlbl10.AutoSize:= bAux;
+    qrlblLPais.AutoSize:= bAux;
+    qrlbl8.AutoSize:= bAux;
+    qrlbl9.AutoSize:= bAux;
+    qrlbl11.AutoSize:= bAux;
+    qrlbl7.AutoSize:= bAux;                                                
+    qrlbl12.AutoSize:= bAux;
+    qrlbl13.AutoSize:= bAux;
+    qrlbl1.AutoSize:= bAux;
+    qrlbl15.AutoSize:= bAux;
+    qrlblLKilos.AutoSize:= bAux;
+    qrlblPsQRLabel1.AutoSize:= bAux;
+    qrlbl2.AutoSize:= bAux;
+    qrlbl3.AutoSize:= bAux;
+    qrlbl4.AutoSize:= bAux;
+
+
+   qrlbl1.Width:= qrdbtxtcod_pais.Width;
+    qrlbl5.Width:= qrdbtxtcod_producto.Width;
+    qrlbl6.Width:= qrdbtxtcod_factura.Width;
+    qrlbl10.Width:= qrdbtxtfecha_factura.Width;
+    qrlblLPais.Width:= qrdbtxtproducto1.Width;
+    qrlbl8.Width:= qrdbtxtdes_producto2.Width;
+    qrlbl9.Width:= qrdbtxtenvase.Width;
+    qrlbl11.Width:= qrdbtxtdes_envase.Width;
+    qrlbl7.Width:= qrdbtxtproducto2.Width;
+    qrlbl12.Width:= qrdbtxtdes_producto.Width;
+    qrlbl13.Width:= descripcion_p.Width;
+    qrlbl1.Width:= qrdbtxtproducto.Width;
+    qrlbl15.Width:= qrdbtxtdes_producto1.Width;
+    qrlblLKilos.Width:= qrdbtxtcajas.Width;
+    qrlblPsQRLabel1.Width:= qrdbtxtcajas1.Width;
+    qrlbl2.Width:= kilos.Width;
+    qrlbl3.Width:= qrxpr6.Width;
+    qrlbl4.Width:= qrxpr7.Width;
+    qrlbl16.Width:= qrdbtxtcod_pais1.Width;
+    qrbl1.Width:=QRDBText1.Width;
+
+    qrlblLKilos.Left:= qrdbtxtcajas.Left;
+    qrlblPsQRLabel1.Left:= qrdbtxtcajas1.Left;
+    qrlbl2.Left:= kilos.Left;
+    qrlbl3.Left:= qrxpr6.Left;
+    qrlbl4.Left:= qrxpr7.Left;
+
+  if not bAux then
+  begin
+    qrlbl1.AutoSize:= True;
+    qrlbl1.Caption:= 'PLANTA';
+    qrlbl5.Enabled:= False;
+    qrlbl9.AutoSize:= True;
+    qrlbl11.Enabled:= False;
+    qrlbl12.AutoSize:= True;
+    qrlbl13.Enabled:= False;
+    qrlbl14.AutoSize:= True;
+    qrlbl15.Enabled:= False;
+    qrlbl16.Enabled:= False;
+  end
+  else
+  begin
+    qrlbl1.Caption:= 'EMPRESA';
+    qrlbl5.Enabled:= True;
+    qrlbl11.Enabled:= True;
+    qrlbl13.Enabled:= True;
+    qrlbl15.Enabled:= True;
+    qrlbl16.Enabled:= True;
+  end;
+
+  if (Exporting) and ( Pos( 'XLS', UpperCase( ExportFilter.ClassName ) ) > 0 ) then
+  begin
+    qrlbl11.width := 200;
+    qrdbtxtdes_envase.width := 200;
+    QRLabel1.width := 70;
+    QRLabel1.Caption := 'Código X3';
+    QRDBText3.width := 70;
+
+    qrlbl13.width := 300;
+    descripcion_p.width := 300;
+
+  end
+  else
+  begin
+    qrlbl11.width := 98;
+    qrdbtxtdes_envase.width := 98;
+    QRLabel1.width := 23;
+    QRLabel1.Caption := 'C.X3';
+    QRDBText3.width := 23;
+
+    qrlbl13.width := 100;
+    descripcion_p.width := 100;
+  end;
+
+end;
+
+end.
