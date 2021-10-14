@@ -181,8 +181,6 @@ object FMTransitosSimple: TFMTransitosSimple
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitLeft = 1
-    ExplicitTop = 5
     object LEmpresa_p: TLabel
       Left = 17
       Top = 61
@@ -1865,7 +1863,7 @@ object FMTransitosSimple: TFMTransitosSimple
     Top = 259
     Width = 182
     Height = 158
-    Date = 36864.468639097220000000
+    Date = 36864.621564363430000000
     TabOrder = 5
     Visible = False
     WeekNumbers = True

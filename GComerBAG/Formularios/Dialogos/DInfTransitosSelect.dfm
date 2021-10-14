@@ -2,7 +2,7 @@ object FDInfTransitosSelect: TFDInfTransitosSelect
   Left = 714
   Top = 229
   Caption = '   '#191'DESEA IMPRIMIR EL ...?'
-  ClientHeight = 108
+  ClientHeight = 151
   ClientWidth = 392
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -31,44 +31,41 @@ object FDInfTransitosSelect: TFDInfTransitosSelect
     Width = 75
     Height = 25
     Caption = 'No (Esc)'
-    TabOrder = 5
+    TabOrder = 1
     OnClick = btnNoClick
   end
-  object rbAlbaran: TRadioButton
+  object cbxAlbaran: TCheckBox
     Left = 32
-    Top = 21
-    Width = 113
+    Top = 18
+    Width = 135
     Height = 17
     Caption = 'Albar'#225'n de tr'#225'nsito'
     Checked = True
-    TabOrder = 1
-    TabStop = True
+    State = cbChecked
+    TabOrder = 2
   end
-  object rbCMR: TRadioButton
+  object cbxCartaPorte: TCheckBox
     Left = 32
-    Top = 59
-    Width = 57
-    Height = 17
-    Caption = 'CMR'
-    TabOrder = 3
-    TabStop = True
-  end
-  object rbCartaPorte: TRadioButton
-    Left = 32
-    Top = 40
+    Top = 50
     Width = 135
     Height = 17
     Caption = 'Carta de porte'
-    TabOrder = 2
-    TabStop = True
+    TabOrder = 3
   end
-  object rbFacturaTrans: TRadioButton
+  object cbxCMR: TCheckBox
     Left = 32
-    Top = 75
+    Top = 82
+    Width = 97
+    Height = 17
+    Caption = 'CMR'
+    TabOrder = 4
+  end
+  object cbxFacturaTransito: TCheckBox
+    Left = 32
+    Top = 113
     Width = 113
     Height = 17
     Caption = 'Factura de Tr'#225'nsito'
-    TabOrder = 4
-    TabStop = True
+    TabOrder = 5
   end
 end

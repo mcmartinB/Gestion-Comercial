@@ -10,10 +10,10 @@ type
   TFDInfTransitosSelect = class(TForm)
     btnSi: TButton;
     btnNo: TButton;
-    rbAlbaran: TRadioButton;
-    rbCMR: TRadioButton;
-    rbCartaPorte: TRadioButton;
-    rbFacturaTrans: TRadioButton;
+    cbxAlbaran: TCheckBox;
+    cbxCartaPorte: TCheckBox;
+    cbxCMR: TCheckBox;
+    cbxFacturaTransito: TCheckBox;
     procedure btnSiClick(Sender: TObject);
     procedure btnNoClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -27,24 +27,41 @@ type
 
 
 
-function Seleccionar( const AFactura: boolean ): Integer;
-
+procedure Seleccionar( var AAlbaran, ACartaPorte, ACMR, AFacturaTransito: boolean );
 implementation
 
 uses UDMConfig;
 
 {$R *.dfm}
 
-function Seleccionar( const AFactura: boolean ): Integer;
+procedure Seleccionar( var AAlbaran, ACartaPorte, ACMR, AFacturaTransito: boolean );
 var
   FDInfTransitosSelect: TFDInfTransitosSelect;
 begin
   FDInfTransitosSelect:= TFDInfTransitosSelect.Create( nil );
   with FDInfTransitosSelect do
   begin
-    iResult:= 0;
     ShowModal;
-    result:= iResult;
+
+    if cbxAlbaran.Checked then
+    begin
+      AAlbaran := true;
+    end;
+
+    if cbxCartaPorte.Checked then
+    begin
+      ACartaPorte := true;
+    end;
+
+    if cbxCMR.Checked then
+    begin
+      ACMR := true;
+    end;
+
+    if cbxFacturaTransito.Checked then
+    begin
+      AFacturaTransito := true;
+    end;
   end;
   FreeAndNil( FDInfTransitosSelect );
 end;
@@ -52,17 +69,17 @@ end;
 
 procedure TFDInfTransitosSelect.btnSiClick(Sender: TObject);
 begin
-  if rbAlbaran.Checked then
-    iResult:= 1
-  else
-  if rbCartaPorte.Checked then
-    iResult:= 2
-  else
-  if rbCMR.Checked then
-    iResult:= 3
-  else
-  if rbFacturaTrans.Checked then
-    iResult:= 4;
+//  if rbAlbaran.Checked then
+//    iResult:= 1
+//  else
+//  if rbCartaPorte.Checked then
+//    iResult:= 2
+//  else
+//  if rbCMR.Checked then
+//    iResult:= 3
+//  else
+//  if rbFacturaTrans.Checked then
+//    iResult:= 4;
   Close;
 end;
 
