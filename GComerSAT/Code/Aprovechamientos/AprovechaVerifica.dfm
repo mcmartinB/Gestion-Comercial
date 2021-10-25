@@ -24,7 +24,7 @@ object FAprovechaVerifica: TFAprovechaVerifica
   PixelsPerInch = 96
   TextHeight = 13
   object btnAceptar: TSpeedButton
-    Left = 202
+    Left = 199
     Top = 175
     Width = 88
     Height = 25
@@ -163,7 +163,7 @@ object FAprovechaVerifica: TFAprovechaVerifica
   end
   object des_producto: TnbStaticText
     Left = 159
-    Top = 75
+    Top = 76
     Width = 190
     Height = 21
     Caption = 'nbStaticText1'
@@ -208,7 +208,7 @@ object FAprovechaVerifica: TFAprovechaVerifica
   end
   object producto: TBEdit
     Left = 125
-    Top = 75
+    Top = 76
     Width = 33
     Height = 21
     ColorEdit = clMoneyGreen

@@ -1180,7 +1180,7 @@ begin
   if QCabEdi.FieldByName('cod_cliente_fc').AsString = 'DIA' then
     result := '28232' + '|'
   else
-    result := Trim(Copy(QCabEdi.FieldByName('cod_postal_fc').AsString, 1, 5)) + '|';
+    result := Trim(Copy(QCabEdi.FieldByName('cod_postal_fc').AsString, 1, 6)) + '|';
 end;
 
 function TFFacturarEdi.GetNIF: string;

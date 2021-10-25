@@ -77,7 +77,8 @@ begin
 
   empresa.Text := '050';
   centro.Text := '1';
-  producto.Text := 'TOM';
+  producto.Text := '';
+  productoChange(self);
 
   fecha := date;
   while DayOfWeek(fecha) <> 1 do fecha := fecha - 1;
@@ -126,11 +127,15 @@ begin
     DMBaseDatos.QListado.SQL.Add(' Where empresa_e2l = :empresa ');
     DMBaseDatos.QListado.SQL.Add(' and centro_e2l = :centro ');
     DMBaseDatos.QListado.SQL.Add(' and fecha_e2l between :fecha_ini and :fecha_fin ');
-    DMBaseDatos.QListado.SQL.Add(' and producto_e2l = :producto ');
+
+    if producto.Text <> '' then
+    begin
+      DMBaseDatos.QListado.SQL.Add(' and producto_e2l = :producto ');
+      DMBaseDatos.QListado.ParamByName('producto').AsString := producto.Text;
+    end;
 
     DMBaseDatos.QListado.ParamByName('empresa').AsString := empresa.Text;
     DMBaseDatos.QListado.ParamByName('centro').AsString := centro.Text;
-    DMBaseDatos.QListado.ParamByName('producto').AsString := producto.Text;
     DMBaseDatos.QListado.ParamByName('fecha_ini').AsString := fecha_desde.Text;
     DMBaseDatos.QListado.ParamByName('fecha_fin').AsString := fecha_hasta.Text;
 
@@ -149,7 +154,7 @@ begin
 
     DMBaseDatos.QListado.SQL.Clear;
 
-    DMBaseDatos.QListado.SQL.Add(' Select cosechero_e2l, ');
+    DMBaseDatos.QListado.SQL.Add(' Select cosechero_e2l,');
     DMBaseDatos.QListado.SQL.Add('   (select nombre_c ');
     DMBaseDatos.QListado.SQL.Add('    from frf_cosecheros ');
     DMBaseDatos.QListado.SQL.Add('    where empresa_c = :empresa ');
@@ -159,9 +164,14 @@ begin
     DMBaseDatos.QListado.SQL.Add('    from frf_plantaciones ');
     DMBaseDatos.QListado.SQL.Add('    where ano_semana_p = ano_sem_planta_e2l ');
     DMBaseDatos.QListado.SQL.Add('      and empresa_p = :empresa ');
-    DMBaseDatos.QListado.SQL.Add('      and producto_p = :producto ');
+    DMBaseDatos.QListado.SQL.Add('      and producto_p = producto_e2l ');
     DMBaseDatos.QListado.SQL.Add('      and cosechero_p = cosechero_e2l ');
     DMBaseDatos.QListado.SQL.Add('      and plantacion_p = plantacion_e2l) des_plantacion, ');
+
+    DMBaseDatos.QListado.SQL.Add('    producto_e2l,');
+    DMBaseDatos.QListado.SQL.Add('    (select descripcion_p ');
+    DMBaseDatos.QListado.SQL.Add('      from frf_productos ');
+    DMBaseDatos.QListado.SQL.Add('      where producto_p = producto_e2l) des_producto,');
 
     if chkDesglose.Checked then
     begin
@@ -177,7 +187,9 @@ begin
     DMBaseDatos.QListado.SQL.Add('  (Select * from frf_escandallo ');
     DMBaseDatos.QListado.SQL.Add('   where empresa_e = :empresa ');
     DMBaseDatos.QListado.SQL.Add('   and centro_e = :centro ');
-    DMBaseDatos.QListado.SQL.Add('   and producto_e = :producto ');
+//    DMBaseDatos.QListado.SQL.Add('   and producto_e = :producto ');
+    DMBaseDatos.QListado.SQL.Add('   and producto_e = producto_e2l ');
+
     DMBaseDatos.QListado.SQL.Add('   and fecha_e between :fecha_ini and :fecha_fin ');
     DMBaseDatos.QListado.SQL.Add('   and fecha_e = fecha_e2l ');
     DMBaseDatos.QListado.SQL.Add('   and numero_entrada_e = numero_entrada_e2l ');
@@ -186,11 +198,17 @@ begin
     DMBaseDatos.QListado.SQL.Add(' and empresa_e2l = :empresa ');
     DMBaseDatos.QListado.SQL.Add(' and centro_e2l = :centro ');
     DMBaseDatos.QListado.SQL.Add(' and fecha_e2l between :fecha_ini and :fecha_fin ');
-    DMBaseDatos.QListado.SQL.Add(' and producto_e2l = :producto ');
+    //DMBaseDatos.QListado.SQL.Add(' and producto_e2l = :producto ');
+
     DMBaseDatos.QListado.SQL.Add(' and empresa_e2l = empresa_ec ');
     DMBaseDatos.QListado.SQL.Add(' and centro_e2l = centro_ec ');
     DMBaseDatos.QListado.SQL.Add(' and fecha_e2l = fecha_ec ');
     DMBaseDatos.QListado.SQL.Add(' and numero_entrada_e2l = numero_entrada_ec ');
+
+    if producto.Text <> '' then
+    begin
+      DMBaseDatos.QListado.SQL.Add(' and producto_e2l = :producto ');
+    end;
 
     if chkDesglose.Checked then
     begin
@@ -198,13 +216,19 @@ begin
     end
     else
     begin
-      DMBaseDatos.QListado.SQL.Add(' group by 1,2,3,4 ');
+      DMBaseDatos.QListado.SQL.Add(' group by 1,2,3,4,5 ');
       DMBaseDatos.QListado.SQL.Add(' order by 1,3 ');
+    end;
+
+
+    if producto.Text <> '' then
+    begin
+      DMBaseDatos.QListado.ParamByName('producto').AsString := producto.Text;
     end;
 
     DMBaseDatos.QListado.ParamByName('empresa').AsString := empresa.Text;
     DMBaseDatos.QListado.ParamByName('centro').AsString := centro.Text;
-    DMBaseDatos.QListado.ParamByName('producto').AsString := producto.Text;
+    //DMBaseDatos.QListado.ParamByName('producto').AsString := producto.Text;
     DMBaseDatos.QListado.ParamByName('fecha_ini').AsString := fecha_desde.Text;
     DMBaseDatos.QListado.ParamByName('fecha_fin').AsString := fecha_hasta.Text;
 
@@ -273,7 +297,15 @@ end;
 
 procedure TFAprovechaVerifica.productoChange(Sender: TObject);
 begin
-  des_producto.Caption := desProducto(empresa.Text, producto.Text);
+  if producto.Text <> '' then
+  begin
+    des_producto.Caption := desProducto(empresa.Text, producto.Text);
+  end
+  else
+  begin
+    des_producto.Caption := 'TODOS LOS PRODUCTOS';
+  end;
+
 end;
 
 procedure TFAprovechaVerifica.FormKeyUp(Sender: TObject; var Key: Word;
