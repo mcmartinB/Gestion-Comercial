@@ -2,7 +2,7 @@ object FDInfTransitosSelect: TFDInfTransitosSelect
   Left = 1036
   Top = 302
   Caption = '   '#191'DESEA IMPRIMIR EL ...?'
-  ClientHeight = 168
+  ClientHeight = 163
   ClientWidth = 446
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -46,7 +46,7 @@ object FDInfTransitosSelect: TFDInfTransitosSelect
   end
   object cbxCMR: TCheckBox
     Left = 40
-    Top = 51
+    Top = 68
     Width = 121
     Height = 25
     Caption = 'CMR'
@@ -54,7 +54,7 @@ object FDInfTransitosSelect: TFDInfTransitosSelect
   end
   object cbxFacturaTransito: TCheckBox
     Left = 40
-    Top = 91
+    Top = 99
     Width = 121
     Height = 17
     Caption = 'Factura de Tr'#225'nsito'
@@ -62,10 +62,18 @@ object FDInfTransitosSelect: TFDInfTransitosSelect
   end
   object cbxCertificadoLAME: TCheckBox
     Left = 40
-    Top = 122
+    Top = 125
     Width = 121
     Height = 17
     Caption = 'Certificado LAME'
     TabOrder = 5
+  end
+  object cbxCartaPorte: TCheckBox
+    Left = 40
+    Top = 39
+    Width = 97
+    Height = 29
+    Caption = 'Carta de Porte'
+    TabOrder = 6
   end
 end

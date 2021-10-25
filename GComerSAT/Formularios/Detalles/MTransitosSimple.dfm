@@ -1863,7 +1863,7 @@ object FMTransitosSimple: TFMTransitosSimple
     Top = 259
     Width = 182
     Height = 158
-    Date = 36864.621564363430000000
+    Date = 36864.628545601850000000
     TabOrder = 5
     Visible = False
     WeekNumbers = True

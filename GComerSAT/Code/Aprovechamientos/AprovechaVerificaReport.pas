@@ -27,6 +27,10 @@ type
     lblFecha: TQRLabel;
     qrlblCalidad: TQRLabel;
     qrdbtxtcalidad_ec: TQRDBText;
+    QRDBTextProducto: TQRDBText;
+    QRDBTextDescProducto: TQRDBText;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
     procedure lblCentro2Print(sender: TObject; var Value: string);
     procedure lblFecha2Print(sender: TObject; var Value: string);
     procedure lblProducto2Print(sender: TObject; var Value: string);

@@ -657,6 +657,7 @@ begin
 
      //Intentamos  enviar
   SBEstado.SimpleText := 'Enviando mensaje';
+
   try
     IdSMTP.Send(IdMessage);
   except

@@ -1,8 +1,8 @@
 object QRAprovechaVerifica: TQRAprovechaVerifica
   Left = 0
   Top = 0
-  Width = 794
-  Height = 1123
+  Width = 1123
+  Height = 794
   Frame.Color = clBlack
   Frame.DrawTop = False
   Frame.DrawBottom = False
@@ -24,13 +24,13 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
     #39#39)
   Options = [FirstPageHeader, LastPageFooter]
   Page.Columns = 1
-  Page.Orientation = poPortrait
+  Page.Orientation = poLandscape
   Page.PaperSize = A4
   Page.Values = (
     100.000000000000000000
-    2970.000000000000000000
-    100.000000000000000000
     2100.000000000000000000
+    100.000000000000000000
+    2970.000000000000000000
     100.000000000000000000
     100.000000000000000000
     0.000000000000000000)
@@ -59,7 +59,7 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
   object DetailBand1: TQRBand
     Left = 38
     Top = 142
-    Width = 718
+    Width = 1047
     Height = 19
     Frame.Color = clBlack
     Frame.DrawTop = False
@@ -73,14 +73,14 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
     ForceNewPage = False
     Size.Values = (
       50.270833333333330000
-      1899.708333333333000000)
+      2770.187500000000000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     BandType = rbDetail
     object PsQRDBText1: TQRDBText
-      Left = 663
+      Left = 986
       Top = 1
-      Width = 54
+      Width = 51
       Height = 17
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -88,10 +88,10 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       Frame.DrawLeft = False
       Frame.DrawRight = False
       Size.Values = (
-        44.979166666666700000
-        1754.187500000000000000
-        2.645833333333330000
-        142.875000000000000000)
+        44.979166666666670000
+        2608.791666666667000000
+        2.645833333333333000
+        134.937500000000000000)
       Alignment = taLeftJustify
       AlignToBand = False
       AutoSize = False
@@ -104,7 +104,7 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       FontSize = 10
     end
     object PsQRDBText2: TQRDBText
-      Left = 584
+      Left = 914
       Top = 1
       Width = 70
       Height = 17
@@ -114,10 +114,10 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       Frame.DrawLeft = False
       Frame.DrawRight = False
       Size.Values = (
-        44.979166666666700000
-        1545.166666666670000000
-        2.645833333333330000
-        185.208333333333000000)
+        44.979166666666670000
+        2418.291666666667000000
+        2.645833333333333000
+        185.208333333333300000)
       Alignment = taLeftJustify
       AlignToBand = False
       AutoSize = False
@@ -210,7 +210,7 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
     object PsQRDBText6: TQRDBText
       Left = 281
       Top = 1
-      Width = 278
+      Width = 227
       Height = 17
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -218,10 +218,10 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       Frame.DrawLeft = False
       Frame.DrawRight = False
       Size.Values = (
-        44.979166666666700000
-        743.479166666667000000
-        2.645833333333330000
-        735.541666666667000000)
+        44.979166666666670000
+        743.479166666666700000
+        2.645833333333333000
+        600.604166666666700000)
       Alignment = taLeftJustify
       AlignToBand = False
       AutoSize = False
@@ -234,7 +234,7 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       FontSize = 10
     end
     object qrdbtxtcalidad_ec: TQRDBText
-      Left = 506
+      Left = 836
       Top = 1
       Width = 70
       Height = 17
@@ -244,10 +244,10 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       Frame.DrawLeft = False
       Frame.DrawRight = False
       Size.Values = (
-        44.979166666666700000
-        1338.791666666670000000
-        2.645833333333330000
-        185.208333333333000000)
+        44.979166666666670000
+        2211.916666666667000000
+        2.645833333333333000
+        185.208333333333300000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
@@ -259,12 +259,68 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       WordWrap = True
       FontSize = 10
     end
+    object QRDBTextProducto: TQRDBText
+      Left = 514
+      Top = 1
+      Width = 75
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        1359.958333333333000000
+        2.645833333333333000
+        198.437500000000000000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Color = clWhite
+      DataSet = DMBaseDatos.QListado
+      DataField = 'producto_e2l'
+      Transparent = False
+      WordWrap = True
+      FontSize = 10
+    end
+    object QRDBTextDescProducto: TQRDBText
+      Left = 624
+      Top = 1
+      Width = 206
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        1651.000000000000000000
+        2.645833333333333000
+        545.041666666666700000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Color = clWhite
+      DataSet = DMBaseDatos.QListado
+      DataField = 'des_producto'
+      Transparent = False
+      WordWrap = True
+      FontSize = 10
+    end
   end
   object TitleBand1: TQRBand
     Left = 38
     Top = 38
-    Width = 718
+    Width = 1047
     Height = 85
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
@@ -277,12 +333,12 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
     ForceNewPage = False
     Size.Values = (
       224.895833333333300000
-      1899.708333333333000000)
+      2770.187500000000000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     BandType = rbPageHeader
     object PsQRLabel4: TQRLabel
-      Left = 119
+      Left = 283
       Top = 15
       Width = 480
       Height = 30
@@ -293,7 +349,7 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       Frame.DrawRight = False
       Size.Values = (
         79.375000000000000000
-        314.854166666666700000
+        748.770833333333300000
         39.687500000000000000
         1270.000000000000000000)
       Alignment = taCenter
@@ -313,7 +369,7 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       FontSize = 18
     end
     object PsQRSysData2: TQRSysData
-      Left = 635
+      Left = 964
       Top = 1
       Width = 83
       Height = 17
@@ -324,7 +380,7 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       Frame.DrawRight = False
       Size.Values = (
         44.979166666666670000
-        1680.104166666667000000
+        2550.583333333333000000
         2.645833333333333000
         219.604166666666700000)
       Alignment = taRightJustify
@@ -374,7 +430,7 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       FontSize = 9
     end
     object lblProducto: TQRLabel
-      Left = 326
+      Left = 490
       Top = 65
       Width = 66
       Height = 20
@@ -385,7 +441,7 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       Frame.DrawRight = False
       Size.Values = (
         52.916666666666670000
-        862.541666666666700000
+        1296.458333333333000000
         171.979166666666700000
         174.625000000000000000)
       Alignment = taCenter
@@ -405,7 +461,7 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       FontSize = 9
     end
     object lblFecha: TQRLabel
-      Left = 670
+      Left = 999
       Top = 65
       Width = 48
       Height = 20
@@ -416,7 +472,7 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       Frame.DrawRight = False
       Size.Values = (
         52.916666666666670000
-        1772.708333333333000000
+        2643.187500000000000000
         171.979166666666700000
         127.000000000000000000)
       Alignment = taRightJustify
@@ -437,9 +493,10 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
     end
   end
   object ColumnHeaderBand1: TQRBand
+    AlignWithMargins = True
     Left = 38
     Top = 123
-    Width = 718
+    Width = 1047
     Height = 19
     Frame.Color = clBlack
     Frame.DrawTop = False
@@ -453,14 +510,14 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
     ForceNewPage = False
     Size.Values = (
       50.270833333333330000
-      1899.708333333333000000)
+      2770.187500000000000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     BandType = rbColumnHeader
     object PsQRLabel5: TQRLabel
-      Left = 663
+      Left = 986
       Top = 1
-      Width = 51
+      Width = 58
       Height = 17
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -468,10 +525,10 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       Frame.DrawLeft = False
       Frame.DrawRight = False
       Size.Values = (
-        44.979166666666700000
-        1754.187500000000000000
-        2.645833333333330000
-        134.937500000000000000)
+        44.979166666666670000
+        2608.791666666667000000
+        2.645833333333333000
+        153.458333333333300000)
       Alignment = taLeftJustify
       AlignToBand = False
       AutoSize = False
@@ -489,9 +546,9 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       FontSize = 10
     end
     object PsQRLabel6: TQRLabel
-      Left = 584
+      Left = 914
       Top = 1
-      Width = 60
+      Width = 57
       Height = 17
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -499,10 +556,10 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       Frame.DrawLeft = False
       Frame.DrawRight = False
       Size.Values = (
-        44.979166666666700000
-        1545.166666666670000000
-        2.645833333333330000
-        158.750000000000000000)
+        44.979166666666670000
+        2418.291666666667000000
+        2.645833333333333000
+        150.812500000000000000)
       Alignment = taLeftJustify
       AlignToBand = False
       AutoSize = False
@@ -582,9 +639,9 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       FontSize = 10
     end
     object qrlblCalidad: TQRLabel
-      Left = 516
+      Left = 836
       Top = 1
-      Width = 60
+      Width = 57
       Height = 17
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -592,15 +649,77 @@ object QRAprovechaVerifica: TQRAprovechaVerifica
       Frame.DrawLeft = False
       Frame.DrawRight = False
       Size.Values = (
-        44.979166666666700000
-        1365.250000000000000000
-        2.645833333333330000
-        158.750000000000000000)
+        44.979166666666670000
+        2211.916666666667000000
+        2.645833333333333000
+        150.812500000000000000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
       AutoStretch = False
       Caption = 'Calidad'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 10
+    end
+    object QRLabel1: TQRLabel
+      Left = 514
+      Top = 1
+      Width = 58
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        1359.958333333333000000
+        2.645833333333333000
+        153.458333333333300000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Caption = 'Producto'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 10
+    end
+    object QRLabel2: TQRLabel
+      Left = 624
+      Top = 1
+      Width = 159
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        1651.000000000000000000
+        2.645833333333333000
+        420.687500000000000000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Caption = 'Descripci'#243'n del producto'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

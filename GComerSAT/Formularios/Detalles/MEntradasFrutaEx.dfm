@@ -1196,13 +1196,17 @@ object FMEntradasFrutaEx: TFMEntradasFrutaEx
       Top = 128
       Width = 942
       Height = 251
-      ActivePage = tsSalidas
+      ActivePage = tsEscandallos
       Align = alBottom
       TabOrder = 2
       TabWidth = 100
       object tsEscandallos: TTabSheet
         Caption = 'Escandallos'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object lblTipoEntrada: TLabel
           Left = 622
           Top = 4
@@ -1374,6 +1378,10 @@ object FMEntradasFrutaEx: TFMEntradasFrutaEx
       end
       object tsSalidas: TTabSheet
         Caption = 'Salidas'
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pnlSalidas: TPanel
           Left = 0
           Top = 0
@@ -1575,7 +1583,7 @@ object FMEntradasFrutaEx: TFMEntradasFrutaEx
     Width = 212
     Height = 143
     AutoSize = True
-    Date = 36748.414724467590000000
+    Date = 36748.646370023150000000
     ShowToday = False
     TabOrder = 3
     Visible = False

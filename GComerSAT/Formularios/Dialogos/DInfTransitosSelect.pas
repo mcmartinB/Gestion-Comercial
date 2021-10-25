@@ -14,6 +14,7 @@ type
     cbxCMR: TCheckBox;
     cbxFacturaTransito: TCheckBox;
     cbxCertificadoLAME: TCheckBox;
+    cbxCartaPorte: TCheckBox;
     procedure btnSiClick(Sender: TObject);
     procedure btnNoClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -27,7 +28,7 @@ type
 
   end;
 
-procedure Seleccionar( var AAlbaran, ACMR, AFactura, ACertificado, ACertificadoLame: boolean );
+procedure Seleccionar( var AAlbaran, ACartaPorte, ACMR, AFactura, ACertificado, ACertificadoLame: boolean );
 
 implementation
 
@@ -35,7 +36,7 @@ uses UDMConfig;
 
 {$R *.dfm}
 
-procedure Seleccionar ( var AAlbaran, ACMR, AFActura, ACertificado, ACertificadoLame: boolean);
+procedure Seleccionar ( var AAlbaran, ACartaPorte, ACMR, AFActura, ACertificado, ACertificadoLame: boolean);
 var FDInfTransitosSelect: TFDInfTransitosSelect;
 begin
   FDInfTransitosSelect:= TFDInfTransitosSelect.Create( nil );
@@ -48,6 +49,11 @@ begin
       begin
         AAlbaran := true;
       end;
+
+    if cbxCartaPorte.Checked then
+    begin
+      ACartaPorte := true;
+    end;
 
     if cbxCMR.Checked then
       begin

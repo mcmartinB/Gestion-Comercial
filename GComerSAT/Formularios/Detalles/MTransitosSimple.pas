@@ -277,6 +277,7 @@ type
 
     procedure PreguntarCMR;
     procedure SeleccionarInforme;
+    procedure ImprimirCartaPorte;
     procedure ImprimirAlbaran;
     procedure ImprimirFactura;
     procedure ImprimirCMRInyeccion;
@@ -314,7 +315,7 @@ uses CVariables, CGestionPrincipal, UDMBaseDatos, CAuxiliarDB,
   DesgloseTransitosFC, bSQLUtils, DInfTransitosSelect, DInfTransitosPreguntar,
   DConfigMail, UDMConfig, CMaestro, CFDTransitosAduana, CRDTransitosAduanaFicha,
   LFacturaTransitoProforma, AdvertenciaFD, PFTransitoActivar,
-  UDMEnvases, bTextUtils, UDLCertificadoLame;
+  UDMEnvases, bTextUtils, UDLCertificadoLame, CartaTransitoDL;
 
 {$R *.DFM}
 
@@ -798,6 +799,11 @@ begin
                  QTransitosC);
 end;
 
+procedure TFMTransitosSimple.ImprimirCartaPorte;
+begin
+  CartaTransitoDL.Ejecutar(self, empresa_tc.Text, centro_tc.Text, StrToInt(referencia_tc.Text), StrToDate( fecha_tc.Text ), '');
+end;
+
 procedure TFMTransitosSimple.ImprimirFactura;
 begin
   LFacturaTransitoProforma.PreviewFactura( self, empresa_tc.Text, centro_tc.Text, StrToInt( referencia_tc.Text ),
@@ -844,7 +850,7 @@ begin
 end;
 
 procedure TFMTransitosSimple.SeleccionarInforme;
-var bAlbaran, bCMR, bFactura, bCertificado, bCertificadoLame: boolean;
+var bAlbaran, bCartaPorte, bCMR, bFactura, bCertificado, bCertificadoLame: boolean;
 begin
   bCertificadoLame := EsCertificadoLame(empresa_tc.Text, centro_tc.Text, Referencia_tc.Text, fecha_tc.Text);
   bAlbaran := false;
@@ -852,11 +858,17 @@ begin
   bCertificado := false;
   bCMR := false;
 
-  DInfTransitosSelect.Seleccionar( bAlbaran, bCMR, bFactura, bCertificado, bCertificadoLame );
+  DInfTransitosSelect.Seleccionar( bAlbaran, bCartaPorte, bCMR, bFactura, bCertificado, bCertificadoLame );
   if bAlbaran then
   begin
     imprimirAlbaran;
   end;
+
+  if bCartaPorte then
+  begin
+      ImprimirCartaPorte;
+  end;
+
 
   if bCMR then
   begin
