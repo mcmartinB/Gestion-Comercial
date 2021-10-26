@@ -27,7 +27,8 @@ type
   end;
 
   function AplicarEscandallos( const AEmpresa, AProducto, ACosechero, APlantacion, AAnyoSemana, AAnyoSemanaEscandallo: string;
-                                 const APrimera, ASegunda, ATercera, ADestrio: Real; const ASoloNuevas: Boolean ): integer;
+                               const AFecha: TDateTime;
+                               const APrimera, ASegunda, ATercera, ADestrio: Real; const ASoloNuevas, APorSemana: Boolean ): integer;
 Implementation
 
 {$R *.dfm}
@@ -38,8 +39,8 @@ uses
 var
   MDPutEscandalloSemanal: TMDPutEscandalloSemanal;
 
-function AplicarEscandallos( const AEmpresa, AProducto, ACosechero, APlantacion, AAnyoSemana, AAnyoSemanaEscandallo: string;
-                             const APrimera, ASegunda, ATercera, ADestrio: Real; const ASoloNuevas: Boolean ): integer;
+function AplicarEscandallos( const AEmpresa, AProducto, ACosechero, APlantacion, AAnyoSemana, AAnyoSemanaEscandallo: string; const AFecha: TDateTime;
+                             const APrimera, ASegunda, ATercera, ADestrio: Real; const ASoloNuevas, APorSemana: Boolean ): integer;
 begin
   MDPutEscandalloSemanal:= TMDPutEscandalloSemanal.Create( nil );
   try
@@ -49,9 +50,18 @@ begin
     MDPutEscandalloSemanal.sCosechero:= ACosechero;
     MDPutEscandalloSemanal.sPlantacion:= APlantacion;
     MDPutEscandalloSemanal.sAnyoSemana:= AAnyoSemana;
-    MDPutEscandalloSemanal.sAnyoSemanaEscandallo:= AAnyoSemanaEscandallo;
-    MDPutEscandalloSemanal.dFechaIni:= LunesAnyoSemana( AAnyoSemanaEscandallo );
-    MDPutEscandalloSemanal.dFechaFin:= MDPutEscandalloSemanal.dFechaIni + 6;
+    if APorSemana then
+    begin
+      MDPutEscandalloSemanal.sAnyoSemanaEscandallo:= AAnyoSemanaEscandallo;
+      MDPutEscandalloSemanal.dFechaIni:= LunesAnyoSemana( AAnyoSemanaEscandallo );
+      MDPutEscandalloSemanal.dFechaFin:= MDPutEscandalloSemanal.dFechaIni + 6;
+    end
+    else
+    begin
+      MDPutEscandalloSemanal.sAnyoSemanaEscandallo:= AAnyoSemanaEscandallo;
+      MDPutEscandalloSemanal.dFechaIni:= AFecha;
+      MDPutEscandalloSemanal.dFechaFin:= AFecha;
+    end;
     MDPutEscandalloSemanal.rPrimera:= APrimera;
     MDPutEscandalloSemanal.rSegunda:= ASegunda;
     MDPutEscandalloSemanal.rTercera:= ATercera;

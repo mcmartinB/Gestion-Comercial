@@ -4,8 +4,8 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = '    INSERTAR NUEVOS ESCANDALLOS (Entregas Normales)'
-  ClientHeight = 328
-  ClientWidth = 468
+  ClientHeight = 361
+  ClientWidth = 454
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -28,13 +28,13 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
   end
   object bvl1: TBevel
     Left = 27
-    Top = 167
+    Top = 207
     Width = 401
     Height = 89
   end
   object Label2: TLabel
     Left = 138
-    Top = 178
+    Top = 218
     Width = 50
     Height = 19
     AutoSize = False
@@ -45,7 +45,7 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
   end
   object LEmpresa_p: TLabel
     Left = 195
-    Top = 178
+    Top = 218
     Width = 50
     Height = 19
     AutoSize = False
@@ -56,7 +56,7 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
   end
   object Label11: TLabel
     Left = 253
-    Top = 178
+    Top = 218
     Width = 50
     Height = 19
     AutoSize = False
@@ -67,7 +67,7 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
   end
   object lblDestrio: TLabel
     Left = 310
-    Top = 178
+    Top = 218
     Width = 50
     Height = 19
     AutoSize = False
@@ -78,7 +78,7 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
   end
   object lblTotal: TLabel
     Left = 367
-    Top = 178
+    Top = 218
     Width = 50
     Height = 19
     AutoSize = False
@@ -89,7 +89,7 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
   end
   object lblTotal1: TLabel
     Left = 367
-    Top = 202
+    Top = 242
     Width = 50
     Height = 19
     Alignment = taRightJustify
@@ -344,7 +344,7 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
   end
   object lbl1: TLabel
     Left = 37
-    Top = 178
+    Top = 218
     Width = 95
     Height = 19
     AutoSize = False
@@ -355,7 +355,7 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
   end
   object lblFechas: TLabel
     Left = 253
-    Top = 227
+    Top = 267
     Width = 164
     Height = 19
     AutoSize = False
@@ -364,37 +364,26 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
     Layout = tlCenter
   end
   object btnAceptar: TButton
-    Left = 271
-    Top = 265
+    Left = 268
+    Top = 313
     Width = 77
     Height = 25
     Caption = 'Aplicar'
-    TabOrder = 17
+    TabOrder = 18
     OnClick = btnAceptarClick
   end
   object btnCancelar: TButton
     Left = 351
-    Top = 265
+    Top = 313
     Width = 77
     Height = 25
     Caption = 'Cancelar'
-    TabOrder = 18
+    TabOrder = 19
     OnClick = btnCancelarClick
   end
   object edtPrimera: TBEdit
     Left = 138
-    Top = 201
-    Width = 50
-    Height = 21
-    InputType = itReal
-    MaxDecimals = 2
-    MaxLength = 6
-    TabOrder = 12
-    OnChange = edtPrimeraChange
-  end
-  object edtSegunda: TBEdit
-    Left = 195
-    Top = 201
+    Top = 241
     Width = 50
     Height = 21
     InputType = itReal
@@ -403,9 +392,9 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
     TabOrder = 13
     OnChange = edtPrimeraChange
   end
-  object edtTercera: TBEdit
-    Left = 253
-    Top = 201
+  object edtSegunda: TBEdit
+    Left = 195
+    Top = 241
     Width = 50
     Height = 21
     InputType = itReal
@@ -414,15 +403,26 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
     TabOrder = 14
     OnChange = edtPrimeraChange
   end
-  object edtDestrio: TBEdit
-    Left = 310
-    Top = 201
+  object edtTercera: TBEdit
+    Left = 253
+    Top = 241
     Width = 50
     Height = 21
     InputType = itReal
     MaxDecimals = 2
     MaxLength = 6
     TabOrder = 15
+    OnChange = edtPrimeraChange
+  end
+  object edtDestrio: TBEdit
+    Left = 310
+    Top = 241
+    Width = 50
+    Height = 21
+    InputType = itReal
+    MaxDecimals = 2
+    MaxLength = 6
+    TabOrder = 16
     OnChange = edtPrimeraChange
   end
   object edtEmpresa: TBEdit
@@ -522,24 +522,25 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
   end
   object edtAnyoSemanaEsnandallo: TBEdit
     Left = 37
-    Top = 201
-    Width = 63
+    Top = 241
+    Width = 80
     Height = 21
     Hint = 'Formato  "AAAASS"  donde A es a'#241'o y S semana.'
     ColorEdit = clMoneyGreen
     Required = True
     RequiredMsg = 'El A'#241'o/Semana es obligatorio.'
+    Visible = False
     MaxLength = 6
     TabOrder = 11
     OnChange = edtAnyoSemanaEsnandalloChange
   end
   object CalendarioFlotante: TBCalendario
-    Left = 355
-    Top = 64
+    Left = 434
+    Top = 20
     Width = 212
     Height = 143
     AutoSize = True
-    Date = 36748.531536377310000000
+    Date = 36748.615334409730000000
     ShowToday = False
     TabOrder = 5
     Visible = False
@@ -564,11 +565,41 @@ object FDPutEscandalloSemanal: TFDPutEscandalloSemanal
   end
   object chkSobreescribir: TCheckBox
     Left = 37
-    Top = 228
+    Top = 268
     Width = 193
     Height = 18
     Caption = 'Sobreescribir escandallos existentes '
-    TabOrder = 16
+    TabOrder = 17
+  end
+  object rbPorDia: TRadioButton
+    Left = 53
+    Top = 176
+    Width = 113
+    Height = 17
+    Caption = 'Escandallos por Dias'
+    Checked = True
+    TabOrder = 20
+    TabStop = True
+    OnClick = rbPorDiaClick
+  end
+  object rbPorSemana: TRadioButton
+    Left = 264
+    Top = 176
+    Width = 161
+    Height = 17
+    Caption = 'Escandallos por Semanas'
+    TabOrder = 21
+    OnClick = rbPorSemanaClick
+  end
+  object edtFecha: TBEdit
+    Left = 38
+    Top = 241
+    Width = 80
+    Height = 21
+    ColorEdit = clMoneyGreen
+    RequiredMsg = 'El campo Fecha es obligatorio'
+    TabOrder = 12
+    OnChange = edtAnyoSemanaEsnandalloChange
   end
   object actlstBotones: TActionList
     Images = DMBaseDatos.ImgBotones

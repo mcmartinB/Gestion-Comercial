@@ -1,8 +1,6 @@
 object MDPutEscandalloSemanal: TMDPutEscandalloSemanal
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 869
-  Top = 287
   Height = 310
   Width = 324
   object qryEntradas: TQuery

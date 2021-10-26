@@ -2811,7 +2811,7 @@ begin
   begin
     sAnyoSemanaEscandallo:= AnyoSemana( DSMaestro.DataSet.FieldByName('fecha_ec').AsDateTime );
   end;
-  UFDPutEscandalloSemanal.PutEscandalloSemanalExec( self, empresa_ec.Text, producto_ec.Text, cosechero_e2l.Text, plantacion_e2l.Text, DSDetalle.DataSet.FieldByName('ano_sem_planta_e2l').AsString, sAnyoSemanaEscandallo);
+  UFDPutEscandalloSemanal.PutEscandalloSemanalExec( self, empresa_ec.Text, producto_ec.Text, cosechero_e2l.Text, plantacion_e2l.Text, fecha_ec.Text, DSDetalle.DataSet.FieldByName('ano_sem_planta_e2l').AsString, sAnyoSemanaEscandallo);
   dsEscandallos.DataSet.Close;
   dsEscandallos.DataSet.Open;
 end;

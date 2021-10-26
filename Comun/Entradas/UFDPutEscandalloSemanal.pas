@@ -49,6 +49,9 @@ type
     chkSobreescribir: TCheckBox;
     bvl1: TBevel;
     lblFechas: TLabel;
+    rbPorDia: TRadioButton;
+    rbPorSemana: TRadioButton;
+    edtFecha: TBEdit;
     procedure edtPrimeraChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAceptarClick(Sender: TObject);
@@ -64,11 +67,14 @@ type
     procedure edtPlantacionChange(Sender: TObject);
     procedure edtAnoSemanaChange(Sender: TObject);
     procedure edtAnyoSemanaEsnandalloChange(Sender: TObject);
+    procedure rbPorDiaClick(Sender: TObject);
+    procedure rbPorSemanaClick(Sender: TObject);
   private
     { Private declarations }
-    sEmpresa, sProducto, sCosechero, sPlantacion, sAnyoSemana, sAnyoSemanaEscandallo: string;
+    sEmpresa, sProducto, sCosechero, sPlantacion, sAnyoSemana, sAnyoSemanaEscandallo, sFechaEscandallo: string;
     rPrimera, rSegunda, rTercera, rDestrio, rFalta: Real;
     bSoloNuevas: Boolean;
+    dFecha: TDateTime;
 
     function ValidarParametros: Boolean;
     function BuscaPlanatacion: Boolean;
@@ -76,7 +82,7 @@ type
     { Public declarations }
   end;
 
-  function PutEscandalloSemanalExec( const AOwner: TComponent; const AEmpresa, AProducto, ACosechero, APlantacion, AAnyoSemana, AAnyoSemanaEscandallo: string ): Boolean;
+  function PutEscandalloSemanalExec( const AOwner: TComponent; const AEmpresa, AProducto, ACosechero, APlantacion, AFecha, AAnyoSemana, AAnyoSemanaEscandallo: string ): Boolean;
 
 
 implementation
@@ -90,13 +96,14 @@ uses
 var
   FDPutEscandalloSemanal: TFDPutEscandalloSemanal;
 
-function PutEscandalloSemanalExec( const AOwner: TComponent; const AEmpresa, AProducto, ACosechero, APlantacion, AAnyoSemana, AAnyoSemanaEscandallo: string  ): Boolean;
+function PutEscandalloSemanalExec( const AOwner: TComponent; const AEmpresa, AProducto, ACosechero, APlantacion, AFecha, AAnyoSemana, AAnyoSemanaEscandallo: string  ): Boolean;
 begin
   FDPutEscandalloSemanal:= TFDPutEscandalloSemanal.Create( AOwner );
   FDPutEscandalloSemanal.edtEmpresa.Text:= AEmpresa;
   FDPutEscandalloSemanal.edtProducto.Text:= AProducto;
   FDPutEscandalloSemanal.edtCosechero.Text:= ACosechero;
   FDPutEscandalloSemanal.edtPlantacion.Text:= APlantacion;
+  FDPutEscandalloSemanal.edtFecha.Text:= AFecha;
   FDPutEscandalloSemanal.edtAnoSemana.Text:= AAnyoSemana;
   FDPutEscandalloSemanal.edtAnyoSemanaEsnandallo.Text:= AAnyoSemanaEscandallo;
   try
@@ -129,6 +136,8 @@ begin
   edtCosechero.Tag := kCosechero;
   edtPlantacion.Tag := kPlantacion;
 
+  lbl1.Caption := 'Fecha';
+
   RejillaFlotante.DataSource := DMBaseDatos.DSQDespegables;
 end;
 
@@ -149,44 +158,61 @@ begin
     sPlantacion:= edtPlantacion.Text;
     sAnyoSemana:= edtAnoSemana.Text;
     bSoloNuevas:= not chkSobreescribir.Checked;
-    if Length( edtAnoSemana.Text) = 6 then
+    if rbPorSemana.Checked then
     begin
-      sAnyoSemanaEscandallo:= edtAnyoSemanaEsnandallo.Text;
-      dAux:= LunesAnyoSemana( sAnyoSemanaEscandallo );
+      if Length( edtAnoSemana.Text) = 6 then
+      begin
+        sAnyoSemanaEscandallo:= edtAnyoSemanaEsnandallo.Text;
+        dAux:= LunesAnyoSemana( sAnyoSemanaEscandallo );
 
-      if rFalta <> 0 then
+        if rFalta <> 0 then
+        begin
+          ShowMessage('El sumatorio de los porcentajes debe de ser 100');
+        end
+        else
+        begin
+          if dAux < ( Now - 30 ) then
+          begin
+            sAux:= '["' + sAnyoSemanaEscandallo + '" -> ' + FormatDateTime('dd/mm/yyyy', dAux ) + ' - ' + FormatDateTime('dd/mm/yyyy', dAux + 6 ) + ']';
+            Result:= AdvertenciaFD.VerAdvertencia(Self, 'La fecha inicial de la semana del escandallo tiene mas de 30 dias de antiguedad ' + sAux + '.' )  = mrIgnore;
+          end
+          else
+          begin
+            if dAux > Now  then
+            begin
+              sAux:= '["' + sAnyoSemanaEscandallo + '" -> ' + FormatDateTime('dd/mm/yyyy', dAux ) + ' - ' + FormatDateTime('dd/mm/yyyy', dAux + 6 ) + ']';
+              Result:= AdvertenciaFD.VerAdvertencia(Self, 'La fecha inicial de la semana del escandallo es superior a la fecha actual ' + sAux + '.' )  = mrIgnore;
+            end
+            else
+            begin
+              Result:= True;
+            end;
+          end;
+        end;
+      end
+      else
+      begin
+        ShowMessage('El año/semana del escandallo debe de ser de 6 digitos.');
+      end;
+    end
+    else if rbPorDia.Checked then
+    begin
+      if not TryStrToDate( Trim( edtFecha.Text ), dFecha ) then
+      begin
+        edtFecha.SetFocus;
+        ShowMessage('Falta Fecha de Escandallo por Dia.');
+      end
+      else if rFalta <> 0 then
       begin
         ShowMessage('El sumatorio de los porcentajes debe de ser 100');
       end
       else
-      begin
-        if dAux < ( Now - 30 ) then
-        begin
-          sAux:= '["' + sAnyoSemanaEscandallo + '" -> ' + FormatDateTime('dd/mm/yyyy', dAux ) + ' - ' + FormatDateTime('dd/mm/yyyy', dAux + 6 ) + ']';
-          Result:= AdvertenciaFD.VerAdvertencia(Self, 'La fecha inicial de la semana del escandallo tiene mas de 30 dias de antiguedad ' + sAux + '.' )  = mrIgnore;
-        end
-        else
-        begin
-          if dAux > Now  then
-          begin
-            sAux:= '["' + sAnyoSemanaEscandallo + '" -> ' + FormatDateTime('dd/mm/yyyy', dAux ) + ' - ' + FormatDateTime('dd/mm/yyyy', dAux + 6 ) + ']';
-            Result:= AdvertenciaFD.VerAdvertencia(Self, 'La fecha inicial de la semana del escandallo es superior a la fecha actual ' + sAux + '.' )  = mrIgnore;
-          end
-          else
-          begin
-            Result:= True;
-          end;
-        end;
-      end;
+        Result := True;
     end
     else
     begin
-      ShowMessage('El año/semana del escandallo debe de ser de 6 digitos.');
+      ShowMessage('Falta por rellenar algun dato o es incorrecto.');
     end;
-  end
-  else
-  begin
-    ShowMessage('Falta por rellenar algun dato o es incorrecto.');
   end;
 end;
 
@@ -194,10 +220,12 @@ end;
 procedure TFDPutEscandalloSemanal.btnAceptarClick(Sender: TObject);
 var
   iModificados: Integer;
+  bPorSemana: boolean;
 begin
   if ValidarParametros then
   begin
-    iModificados:=  UMDPutEscandalloSemanal.AplicarEscandallos( sEmpresa, sProducto, sCosechero, sPlantacion, sAnyoSemana, sAnyoSemanaEscandallo, rPrimera, rSegunda, rTercera, rDestrio, bSoloNuevas );
+    bPorSemana := rbPorSemana.Checked = true;
+    iModificados:=  UMDPutEscandalloSemanal.AplicarEscandallos( sEmpresa, sProducto, sCosechero, sPlantacion, sAnyoSemana, sAnyoSemanaEscandallo, dFecha, rPrimera, rSegunda, rTercera, rDestrio, bSoloNuevas, bPorSemana );
     ShowMessage('Modificados ' + IntToStr( iModificados ) + ' escandallos.');
     //ModalResult:= mrOk;
   end;
@@ -236,6 +264,22 @@ begin
         btnAceptar.Click;
       end;
   end;
+end;
+
+procedure TFDPutEscandalloSemanal.rbPorDiaClick(Sender: TObject);
+begin
+  lbl1.Caption := ' Fecha';
+  edtFecha.Visible := true;
+  edtAnyoSemanaEsnandallo.Visible := false;
+  edtAnyoSemanaEsnandalloChange (Self);
+end;
+
+procedure TFDPutEscandalloSemanal.rbPorSemanaClick(Sender: TObject);
+begin
+  lbl1.Caption := ' Año - Semana';
+  edtFecha.Visible := false;
+  edtAnyoSemanaEsnandallo.Visible := true;
+  edtAnyoSemanaEsnandalloChange (Self);
 end;
 
 procedure TFDPutEscandalloSemanal.actARejillaFlotanteExecute(
@@ -303,7 +347,16 @@ procedure TFDPutEscandalloSemanal.edtAnyoSemanaEsnandalloChange(
 var
   dAux: TDate;
 begin
-  if Length( edtAnyoSemanaEsnandallo.Text ) = 6 then
+
+  if rbPorDia.Checked then
+  begin
+    if Length( edtFecha.Text ) = 10 then
+    begin
+      dAux := StrToDate(edtFecha.Text);
+      lblFechas.Caption:= FormatDateTime('dd/mm/yyyy', dAux ) + ' -> ' + FormatDateTime('dd/mm/yyyy', dAux);
+    end;
+  end
+  else if (Length( edtAnyoSemanaEsnandallo.Text ) = 6) and rbPorSemana.Checked then
   begin
     dAux:= LunesAnyoSemana( edtAnyoSemanaEsnandallo.Text );
     lblFechas.Caption:= FormatDateTime('dd/mm/yyyy', dAux ) + ' -> ' + FormatDateTime('dd/mm/yyyy', dAux + 6 );
