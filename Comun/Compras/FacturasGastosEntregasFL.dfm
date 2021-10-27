@@ -355,8 +355,8 @@ object FLFacturasGastosEntregas: TFLFacturasGastosEntregas
       CalendarHeigth = 140
     end
     object eEmpresa: TBEdit
-      Left = 155
-      Top = 37
+      Left = 153
+      Top = 33
       Width = 34
       Height = 21
       ColorEdit = clMoneyGreen
@@ -367,7 +367,7 @@ object FLFacturasGastosEntregas: TFLFacturasGastosEntregas
     end
     object STEmpresa: TStaticText
       Left = 192
-      Top = 39
+      Top = 35
       Width = 182
       Height = 17
       AutoSize = False
@@ -536,7 +536,7 @@ object FLFacturasGastosEntregas: TFLFacturasGastosEntregas
     Top = -5
     Width = 177
     Height = 140
-    Date = 36717.679571956020000000
+    Date = 36717.482949814820000000
     ShowToday = False
     TabOrder = 0
     Visible = False

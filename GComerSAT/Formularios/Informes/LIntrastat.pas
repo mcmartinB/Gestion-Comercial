@@ -102,11 +102,12 @@ begin
       0: SQL.add(' centro_salida_sl centro,');
       else SQL.add(' ''1'' centro,');
     end;
-    SQL.add(' (select case when estomate_p = ''S'' then ''TOMATES FRESCOS'' ');
-    SQL.add('              else descripcion_p end ');
-    SQL.add('  from frf_productos ');
-    SQL.add('  where producto_p = producto_sl ');
-    SQL.add(' ) descripcion, ');
+//    SQL.add(' (select case when estomate_p = ''S'' then ''TOMATES FRESCOS'' ');
+//    SQL.add('              else descripcion_p end ');
+//    SQL.add('  from frf_productos ');
+//    SQL.add('  where producto_p = producto_sl ');
+//    SQL.add(' ) descripcion, ');
+    SQL.add(' ( select nombre_a from frf_agrupacion where producto_a = producto_sl) descripcion,');
     SQL.add(' ( select descripcion_p from frf_paises where pais_p = pais_c ) pais,  ');
     SQL.Add(' cliente_sl cliente, ');
     SQL.Add(' representante_c representante, ');

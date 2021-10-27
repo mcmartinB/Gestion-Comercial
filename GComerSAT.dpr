@@ -844,7 +844,7 @@ uses
   uSalidaUtils in 'Comun\Salidas\uSalidaUtils.pas',
   LiqProdVendidoTransitosDM in 'Comun\Liquidacion\LiqProdVendidoTransitosDM.pas' {DMLiqProdVendidoTransitos: TDataModule},
   LiqProdVendidoDM in 'Comun\Liquidacion\LiqProdVendidoDM.pas' {DMLiqProdVendido: TDataModule};
-
+    
 (*COMERBAG*)
 
   //DatosCMRDD in 'Comun\Salidas\DatosCMRDD.pas' {DDDatosCMR: TDataModule},(*Hace referencia a  LCMRInyeccion, primero unficar esta com en BAG*)

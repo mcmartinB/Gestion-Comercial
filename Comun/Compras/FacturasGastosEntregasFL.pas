@@ -114,7 +114,11 @@ begin
 
     Add('  from frf_entregas_c, frf_gastos_entregas, frf_tipo_gastos ');
 
-    Add('  where empresa_ec = :empresa ');
+    if EEmpresa.Text <> 'BAG' then
+      Add(' where empresa_ec = :empresa ' )
+    else
+      Add(' where substr(empresa_ec,1,1) = ''F'' ' );
+
     if eCliente.Text <> '' then
       Add('    and proveedor_ec = :proveedor ');
     Add('    and codigo_ge = codigo_ec ');
@@ -202,7 +206,10 @@ begin
   edtProductoChange( edtProducto );
   edtTipoChange( edtTipo );
 
-  eEmpresa.Text:= gsDefEmpresa;
+  if CGlobal.gProgramVersion = pvBAG then
+    eEmpresa.Text:= 'BAG'
+  else
+    eEmpresa.Text:= gsDefEmpresa;
 
   EDesde.Tag := kCalendar;
   EHasta.Tag := kCalendar;
@@ -364,7 +371,8 @@ begin
   with QLCompGastosEntregas do
   begin
     Close;
-    ParamByName('empresa').AsString := eEmpresa.Text;
+    if EEmpresa.Text <> 'BAG' then
+      ParamByName('empresa').AsString := eEmpresa.Text;
     if eCliente.Text <> '' then
       ParamByName('proveedor').AsString := eCliente.Text;
     ParamByName('desde').AsDate := StrToDate(EDesde.Text);

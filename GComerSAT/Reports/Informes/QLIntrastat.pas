@@ -513,7 +513,7 @@ begin
   if Pos( 'TOMATE RALLADO', UpperCase( DMBaseDatos.QListado.FieldByName('descripcion').AsString ) ) > 0  then
     Value := '2002.90.19'
   else
-  if Pos( 'UVA BLANCA SIN SEMILLA', UpperCase( DMBaseDatos.QListado.FieldByName('descripcion').AsString ) ) > 0  then
+  if Pos( 'UVA', UpperCase( DMBaseDatos.QListado.FieldByName('descripcion').AsString ) ) > 0  then
     Value := '0806.10.10'                 
   else
   if Pos( 'TOMATE SECO', UpperCase( DMBaseDatos.QListado.FieldByName('descripcion').AsString ) ) > 0  then
