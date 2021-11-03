@@ -635,7 +635,7 @@ begin
         StringGrid1.Cells[12, fila] := FloatToStr( GetPesoBruto( FieldByName('empresa').AsString, FieldByName('envase').AsString, FieldByName('tipo_palet').AsString,
                       strToDate(fecha), FieldByName('kilos').AsFloat,FieldByName('cajas').AsFloat,FieldByName('palets').AsFloat) );
 
-        StringGrid1.Cells[12, fila] :=  Uppercase(FieldByName('producto').AsString);       //producto_sl
+        StringGrid1.Cells[13, fila] :=  Uppercase(FieldByName('producto').AsString);       //producto_sl
         Inc(fila);
         Next;
       end;
