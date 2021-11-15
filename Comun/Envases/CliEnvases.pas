@@ -285,6 +285,8 @@ begin
 
   Panel1.Enabled:= True;
   empresa.Enabled:= False;
+  producto_ce.Enabled:= False;
+  ////
   if sCliente <> '' then
   begin
     cliente.Enabled:= False;

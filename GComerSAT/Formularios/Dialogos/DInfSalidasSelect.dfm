@@ -23,6 +23,7 @@ object FDInfSalidasSelect: TFDInfSalidasSelect
     Height = 206
     Align = alTop
     TabOrder = 0
+    ExplicitTop = -2
     object cbxFirma: TCheckBox
       Tag = 10
       Left = 216
@@ -114,11 +115,20 @@ object FDInfSalidasSelect: TFDInfSalidasSelect
     object cbxLame: TCheckBox
       Tag = 20
       Left = 32
-      Top = 106
+      Top = 130
       Width = 169
-      Height = 17
+      Height = 12
       Caption = 'Certificado L.A.M.E.'
       TabOrder = 9
+    end
+    object cbxDeclaracion: TCheckBox
+      Tag = 20
+      Left = 32
+      Top = 107
+      Width = 169
+      Height = 17
+      Caption = 'Declaraci'#243'n Responsable'
+      TabOrder = 10
     end
   end
   object PanelBotones: TPanel

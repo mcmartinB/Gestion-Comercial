@@ -178,7 +178,7 @@ type
     cbx_porte_bonny_sc: TComboBox;
     Label35: TLabel;
     Label36: TLabel;
-    Label37: TLabel;
+    Label37: TLabel;     
     cbx_higiene_sc: TComboBox;
     n_orden_sc: TBDEdit;
     nota_sc: TDBMemo;
@@ -502,6 +502,8 @@ type
     procedure PreviewCartaPorte( const APedirFirma: boolean );
     procedure PreviewCertificadoLame;
 
+    procedure PreviewDeclaracionResponsable;
+
     procedure RestaurarCabecera; override;
     procedure ReintentarAlta; override;
 
@@ -530,7 +532,7 @@ uses Variants, bDialogs, LFacturaProforma, UFTransportistas, bTimeUtils, CGestio
   AdvertenciaFD, UDQAlbaranSalida, UDMMaster, SeleccionarComercialFD, UQRAlbaranAlemaniaNoVar,
   CFDTransitosAduana, CRDTransitosAduanaFicha, AsignarTransitoFD, UFProcFacturacion,
   UDQAlbaranSalidaWEB, AlbaranEntreCentrosMercadonaDM, VerOrdenFD, ArticuloDesgloseSalMod,
-  UDLCertificadoLame;
+  UDLCertificadoLame, UDLDeclaracionResponsable;
   //UQRAlbaranSat,
 
 {$R *.DFM}
@@ -1431,6 +1433,14 @@ begin
 
   bFlag:= True;
 
+  if (iResult - 100000 ) >= 0 then
+  begin
+    iResult := iResult - 100000;
+    //bFlag
+    PreviewDeclaracionResponsable;
+  end;
+
+
   if ( iResult - 10000 ) >= 0 then
   begin
     iResult:= iResult - 10000;
@@ -1613,6 +1623,11 @@ begin
   CartaPorteDL.Ejecutar( self, empresa_sc.Text, centro_salida_sc.Text,
                          StrToInt(n_albaran_sc.Text), StrToDate(fecha_sc.Text),
                          SFileName );
+end;
+
+procedure TFMSalidas.PreviewDeclaracionResponsable;
+begin
+   UDLDeclaracionResponsable.Ejecutar(self, empresa_sc.Text, centro_salida_sc.Text, StrToInt(n_albaran_sc.Text) ,StrToDate(fecha_sc.Text));
 end;
 
 

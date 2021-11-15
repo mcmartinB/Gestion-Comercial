@@ -3002,7 +3002,7 @@ object FMSalidas: TFMSalidas
     Width = 212
     Height = 143
     AutoSize = True
-    Date = 36748.381130057870000000
+    Date = 36748.467478738430000000
     ShowToday = False
     TabOrder = 13
     Visible = False

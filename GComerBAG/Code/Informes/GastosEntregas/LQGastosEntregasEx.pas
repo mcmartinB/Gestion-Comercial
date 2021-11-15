@@ -163,7 +163,6 @@ begin
   rUnidadesPro:= rUnidadesPro +  DataSet.fieldByName('unidades_ec').AsInteger;
   rKilosPro:= rKilosPro + DataSet.fieldByName('kilos_ec').AsInteger;
   rImportePro:= rImportePro + DataSet.fieldByName('importe_ec').AsFloat;
-  rGastoPro:= rGastopro + QRSubDetailGastos.DataSet.fieldByName('importe_ge').AsFloat;
 end;
 
 procedure TQLGastosEntregasEx.QRSubDetailGastosBeforePrint(
@@ -176,6 +175,8 @@ begin
   qtxtfecha.Enabled:= ( Exporting and ( Pos( 'XLS', UpperCase( ExportFilter.ClassName ) ) > 0 ) );
   qtxtproveedor_ec.Enabled:= ( Exporting and ( Pos( 'XLS', UpperCase( ExportFilter.ClassName ) ) > 0 ) );
   productoLin.Enabled:= ( Exporting and ( Pos( 'XLS', UpperCase( ExportFilter.ClassName ) ) > 0 ) );
+
+  rGastoPro:= rGastopro + QRSubDetailGastos.DataSet.fieldByName('importe_ge').AsFloat;
 end;
 
 procedure TQLGastosEntregasEx.QuickRepBeforePrint(Sender: TCustomQuickRep;
@@ -196,8 +197,8 @@ procedure TQLGastosEntregasEx.qrbndPieProductoBeforePrint(
 begin
   qrlblUnidadesPro.Caption:= FormatFloat('#,###', rUnidadesPro);
   qrlblKilosPro.Caption:= FormatFloat('#,###', rKilosPro);
-  qrlblImportesPro.Caption:= FormatFloat('#,###', rImportePro);
-  qrlblGastoPro.Caption:= FormatFloat('#,###', rGastoPro);
+  qrlblImportesPro.Caption:= FormatFloat('#,##0.00', rImportePro);
+  qrlblGastoPro.Caption:= FormatFloat('#,##0.00', rGastoPro);
 
   rUnidades:= rUnidadesPro +  rUnidades;
   rKilos:= rKilosPro + rKilos;
@@ -217,8 +218,8 @@ procedure TQLGastosEntregasEx.SummaryBand1BeforePrint(
 begin
   qrlblUnidadesTotal.Caption:= FormatFloat('#,###', rUnidades);
   qrlblKilosTotal.Caption:= FormatFloat('#,###', rKilos);
-  qrlblImporteTotal.Caption:= FormatFloat('#,###', rImporte);
-  qrlblGastoTotal.Caption:= FormatFloat('#,###', rGasto);
+  qrlblImporteTotal.Caption:= FormatFloat('#,##0.00', rImporte);
+  qrlblGastoTotal.Caption:= FormatFloat('#,##0.00', rGasto);
 
   rUnidades:= 0;
   rKilos:= 0;

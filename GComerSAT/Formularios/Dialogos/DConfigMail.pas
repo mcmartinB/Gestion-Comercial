@@ -41,7 +41,7 @@ type
     btn1: TButton;
     dlgOpen: TOpenDialog;
     IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL;
-    IdSASLLogin1: TIdSASLLogin;
+    IdSASLLogin1config: TIdSASLLogin;
     IdUserPassProvider1: TIdUserPassProvider;
     procedure SBEnviarClick(Sender: TObject);
     procedure SBSalirClick(Sender: TObject);

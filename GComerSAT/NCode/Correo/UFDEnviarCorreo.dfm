@@ -222,7 +222,7 @@ object FDEnviarCorreo: TFDEnviarCorreo
     Left = 168
     Top = 144
     Bitmap = {
-      494C0101020005001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -395,7 +395,10 @@ object FDEnviarCorreo: TFDEnviarCorreo
     Host = 'smtp.office365.com'
     Password = 'co1234'
     Port = 587
-    SASLMechanisms = <>
+    SASLMechanisms = <
+      item
+        SASL = IdSASLLogin1Env
+      end>
     UseTLS = utUseExplicitTLS
     Left = 168
     Top = 105
@@ -436,10 +439,10 @@ object FDEnviarCorreo: TFDEnviarCorreo
     Left = 238
     Top = 108
   end
-  object IdSASLLogin1: TIdSASLLogin
+  object IdSASLLogin1Env: TIdSASLLogin
     UserPassProvider = IdUserPassProvider1
-    Left = 276
-    Top = 106
+    Left = 270
+    Top = 108
   end
   object IdUserPassProvider1: TIdUserPassProvider
     Left = 309

@@ -21,6 +21,7 @@ type
     cbbIdiomaAlbaran: TComboBox;
     rbProforma: TRadioButton;
     rbDespacho: TRadioButton;
+    cbxDeclaracion: TCheckBox;
     procedure btnSiClick(Sender: TObject);
     procedure btnNoClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -87,6 +88,8 @@ end;
 procedure TFDInfSalidasSelect.btnSiClick(Sender: TObject);
 begin
   iResult:= 0;
+  if cbxDeclaracion.Checked then
+    iResult := iResult + 10000;
   if cbxAlbaran.Checked then
     iResult:= iResult + 1000;
   if cbxCartaPorte.Checked then

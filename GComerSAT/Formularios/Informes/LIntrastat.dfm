@@ -383,7 +383,7 @@ object FLIntrastat: TFLIntrastat
     Top = 8
     Width = 197
     Height = 153
-    Date = 36717.414493912040000000
+    Date = 36717.414852037040000000
     ShowToday = False
     TabOrder = 0
     Visible = False

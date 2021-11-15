@@ -843,8 +843,10 @@ uses
   InformeOficialPoseiQR in 'GComerSAT\Code\Transitos\InformeOficialPoseiQR.pas' {QRInformeOficialPosei: TQuickRep},
   uSalidaUtils in 'Comun\Salidas\uSalidaUtils.pas',
   LiqProdVendidoTransitosDM in 'Comun\Liquidacion\LiqProdVendidoTransitosDM.pas' {DMLiqProdVendidoTransitos: TDataModule},
-  LiqProdVendidoDM in 'Comun\Liquidacion\LiqProdVendidoDM.pas' {DMLiqProdVendido: TDataModule};
-    
+  LiqProdVendidoDM in 'Comun\Liquidacion\LiqProdVendidoDM.pas' {DMLiqProdVendido: TDataModule},
+  UDLDeclaracionResponsable in 'Comun\Salidas\UDLDeclaracionResponsable.pas' {DLDeclaracionResponsable: TDataModule},
+  LDeclaracionResponsable in 'Comun\Salidas\LDeclaracionResponsable.pas' {QLDeclaracionResponsable: TQuickRep};
+
 (*COMERBAG*)
 
   //DatosCMRDD in 'Comun\Salidas\DatosCMRDD.pas' {DDDatosCMR: TDataModule},(*Hace referencia a  LCMRInyeccion, primero unficar esta com en BAG*)

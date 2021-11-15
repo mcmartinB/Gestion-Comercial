@@ -16,7 +16,7 @@ uses
   dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver,
   dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray, dxSkinOffice2013White, dxSkinPumpkin, dxSkinSeven,
   dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
-  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, uSalidaUtils;
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, uSalidaUtils, UDLDeclaracionResponsable;
 
 type
   TSalidaRecord = record
@@ -431,6 +431,9 @@ type
     function GetFirmaFileName: string;
     procedure Previsualizar; override;
     procedure PreviewCartaPorte(const APedirFirma: boolean);
+
+    procedure PreviewDeclaracionResponsable;
+
     procedure RestaurarCabecera; override;
     procedure ReintentarAlta; override;
     function esClienteExtranjero(codEmp: string; codCliente: string): Boolean;
@@ -1334,6 +1337,12 @@ begin
   iTipoAlbaran := TipoAlbaran(empresa_sc.Text, cliente_sal_sc.Text);
   iResult := Seleccionar(iImpresora, iTipoAlbaran, bPedirFirma, bOriginal);
 
+  if (iResult - 10000 ) >= 0 then
+  begin
+    iResult := iResult - 10000;
+    PreviewDeclaracionResponsable;
+  end;
+
   if (iResult - 1000) >= 0 then
   begin
     iResult := iResult - 1000;
@@ -1530,6 +1539,13 @@ begin
 
   CartaPorteDL.Ejecutar(self, empresa_sc.Text, centro_salida_sc.Text, StrToInt(n_albaran_sc.Text), StrToDate(fecha_sc.Text), SFileName);
 end;
+
+
+procedure TFMSalidas.PreviewDeclaracionResponsable;
+begin
+   UDLDeclaracionResponsable.Ejecutar(self, empresa_sc.Text, centro_salida_sc.Text, StrToInt(n_albaran_sc.Text) ,StrToDate(fecha_sc.Text));
+end;
+
 
 //*****************************************************************************
 //*****************************************************************************

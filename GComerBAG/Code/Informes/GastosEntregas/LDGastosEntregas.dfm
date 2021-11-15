@@ -58,7 +58,6 @@ object DLGastosEntregas: TDLGastosEntregas
   end
   object QDetalleGasto: TQuery
     DatabaseName = 'BDProyecto'
-    DataSource = DataSource
     Left = 208
     Top = 104
   end

@@ -84,6 +84,7 @@ begin
     SQL.Clear;
     SQL.Add('select producto_el, sum(kilos_el) kilos_el, sum(unidades_el) unidades_el, ');
     SQL.Add('       round(sum(kilos_el*precio_kg_el),2) importe_el ');
+    //SQL.Add('       sum(kilos_el*precio_kg_el) importe_el ');
     SQL.Add('from frf_entregas_l ');
     SQL.Add('where codigo_el = :codigo_ec ');
     if AProducto <> '' then
@@ -115,12 +116,14 @@ begin
     SQL.Add('            from frf_entregas_l ');
     SQL.Add('            where codigo_ge = codigo_el ) unidades_linea_ge ');
     SQL.Add(' from frf_gastos_entregas ');
-    SQL.Add(' where codigo_ge = :codigo_ec ' + sFactura);
+//    SQL.Add(' where codigo_ge = :codigo_ec ' + sFactura);
+    SQL.Add(' where codigo_ge = :codigo_ec ');
     if AGasto <> '' then
       SQL.Add('and tipo_ge = :gasto ');
 
     SQL.Add(' order by tipo_ge ');
 
+    ParamByName('codigo_ec').AsString := AEntrega;
     if AGasto <> '' then
       ParamByName('gasto').AsString:= AGasto;
     if AFacturaGrabada = 5 then

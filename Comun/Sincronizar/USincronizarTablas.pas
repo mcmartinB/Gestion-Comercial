@@ -5,7 +5,8 @@ interface
 uses
    DB, Variants, SysUtils;
 
-function  SincronizarRegistro( const AFuente, ADestino: TDataSet; var VLog: string; const ATable: string = '' ) : Integer;
+function  SincronizarRegistro( const AFuente, ADestino: TDataSet; var VLog: string; const ATable: string = ''  ) : integer;
+function  SincronizarRegistroArtDesglosados( const AFuente, ADestino: TDataSet; var VLog: string; const ATable: string = '' ) : Integer;
 procedure ClonarRegistro( const AFuente, ADestino: TDataSet  );
 
 implementation
@@ -18,7 +19,7 @@ function  SincronizarRegistro( const AFuente, ADestino: TDataSet; var VLog: stri
 var
   i: integer;
   campo: TField;
-  bAlta, bModificado: Boolean;
+  bAlta, bModificado : Boolean;
   sLog: string;
 begin
   bAlta:= ADestino.IsEmpty;
@@ -44,7 +45,7 @@ begin
           sLog:= sLog + '    ' + UpperCase( ADestino.Fields[i].FieldName ) + '= ' + campo.AsString + #13 + #10
         end;
       end
-      else
+    else
       begin
         if ADestino.Fields[i].Value <> campo.Value then
         begin
@@ -67,10 +68,11 @@ begin
         Result:= 1;
       end
       else
+      if bModificado then
       begin
         VLog:= VLog + #13 + #10 + '* MODIFICADO REGISTRO EXISTENTE [' + ATable + ']:'  + #13 + #10 + sLog;
         Result:= 2;
-      end;
+      end
     end
     else
     begin
@@ -90,6 +92,46 @@ begin
 end;
 
 
+function  SincronizarRegistroArtDesglosados( const AFuente, ADestino: TDataSet; var VLog: string; const ATable: string = ''  ) : integer;
+var
+  i: integer;
+  campo: TField;
+  sLog: string;
+begin
+  sLog:= #13 + #10;
+
+  ADestino.Insert;
+
+  i:= 0;
+  while i < ADestino.Fields.Count do
+  begin
+    campo:= AFuente.FindField(ADestino.Fields[i].FieldName);
+    if campo <> nil then
+      begin
+        ADestino.Fields[i].Value:= campo.Value;
+        if ADestino.Fields[i].Value <> null then
+        begin
+          sLog:= sLog + '    ' + UpperCase( ADestino.Fields[i].FieldName ) + ' => ' + campo.AsString + #13 + #10
+        end;
+      end;
+    inc( i );
+  end;
+
+  try
+      ADestino.Post;
+      VLog:= VLog + #13 + #10 + '+ CAMBIOS APLICADOS CORRECTAMENTE [' + ATable + ']:'   + #13 + #10 + sLog;
+      Result:= 1;
+  except
+    on E: Exception do
+    begin
+      VLog:= VLog + #13 + #10 + '= ERROR AL SINCRONIZAR [' + ATable + ']' + #13 + #10;
+      VLog:= VLog + e.Message + #13 + #10;
+      ADestino.Cancel;
+      Result:= -1;
+    end;
+  end;
+end;
+
 procedure  ClonarRegistro( const AFuente, ADestino: TDataSet  );
 var
   i: integer;
@@ -107,5 +149,4 @@ begin
     inc( i );
   end;
 end;
-
 end.

@@ -2,8 +2,8 @@ object FDInfSalidasSelect: TFDInfSalidasSelect
   Left = 235
   Top = 150
   Caption = '   '#191'DESEA IMPRIMIR EL ...?'
-  ClientHeight = 162
-  ClientWidth = 381
+  ClientHeight = 197
+  ClientWidth = 379
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,10 +19,11 @@ object FDInfSalidasSelect: TFDInfSalidasSelect
   object PanelCompleto: TPanel
     Left = 0
     Top = 0
-    Width = 381
-    Height = 120
+    Width = 379
+    Height = 155
     Align = alClient
     TabOrder = 0
+    ExplicitTop = 1
     object cbxFirma: TCheckBox
       Tag = 10
       Left = 216
@@ -52,7 +53,7 @@ object FDInfSalidasSelect: TFDInfSalidasSelect
     object cbxCMR: TCheckBox
       Tag = 10
       Left = 32
-      Top = 55
+      Top = 57
       Width = 97
       Height = 17
       Caption = 'CMR'
@@ -60,8 +61,8 @@ object FDInfSalidasSelect: TFDInfSalidasSelect
     end
     object cbxProforma: TCheckBox
       Tag = 20
-      Left = 32
-      Top = 74
+      Left = 31
+      Top = 106
       Width = 62
       Height = 17
       Caption = 'Factura'
@@ -92,34 +93,45 @@ object FDInfSalidasSelect: TFDInfSalidasSelect
         'Imprimir Albar'#225'n Ingl'#233's')
     end
     object rbProforma: TRadioButton
-      Left = 92
-      Top = 74
-      Width = 80
-      Height = 17
+      Left = 100
+      Top = 102
+      Width = 85
+      Height = 26
       Caption = 'Proforma'
       Checked = True
       TabOrder = 7
       TabStop = True
     end
     object rbDespacho: TRadioButton
-      Left = 156
-      Top = 74
+      Left = 177
+      Top = 106
       Width = 113
       Height = 17
       Caption = 'Despacho'
       TabOrder = 8
     end
+    object cbxDeclaracion: TCheckBox
+      Tag = 20
+      Left = 31
+      Top = 83
+      Width = 169
+      Height = 17
+      Caption = 'Declaraci'#243'n Responsable'
+      TabOrder = 9
+    end
   end
   object PanelBotones: TPanel
     Left = 0
-    Top = 120
-    Width = 381
+    Top = 155
+    Width = 379
     Height = 42
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 126
+    ExplicitWidth = 381
     object btnSi: TButton
       Left = 199
-      Top = 8
+      Top = 6
       Width = 75
       Height = 25
       Caption = 'Si  (F1)'

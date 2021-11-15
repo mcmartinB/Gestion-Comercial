@@ -1242,6 +1242,10 @@
       <Form>QRLComprobacionGastosSalidasBAG</Form>
       <DesignClass>TQuickRep</DesignClass>
     </DCCReference>
+    <DCCReference Include="Comun\Salidas\LDeclaracionResponsable.pas">
+      <Form>QLDeclaracionResponsable</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
     <DCCReference Include="Comun\Salidas\LDSalidasResumenDinamico.pas">
       <Form>DMSalidasResumenDinamico</Form>
       <DesignClass>TDataModule</DesignClass>
@@ -1292,6 +1296,10 @@
     <DCCReference Include="Comun\Salidas\UCAlbaran.pas" />
     <DCCReference Include="Comun\Salidas\UDLCertificadoLame.pas">
       <Form>DLCertificadoLame</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="Comun\Salidas\UDLDeclaracionResponsable.pas">
+      <Form>DLDeclaracionResponsable</Form>
       <DesignClass>TDataModule</DesignClass>
     </DCCReference>
     <DCCReference Include="Comun\Salidas\UDMCmr.pas">

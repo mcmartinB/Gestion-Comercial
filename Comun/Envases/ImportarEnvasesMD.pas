@@ -51,6 +51,8 @@ type
     procedure SincronizarDetalles( const ATitle, AField: string; var VLog: string );
     procedure SincronizaDetalle( const ATitle, AField, AValue: string; var VLog: string );
 
+    procedure BorrarProductosDesglosados();
+    procedure BorrarInfoClientes();
 
     function  ExisteCliente: Boolean;
     function  GetMessage: string;
@@ -236,7 +238,6 @@ begin
     SincDependenciaLineaProducto( sLog );
     SincDependenciaUndConsumo( sLog );
 
-
     Result:= SincronizarRegistro( qryCabRemoto, qryCabLocal, sLog, 'ARTÍCULO' ) > -1;
     if Result then
     begin
@@ -300,6 +301,7 @@ begin
   qryDetRemoto.Open;
   if not qryDetRemoto.IsEmpty then
   begin
+    BorrarProductosDesglosados;
     while not qryDetRemoto.Eof do
     begin
       SincronizaArtDesglose( VLog );
@@ -309,6 +311,32 @@ begin
   end;
 end;
 
+procedure TDMImportarEnvases.BorrarProductosDesglosados();
+var
+  TConsulta : TQuery;
+begin
+  TConsulta := TQuery.Create(nil);
+  TConsulta.DatabaseName := 'BDProyecto';
+  TConsulta.SQL.Clear;
+  TConsulta.SQL.Add(' delete from frf_articulos_desglose ');
+  TConsulta.SQL.Add(' where articulo_ad = :envase ');
+  TConsulta.ParamByName('envase').AsString := sEnvase;
+  TConsulta.ExecSQL;
+end;
+
+procedure TDMImportarEnvases.BorrarInfoClientes();
+var
+  TConsulta : TQuery;
+begin
+  TConsulta := TQuery.Create(nil);
+  TConsulta.DatabaseName := 'BDProyecto';
+  TConsulta.SQL.Clear;
+  TConsulta.SQL.Add(' delete from frf_clientes_env where envase_ce = :envase ');
+  TConsulta.ParamByName('envase').AsString := sEnvase;
+  TConsulta.ExecSQL;
+end;
+
+
 procedure TDMImportarEnvases.SincronizarClientes( var VLog: string );
 begin
   qryDetRemoto.ParamByName('envase').AsString:= sEnvase;
@@ -317,6 +345,7 @@ begin
   qryDetRemoto.Open;
   if not qryDetRemoto.IsEmpty then
   begin
+    BorrarInfoClientes();
     while not qryDetRemoto.Eof do
     begin
       SincronizaClientes( VLog );
@@ -329,24 +358,18 @@ end;
 procedure TDMImportarEnvases.SincronizaArtDesglose(var VLog: string);
 var
   sLog: string;
+  i : integer;
 begin
   //Abrir destino solo si existe el producto, si no dara error al grabar
   LoadQueryLocalArtDesglose;
   qryDetLocal.ParamByName('envase').AsString:= sEnvase;
 
   if qryDetRemoto.FieldByname('producto_desglose_ad').Value <> Null then
-    qryDetLocal.ParamByName('producto_des').AsString:= qryDetRemoto.FieldByname('producto_desglose_ad').AsString;;
-{
-  if qryDetRemoto.FieldByname('producto_ad').Value <> Null then
-    qryDetLocal.ParamByName('producto_ad').AsString:= qryDetRemoto.FieldByname('producto_ad').AsString;;
-  if qryDetRemoto.FieldByname('producto_desglose_ad').Value <> Null then
-    qryDetLocal.ParamByName('producto_desglose_ad').AsString:= qryDetRemoto.FieldByname('producto_desglose_ad').AsString;
-  if qryDetRemoto.FieldByname('porcentaje_ad').Value  <> Null then
-    qryDetLocal.ParamByName('porcentaje_ad').AsString:= qryDetRemoto.FieldByname('porcentaje_ad').AsString;
-}
+    qryDetLocal.ParamByName('producto_des').AsString:= qryDetRemoto.FieldByname('producto_desglose_ad').AsString;
+
   qryDetLocal.Open;
-  SincronizarRegistro( qryDetRemoto, qryDetLocal, sLog, 'ART. DESGLOSE' );
-   VLog:= VLog + sLog;
+  SincronizarRegistroArtDesglosados( qryDetRemoto, qryDetLocal, sLog, 'ART. DESGLOSE' );
+  VLog:= VLog + sLog;
   qryDetLocal.Close;
 end;
 
@@ -360,11 +383,11 @@ begin
     qryDetLocal.ParamByName('empresa').AsString:= qryDetRemoto.FieldByname('empresa_ce').AsString;
     qryDetLocal.ParamByName('envase').AsString:= sEnvase;
     //if sProducto <> '' then
-      qryDetLocal.ParamByName('producto').AsString:= qryDetRemoto.FieldByname('producto_ce').AsString;//sProducto;
+    qryDetLocal.ParamByName('producto').AsString:= qryDetRemoto.FieldByname('producto_ce').AsString;//sProducto;
     qryDetLocal.ParamByName('cliente').AsString:= qryDetRemoto.FieldByname('cliente_ce').AsString;
     qryDetLocal.Open;
-    SincronizarRegistro( qryDetRemoto, qryDetLocal, sLog, 'ARTÍCULO CLIENTE' );
-     VLog:= VLog + sLog;
+    SincronizarRegistroArtDesglosados( qryDetRemoto, qryDetLocal, sLog, 'ARTÍCULO CLIENTE' );
+    VLog:= VLog + sLog;
     qryDetLocal.Close;
   end;
 end;
@@ -395,6 +418,7 @@ begin
     SQL.Add('where articulo_ad = :envase ');
   end;
 end;
+
 
 procedure TDMImportarEnvases.LoadQueryLocalEan;
 begin

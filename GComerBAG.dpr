@@ -740,7 +740,9 @@ uses
   ListControlIntrasatQL in 'GComerSAT\Code\Intrastat\ListControlIntrasatQL.pas' {QLListControlIntrasat: TQuickRep},
   LIntrastat in 'GComerSAT\Formularios\Informes\LIntrastat.pas' {FLIntrastat},
   QLIntrastat in 'GComerSAT\Reports\Informes\QLIntrastat.pas' {QRLIntrastat: TQuickRep},
-  uSalidaUtils in 'Comun\Salidas\uSalidaUtils.pas';
+  uSalidaUtils in 'Comun\Salidas\uSalidaUtils.pas',
+  LDeclaracionResponsable in 'Comun\Salidas\LDeclaracionResponsable.pas' {QLDeclaracionResponsable: TQuickRep},
+  UDLDeclaracionResponsable in 'Comun\Salidas\UDLDeclaracionResponsable.pas' {DLDeclaracionResponsable: TDataModule};
 
 (*
   AbonoDetallesDL in 'GComerSAT\Code\Facturacion\AbonoDetallesDL.pas' {DLAbonoDetalles: TDataModule},

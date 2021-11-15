@@ -435,7 +435,7 @@ end;
 procedure TQRLIntrastat.PsQRLabel10Print(sender: TObject;
   var Value: string);
 begin
-  if UpperCase( DMBaseDatos.QListado.FieldByName('descripcion').AsString ) = 'TOMATES FRESCOS' then
+  if UpperCase( DMBaseDatos.QListado.FieldByName('descripcion').AsString ) = 'TOMATE' then
     Value := '0702.00.00'
   else
   if UpperCase( DMBaseDatos.QListado.FieldByName('descripcion').AsString ) = 'BREVAS' then

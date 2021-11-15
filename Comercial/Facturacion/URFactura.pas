@@ -1012,8 +1012,12 @@ begin
     end
     else
     begin
-      tipo_albaran := FQueryCliente.FieldByName('tipo_albaran_c').asInteger;
       num_exportador := FQueryEmpresa.FieldByName('num_exp_autorizado_e').asString;
+      if DFactura.mtFacturas_Cab.FieldByName('cod_cliente_fc').asString = 'ODD' then
+          num_exportador := Copy(num_exportador, 1, 2) + '/' + Copy(num_exportador, 3, 4) + '/' + Copy(num_exportador, 7, 2) + '/' + Copy(num_exportador, 9, 4)
+            + '/' + Copy(num_exportador, 13, 2);
+
+      tipo_albaran := FQueryCliente.FieldByName('tipo_albaran_c').asInteger;
       case tipo_albaran of
         0, 1:  // Tipos albaran Valorado, No valorado
           qrm1.Lines.Add(Format(_EXPORTADOR_AUTORIZADO_ES_, [ num_exportador ]));
