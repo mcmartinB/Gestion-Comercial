@@ -4,7 +4,7 @@ object FMProveedores: TFMProveedores
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = '  PROVEEDORES'
-  ClientHeight = 601
+  ClientHeight = 731
   ClientWidth = 903
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -25,7 +25,7 @@ object FMProveedores: TFMProveedores
   OnKeyDown = FormKeyDown
   DesignSize = (
     903
-    601)
+    731)
   PixelsPerInch = 96
   TextHeight = 13
   object PMaestro: TPanel
@@ -484,17 +484,13 @@ object FMProveedores: TFMProveedores
     Left = 0
     Top = 307
     Width = 903
-    Height = 294
-    ActivePage = tsProductos
+    Height = 424
+    ActivePage = tsCostes
     Align = alClient
     TabOrder = 3
     OnChange = PageControlChange
     object tsAlmacenes: TTabSheet
       Caption = 'Almacenes'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object PAlmacenes: TPanel
         Left = 0
         Top = 0
@@ -650,7 +646,7 @@ object FMProveedores: TFMProveedores
         Left = 0
         Top = 57
         Width = 895
-        Height = 209
+        Height = 339
         Align = alClient
         DataSource = DSAlmacenes
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -693,10 +689,6 @@ object FMProveedores: TFMProveedores
     object tsProductos: TTabSheet
       Caption = 'Productos'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object PProductos: TPanel
         Left = 0
         Top = 0
@@ -1192,13 +1184,15 @@ object FMProveedores: TFMProveedores
         Left = 0
         Top = 130
         Width = 895
-        Height = 136
+        Height = 266
         Align = alClient
         TabOrder = 1
+        LookAndFeel.Kind = lfFlat
         LookAndFeel.NativeStyle = False
-        LookAndFeel.SkinName = 'Foggy'
+        LookAndFeel.SkinName = 'DevExpressStyle'
         object tvDetalleLineas: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          FindPanel.DisplayMode = fpdmAlways
           DataController.DataSource = DSProductos
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <
@@ -1239,58 +1233,60 @@ object FMProveedores: TFMProveedores
           DataController.Summary.SummaryGroups = <>
           OptionsBehavior.CellHints = True
           OptionsBehavior.FocusCellOnCycle = True
+          OptionsCustomize.ColumnFiltering = False
+          OptionsCustomize.ColumnGrouping = False
+          OptionsCustomize.ColumnMoving = False
           OptionsData.CancelOnExit = False
           OptionsData.Deleting = False
           OptionsData.DeletingConfirmation = False
           OptionsData.Editing = False
           OptionsData.Inserting = False
-          OptionsSelection.MultiSelect = True
-          OptionsView.ColumnAutoWidth = True
+          OptionsSelection.CellSelect = False
           OptionsView.GroupByBox = False
           object tvProducto: TcxGridDBColumn
             Caption = 'Prod.'
             DataBinding.FieldName = 'producto_pp'
-            Width = 39
+            Width = 34
           end
           object tvVariedad: TcxGridDBColumn
             Caption = 'Var.'
             DataBinding.FieldName = 'variedad_pp'
-            Width = 39
+            Width = 37
           end
           object tvCodigo_ean: TcxGridDBColumn
             Caption = 'EAN'
             DataBinding.FieldName = 'codigo_ean_pp'
-            Width = 105
+            Width = 106
           end
           object tvDescripcion: TcxGridDBColumn
             Caption = 'Descripcion'
             DataBinding.FieldName = 'descripcion_pp'
             FooterAlignmentHorz = taCenter
-            Width = 234
+            Width = 274
           end
           object tvDescripcionBreve: TcxGridDBColumn
             Caption = 'Desc. Breve'
             DataBinding.FieldName = 'descripcion_breve_pp'
             FooterAlignmentHorz = taCenter
-            Width = 197
+            Width = 186
           end
           object tvMarca: TcxGridDBColumn
             Caption = 'Marca'
             DataBinding.FieldName = 'marca_pp'
             HeaderAlignmentHorz = taCenter
-            Width = 89
+            Width = 90
           end
           object tvPaisOrigen: TcxGridDBColumn
             Caption = 'Pa'#237's'
             DataBinding.FieldName = 'pais_origen_pp'
             HeaderAlignmentHorz = taCenter
-            Width = 22
+            Width = 34
           end
           object tvPresentacion: TcxGridDBColumn
             Caption = 'Presentaci'#243'n'
             DataBinding.FieldName = 'presentacion_pp'
             HeaderAlignmentHorz = taCenter
-            Width = 39
+            Width = 70
           end
           object tvPesoPaleta: TcxGridDBColumn
             Caption = 'P. Paleta'
@@ -1308,13 +1304,13 @@ object FMProveedores: TFMProveedores
             Caption = 'Cajas Paleta'
             DataBinding.FieldName = 'cajas_paleta_pp'
             HeaderAlignmentHorz = taCenter
-            Width = 34
+            Width = 35
           end
           object tvFechaBaja: TcxGridDBColumn
             Caption = 'Baja'
             DataBinding.FieldName = 'fecha_baja_pp'
             HeaderAlignmentHorz = taCenter
-            Width = 39
+            Width = 53
           end
         end
         object lvDetalleLineas: TcxGridLevel
@@ -1329,7 +1325,7 @@ object FMProveedores: TFMProveedores
         Left = 0
         Top = 73
         Width = 625
-        Height = 193
+        Height = 323
         TabStop = False
         Align = alLeft
         Color = clWhite
@@ -1411,7 +1407,6 @@ object FMProveedores: TFMProveedores
           Width = 13
           Height = 21
           Action = ARejillaFlotante
-          Enabled = False
           Glyph.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
             2000000000000004000000000000000000000000000000000000FF00FF00FF00
@@ -1496,7 +1491,6 @@ object FMProveedores: TFMProveedores
           ColorDisable = clWindow
           Required = True
           OnRequiredTime = RequiredTime
-          Enabled = False
           MaxLength = 3
           TabOrder = 0
           OnChange = tipo_coste_pcChange
@@ -1621,6 +1615,11 @@ object FMProveedores: TFMProveedores
       ImageIndex = 0
       ShortCut = 113
       OnExecute = ARejillaFlotanteExecute
+    end
+    object AModificar: TAction
+      Caption = 'Modificar'
+      ShortCut = 77
+      OnExecute = AModificarExecute
     end
   end
   object QProveedores: TQuery

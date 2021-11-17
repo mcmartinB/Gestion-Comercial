@@ -20,7 +20,10 @@ uses
   dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
-  dxSkinXmas2008Blue;
+  dxSkinXmas2008Blue, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
+  cxData, cxDataStorage, cxNavigator, cxDBData, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxGridLevel, cxClasses, cxGridCustomView,
+  cxGrid;
 
 type
   TFCliEnvases = class(TForm)
@@ -28,7 +31,6 @@ type
     nbLabel1: TnbLabel;
     lblEmpresa: TnbStaticText;
     empresa: TnbDBAlfa;
-    DBGrid: TDBGrid;
     ToolBar1: TToolBar;
     btnAlta: TToolButton;
     btnModificar: TToolButton;
@@ -87,6 +89,26 @@ type
     nbLabel12: TnbLabel;
     variedad: TnbDBAlfa;
     Queryvariedad_ce: TStringField;
+    nbLabel13: TnbLabel;
+    ref_cliente_ce: TnbDBAlfa;
+    Queryref_cliente_ce: TStringField;
+    Panel2: TPanel;
+    cxGrid1: TcxGrid;
+    tvDetalle: TcxGridDBTableView;
+    tvEmpresa: TcxGridDBColumn;
+    tvProducto: TcxGridDBColumn;
+    tvEnvase: TcxGridDBColumn;
+    tvCliente: TcxGridDBColumn;
+    tvDescripcion: TcxGridDBColumn;
+    tvRefCliente: TcxGridDBColumn;
+    tvVariedad: TcxGridDBColumn;
+    tvUndFacturacion: TcxGridDBColumn;
+    tvCaducidad: TcxGridDBColumn;
+    tvMinVida: TcxGridDBColumn;
+    tvMaxVida: TcxGridDBColumn;
+    tvPalets: TcxGridDBColumn;
+    tvKgPalets: TcxGridDBColumn;
+    lvDetalle: TcxGridLevel;
     procedure empresaChange(Sender: TObject);
     procedure clienteChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -105,6 +127,8 @@ type
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure envaseExit(Sender: TObject);
     procedure ssEnvaseAntesEjecutar(Sender: TObject);
+    procedure cxGrid1Enter(Sender: TObject);
+    procedure cxGrid1Exit(Sender: TObject);
   private
     { Private declarations }
     sEmpresa, sCliente, sEnvase: string;
@@ -162,6 +186,16 @@ end;
 procedure TFCliEnvases.clienteChange(Sender: TObject);
 begin
   lblCliente.Caption := desCliente(cliente.Text);
+end;
+
+procedure TFCliEnvases.cxGrid1Enter(Sender: TObject);
+begin
+  AModificar.ShortCut := TexttoShortCut('');
+end;
+
+procedure TFCliEnvases.cxGrid1Exit(Sender: TObject);
+begin
+  AModificar.ShortCut := ShortCut(Word('M'), []);
 end;
 
 procedure TFCliEnvases.DataSourceDataChange(Sender: TObject; Field: TField);
@@ -317,6 +351,10 @@ end;
 
 procedure TFCliEnvases.AAceptarExecute(Sender: TObject);
 begin
+    //si no se inserta una referencia de cliente, tomará el valor del envase
+    if ref_cliente_ce.Text = '' then
+      Query.FieldByName('ref_cliente_ce').AsString :=  Query.FieldByName('envase_ce').AsString;
+
   Query.Post;
   SincroBonnyAurora.SincronizarUnidadFacturacion(
     Query.FieldByName('empresa_ce').asString,
@@ -392,9 +430,9 @@ end;
 
 procedure TFCliEnvases.FormCreate(Sender: TObject);
 begin
-  ABorrar.ShortCut := ShortCut(VK_SUBTRACT, []);
-  AAnyadir.ShortCut := ShortCut(VK_ADD, []);
-  AModificar.ShortCut := ShortCut(Word('M'), []);
+  //ABorrar.ShortCut := ShortCut(VK_SUBTRACT, []);
+  //AAnyadir.ShortCut := ShortCut(VK_ADD, []);
+  //AModificar.ShortCut := ShortCut(Word('M'), []);
   AAceptar.ShortCut := ShortCut(VK_F1, []);
 end;
 

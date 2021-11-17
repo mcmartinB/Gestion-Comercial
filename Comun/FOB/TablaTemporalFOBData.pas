@@ -92,6 +92,8 @@ type
     qryAux: TQuery;
     ClientDataSetgas_no_facturable: TFloatField;
     ClientDataSetfecha_albaran: TDateField;
+    Query1: TQuery;
+    ClientDataSetkilos_reales: TFloatField;
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private
@@ -711,6 +713,8 @@ begin
   Query.SQL.Add('        centro_salida_sc centro, fecha_sc fecha, moneda_sc moneda, categoria_sl categoria,');
   Query.SQL.Add('        nvl(agrupa_comercial_e,''SIN AGRUPACION'') agrupacion, ');
   Query.SQL.Add('        calibre_sl calibre, SUM(NVL(kilos_sl,0)) kilos_producto,');
+
+  Query.SQL.Add('        SUM(NVL(kilos_reales_sl,0)) kilos_reales,');
 
   Query.SQL.Add('        SUM(NVL(cajas_sl,0)) cajas_producto, SUM(NVL(cajas_sl,0)*NVL(unidades_caja_sl,1)) unidades_producto, SUM(NVL(n_palets_sl,0)) palets_producto,');
 

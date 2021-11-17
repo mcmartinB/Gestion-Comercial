@@ -40,7 +40,7 @@ implementation
 
 uses
   Forms, TablaTemporalFOBData, bTimeUtils, bMath, Variants, DatosExcelFOBReport,
-  DatosExcelFOBReportEx, UDMAuxDB;
+  DatosExcelFOBReportEx, UDMAuxDB, CAuxiliarDB;
 
 procedure TDMTablaListFob.DataModuleCreate(Sender: TObject);
 begin
@@ -68,6 +68,7 @@ begin
   kmtTabla.FieldDefs.Add('unidades', ftFloat, 0, False);
   kmtTabla.FieldDefs.Add('palets', ftFloat, 0, False);
   kmtTabla.FieldDefs.Add('peso', ftFloat, 0, False);
+  kmtTabla.FieldDefs.Add('kilos_reales', ftFloat, 0, False);
   kmtTabla.FieldDefs.Add('importe', ftFloat, 0, False);
   kmtTabla.FieldDefs.Add('comision', ftFloat, 0, False);
   kmtTabla.FieldDefs.Add('comision_fac', ftFloat, 0, False);
@@ -245,6 +246,9 @@ begin
 end;
 
 procedure TDMTablaListFob.AltaLineaListadoEnvasesFOB( const Aproducto, ASemana: string; const ASumnistro: Boolean  );
+var
+  env_sobrepeso: real;
+  anyo, mes, dia: Word;
 begin
   with kmtTabla do
   begin
@@ -275,6 +279,22 @@ begin
     FieldByName('unidades').AsFloat:= DMTablaTemporalFOB.ClientDataSet.FieldByName('unidades_producto').AsFloat;
     FieldByName('palets').AsFloat:= DMTablaTemporalFOB.ClientDataSet.FieldByName('palets_producto').AsFloat;
     FieldByName('peso').AsFloat:= DMTablaTemporalFOB.ClientDataSet.FieldByName('kilos_producto').AsFloat;
+
+    Decodedate(DMTablaListFob.kmtTabla.FieldByName('fecha_albaran').AsDateTime, anyo, mes, dia);
+    env_sobrepeso := CAuxiliarDB.EnvaseObtenerSobrepeso(DMTablaTemporalFOB.ClientDataSet.FieldByName('empresa').AsString,
+                                                        DMTablaTemporalFOB.ClientDataSet.FieldByName('envase').AsString, anyo , mes );
+  //comprobar si el envase tiene peso variable
+    if CAuxiliarDB.EnvasePesoVariable(DMTablaTemporalFOB.ClientDataSet.FieldByName('empresa').AsString,
+                                      DMTablaTemporalFOB.ClientDataSet.FieldByName('envase').AsString,
+                                      Aproducto) then
+      FieldByName('kilos_reales').AsFloat := DMTablaTemporalFOB.ClientDataSet.FieldByName('kilos_reales').AsFloat
+    else
+    begin
+      if env_sobrepeso <> -1 then
+        FieldByName('kilos_reales').AsFloat := DMTablaTemporalFOB.ClientDataSet.FieldByName('kilos_producto').AsFloat + bRoundTo(DMTablaTemporalFOB.ClientDataSet.FieldByName('kilos_producto').AsFloat  * env_sobrepeso / 100, 2 )
+      else
+        FieldByName('kilos_reales').AsFloat := 0;
+    end;
 
     //Moneda del albaran, pasar a euros
     FieldByName('importe').AsFloat:= bRoundTo(DMTablaTemporalFOB.ClientDataSet.FieldByName('importe').AsFloat * DMTablaTemporalFOB.ClientDataSet.FieldByName('cambio').AsFloat, 2 );
@@ -307,7 +327,7 @@ begin
     FieldByName('unidades').AsFloat:= FieldByName('unidades').AsFloat+ DMTablaTemporalFOB.ClientDataSet.FieldByName('unidades_producto').AsFloat;
     FieldByName('palets').AsFloat:= FieldByName('palets').AsFloat + DMTablaTemporalFOB.ClientDataSet.FieldByName('palets_producto').AsFloat;
     FieldByName('peso').AsFloat:= FieldByName('peso').AsFloat + DMTablaTemporalFOB.ClientDataSet.FieldByName('kilos_producto').AsFloat;
-
+    FieldByName('kilos_reales').AsFloat:= FieldByName('kilos_reales').AsFloat + DMTablaTemporalFOB.ClientDataSet.FieldByName('kilos_reales').AsFloat;
     //Moneda del albaran, pasar a euros
 
     FieldByName('importe').AsFloat:= FieldByName('importe').AsFloat +

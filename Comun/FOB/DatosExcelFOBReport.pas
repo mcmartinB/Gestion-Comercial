@@ -72,6 +72,9 @@ type
     qrlbl3: TQRLabel;
     QRExpr1: TQRExpr;
     QRLabel1: TQRLabel;
+    QRExpr3: TQRExpr;
+    QRLabel2: TQRLabel;
+    kilos_reales: TQRExpr;
     procedure PageFooterBand1BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
     procedure qrx8Print(sender: TObject; var Value: String);
@@ -112,7 +115,8 @@ implementation
 
 {$R *.DFM}
 
-uses TablaListFobDM, bMath, UDMAuxDB, Dialogs, UDMMaster, CReportes, DPreview;
+uses TablaListFobDM, bMath, UDMAuxDB, Dialogs, UDMMaster, CReportes, DPreview,
+  CAuxiliarDB;
 
 function DesPrecio( const ACondicion: Integer ): string;
 begin

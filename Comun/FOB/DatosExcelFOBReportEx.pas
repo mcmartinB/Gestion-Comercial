@@ -95,6 +95,9 @@ type
     qrlGastoNoFac: TQRLabel;
     qrGastoNoFac: TQRExpr;
     QRExpr8: TQRExpr;
+    QRLabel4: TQRLabel;
+    kilos_reales: TQRExpr;
+    QRExpr5: TQRExpr;
     procedure PageFooterBand1BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
     procedure qrx8Print(sender: TObject; var Value: String);

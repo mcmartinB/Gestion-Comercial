@@ -9,6 +9,7 @@ uses db, dbtables, CVariables, Dialogs, SysUtils, UDMBaseDatos,
 var QUERY: string;
 
 function EnvasePesoVariable(const empresa, envase, producto: string): Boolean;
+function EnvaseObtenerSobrepeso(const empresa, envase : string; const anyo, mes : integer): real;
 function EnvaseUnidadesVariable(const empresa, envase, producto: string): Boolean;
 function KilosEnvase(const empresa, envase, producto: string): Real;
 function UnidadesEnvase(const AEmpresa, AEnvase, AProducto: string ): Integer;
@@ -1517,10 +1518,45 @@ begin
 
     if not isEmpty then
     begin
-      result:= ( FieldByName('peso_neto_e').AsFloat = 0 ) or (FieldByName('peso_variable_e').Asinteger <> 0 );
+//      result:= ( FieldByName('peso_neto_e').AsFloat = 0 ) or (FieldByName('peso_variable_e').Asinteger <> 0 );
+      result:= FieldByName('peso_variable_e').Asinteger = 1;
     end;
     Close;
   end;
+end;
+
+//funcion que comprueba si el envase filtrado por los parámetros tiene sobrepeso
+//si tiene sobrepeso devuelve el valor y si no un -1
+function EnvaseObtenerSobrepeso(const empresa, envase : string; const anyo, mes : integer): real;
+var
+  env_sobrepeso : real;
+  qAux : TQuery;
+begin
+  env_sobrepeso := -1;
+  with DMBaseDatos.QGeneral do
+  begin
+    if Active then
+    begin
+      Cancel;
+      Close;
+    end;
+    sql.Clear;
+    sql.Add('select peso_es ');
+    sql.Add('from frf_env_sobrepeso ');
+    sql.Add('where empresa_es = :empresa ');
+    sql.Add(' and anyo_es = :anyo ');
+    sql.Add(' and mes_es = :mes ');
+    sql.Add(' and envase_es = :envase ');
+    ParamByName('empresa').AsString := empresa;
+    ParamByName('anyo').AsInteger := anyo;
+    ParamByName('mes').AsInteger := mes;
+    ParamByName('envase').AsString := envase;
+    Open;
+
+    if not isEmpty then
+      env_sobrepeso := FieldByName('peso_es').AsFloat;
+  end;
+  result := env_sobrepeso;
 end;
 
 function EnvaseUnidadesVariable(const empresa, envase, producto: string): Boolean;

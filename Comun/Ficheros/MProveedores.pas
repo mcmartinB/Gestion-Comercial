@@ -6,12 +6,24 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs
   , Db, ExtCtrls, StdCtrls, Mask, DBCtrls, CMaestroDetalle, Buttons,
   ActnList, BSpeedButton, Grids, DBGrids, BGridButton, BGrid, BEdit, BDEdit,
-  dbtables, DError, ComCtrls, nbEdits, nbCombos, nbLabels, cxGraphics,
+  dbtables, DError, ComCtrls, nbEdits, nbCombos, nbLabels, Menus, cxGraphics,
   cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxStyles, dxSkinsCore,
   dxSkinBlue, dxSkinBlueprint, dxSkinFoggy, dxSkinMoneyTwins,
   dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit,
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomTableView, cxGridTableView,
-  cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid;
+  cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, dxSkinBlack,
+  dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinGlassOceans,
+  dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky,
+  dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis, dxSkinMetropolisDark,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinOffice2013DarkGray,
+  dxSkinOffice2013LightGray, dxSkinOffice2013White, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
+  dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
+  dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue;
 
 type
   TFMProveedores = class(TMaestroDetalle)
@@ -145,6 +157,7 @@ type
     tvCajasPaleta: TcxGridDBColumn;
     tvFechaBaja: TcxGridDBColumn;
     lvDetalleLineas: TcxGridLevel;
+    AModificar: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -178,6 +191,7 @@ type
     procedure QCostesCalcFields(DataSet: TDataSet);
     procedure rbCostesActivosClick(Sender: TObject);
     procedure DSMaestroDataChange(Sender: TObject; Field: TField);
+    procedure AModificarExecute(Sender: TObject);
   private
     { Private declarations }
     ListaComponentes, ListaDetalle: TList;
@@ -226,14 +240,24 @@ type
     procedure Modificar; override;
     procedure DetalleAltas; Override;
     procedure DetalleModificar; Override;
+
+    procedure InsertarLogTransacciones(AAcion: string);
   end;
 
+var
+  MProveedor : TFMProveedores;
+
 implementation
+
 
 uses CVariables, CGestionPrincipal, UDMBaseDatos, CReportes,
   CAuxiliarDB, Principal, DPreview, UDMAuxDB, bSQLUtils,
   CMaestro, LDProveedores, LProveedoresEx, UDMConfig,
   SeleccionarClonarProveedorFD, AdvertenciaFD, ImportarProveedorFD;
+
+  
+type
+  TcxGridTableControllerAccess = class (TcxGridTableController);
 
 {$R *.DFM}
 
@@ -466,7 +490,7 @@ begin
     //               y entre los Campos de Búsqueda en la localización
   if RProductos.IsFocused then
     Exit;
-  
+
   case key of
     vk_Return, vk_down:
       begin
@@ -510,6 +534,35 @@ begin
             end;
           end;
        else ShowMessage('Error ' + IntToStr( iValue ) + ' al importar el Proveedor.');
+  end;
+end;
+
+procedure TFMProveedores.InsertarLogTransacciones( AAcion: string );
+var qInsertarLog: TQuery;
+begin
+  // Log
+  qInsertarLog := TQuery.Create(nil);
+  qInsertarLog.DatabaseName:= DataSeTMaestro.DatabaseName;
+  qInsertarLog.RequestLive := true;
+  with qInsertarLog do
+  try
+    SQL.Clear;
+    SQL.Add(' insert into cnf_logTransacciones (tabla_l, accion_l, fecha_accion_l, usuario_l, centro_l, empresa_id_l, centro_id_l, numero_id_l, fecha_id_l) ');
+    SQL.Add(' values ');
+    SQL.Add(' (:tabla, :accion, :fecha_accion, :usuario, :centro, :empresa_id, :centro_id, :numero_id, :fecha_id) ');
+    ParamByName('tabla').AsString := 'frf_salidas_c';
+    ParamByName('accion').AsString := AAcion;
+    ParamByName('fecha_accion').AsDateTime := now;
+    ParamByName('usuario').AsString := gsCodigo;
+    ParamByName('centro').AsString := DMConfig.sDesInstalacion;
+    ParamByName('empresa_id').AsString := '';
+    ParamByName('centro_id').AsString := '';
+    ParamByName('numero_id').AsString := proveedor_p.Text;
+    ParamByName('fecha_id').AsString := '';
+
+    ExecSQL;
+  finally
+    Free;
   end;
 end;
 
@@ -557,6 +610,12 @@ begin
         MiAlta;
     end;
   end;
+end;
+
+procedure TFMProveedores.AModificarExecute(Sender: TObject);
+begin
+  if RProductos.Focused then
+    Modificar;
 end;
 
 procedure TFMProveedores.MiAlta;
@@ -652,11 +711,12 @@ begin
         inherited DetalleAltas;
     end;
   end;
-{
+
   tipo_coste_pc.Enabled := true;
   BGBTipoCoste.Enabled := true;
+  tipo_coste_pc.SetFocus;
   fecha_ini_pc.Enabled := true;
-
+{
   if not DMConfig.EsLaFontEx then
   begin
     ShowMessage('Antes de dar de alta un nuevo almacén/variedad de proveedor, recuerde darlo de alta antes en la central.');
@@ -1335,13 +1395,22 @@ begin
   end
   else
   begin
-    FocoDetalle:=tipo_coste_pc;
     tsAlmacenes.TabVisible:= False;
     tsProductos.TabVisible:= False;
     if EstadoDetalle <> tedModificar then
     begin
       QCostes.Close;
       QCostes.Open;
+      tipo_coste_pc.Enabled := true;
+      BGBTipoCoste.Enabled := true;
+      FocoDetalle:=tipo_coste_pc;
+    end
+    else
+    begin
+      tipo_coste_pc.Enabled := false;
+      BGBTipoCoste.Enabled := false;
+      fecha_ini_pc.Enabled := false;
+      FocoDetalle:=importe_pc;
     end;
   end;
 end;

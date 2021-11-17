@@ -161,6 +161,9 @@ object DMTablaTemporalFOB: TDMTablaTemporalFOB
     object ClientDataSetkilos_producto: TFloatField
       FieldName = 'kilos_producto'
     end
+    object ClientDataSetkilos_reales: TFloatField
+      FieldName = 'kilos_reales'
+    end
     object ClientDataSetcajas_producto: TFloatField
       FieldName = 'cajas_producto'
     end
@@ -892,5 +895,10 @@ object DMTablaTemporalFOB: TDMTablaTemporalFOB
     DatabaseName = 'BDProyecto'
     Left = 18
     Top = 95
+  end
+  object Query1: TQuery
+    DatabaseName = 'BDProyecto'
+    Left = 680
+    Top = 32
   end
 end

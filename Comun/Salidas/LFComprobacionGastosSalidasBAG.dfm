@@ -358,7 +358,7 @@ object FLComprobacionGastosSalidasBAG: TFLComprobacionGastosSalidasBAG
     Top = 150
     Width = 177
     Height = 140
-    Date = 36717.641143726850000000
+    Date = 36717.443922442130000000
     ShowToday = False
     TabOrder = 1
     Visible = False

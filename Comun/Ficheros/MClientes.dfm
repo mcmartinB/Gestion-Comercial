@@ -37,7 +37,7 @@ object FMClientes: TFMClientes
       Top = 2
       Width = 1092
       Height = 311
-      ActivePage = tsSuministro
+      ActivePage = tsUnidades
       Align = alClient
       TabOrder = 0
       object tsSuministro: TTabSheet

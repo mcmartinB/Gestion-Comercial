@@ -132,7 +132,7 @@ begin
     SQL.Add('       AND   n_albaran_g = n_albaran_sc ');
     SQL.Add('       AND   fecha_g = fecha_sc ');
     SQL.Add('       AND   tipo_g IN (' + sAux + ' )) ');
-    SQL.Add(' ORDER BY 1,2 ');
+    SQL.Add(' ORDER BY 1,5,2 ');
 
     if eEmpresa.Text <> 'BAG' then
       ParamByName('empresa').AsString := eEmpresa.Text;

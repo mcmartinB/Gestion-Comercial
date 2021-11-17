@@ -1,12 +1,11 @@
 object FCliEnvases: TFCliEnvases
   Left = 390
   Top = 241
-  ActiveControl = DBGrid
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = '    UNIDAD DE FACTURACI'#211'N POR CLIENTE'
-  ClientHeight = 480
-  ClientWidth = 851
+  ClientHeight = 568
+  ClientWidth = 834
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,13 +21,12 @@ object FCliEnvases: TFCliEnvases
   object Panel1: TPanel
     Left = 0
     Top = 29
-    Width = 851
-    Height = 220
+    Width = 834
+    Height = 247
     Align = alTop
     BevelOuter = bvNone
     Enabled = False
     TabOrder = 1
-    ExplicitWidth = 732
     object nbLabel1: TnbLabel
       Left = 24
       Top = 33
@@ -69,7 +67,7 @@ object FCliEnvases: TFCliEnvases
     end
     object nbLabel6: TnbLabel
       Left = 24
-      Top = 163
+      Top = 187
       Width = 100
       Height = 21
       Caption = 'Unidad Facturaci'#243'n'
@@ -92,7 +90,7 @@ object FCliEnvases: TFCliEnvases
     end
     object nbLabel7: TnbLabel
       Left = 241
-      Top = 162
+      Top = 186
       Width = 100
       Height = 21
       Caption = 'N'#186' Palets'
@@ -100,7 +98,7 @@ object FCliEnvases: TFCliEnvases
     end
     object nbLabel8: TnbLabel
       Left = 453
-      Top = 162
+      Top = 186
       Width = 100
       Height = 21
       Caption = 'KGS Palet'
@@ -108,7 +106,7 @@ object FCliEnvases: TFCliEnvases
     end
     object nbLabel2: TnbLabel
       Left = 24
-      Top = 187
+      Top = 211
       Width = 100
       Height = 21
       Caption = 'D'#237'as Caducidad'
@@ -116,7 +114,7 @@ object FCliEnvases: TFCliEnvases
     end
     object nbLabel9: TnbLabel
       Left = 241
-      Top = 186
+      Top = 210
       Width = 100
       Height = 21
       Caption = 'Min. en plataforma'
@@ -124,7 +122,7 @@ object FCliEnvases: TFCliEnvases
     end
     object nbLabel10: TnbLabel
       Left = 453
-      Top = 186
+      Top = 210
       Width = 100
       Height = 21
       Caption = 'Max. en plataforma'
@@ -154,10 +152,18 @@ object FCliEnvases: TFCliEnvases
     end
     object nbLabel12: TnbLabel
       Left = 24
-      Top = 138
+      Top = 162
       Width = 100
       Height = 21
       Caption = 'Variedad'
+      About = 'NB 0.1/20020725'
+    end
+    object nbLabel13: TnbLabel
+      Left = 24
+      Top = 138
+      Width = 100
+      Height = 21
+      Caption = 'Ref. Cliente'
       About = 'NB 0.1/20020725'
     end
     object empresa: TnbDBAlfa
@@ -190,13 +196,13 @@ object FCliEnvases: TFCliEnvases
     end
     object unidad_fac_ce: TComboBox
       Left = 128
-      Top = 163
+      Top = 187
       Width = 65
       Height = 21
       Style = csDropDownList
       ItemHeight = 13
       ItemIndex = 0
-      TabOrder = 7
+      TabOrder = 8
       Text = 'KGS'
       Items.Strings = (
         'KGS'
@@ -218,12 +224,12 @@ object FCliEnvases: TFCliEnvases
     end
     object n_palets_ce: TnbDBAlfa
       Left = 345
-      Top = 163
+      Top = 187
       Width = 33
       Height = 21
       About = 'NB 0.1/20020725'
       CharCase = ecUpperCase
-      TabOrder = 8
+      TabOrder = 9
       DataField = 'n_palets_ce'
       DataSource = DataSource
       DBLink = True
@@ -232,12 +238,12 @@ object FCliEnvases: TFCliEnvases
     end
     object kgs_palet_ce: TnbDBAlfa
       Left = 556
-      Top = 163
+      Top = 187
       Width = 33
       Height = 21
       About = 'NB 0.1/20020725'
       CharCase = ecUpperCase
-      TabOrder = 9
+      TabOrder = 10
       DataField = 'kgs_palet_ce'
       DataSource = DataSource
       DBLink = True
@@ -246,12 +252,12 @@ object FCliEnvases: TFCliEnvases
     end
     object min_vida_cliente_ce: TnbDBAlfa
       Left = 345
-      Top = 186
+      Top = 210
       Width = 33
       Height = 21
       About = 'NB 0.1/20020725'
       CharCase = ecUpperCase
-      TabOrder = 11
+      TabOrder = 12
       DataField = 'min_vida_cliente_ce'
       DataSource = DataSource
       DBLink = True
@@ -260,12 +266,12 @@ object FCliEnvases: TFCliEnvases
     end
     object max_vida_cliente_ce: TnbDBAlfa
       Left = 556
-      Top = 186
+      Top = 210
       Width = 33
       Height = 21
       About = 'NB 0.1/20020725'
       CharCase = ecUpperCase
-      TabOrder = 12
+      TabOrder = 13
       DataField = 'max_vida_cliente_ce'
       DataSource = DataSource
       DBLink = True
@@ -274,12 +280,12 @@ object FCliEnvases: TFCliEnvases
     end
     object caducidad_cliente_ce: TnbDBAlfa
       Left = 128
-      Top = 186
+      Top = 210
       Width = 33
       Height = 21
       About = 'NB 0.1/20020725'
       CharCase = ecUpperCase
-      TabOrder = 10
+      TabOrder = 11
       DataField = 'caducidad_cliente_ce'
       DataSource = DataSource
       DBLink = True
@@ -358,146 +364,41 @@ object FCliEnvases: TFCliEnvases
     end
     object variedad: TnbDBAlfa
       Left = 128
+      Top = 162
+      Width = 251
+      Height = 21
+      About = 'NB 0.1/20020725'
+      CharCase = ecUpperCase
+      TabOrder = 7
+      DataField = 'variedad_ce'
+      DataSource = DataSource
+      DBLink = True
+      NumChars = 30
+    end
+    object ref_cliente_ce: TnbDBAlfa
+      Left = 128
       Top = 138
       Width = 251
       Height = 21
       About = 'NB 0.1/20020725'
       CharCase = ecUpperCase
       TabOrder = 6
-      DataField = 'variedad_ce'
+      DataField = 'ref_cliente_ce'
       DataSource = DataSource
       DBLink = True
       NumChars = 30
     end
   end
-  object DBGrid: TDBGrid
-    Left = 8
-    Top = 263
-    Width = 833
-    Height = 207
-    TabStop = False
-    DataSource = DataSource
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-    ReadOnly = True
-    TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'empresa_ce'
-        Title.Caption = 'Empresa'
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'producto_ce'
-        Title.Alignment = taCenter
-        Title.Caption = 'Prod.'
-        Width = 38
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'envase_ce'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Title.Alignment = taCenter
-        Title.Caption = 'Art'#237'culo'
-        Width = 75
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'cliente_ce'
-        Title.Caption = 'Cliente'
-        Width = 38
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'des_envase'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Title.Alignment = taCenter
-        Title.Caption = 'Descripcion'
-        Width = 249
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'variedad_ce'
-        Title.Alignment = taCenter
-        Title.Caption = 'Variedad'
-        Width = 122
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'unidad_fac_ce'
-        Title.Caption = 'Fac. Por'
-        Width = 38
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'caducidad_cliente_ce'
-        Title.Caption = 'Caduc.'
-        Width = 38
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'min_vida_cliente_ce'
-        Title.Caption = 'Min.'
-        Width = 38
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'max_vida_cliente_ce'
-        Title.Caption = 'Max.'
-        Width = 38
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'n_palets_ce'
-        Title.Caption = 'Palets'
-        Width = 38
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'kgs_palet_ce'
-        Title.Caption = 'Kgs.Pal.'
-        Width = 38
-        Visible = True
-      end>
-  end
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 851
+    Width = 834
     Height = 29
     ButtonHeight = 21
     ButtonWidth = 50
     Caption = 'ToolBar1'
     ShowCaptions = True
     TabOrder = 0
-    ExplicitWidth = 732
     object btnAlta: TToolButton
       Left = 0
       Top = 0
@@ -553,6 +454,132 @@ object FCliEnvases: TFCliEnvases
       OnClick = ACerrarExecute
     end
   end
+  object Panel2: TPanel
+    Left = 0
+    Top = 282
+    Width = 834
+    Height = 286
+    Align = alBottom
+    BevelOuter = bvNone
+    Caption = 'Panel2'
+    TabOrder = 2
+    object cxGrid1: TcxGrid
+      Left = 0
+      Top = -3
+      Width = 834
+      Height = 289
+      Align = alBottom
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnEnter = cxGrid1Enter
+      OnExit = cxGrid1Exit
+      LockedStateImageOptions.AssignedValues = [lsiavFont]
+      LockedStateImageOptions.Font.Charset = DEFAULT_CHARSET
+      LockedStateImageOptions.Font.Color = clWindowText
+      LockedStateImageOptions.Font.Height = -11
+      LockedStateImageOptions.Font.Name = 'MS Sans Serif'
+      LockedStateImageOptions.Font.Style = []
+      LookAndFeel.NativeStyle = True
+      LookAndFeel.SkinName = 'DevExpressStyle'
+      ExplicitTop = 0
+      object tvDetalle: TcxGridDBTableView
+        Navigator.Buttons.ConfirmDelete = True
+        Navigator.Buttons.CustomButtons = <>
+        FindPanel.DisplayMode = fpdmAlways
+        DataController.DataSource = DataSource
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsView.GroupByBox = False
+        object tvEmpresa: TcxGridDBColumn
+          Caption = 'Emp'
+          DataBinding.FieldName = 'empresa_ce'
+          Options.Focusing = False
+          Width = 40
+        end
+        object tvProducto: TcxGridDBColumn
+          Caption = 'Prod.'
+          DataBinding.FieldName = 'producto_ce'
+          Options.Focusing = False
+          Width = 40
+        end
+        object tvEnvase: TcxGridDBColumn
+          Caption = 'Art'#237'culo'
+          DataBinding.FieldName = 'envase_ce'
+          Options.Focusing = False
+          Width = 80
+        end
+        object tvCliente: TcxGridDBColumn
+          Caption = 'Cliente'
+          DataBinding.FieldName = 'cliente_ce'
+          Options.Focusing = False
+          Width = 50
+        end
+        object tvDescripcion: TcxGridDBColumn
+          Caption = 'Descripcion'
+          DataBinding.FieldName = 'des_envase'
+          Options.Focusing = False
+        end
+        object tvRefCliente: TcxGridDBColumn
+          Caption = 'Ref. Cliente'
+          DataBinding.FieldName = 'ref_cliente_ce'
+          Options.Focusing = False
+          Width = 100
+        end
+        object tvVariedad: TcxGridDBColumn
+          Caption = 'Variedad'
+          DataBinding.FieldName = 'variedad_ce'
+          Options.Focusing = False
+          Width = 120
+        end
+        object tvUndFacturacion: TcxGridDBColumn
+          Caption = 'Und. Fac.'
+          DataBinding.FieldName = 'unidad_fac_ce'
+          Options.Focusing = False
+          Width = 55
+        end
+        object tvCaducidad: TcxGridDBColumn
+          Caption = 'Caduc.'
+          DataBinding.FieldName = 'caducidad_cliente_ce'
+          Options.Focusing = False
+          Width = 45
+        end
+        object tvMinVida: TcxGridDBColumn
+          Caption = 'Min. Vida'
+          DataBinding.FieldName = 'min_vida_cliente_ce'
+          Options.Focusing = False
+        end
+        object tvMaxVida: TcxGridDBColumn
+          Caption = 'Max.Vida'
+          DataBinding.FieldName = 'max_vida_cliente_ce'
+          Options.Focusing = False
+        end
+        object tvPalets: TcxGridDBColumn
+          Caption = 'N Palets'
+          DataBinding.FieldName = 'n_palets_ce'
+          Options.Focusing = False
+        end
+        object tvKgPalets: TcxGridDBColumn
+          Caption = 'Kg. Paltes'
+          DataBinding.FieldName = 'kgs_palet_ce'
+          Options.Focusing = False
+        end
+      end
+      object lvDetalle: TcxGridLevel
+        GridView = tvDetalle
+      end
+    end
+  end
   object Query: TQuery
     BeforePost = QueryBeforePost
     OnCalcFields = QueryCalcFields
@@ -599,6 +626,10 @@ object FCliEnvases: TFCliEnvases
       Origin = 'COMERCIALIZACION.frf_clientes_env.descripcion_ce'
       Size = 30
     end
+    object Queryref_cliente_ce: TStringField
+      FieldName = 'ref_cliente_ce'
+      Size = 13
+    end
     object Queryvariedad_ce: TStringField
       FieldName = 'variedad_ce'
       Size = 35
@@ -639,16 +670,14 @@ object FCliEnvases: TFCliEnvases
   end
   object ActionList: TActionList
     OnUpdate = ActionListUpdate
-    Left = 384
-    Top = 144
+    Left = 472
+    Top = 424
     object AAnyadir: TAction
       Caption = 'A'#241'adir'
-      ShortCut = 187
       OnExecute = AAnyadirExecute
     end
     object ABorrar: TAction
       Caption = 'Borrar'
-      ShortCut = 111
       OnExecute = ABorrarExecute
     end
     object AModificar: TAction

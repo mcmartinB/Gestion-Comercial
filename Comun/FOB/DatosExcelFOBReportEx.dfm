@@ -1,7 +1,7 @@
 object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
   Left = 0
   Top = 0
-  Width = 1123
+  Width = 1655
   Height = 794
   Frame.Color = clBlack
   Frame.DrawTop = False
@@ -60,7 +60,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
   object BandaDetalle: TQRBand
     Left = 38
     Top = 143
-    Width = 1047
+    Width = 1579
     Height = 15
     Frame.Color = clBlack
     Frame.DrawTop = False
@@ -75,7 +75,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
     ForceNewPage = False
     Size.Values = (
       39.687500000000000000
-      2770.187500000000000000)
+      4177.770833333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     BandType = rbDetail
@@ -1066,11 +1066,44 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
       Mask = '#,##0.000'
       FontSize = 8
     end
+    object kilos_reales: TQRExpr
+      Left = 1450
+      Top = 0
+      Width = 71
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        3836.458333333333000000
+        0.000000000000000000
+        187.854166666666700000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      Color = clWhite
+      ParentFont = False
+      ResetAfterPrint = False
+      Transparent = True
+      WordWrap = True
+      Expression = '[kilos_reales]'
+      Mask = '#,##0.00'
+      FontSize = 8
+    end
   end
   object QRBand4: TQRBand
     Left = 38
     Top = 123
-    Width = 1047
+    Width = 1579
     Height = 20
     Frame.Color = clBlack
     Frame.DrawTop = False
@@ -1085,7 +1118,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
     ForceNewPage = False
     Size.Values = (
       52.916666666666670000
-      2770.187500000000000000)
+      4177.770833333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     BandType = rbColumnHeader
@@ -2086,11 +2119,42 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
       WordWrap = True
       FontSize = 8
     end
+    object QRLabel4: TQRLabel
+      Left = 1450
+      Top = 3
+      Width = 71
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        3836.458333333333000000
+        7.937500000000000000
+        187.854166666666700000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Caption = 'Peso Real'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 8
+    end
   end
   object QRBand5: TQRBand
     Left = 38
     Top = 38
-    Width = 1047
+    Width = 1579
     Height = 85
     Frame.Color = clBlack
     Frame.DrawTop = False
@@ -2105,12 +2169,12 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
     ForceNewPage = False
     Size.Values = (
       224.895833333333300000
-      2770.187500000000000000)
+      4177.770833333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     BandType = rbPageHeader
     object PsQRSysData3: TQRSysData
-      Left = 1005
+      Left = 1537
       Top = 0
       Width = 42
       Height = 12
@@ -2121,7 +2185,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
       Frame.DrawRight = False
       Size.Values = (
         31.750000000000000000
-        2659.062500000000000000
+        4066.645833333333000000
         0.000000000000000000
         111.125000000000000000)
       Alignment = taRightJustify
@@ -2139,7 +2203,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
       FontSize = 6
     end
     object qrlblPeriodo: TQRLabel
-      Left = 977
+      Left = 1509
       Top = 65
       Width = 70
       Height = 17
@@ -2150,7 +2214,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
       Frame.DrawRight = False
       Size.Values = (
         44.979166666666670000
-        2584.979166666667000000
+        3992.562500000000000000
         171.979166666666700000
         185.208333333333300000)
       Alignment = taRightJustify
@@ -2201,7 +2265,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
       FontSize = 18
     end
     object LCategoria: TQRLabel
-      Left = 984
+      Left = 1516
       Top = 48
       Width = 63
       Height = 17
@@ -2212,7 +2276,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
       Frame.DrawRight = False
       Size.Values = (
         44.979166666666670000
-        2603.500000000000000000
+        4011.083333333333000000
         127.000000000000000000
         166.687500000000000000)
       Alignment = taRightJustify
@@ -2328,7 +2392,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
   object PageFooterBand1: TQRBand
     Left = 38
     Top = 179
-    Width = 1047
+    Width = 1579
     Height = 17
     Frame.Color = clBlack
     Frame.DrawTop = False
@@ -2343,12 +2407,12 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
     ForceNewPage = False
     Size.Values = (
       44.979166666666670000
-      2770.187500000000000000)
+      4177.770833333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     BandType = rbPageFooter
     object PsQRSysData2: TQRSysData
-      Left = 993
+      Left = 1525
       Top = 2
       Width = 54
       Height = 11
@@ -2359,7 +2423,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
       Frame.DrawRight = False
       Size.Values = (
         29.104166666666670000
-        2627.312500000000000000
+        4034.895833333333000000
         5.291666666666667000
         142.875000000000000000)
       Alignment = taRightJustify
@@ -2414,7 +2478,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
   object SummaryBand1: TQRBand
     Left = 38
     Top = 158
-    Width = 1047
+    Width = 1579
     Height = 21
     Frame.Color = clBlack
     Frame.DrawTop = True
@@ -2429,7 +2493,7 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
     ForceNewPage = False
     Size.Values = (
       55.562500000000000000
-      2770.187500000000000000)
+      4177.770833333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     BandType = rbSummary
@@ -2829,6 +2893,39 @@ object QRDatosExcelFOBReportEx: TQRDatosExcelFOBReportEx
       WordWrap = True
       Expression = 'sum([gasto_albaran_no_fac])'
       Mask = '#,##0.000'
+      FontSize = 8
+    end
+    object QRExpr5: TQRExpr
+      Left = 1450
+      Top = 2
+      Width = 71
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        3836.458333333333000000
+        5.291666666666667000
+        187.854166666666700000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      Color = clWhite
+      ParentFont = False
+      ResetAfterPrint = False
+      Transparent = True
+      WordWrap = True
+      Expression = 'sum([kilos_reales])'
+      Mask = '#,##0.00'
       FontSize = 8
     end
   end
