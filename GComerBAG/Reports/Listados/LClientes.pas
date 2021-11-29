@@ -61,6 +61,7 @@ type
     qrlbl2: TQRLabel;
     qrlbl3: TQRLabel;
     email_alb_c: TQRDBText;
+    dias_trayecto_ds: TQRDBText;
     procedure QRSysData1Print(sender: TObject; var Value: string);
     procedure LDireccionPrint(sender: TObject; var Value: string);
     procedure QRSubDetailBeforePrint(Sender: TQRCustomBand;

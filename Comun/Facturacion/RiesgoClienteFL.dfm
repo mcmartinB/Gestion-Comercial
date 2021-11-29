@@ -375,7 +375,7 @@ object FLRiesgoCliente: TFLRiesgoCliente
     Top = 208
     Width = 183
     Height = 153
-    Date = 36717.510915266200000000
+    Date = 36717.482078333330000000
     ShowToday = False
     TabOrder = 10
     Visible = False

@@ -105,7 +105,7 @@ begin
     SQL.Add('        sum( case when empresa_apb = entrega_apb[1,3] then 0 else peso_apb end ) kilos_transito ');
     SQL.Add(' from  alm_palet_pb ');
     SQL.Add(' where entrega_apb = :entrega ');
-    SQL.Add(' and centro_apb = :centro ');
+//    SQL.Add(' and centro_apb = :centro ');
     SQL.Add(' and status_apb <> ''B'' ');
   end;
 
@@ -468,7 +468,7 @@ begin
   with qryKilosEntrega do
   begin
     ParamByName('entrega').AsString:= qryListadoStock.FieldByName('entrega_apb').AsString;
-    ParamByName('centro').AsString:= qryListadoStock.FieldByName('centro_apb').AsString;
+//    ParamByName('centro').AsString:= qryListadoStock.FieldByName('centro_apb').AsString;
     Open;
   end;
 

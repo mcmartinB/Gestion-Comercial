@@ -8,7 +8,7 @@ uses
   nbEdits, nbCombos, BSpeedButton, BCalendarButton, ComCtrls, BCalendario,
   BGridButton, Grids, DBGrids, BGrid, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinFoggy,
-  cxTextEdit, cxMaskEdit, cxDropDownEdit;
+  cxTextEdit, cxMaskEdit, cxDropDownEdit, dxSkinBlue;
 
 type
   TFLRiesgoCliente = class(TForm)

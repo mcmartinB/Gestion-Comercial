@@ -48,7 +48,7 @@ type
 
     function  ImporteALbaranado( const ACliente: string ): Real;
     procedure QueryALbaranado( const AEmpresa: string; const AFechaIni, AFechaFin: TDateTime );
-    function DiasTesoreriaCliente( const ACliente: string): integer;
+    function DiasTesoreriaCliente( const ACliente, AEmpresa: string): integer;
   public
 
     { Public declarations }
@@ -316,7 +316,7 @@ var
   iDiasVencimiento: Integer;
 begin
 //  iDiasVencimiento:= 45;
-  iDiasVencimiento := DiasTesoreriaCliente(kmtRiesgo.FieldByName('cod_cliente').AsString);
+  iDiasVencimiento := DiasTesoreriaCliente(kmtRiesgo.FieldByName('cod_cliente').AsString, qryRiesgo.fieldByName('empresa').AsString);
 
   //Cambio moneda
   rPendienteEuros:= bRoundTo( rPendienteFact * rCambioFact, 2);
@@ -519,7 +519,7 @@ var
   iDiasVencimiento: Integer;
 begin
 //  iDiasVencimiento:= 45;
-  iDiasVencimiento := DiasTesoreriaCliente(kmtRiesgo.Fieldbyname('cod_cliente').AsString);
+  iDiasVencimiento := DiasTesoreriaCliente(kmtRiesgo.Fieldbyname('cod_cliente').AsString, qryRiesgo.fieldByName('empresa').AsString );
 
   if kmtRiesgo.fieldByName('activo').AsInteger = 0 then
   begin
@@ -712,7 +712,7 @@ begin
   end;
 end;
 
-function TDLRiesgo.DiasTesoreriaCliente(const ACliente: string): integer;
+function TDLRiesgo.DiasTesoreriaCliente(const ACliente, AEmpresa: string): integer;
 var qryAux: TBonnyQuery;
 begin
  qryAux := TBonnyQuery.Create(Self);
@@ -720,9 +720,11 @@ begin
   try
     SQL.Add(' select nvl(max(dias_tesoreria_ct), 0) tesoreria from frf_clientes, frf_clientes_tes ');
     SQL.Add(' where cliente_c = :cliente ');
+    SQL.Add('   and empresa_ct = :empresa ');
     SQL.Add('   and cliente_ct = cliente_c ');
 
     ParamByName('cliente').AsString := ACliente;
+    ParamByName('empresa').AsString := AEmpresa;
 
     Open;
     result:= FieldByName('tesoreria').AsInteger;

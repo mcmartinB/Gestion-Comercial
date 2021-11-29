@@ -37,7 +37,7 @@ object FMClientes: TFMClientes
       Top = 2
       Width = 1092
       Height = 311
-      ActivePage = tsUnidades
+      ActivePage = tsSuministro
       Align = alClient
       TabOrder = 0
       object tsSuministro: TTabSheet
@@ -244,6 +244,17 @@ object FMClientes: TFMClientes
             ParentColor = False
             Layout = tlCenter
           end
+          object Label14: TLabel
+            Left = 547
+            Top = 85
+            Width = 90
+            Height = 21
+            AutoSize = False
+            Caption = ' D'#237'as trayecto'
+            Color = cl3DLight
+            ParentColor = False
+            Layout = tlCenter
+          end
           object stCodCliente: TStaticText
             Left = 133
             Top = 17
@@ -347,7 +358,7 @@ object FMClientes: TFMClientes
             Height = 21
             ColorEdit = clMoneyGreen
             MaxLength = 30
-            TabOrder = 11
+            TabOrder = 12
             DataField = 'poblacion_ds'
             DataSource = DSDetalle
           end
@@ -358,7 +369,7 @@ object FMClientes: TFMClientes
             Height = 21
             ColorEdit = clMoneyGreen
             MaxLength = 16
-            TabOrder = 14
+            TabOrder = 15
             DataField = 'telefono_ds'
             DataSource = DSDetalle
           end
@@ -369,7 +380,7 @@ object FMClientes: TFMClientes
             Height = 19
             AutoSize = False
             BorderStyle = sbsSunken
-            TabOrder = 10
+            TabOrder = 11
           end
           object provincia_ds: TBDEdit
             Left = 211
@@ -378,7 +389,7 @@ object FMClientes: TFMClientes
             Height = 21
             ColorEdit = clMoneyGreen
             MaxLength = 30
-            TabOrder = 9
+            TabOrder = 10
             DataField = 'provincia_ds'
             DataSource = DSDetalle
           end
@@ -389,7 +400,7 @@ object FMClientes: TFMClientes
             Height = 21
             ColorEdit = clMoneyGreen
             MaxLength = 8
-            TabOrder = 12
+            TabOrder = 13
             OnChange = pais_dsChange
             DataField = 'pais_ds'
             DataSource = DSDetalle
@@ -401,7 +412,7 @@ object FMClientes: TFMClientes
             Height = 19
             AutoSize = False
             BorderStyle = sbsSunken
-            TabOrder = 13
+            TabOrder = 14
           end
           object nif_ds: TBDEdit
             Left = 645
@@ -422,7 +433,7 @@ object FMClientes: TFMClientes
             Height = 21
             ColorEdit = clMoneyGreen
             MaxLength = 125
-            TabOrder = 15
+            TabOrder = 16
             DataField = 'Email_ds'
             DataSource = DSDetalle
           end
@@ -433,7 +444,7 @@ object FMClientes: TFMClientes
             Height = 21
             ColorEdit = clMoneyGreen
             MaxLength = 125
-            TabOrder = 16
+            TabOrder = 17
             DataField = 'email_fac_ds'
             DataSource = DSDetalle
           end
@@ -454,8 +465,20 @@ object FMClientes: TFMClientes
             Height = 21
             ColorEdit = clMoneyGreen
             MaxLength = 40
-            TabOrder = 17
+            TabOrder = 18
             DataField = 'plataforma_ds'
+            DataSource = DSDetalle
+          end
+          object dias_trayecto_ds: TBDEdit
+            Left = 645
+            Top = 85
+            Width = 42
+            Height = 21
+            ColorEdit = clMoneyGreen
+            OnRequiredTime = RequiredTime
+            MaxLength = 14
+            TabOrder = 9
+            DataField = 'dias_trayecto_ds'
             DataSource = DSDetalle
           end
         end
@@ -600,6 +623,10 @@ object FMClientes: TFMClientes
       object tsDescuentos: TTabSheet
         Caption = 'Descuentos'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object lbl5: TLabel
           Left = 904
           Top = 102
@@ -833,6 +860,10 @@ object FMClientes: TFMClientes
       object tsUnidades: TTabSheet
         Caption = 'Unidades'
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object BtnUniFac: TBitBtn
           Left = 887
           Top = 15
@@ -992,6 +1023,10 @@ object FMClientes: TFMClientes
       object tsRecargo: TTabSheet
         Caption = 'Recargo'
         ImageIndex = 4
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgRecargo: TDBGrid
           Left = 0
           Top = 0
@@ -1063,6 +1098,10 @@ object FMClientes: TFMClientes
       object tsFormaPago: TTabSheet
         Caption = 'Forma Pago'
         ImageIndex = 3
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pnlFormaPago: TPanel
           Left = 0
           Top = 0
@@ -1266,6 +1305,10 @@ object FMClientes: TFMClientes
       object ts1: TTabSheet
         Caption = 'Riesgo Cliente'
         ImageIndex = 5
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgRiesgo: TDBGrid
           Left = 0
           Top = 0
@@ -1369,6 +1412,10 @@ object FMClientes: TFMClientes
       object tsGastos: TTabSheet
         Caption = 'Gastos Fijos'
         ImageIndex = 6
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object DBGrid1: TDBGrid
           Left = 0
           Top = 0
@@ -3451,6 +3498,9 @@ object FMClientes: TFMClientes
     end
     object QSuministrofecha_baja_ds: TDateField
       FieldName = 'fecha_baja_ds'
+    end
+    object QSuministrodias_trayecto_ds: TIntegerField
+      FieldName = 'dias_trayecto_ds'
     end
   end
 end

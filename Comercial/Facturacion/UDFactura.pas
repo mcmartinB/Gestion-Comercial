@@ -289,7 +289,7 @@ begin
                                 FieldByName('fechaFacturacion').AsDatetime);
 
       rImpComision := bRoundTo(FieldByName('importe_neto_sl').AsFloat * rComision/100, 2);
-      rImpDescuento:= bRoundTo((FieldByName('importe_neto_sl').AsFloat - rImpComision) * rDescuento/100, 3);
+      rImpDescuento:= bRoundTo((FieldByName('importe_neto_sl').AsFloat - rImpComision) * rDescuento/100, 2);
       rImpEurosKg := bRoundTo(FieldByName('kilos_sl').AsFloat * rEurosKg);
       rImpEurosPale := bRoundTo(FieldByName('palets_sl').AsFloat * rEurosPale);
 

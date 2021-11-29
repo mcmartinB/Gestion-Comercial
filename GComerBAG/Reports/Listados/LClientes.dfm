@@ -1576,6 +1576,30 @@ object QRLClientes: TQRLClientes
       WordWrap = True
       FontSize = 9
     end
+    object dias_trayecto_ds: TQRDBText
+      Left = 237
+      Top = 2
+      Width = 100
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        627.062500000000000000
+        5.291666666666667000
+        264.583333333333300000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Color = clWhite
+      Transparent = False
+      WordWrap = True
+      FontSize = 10
+    end
   end
   object bndcNotas: TQRChildBand
     Left = 37

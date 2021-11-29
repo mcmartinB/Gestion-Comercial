@@ -266,6 +266,9 @@ type
     lbl8: TLabel;
     eori_cliente_c: TBDEdit;
     albaran_factura_c: TComboBox;
+    Label14: TLabel;
+    dias_trayecto_ds: TBDEdit;
+    QSuministrodias_trayecto_ds: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -1301,6 +1304,7 @@ begin
     QRLClientes.telefono_ds.DataSet := QDirClientes;
     QRLClientes.provincia_ds.DataSet := QDirClientes;
     QRLClientes.pais_ds.DataSet := QDirClientes;
+    QRLClientes.dias_trayecto_ds.DataSet := QDirClientes;
 
     ConsultaOpen(QRLClientes.QDescripciones, false, false);
     Preview(QRLClientes);
@@ -2112,6 +2116,7 @@ begin
             QAuxCli.FieldByName('telefono_ds').AsString:= FieldByName('telefono_ds').AsString;
             QAuxCli.FieldByName('provincia_ds').AsString:= FieldByName('provincia_ds').AsString;
             QAuxCli.FieldByName('pais_ds').AsString:= FieldByName('pais_ds').AsString;
+            QAuxCli.FieldByName('dias_trayecto_ds').AsString:= FieldByName('dias_trayecto_ds').AsString;
             try
               QAuxCli.Post;
             except
