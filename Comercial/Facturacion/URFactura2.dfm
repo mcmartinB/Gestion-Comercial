@@ -4621,6 +4621,7 @@ object RFactura2: TRFactura2
     Frame.DrawRight = True
     AfterPrint = CabeceraGastosAfterPrint
     AlignToBottom = False
+    BeforePrint = CabeceraGastosBeforePrint
     Color = cl3DLight
     Enabled = False
     TransparentBand = False
