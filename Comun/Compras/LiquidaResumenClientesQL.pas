@@ -185,6 +185,12 @@ type
     q18: TQRLabel;
     qTotalPeso: TQRLabel;
     qTotalImporte: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRDBText12: TQRDBText;
+    QRExpr55: TQRExpr;
+    QRExpr56: TQRExpr;
+    QRExpr57: TQRExpr;
+    QRExpr58: TQRExpr;
     procedure qrdbtxtliq_categoria1Print(sender: TObject;
       var Value: String);
     procedure qrdbtxt3Print(sender: TObject; var Value: String);
@@ -264,6 +270,7 @@ begin
     qrdbtxtliq_importe_beneficio.DataField:= 'res_importe_beneficio';
     qrdbtxtliq_importe_financiero.DataField:= 'res_importe_financiero';
     qrdbtxtliq_importe_flete.DataField:= 'res_importe_flete';
+    QRDBText12.DataField := 'res_importe_indirecto_almacen';
   end
   else
   begin
@@ -276,6 +283,7 @@ begin
     qrdbtxtliq_importe_beneficio.DataField:= 'res_precio_beneficio';
     qrdbtxtliq_importe_financiero.DataField:= 'res_precio_financiero';
     qrdbtxtliq_importe_flete.DataField:= 'res_precio_flete';
+    QRDBText12.DataField := 'res_precio_indirecto_almacen';
   end;
 end;
 

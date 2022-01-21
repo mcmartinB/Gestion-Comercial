@@ -3,7 +3,7 @@ unit LiqProdVendidoSalidasDM;
 interface
 
 uses
-  SysUtils, Classes, DB, DBTables, LiqProdVendidoDM, DateUtils;
+  SysUtils, Classes, DB, DBTables, LiqProdVendidoDM, DateUtils, bMath;
 
 type
   TDMLiqProdVendidoSalidas = class(TDataModule)
@@ -448,7 +448,7 @@ begin
   iCodigo:= ACodigo;
 
   i:= 0;
-  while (skilos_total < AKilosTotal ) And ( dFechaFin < Now ) do
+  while (bRoundTo(skilos_total, 2) < AKilosTotal ) And ( dFechaFin < Now ) do
   begin
     dFechaIni:= ADesde + ( 7 * i );
     dFechaFin:= AHasta + ( 7 * i );

@@ -131,21 +131,21 @@ object FLLiquidaPlatanoInforme: TFLLiquidaPlatanoInforme
   end
   object lbl3: TLabel
     Left = 29
-    Top = 282
+    Top = 306
     Width = 92
     Height = 13
     Caption = 'Tte. Cliente M'#237'nimo'
   end
   object lbl4: TLabel
     Left = 29
-    Top = 305
+    Top = 329
     Width = 99
     Height = 13
     Caption = 'Tte. Canario  M'#237'nimo'
   end
   object lbl5: TLabel
     Left = 29
-    Top = 328
+    Top = 352
     Width = 119
     Height = 13
     Caption = 'Coste Envasado  M'#237'nimo'
@@ -233,6 +233,13 @@ object FLLiquidaPlatanoInforme: TFLLiquidaPlatanoInforme
     Caption = 'Producto'
     About = 'NB 0.1/20020725'
   end
+  object Label1: TLabel
+    Left = 30
+    Top = 263
+    Width = 92
+    Height = 13
+    Caption = 'Coste Ind. Almacen'
+  end
   object edtAnyoSem: TBEdit
     Left = 137
     Top = 45
@@ -317,7 +324,7 @@ object FLLiquidaPlatanoInforme: TFLLiquidaPlatanoInforme
   end
   object edtMinimoTteCliente: TBEdit
     Left = 138
-    Top = 278
+    Top = 302
     Width = 61
     Height = 21
     ColorEdit = clMoneyGreen
@@ -328,7 +335,7 @@ object FLLiquidaPlatanoInforme: TFLLiquidaPlatanoInforme
   end
   object edtMinimoTteCanario: TBEdit
     Left = 138
-    Top = 301
+    Top = 325
     Width = 61
     Height = 21
     ColorEdit = clMoneyGreen
@@ -339,7 +346,7 @@ object FLLiquidaPlatanoInforme: TFLLiquidaPlatanoInforme
   end
   object edtMinimoCosteEnvasado: TBEdit
     Left = 138
-    Top = 324
+    Top = 348
     Width = 61
     Height = 21
     ColorEdit = clMoneyGreen
@@ -472,5 +479,13 @@ object FLLiquidaPlatanoInforme: TFLLiquidaPlatanoInforme
     Zeros = True
     MaxLength = 3
     TabOrder = 4
+  end
+  object chkIndirecto: TCheckBox
+    Left = 216
+    Top = 262
+    Width = 113
+    Height = 17
+    Caption = 'Excluir en Informe'
+    TabOrder = 24
   end
 end

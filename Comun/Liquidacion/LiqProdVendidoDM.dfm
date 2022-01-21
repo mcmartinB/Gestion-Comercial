@@ -179,4 +179,12 @@ object DMLiqProdVendido: TDMLiqProdVendido
     Left = 408
     Top = 347
   end
+  object dlgSaveFile: TSaveDialog
+    DefaultExt = 'csv'
+    FileName = 'InformeSalidas'
+    Filter = '*.csv|*.csv'
+    InitialDir = 'c:\tmp'
+    Left = 452
+    Top = 24
+  end
 end

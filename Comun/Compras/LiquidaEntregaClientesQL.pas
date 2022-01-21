@@ -111,7 +111,6 @@ type
     qrdbtxtliq_proveedor1: TQRDBText;
     qrlbl1: TQRLabel;
     qrbnd1: TQRBand;
-    qrsysdt1: TQRSysData;
     qrdbtxtliq_cliente_sal: TQRDBText;
     qrdbtxtliq_proveedor: TQRDBText;
     qrdbtxtliq_kilos_liquidar: TQRDBText;
@@ -130,6 +129,12 @@ type
     qrlbl21: TQRLabel;
     qrlbl22: TQRLabel;
     qrlbl23: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRDBText1: TQRDBText;
+    QRExpr1: TQRExpr;
+    QRExpr2: TQRExpr;
+    QRExpr3: TQRExpr;
+    QRExpr4: TQRExpr;
     procedure qrdbtxtliq_proveedorPrint(sender: TObject; var Value: String);
     procedure qrdbtxtliq_categoria1Print(sender: TObject;
       var Value: String);
@@ -163,12 +168,13 @@ uses LiquidaEntregaDL, UDMAuxDB,  DPreview, CReportes;
 procedure PrevisualizarClientes( const AEmpresa, AProducto: string; const APrecios: boolean );
 var
   QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes;
-  sAux: string;
+  sAux, campo: string;
 begin
   QLLiquidaEntregaClientes := TQLLiquidaEntregaClientes.Create(Application);
   PonLogoGrupoBonnysa(QLLiquidaEntregaClientes, AEmpresa);
   QLLiquidaEntregaClientes.VerPrecios( APrecios );
   sAux:= QLLiquidaEntregaClientes.DataSet.FieldByName('liq_anyo_semana').AsString;
+  campo := QLLiquidaEntregaClientes.DataSet.FieldByName('liq_importe_indirecto_almacen').AsString;
   QLLiquidaEntregaClientes.sProducto := AProducto;
   QLLiquidaEntregaClientes.qrlblTitulo.Caption:= 'INFORME POR CLIENTE ' + AEmpresa  + ' - SEMANA ' + sAux + ' ' + AProducto + ' - ' + desProducto('', AProducto);
   QLLiquidaEntregaClientes.ReportTitle:= 'INFORME_POR_CLIENTE_' + AEmpresa  + '_SEMANA_' + sAux + '_' + AProducto;
@@ -188,6 +194,7 @@ begin
     qrdbtxtpal_importe_general.DataField:= 'liq_importe_liquidar';
     qrdbtxtliq_importe_beneficio.DataField:= 'liq_importe_beneficio';
     qrdbtxtliq_importe_financiero.DataField:= 'liq_importe_financiero';
+    QRDBText1.DataField := 'liq_importe_indirecto_almacen';
   end
   else
   begin
@@ -200,6 +207,7 @@ begin
     qrdbtxtpal_importe_general.DataField:= 'liq_precio_liquidar';
     qrdbtxtliq_importe_beneficio.DataField:= 'liq_precio_beneficio';
     qrdbtxtliq_importe_financiero.DataField:= 'liq_precio_financiero';
+    QRDBText1.DataField := 'liq_precio_indirecto_almacen';
   end;
 end;
 

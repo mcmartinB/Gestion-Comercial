@@ -16,7 +16,7 @@ uses
   cxPC, ActnList, SQLExprEdit, SQLExprStrEdit, SQLExprIntEdit, SQLExprDateEdit,
   dxSkinsCore, dxSkinBlue, dxSkinFoggy, dxSkinscxPCPainter,  dxSkinsdxBarPainter, dxSkinMoneyTwins,
   dxSkinBlueprint, nbLabels, DBTables, bTextUtils, cxGridBandedTableView,
-  cxGridDBBandedTableView;
+  cxGridDBBandedTableView, dxSkinDevExpressStyle;
 
 type
   TFArticuloDesgloseSal = class(TForm)
@@ -76,6 +76,7 @@ type
     tvMarca: TcxGridDBColumn;
     btnSeleccionar: TcxButton;
     btnCancelar: TcxButton;
+    dxImprimir: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
     procedure dxLocalizarClick(Sender: TObject);
     procedure dxSalirClick(Sender: TObject);
@@ -103,10 +104,12 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure dxModificarGrupoClick(Sender: TObject);
     procedure tvMarcaPropertiesChange(Sender: TObject);
+    procedure dxImprimirClick(Sender: TObject);
   private
     QArtDesglose, QSalidasL2: TBonnyClientDataSet;
     dFechaIni, dFechaFin: TDateTime;
 
+    procedure MontarConsultaArticulosDesglose;
     procedure CreaQArtDesglose;
     procedure CreaQSalidasL2;
     function EjecutaQArtDesglose: boolean;
@@ -136,7 +139,7 @@ implementation
 
 {$R *.dfm}                                          
 uses CGestionPrincipal, CVariables, UDMAuxDB, ArticuloDesgloseSalMod, Principal, UDMBaseDatos,
-  ArticuloDesgloseGruMod;
+  ArticuloDesgloseGruMod, ArticuloDesgloseSalQR, CReportes, DPreview;
 
 
 function TFArticuloDesgloseSal.ComprobacionDatos(var AArticulo, AProducto: string): boolean;
@@ -246,6 +249,80 @@ begin
   CreaQArtDesglose;
   CreaQSalidasL2;
 end;
+
+procedure TFArticuloDesgloseSal.dxImprimirClick(Sender: TObject);
+var
+  QRArticulosDesglose: TQRArticuloDesgloseSal;
+begin
+    QRArticulosDesglose:= TQRArticuloDesgloseSal.Create( Application );
+  try
+    MontarConsultaArticulosDesglose;
+    PonLogoGrupoBonnysa( QRArticulosDesglose );
+    Preview(QRArticulosDesglose);
+    DMAuxDB.QArticulosDesglose.Close;
+  except
+    FreeAndNil( QRArticulosDesglose );
+  end;
+end;
+
+procedure TFArticuloDesgloseSal.MontarConsultaArticulosDesglose;
+begin
+  with DMAuxDB.QArticulosDesglose do
+  begin
+    if Active then
+      Close;
+    SQL.Clear;
+    SQL.Add(' select salc.empresa_sc, salc.centro_salida_sc, salc.n_albaran_sc, salc.fecha_sc, cli.cliente_c, cli.nombre_c, ');
+    SQL.Add(' sall.id_linea_albaran_sl, sall.envase_sl,	sall2.producto_sl2,	sall.categoria_sl,	sall.kilos_sl,	sall2.producto_desglose_sl2,	sall2.porcentaje_sl2,	sall2.kilos_desglose_sl2 ');
+    SQL.Add(' from frf_salidas_c salc ');
+    SQL.Add('   left join frf_clientes cli on salc.cliente_sal_sc = cli.cliente_c ');
+    SQL.Add('   left join frf_salidas_l sall on salc.empresa_sc = sall.empresa_sl ');
+    SQL.Add('     and salc.centro_salida_sc = sall.centro_salida_sl ');
+    SQL.Add('     and salc.n_albaran_sc = sall.n_albaran_sl ');
+    SQL.Add('     and salc.fecha_sc = sall.fecha_sl ');
+    SQL.Add('   join frf_salidas_l2 sall2 on sall2.empresa_sl2 = salc.empresa_sc ');
+    SQL.Add('     and sall2.centro_salida_sl2 = salc.centro_salida_sc ');
+    SQL.Add('     and sall2.n_albaran_sl2 = salc.n_albaran_sc ');
+    SQL.Add('     and sall2.fecha_sl2 = salc.fecha_sc ');
+    SQL.Add('     and sall2.id_linea_albaran_sl2 = sall.id_linea_albaran_sl ');
+    SQL.Add('  where 1=1 ');
+
+    if cxFechaIni.Text <> '' then
+      SQL.Add(' and salc.fecha_sc >= :fecha_ini ');
+    if cxFechaFin.Text <> '' then
+      SQL.Add(' and salc.fecha_sc <= :fecha_fin ');
+    if cxEmpresa.Text <> '' then
+      SQL.Add(' and salc.empresa_sc = :empresa');
+    if cxCentro.Text <> '' then
+      SQL.Add(' and salc.centro_salida_sc = :centro ');
+    if cxAlbaran.Text <> '' then
+      SQL.Add(' and salc.n_albaran_sc = :albaran');
+    if cxArticulo.Text <> '' then
+      SQL.Add(' and sall.envase_sl = :articulo ');
+    if cxProducto.Text <> '' then
+      SQL.Add(' and sall2.producto_desglose_sl2 = :producto_desglose ');
+
+    SQL.Add(' order by 1,2,3,4,7,12 ');
+
+    if cxFechaIni.Text <> '' then
+      ParamByName('fecha_ini').asDate := cxFechaIni.Date;
+    if cxFechaFin.Text <> '' then
+      ParamByName('fecha_fin').asDate := cxFechaFin.Date;
+    if cxEmpresa.Text <> '' then
+      ParamByName('empresa').asString := cxEmpresa.Text;
+    if cxCentro.Text <> '' then
+      ParamByName('centro').AsInteger := StrToInt(cxCentro.Text);
+    if cxAlbaran.Text <> '' then
+      ParamByName('albaran').asString := cxAlbaran.Text;
+    if cxArticulo.Text <> '' then
+      ParamByName('articulo').asString := cxArticulo.Text;
+    if cxProducto.Text <> '' then
+      ParamByName('producto_desglose').asString := cxProducto.Text;
+    
+    Open;
+  end;
+end;
+
 
 procedure TFArticuloDesgloseSal.dxLimpiarClick(Sender: TObject);
 begin

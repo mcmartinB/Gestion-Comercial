@@ -341,4 +341,9 @@ object DLLiquidaEntrega: TDLLiquidaEntrega
     Left = 197
     Top = 537
   end
+  object qryAux: TQuery
+    DatabaseName = 'BDProyecto'
+    Left = 752
+    Top = 128
+  end
 end

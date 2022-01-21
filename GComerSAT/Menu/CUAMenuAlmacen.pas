@@ -23,9 +23,9 @@ begin
   if AOpcion = 'mnuAlmInventario' then
     CrearVentana( AForm, TFInventario)
   else
-  if AOpcion = 'mnuAlmInventario' then
-    CrearVentana( AForm, TFConfeccionadoPorEnvases)
-  else
+//  if AOpcion = 'mnuAlmInventario' then
+//    CrearVentana( AForm, TFConfeccionadoPorEnvases)
+//  else
   if AOpcion = 'mnuAlmConfeccionadoEnvases' then
     CrearVentana( AForm, TFConfeccionadoPorEnvases)
   else

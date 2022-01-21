@@ -845,7 +845,8 @@ uses
   LiqProdVendidoTransitosDM in 'Comun\Liquidacion\LiqProdVendidoTransitosDM.pas' {DMLiqProdVendidoTransitos: TDataModule},
   LiqProdVendidoDM in 'Comun\Liquidacion\LiqProdVendidoDM.pas' {DMLiqProdVendido: TDataModule},
   UDLDeclaracionResponsable in 'Comun\Salidas\UDLDeclaracionResponsable.pas' {DLDeclaracionResponsable: TDataModule},
-  LDeclaracionResponsable in 'Comun\Salidas\LDeclaracionResponsable.pas' {QLDeclaracionResponsable: TQuickRep};
+  LDeclaracionResponsable in 'Comun\Salidas\LDeclaracionResponsable.pas' {QLDeclaracionResponsable: TQuickRep},
+  ArticuloDesgloseSalQR in 'Comun\Salidas\ArticuloDesgloseSalQR.pas' {QRArticuloDesgloseSal: TQuickRep};
 
 (*COMERBAG*)
 

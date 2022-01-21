@@ -157,7 +157,7 @@ begin
                                             StrToFloatDef( edtCostesFinancierosV.Text,0 ),
                                             StrToFloatDef( edtCostesFinancierosC.Text,0 ),
                                             0,
-                                            false, False,
+                                            false, false, false,
                                             StrToFloatDef( edtMinimoTteCliente.Text,0 ),
                                             StrToFloatDef( edtMinimoTteCanario.Text,0 ),
                                             StrToFloatDef( edtMinimoCosteEnvasado.Text,0 ) );

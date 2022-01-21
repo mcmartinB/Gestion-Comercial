@@ -244,4 +244,9 @@ object DMAuxDB: TDMAuxDB
         ParamType = ptUnknown
       end>
   end
+  object QArticulosDesglose: TQuery
+    DatabaseName = 'BDProyecto'
+    Left = 416
+    Top = 296
+  end
 end

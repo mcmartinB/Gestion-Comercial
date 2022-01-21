@@ -113,7 +113,12 @@ type
     qrdbtxtliq_proveedor1: TQRDBText;
     qrlbl1: TQRLabel;
     qrbnd1: TQRBand;
-    qrsysdt1: TQRSysData;
+    QRLabel1: TQRLabel;
+    QRDBText1: TQRDBText;
+    QRExpr1: TQRExpr;
+    QRExpr2: TQRExpr;
+    QRExpr3: TQRExpr;
+    QRExpr4: TQRExpr;
     procedure qrdbtxtliq_proveedorPrint(sender: TObject; var Value: String);
     procedure qrdbtxtliq_categoria1Print(sender: TObject;
       var Value: String);
@@ -146,12 +151,13 @@ uses LiquidaEntregaDL, UDMAuxDB,  DPreview, CReportes;
 procedure PrevisualizarLiquidacion( const AEmpresa, AProducto: string; const APrecios: boolean );
 var
   QLLiquidaEntregaProveedores: TQLLiquidaEntregaProveedores;
-  sAux: string;
+  sAux, campo: string;
 begin
   QLLiquidaEntregaProveedores := TQLLiquidaEntregaProveedores.Create(Application);
   PonLogoGrupoBonnysa(QLLiquidaEntregaProveedores, AEmpresa);
   QLLiquidaEntregaProveedores.VerPrecios( APrecios );
   sAux:= QLLiquidaEntregaProveedores.DataSet.FieldByName('liq_anyo_semana').AsString;
+  campo := QLLiquidaEntregaProveedores.DataSet.FieldByName('liq_importe_indirecto_almacen').AsString;
   QLLiquidaEntregaProveedores.sProducto := AProducto;
   QLLiquidaEntregaProveedores.qrlblTitulo.Caption:= 'INFORME POR PRODUCTOR ' + AEmpresa  + ' - SEMANA ' + sAux + ' ' + AProducto + ' - ' + desProducto('', AProducto);
   QLLiquidaEntregaProveedores.ReportTitle:= 'INFORME_POR_PRODUCTOR_' + AEmpresa  + '_SEMANA_' + sAux + '_' + AProducto;
@@ -170,6 +176,7 @@ begin
     qrdbtxtpal_importe_general.DataField:= 'liq_importe_liquidar';
     qrdbtxtliq_importe_beneficio.DataField:= 'liq_importe_beneficio';
     qrdbtxtliq_importe_financiero.DataField:= 'liq_importe_financiero';
+    QRDBText1.DataField := 'liq_importe_indirecto_almacen';
   end
   else
   begin
@@ -181,6 +188,7 @@ begin
     qrdbtxtpal_importe_general.DataField:= 'liq_precio_liquidar';
     qrdbtxtliq_importe_beneficio.DataField:= 'liq_precio_beneficio';
     qrdbtxtliq_importe_financiero.DataField:= 'liq_precio_financiero';
+    QRDBText1.DataField := 'liq_precio_indirecto_almacen';
   end;
 end;
 

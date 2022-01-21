@@ -79,9 +79,9 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
     KeepOnOnePage = False
     BandType = rbPageHeader
     object PsQRSysData3: TQRSysData
-      Left = -27
-      Top = 0
-      Width = 42
+      Left = 939
+      Top = 33
+      Width = 58
       Height = 12
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -90,12 +90,12 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         31.750000000000000000
-        2659.062500000000000000
-        0.000000000000000000
-        111.125000000000000000)
+        2484.437500000000000000
+        87.312500000000000000
+        153.458333333333300000)
       Alignment = taRightJustify
-      AlignToBand = True
-      AutoSize = True
+      AlignToBand = False
+      AutoSize = False
       Color = clWhite
       Data = qrsDateTime
       Font.Charset = DEFAULT_CHARSET
@@ -396,7 +396,7 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       AlignToBand = False
       AutoSize = False
       AutoStretch = False
-      Caption = 'Rappel'
+      Caption = 'Com.Cliente'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -502,7 +502,7 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrlbl11: TQRLabel
-      Left = 939
+      Left = 999
       Top = 2
       Width = 50
       Height = 15
@@ -513,14 +513,14 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2484.437500000000000000
-        5.291666666666670000
-        132.291666666667000000)
+        2643.187500000000000000
+        5.291666666666667000
+        132.291666666666700000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
       AutoStretch = False
-      Caption = 'Liquidar'
+      Caption = #8364'/Kg.Neto'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -737,7 +737,7 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       AlignToBand = False
       AutoSize = False
       AutoStretch = False
-      Caption = 'C.Financiero'
+      Caption = 'C.Estructura'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -750,7 +750,7 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrlbl16: TQRLabel
-      Left = 986
+      Left = 1052
       Top = 2
       Width = 60
       Height = 15
@@ -761,14 +761,14 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2608.791666666670000000
-        5.291666666666670000
+        2783.416666666667000000
+        5.291666666666667000
         158.750000000000000000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
       AutoStretch = False
-      Caption = 'Importe'
+      Caption = #8364' Neto'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -831,6 +831,37 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       AutoSize = False
       AutoStretch = False
       Caption = 'Venta'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 8
+    end
+    object QRLabel1: TQRLabel
+      Left = 939
+      Top = 2
+      Width = 58
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        2484.437500000000000000
+        5.291666666666667000
+        153.458333333333300000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Caption = 'Ind.Almac'#233'n'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1227,7 +1258,7 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrdbtxtpal_importe_general: TQRDBText
-      Left = 939
+      Left = 999
       Top = 0
       Width = 50
       Height = 15
@@ -1238,9 +1269,9 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2484.437500000000000000
+        2643.187500000000000000
         0.000000000000000000
-        132.291666666667000000)
+        132.291666666666700000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
@@ -1358,7 +1389,7 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrdbtxtliq_importe_liquidar: TQRDBText
-      Left = 986
+      Left = 1052
       Top = 0
       Width = 60
       Height = 15
@@ -1369,7 +1400,7 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2608.791666666670000000
+        2783.416666666667000000
         0.000000000000000000
         158.750000000000000000)
       Alignment = taRightJustify
@@ -1445,6 +1476,39 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Color = clWhite
       DataSet = DLLiquidaEntrega.kmtLiquidacion
       DataField = 'liq_precio_bruto'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      Mask = '#,##0.000'
+      ParentFont = False
+      Transparent = True
+      WordWrap = True
+      FontSize = 8
+    end
+    object QRDBText1: TQRDBText
+      Left = 939
+      Top = 0
+      Width = 58
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        2484.437500000000000000
+        0.000000000000000000
+        153.458333333333300000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Color = clWhite
+      DataSet = DLLiquidaEntrega.kmtLiquidacion
+      DataField = 'liq_importe_indirecto_almacen'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -1710,8 +1774,8 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrxpr16: TQRExpr
-      Left = 986
-      Top = 1
+      Left = 1052
+      Top = 3
       Width = 60
       Height = 15
       Frame.Color = clBlack
@@ -1721,8 +1785,8 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2608.791666666670000000
-        2.645833333333330000
+        2783.416666666667000000
+        7.937500000000000000
         158.750000000000000000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1908,8 +1972,8 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrxpr22: TQRExpr
-      Left = 939
-      Top = 2
+      Left = 999
+      Top = 3
       Width = 50
       Height = 15
       Frame.Color = clBlack
@@ -1919,9 +1983,9 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2484.437500000000000000
-        5.291666666666670000
-        132.291666666667000000)
+        2643.187500000000000000
+        7.937500000000000000
+        132.291666666666700000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
@@ -2023,6 +2087,39 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Expression = 
         'IF([liq_kilos_liquidar]=0,0,sum(liq_importe_neto)/sum([liq_kilos' +
         '_liquidar]))'
+      Mask = '#,##0.000'
+      FontSize = 8
+    end
+    object QRExpr1: TQRExpr
+      Left = 939
+      Top = 3
+      Width = 58
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        2484.437500000000000000
+        7.937500000000000000
+        153.458333333333300000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      Color = clWhite
+      ParentFont = False
+      ResetAfterPrint = True
+      Transparent = False
+      WordWrap = True
+      Expression = 'sum(liq_importe_indirecto_almacen)/sum(liq_kilos_teoricos)'
       Mask = '#,##0.000'
       FontSize = 8
     end
@@ -2546,8 +2643,8 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrxpr9: TQRExpr
-      Left = 986
-      Top = 4
+      Left = 1052
+      Top = 5
       Width = 60
       Height = 15
       Frame.Color = clBlack
@@ -2557,8 +2654,8 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2608.791666666670000000
-        10.583333333333300000
+        2783.416666666667000000
+        13.229166666666670000
         158.750000000000000000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2645,7 +2742,7 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrxpr19: TQRExpr
-      Left = 939
+      Left = 999
       Top = 5
       Width = 50
       Height = 15
@@ -2656,9 +2753,9 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2484.437500000000000000
-        13.229166666666700000
-        132.291666666667000000)
+        2643.187500000000000000
+        13.229166666666670000
+        132.291666666666700000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
@@ -2776,6 +2873,39 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Mask = '#,##0.000'
       FontSize = 8
     end
+    object QRExpr4: TQRExpr
+      Left = 939
+      Top = 5
+      Width = 58
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        2484.437500000000000000
+        13.229166666666670000
+        153.458333333333300000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      Color = clWhite
+      ParentFont = False
+      ResetAfterPrint = False
+      Transparent = False
+      WordWrap = True
+      Expression = 'sum(liq_importe_indirecto_almacen)/sum(liq_kilos_teoricos)'
+      Mask = '#,##0.000'
+      FontSize = 8
+    end
   end
   object qrbndPieCategoria: TQRBand
     Left = 38
@@ -2801,7 +2931,7 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
     object qrshpCategoria: TQRShape
       Left = 37
       Top = 4
-      Width = 1010
+      Width = 1180
       Height = 23
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -2809,10 +2939,10 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawLeft = False
       Frame.DrawRight = False
       Size.Values = (
-        60.854166666666700000
-        97.895833333333300000
-        10.583333333333300000
-        2672.291666666670000000)
+        60.854166666666670000
+        97.895833333333330000
+        10.583333333333330000
+        3122.083333333333000000)
       Brush.Color = 15329769
       Pen.Width = 3
       Shape = qrsRectangle
@@ -3116,8 +3246,8 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrxpr32: TQRExpr
-      Left = 939
-      Top = 8
+      Left = 999
+      Top = 9
       Width = 50
       Height = 15
       Frame.Color = clBlack
@@ -3127,9 +3257,9 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2484.437500000000000000
-        21.166666666666700000
-        132.291666666667000000)
+        2643.187500000000000000
+        23.812500000000000000
+        132.291666666666700000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
@@ -3149,8 +3279,8 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrxpr33: TQRExpr
-      Left = 986
-      Top = 7
+      Left = 1052
+      Top = 8
       Width = 60
       Height = 15
       Frame.Color = clBlack
@@ -3160,8 +3290,8 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2608.791666666670000000
-        18.520833333333300000
+        2783.416666666667000000
+        21.166666666666670000
         158.750000000000000000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -3282,6 +3412,39 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Mask = '#,##0.000'
       FontSize = 8
     end
+    object QRExpr2: TQRExpr
+      Left = 939
+      Top = 8
+      Width = 58
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        2484.437500000000000000
+        21.166666666666670000
+        153.458333333333300000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      Color = clWhite
+      ParentFont = False
+      ResetAfterPrint = True
+      Transparent = True
+      WordWrap = True
+      Expression = 'sum(liq_importe_indirecto_almacen)/sum(liq_kilos_teoricos)'
+      Mask = '#,##0.000'
+      FontSize = 8
+    end
   end
   object bndcChildBand2: TQRChildBand
     Left = 38
@@ -3363,7 +3526,7 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
     object qrshp1: TQRShape
       Left = 0
       Top = 9
-      Width = 1047
+      Width = 1217
       Height = 22
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -3371,10 +3534,10 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawLeft = False
       Frame.DrawRight = False
       Size.Values = (
-        58.208333333333300000
+        58.208333333333330000
         0.000000000000000000
         23.812500000000000000
-        2770.187500000000000000)
+        3219.979166666667000000)
       Brush.Color = clSilver
       Pen.Width = 3
       Shape = qrsRectangle
@@ -3678,8 +3841,8 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrxpr43: TQRExpr
-      Left = 939
-      Top = 13
+      Left = 999
+      Top = 12
       Width = 50
       Height = 15
       Frame.Color = clBlack
@@ -3689,9 +3852,9 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2484.437500000000000000
-        34.395833333333300000
-        132.291666666667000000)
+        2643.187500000000000000
+        31.750000000000000000
+        132.291666666666700000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
@@ -3711,8 +3874,8 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       FontSize = 8
     end
     object qrxpr44: TQRExpr
-      Left = 986
-      Top = 12
+      Left = 1052
+      Top = 13
       Width = 60
       Height = 15
       Frame.Color = clBlack
@@ -3722,8 +3885,8 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2608.791666666670000000
-        31.750000000000000000
+        2783.416666666667000000
+        34.395833333333330000
         158.750000000000000000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -3844,6 +4007,39 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
       Mask = '#,##0.000'
       FontSize = 8
     end
+    object QRExpr3: TQRExpr
+      Left = 939
+      Top = 12
+      Width = 58
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        2484.437500000000000000
+        31.750000000000000000
+        153.458333333333300000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      Color = clWhite
+      ParentFont = False
+      ResetAfterPrint = True
+      Transparent = True
+      WordWrap = True
+      Expression = 'sum(liq_importe_indirecto_almacen)/sum(liq_kilos_teoricos)'
+      Mask = '#,##0.000'
+      FontSize = 8
+    end
   end
   object qrbnd1: TQRBand
     Left = 38
@@ -3866,35 +4062,5 @@ object QLLiquidaEntregaClientes: TQLLiquidaEntregaClientes
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     BandType = rbPageFooter
-    object qrsysdt1: TQRSysData
-      Left = 974
-      Top = 0
-      Width = 73
-      Height = 11
-      Frame.Color = clBlack
-      Frame.DrawTop = False
-      Frame.DrawBottom = False
-      Frame.DrawLeft = False
-      Frame.DrawRight = False
-      Size.Values = (
-        29.104166666666670000
-        2577.041666666667000000
-        0.000000000000000000
-        193.145833333333300000)
-      Alignment = taRightJustify
-      AlignToBand = True
-      AutoSize = True
-      Color = clWhite
-      Data = qrsPageNumber
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -8
-      Font.Name = 'Arial'
-      Font.Style = []
-      ParentFont = False
-      Text = 'P'#225'gina num.:'
-      Transparent = False
-      FontSize = 6
-    end
   end
 end

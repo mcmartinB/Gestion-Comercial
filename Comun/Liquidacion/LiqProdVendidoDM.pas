@@ -3,7 +3,7 @@ unit LiqProdVendidoDM;
 interface
 
 uses
-  SysUtils, Classes, DB, DBTables, kbmMemTable, StdCtrls, bMath, Math;
+  SysUtils, Classes, DB, DBTables, kbmMemTable, StdCtrls, bMath, Math, Dialogs;
 
 type
   R_KilosEntradas = record
@@ -36,6 +36,7 @@ type
     qryTransitoLlanos: TQuery;
     qryTransitoCentral: TQuery;
     qryTransitoMoradas: TQuery;
+    dlgSaveFile: TSaveDialog;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -91,6 +92,8 @@ type
     //procedure ImportesPlantacion;
     procedure  PonerFechaTransito;
 
+    procedure CrearCsv( const ATabla: TkbmMemTable );
+
   public
     { Public declarations }
     bSoloAjuste: boolean;
@@ -133,7 +136,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DateUtils, bTimeUtils, LiqProdVendidoEntradasDM, Forms, Dialogs,
+  DateUtils, bTimeUtils, LiqProdVendidoEntradasDM, Forms,
   LiqProdVendidoBDDatosDM, LiqProdVendidoSalidasDM, Variants,
   LiqProdVendidoPlanQR, LiqProdVendidoCosQR, LiqProdVendidoResumenQR,
   LiqProdALiquidarQR, LiqProdVendidoTransitosDM, LiqProdInfLiquidacionQR,
@@ -716,6 +719,10 @@ begin
       //la que no podamos asiganar debe de estar es su propia categoria sin asignar -> las entradas mas recientes.
       EntradasSalidas;
 
+      // Guardar csv con informacion de tablas temporales
+      //CrearCsv(kmtEntradas);
+      //CrearCsv(kmtSalidas);
+      //CrearCsv(kmtInOut);
 
       PreparaLiquidacion;
 
@@ -731,6 +738,52 @@ begin
       //ShowMessage('No hay entradas ni stock inicial.');
     end;
     dFechaIni:= dFechaIni + 7;
+  end;
+end;
+
+function CsvField( AField: TField ): string;
+begin
+  if AField.DataType = ftString then
+    result:= '"' + AField.AsString + '"'
+  else
+  if AField.DataType = ftInteger  then
+    Result:= AField.AsString
+  else
+  if AField.DataType = ftFloat  then
+    Result:= StringReplace( FormatFloat( '#.#', AField.AsFloat ), ',', '.', [] )
+  else
+  if ( AField.DataType = ftDate ) or ( AField.DataType = ftDateTime ) then
+    Result:= '"' + FormatDateTime( 'dd/mm/yyyy', AField.AsDateTime ) + '"';
+end;
+
+procedure TDMLiqProdVendido.CrearCsv( const ATabla: TkbmMemTable );
+var
+  slCsvFile: TStringList;
+  sAux: string;
+  i: Integer;
+begin
+  if dlgSaveFile.Execute then
+  begin
+    slCsvFile:= TStringList.Create;
+    ATabla.First;
+    while not ATabla.Eof do
+    begin
+      i:= 0;
+      sAux:= '';
+      sAux:= CsvField( ATabla.Fields[i] );
+      for i:= 1 to ATabla.FieldCount - 1 do
+      begin
+        sAux:= sAux + ';' + CsvField( ATabla.Fields[i] );
+      end;
+      slCsvFile.Add( sAux );
+      ATabla.Next;
+    end;
+    try
+      slCsvFile.SaveToFile( dlgSaveFile.FileName );
+      ShowMessage('Proceso finalizado correctamente.');
+    finally
+      FreeAndNil( slCsvFile );
+    end;
   end;
 end;
 

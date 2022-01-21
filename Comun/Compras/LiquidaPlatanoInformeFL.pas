@@ -51,6 +51,8 @@ type
     chkFlete: TCheckBox;
     nbLabel1: TnbLabel;
     edtProducto: TBEdit;
+    chkIndirecto: TCheckBox;
+    Label1: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -64,7 +66,7 @@ type
 
   private
     sEmpresa, sAnyoSemana, sProveedor, sProductor, sProducto, sEntrega: string;
-    bPrecios, bProveedores, bClientes, bDestrio, bPlacero, bCargado, bVolcado, bFinancierosCargados, bFinancierosVolcados, bFlete: Boolean;
+    bPrecios, bProveedores, bClientes, bDestrio, bPlacero, bCargado, bVolcado, bFinancierosCargados, bFinancierosVolcados, bFlete, bIndirecto: Boolean;
     rMargen, rFinancierosCargados, rFinancierosVolcados, rFlete, rMinCliente, rMinTenerife, rMinEnvasado: Real;
 
     function ValidarParametros: Boolean;
@@ -214,6 +216,7 @@ begin
     bFlete:=chkFlete.Checked;
     bFinancierosCargados:=chkFinancieroCarga.Checked;
     bFinancierosVolcados:=chkFinancieroVolcado.Checked;
+    bIndirecto:= chkIndirecto.Checked;
 
     bDestrio:= chkDestrios.Checked;
     bPlacero:= chkDestrios.Checked;
@@ -237,7 +240,7 @@ begin
   if ValidarParametros then
   begin
     DLLiquidaEntrega.LiquidaEntregasPlatano( Self, sEmpresa, sAnyoSemana, sProveedor, sProductor, sProducto, sEntrega,
-                                             bPrecios, bProveedores, bClientes, bDestrio, bPlacero, bCargado, bVolcado, bFinancierosCargados, bFinancierosVolcados, bFlete,
+                                             bPrecios, bProveedores, bClientes, bDestrio, bPlacero, bCargado, bVolcado, bFinancierosCargados, bFinancierosVolcados, bFlete, bIndirecto,
                                              rMargen, rFinancierosVolcados, rFinancierosCargados, rFlete,
                                              rMinCliente, rMinTenerife, rMinEnvasado );
 

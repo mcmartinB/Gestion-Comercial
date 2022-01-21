@@ -343,7 +343,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       FontSize = 8
     end
     object qrxpr9: TQRExpr
-      Left = 925
+      Left = 986
       Top = 5
       Width = 60
       Height = 15
@@ -354,7 +354,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2447.395833333333000000
+        2608.791666666667000000
         13.229166666666670000
         158.750000000000000000)
       Alignment = taRightJustify
@@ -376,7 +376,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       FontSize = 8
     end
     object qrxpr17: TQRExpr
-      Left = 986
+      Left = 1049
       Top = 5
       Width = 60
       Height = 15
@@ -387,8 +387,8 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2608.791666666670000000
-        13.229166666666700000
+        2775.479166666667000000
+        13.229166666666670000
         158.750000000000000000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -568,6 +568,39 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Transparent = False
       WordWrap = True
       Expression = 'sum(res_importe_flete)/sum(res_kilos_teoricos)'
+      Mask = '#,##0.000'
+      FontSize = 8
+    end
+    object QRExpr3: TQRExpr
+      Left = 925
+      Top = 5
+      Width = 60
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        2447.395833333333000000
+        13.229166666666670000
+        158.750000000000000000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      Color = clWhite
+      ParentFont = False
+      ResetAfterPrint = True
+      Transparent = False
+      WordWrap = True
+      Expression = 'sum(res_importe_indirecto_almacen)/sum(res_kilos_teoricos)'
       Mask = '#,##0.000'
       FontSize = 8
     end
@@ -820,7 +853,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       AlignToBand = False
       AutoSize = False
       AutoStretch = False
-      Caption = 'Rappel'
+      Caption = 'Com.Cliente'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -926,7 +959,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       FontSize = 8
     end
     object qrlbl11: TQRLabel
-      Left = 925
+      Left = 986
       Top = 2
       Width = 60
       Height = 15
@@ -937,14 +970,14 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2447.395833333333000000
+        2608.791666666667000000
         5.291666666666667000
         158.750000000000000000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
       AutoStretch = False
-      Caption = 'Liquidar'
+      Caption = #8364'/Kg Neto'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1099,7 +1132,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       AlignToBand = False
       AutoSize = False
       AutoStretch = False
-      Caption = 'C.Financiero'
+      Caption = 'C.Estructura'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1112,7 +1145,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       FontSize = 8
     end
     object qrlbl16: TQRLabel
-      Left = 986
+      Left = 1049
       Top = 2
       Width = 60
       Height = 15
@@ -1123,14 +1156,14 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2608.791666666670000000
-        5.291666666666670000
+        2775.479166666667000000
+        5.291666666666667000
         158.750000000000000000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
       AutoStretch = False
-      Caption = 'Importe'
+      Caption = #8364' Neto'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1204,6 +1237,37 @@ object QLLiquidaResumen: TQLLiquidaResumen
       WordWrap = True
       FontSize = 8
     end
+    object QRLabel1: TQRLabel
+      Left = 925
+      Top = 2
+      Width = 60
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        2447.395833333333000000
+        5.291666666666667000
+        158.750000000000000000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Caption = 'C.Ind Almac'#233'n'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 8
+    end
   end
   object BandaDetalle: TQRBand
     Left = 38
@@ -1227,7 +1291,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
     KeepOnOnePage = False
     BandType = rbDetail
     object qrdbtxtpal_categoria: TQRDBText
-      Left = 5
+      Left = 12
       Top = 0
       Width = 23
       Height = 15
@@ -1239,9 +1303,9 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        13.229166666666700000
+        31.750000000000000000
         0.000000000000000000
-        60.854166666666700000)
+        60.854166666666670000)
       Alignment = taLeftJustify
       AlignToBand = False
       AutoSize = False
@@ -1271,9 +1335,9 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        108.479166666667000000
+        108.479166666666700000
         0.000000000000000000
-        383.645833333333000000)
+        383.645833333333300000)
       Alignment = taLeftJustify
       AlignToBand = False
       AutoSize = False
@@ -1524,7 +1588,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       FontSize = 8
     end
     object qrdbtxtpal_importe_general: TQRDBText
-      Left = 925
+      Left = 986
       Top = 0
       Width = 60
       Height = 15
@@ -1535,7 +1599,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2447.395833333333000000
+        2608.791666666667000000
         0.000000000000000000
         158.750000000000000000)
       Alignment = taRightJustify
@@ -1623,7 +1687,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       FontSize = 8
     end
     object qrdbtxtliq_importe_liquidar: TQRDBText
-      Left = 986
+      Left = 1049
       Top = 0
       Width = 60
       Height = 15
@@ -1634,7 +1698,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2608.791666666670000000
+        2775.479166666667000000
         0.000000000000000000
         158.750000000000000000)
       Alignment = taRightJustify
@@ -1743,6 +1807,39 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Color = clWhite
       DataSet = DLLiquidaEntrega.kmtResumen
       DataField = 'res_importe_flete'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      Mask = '#,##0.000'
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 8
+    end
+    object QRDBText1: TQRDBText
+      Left = 925
+      Top = 0
+      Width = 60
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        2447.395833333333000000
+        0.000000000000000000
+        158.750000000000000000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Color = clWhite
+      DataSet = DLLiquidaEntrega.kmtResumen
+      DataField = 'res_importe_indirecto_almacen'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -2055,7 +2152,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       FontSize = 8
     end
     object qrxpr16: TQRExpr
-      Left = 986
+      Left = 1049
       Top = 2
       Width = 60
       Height = 15
@@ -2066,8 +2163,8 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2608.791666666670000000
-        5.291666666666670000
+        2775.479166666667000000
+        5.291666666666667000
         158.750000000000000000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2188,7 +2285,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       FontSize = 8
     end
     object qrxpr22: TQRExpr
-      Left = 925
+      Left = 986
       Top = 2
       Width = 60
       Height = 15
@@ -2199,7 +2296,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        2447.395833333333000000
+        2608.791666666667000000
         5.291666666666667000
         158.750000000000000000)
       Alignment = taRightJustify
@@ -2370,6 +2467,39 @@ object QLLiquidaResumen: TQLLiquidaResumen
       Mask = '#,##0.000'
       FontSize = 8
     end
+    object QRExpr1: TQRExpr
+      Left = 925
+      Top = 2
+      Width = 60
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        2447.395833333333000000
+        5.291666666666667000
+        158.750000000000000000)
+      Alignment = taRightJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      Color = clWhite
+      ParentFont = False
+      ResetAfterPrint = True
+      Transparent = False
+      WordWrap = True
+      Expression = 'sum(res_importe_indirecto_almacen)/sum(res_kilos_teoricos)'
+      Mask = '#,##0.000'
+      FontSize = 8
+    end
   end
   object qrbnd1: TQRBand
     Left = 38
@@ -2531,7 +2661,7 @@ object QLLiquidaResumen: TQLLiquidaResumen
       AlignToBand = False
       AutoSize = False
       AutoStretch = False
-      Caption = 'Importe'
+      Caption = 'Importe neto'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

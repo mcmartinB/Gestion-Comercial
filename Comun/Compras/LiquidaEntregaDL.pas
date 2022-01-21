@@ -3,7 +3,7 @@ unit LiquidaEntregaDL;
 interface
 
 uses
-  SysUtils, Classes, kbmMemTable, DB, DBTables, QuickRpt;
+  SysUtils, Classes, kbmMemTable, DB, DBTables, QuickRpt, DateUtils;
 
 type
   TDLLiquidaEntrega = class(TDataModule)
@@ -36,6 +36,7 @@ type
     qryCostesProv: TQuery;
     qryKilosDestrioTfe: TQuery;
     kmtKilosDestrioTfe: TkbmMemTable;
+    qryAux: TQuery;
 
     procedure DMOnCreate(Sender: TObject);
     procedure qryEntregasBeforeClose(DataSet: TDataSet);
@@ -52,6 +53,7 @@ type
     //bFaltanCostesEntrega, bFaltanCostesAlbaran, bFaltanCostesEnvasado: Boolean;
     rBenificio, rFinancieroVolcados, rFinancieroCargados, rFlete: real;
     rMinTteCliente, rMinTteCanario, rMinCosteEnvasado: Real;
+    bExcluirIndirecto: boolean;
 
     spStatus: string;
     spEmpresa,  spCentro, spAlbaran, spFechaAlbaran, spEnvase, spCliente, spProducto, spCategoria, spProductoBase: string;
@@ -80,13 +82,13 @@ type
     procedure CerrarTablasTemporales;
     procedure LimpiarTablasTemporales;
 
-    procedure ValorarVerde( const APrecios: boolean; const ABenificio, AFinacieroCargados, ACosteFlete: Real; const AbFinancieroCargados, AbFinancieroVolcados: boolean );
+    procedure ValorarVerde( const APrecios: boolean; const ABenificio, AFinacieroCargados, ACosteFlete: Real; const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto: boolean );
     function  ValorarLineaVerde: boolean;
     function  ExisteLineaVerde: boolean;
     procedure NewLineaVerde;
     procedure EditLineaVerde;
 
-    procedure ValorarPalets( const APrecios: boolean; const ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete: Real;const AbFinancieroCargados, AbFinancieroVolcados: boolean );
+    procedure ValorarPalets( const APrecios: boolean; const ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete: Real;const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto: boolean );
     function  ValorarPalet: boolean;
     Function  FechaSalida: string;
     procedure NewPalet;
@@ -124,9 +126,9 @@ type
     procedure DesConectarRemoto;
 
     procedure DatosLiquidaVerde( const AEmpresa: string; const APrecios, AProveedores: boolean; const ABenificio, AFinacieroCargados, ACosteFlete: Real;
-                                 const AbFinancieroCargados, AbFinancieroVolcados: boolean);
+                                 const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto: boolean);
     procedure DatosLiquidaRF( const AEmpresa: string; const APrecios, AProveedores: boolean; const ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete: Real;
-                              const AbFinancieroCargados, AbFinancieroVolcados:boolean );
+                              const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto:boolean );
 
 
     function HaySalidas( const AEmpresa, ACliente, AProducto: string; const AFecha: TDateTime; var  AFechaSalida: TDateTime ): boolean;
@@ -140,7 +142,8 @@ type
     procedure CalcularEuroKilo(const sEmpresa, sAnyoSem, sProveedor,sProductor, sProducto, sEntrega: string);
     procedure CalcularKilosDestrioTenerife(const sEmpresa, sAnyoSem, sProveedor, sProductor, sProducto, sEntrega: string; const ACosteFlete: Real);
 
-    procedure GetCostesProveedor(const AProveedor:string);
+    procedure GetCostesProveedor(const AProveedor, AAnoSemana:string);
+    procedure GetCostesProveedorTotal(const AEmpresa, AAnyoSem, AProveedor, AProductor, AProducto, AEntrega:string);
 
     procedure CR1AddReports(Sender: TObject);
 
@@ -169,15 +172,15 @@ type
 
     procedure LiquidarEntregasExecute( const APrecios, APalets, AProveedores: boolean;
                                        const ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete: Real;
-                                       const AbFinancieroCargados, AbFinancieroVolcados: Boolean;
+                                       const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto: Boolean;
                                        const AMinTteCliente, AMinTteCanario, AMinCosteEnvasado: Real );
     procedure LiquidarEntregasVerdeExecute( const APrecios, AProveedores: boolean; const ABenificio, AFinacieroCargado, ACosteFlete: Real;
-                               const AbFinancieroCargados, AbFinancieroVolcados: Boolean;
+                               const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto: Boolean;
                                const AMinTteCliente, AMinTteCanario, AMinCosteEnvasado: Real );
     procedure ValorarPaletsExecute( const APrecios: Boolean );
 
     procedure LiquidaEntregasPlatano( AOwner: TComponent; const AEmpresa, AAnyoSem, AProveedor, AProductor, AProducto, AEntrega: string;
-                                      const APrecios, AProveedores, AClientes, ADestrio, APlacero, ACargado, AVolcado, AbFinancieroCargados, AbFinancieroVolcados, AFlete: boolean;
+                                      const APrecios, AProveedores, AClientes, ADestrio, APlacero, ACargado, AVolcado, AbFinancieroCargados, AbFinancieroVolcados, AFlete, AbIndirecto: boolean;
                                       const ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete,
                                             AMinTteCliente, AMinTteCanario, AMinCosteEnvasado: Real );
   end;
@@ -483,9 +486,9 @@ begin
   with qryCostesProv do
   begin
     SQL.Clear;
-    SQL.Add(' select * from frf_proveedores_costes ');
-    SQL.Add('  where proveedor_pc = :proveedor ');
-    SQL.Add('    and fecha_fin_pc is null ');
+    SQL.Add(' select * from frf_proveedores_costes     ');
+    SQL.Add('  where proveedor_pc = :proveedor         ');
+    SQl.Add('    and :fecha between fecha_ini_pc and nvl(fecha_fin_pc, today) ');
   end;
 
   with qryKilosTeoricosLinea do
@@ -640,7 +643,9 @@ begin
   kmtResumen.FieldDefs.Add('res_importe_financiero', ftFloat, 0, False);
   kmtResumen.FieldDefs.Add('res_importe_flete', ftFloat, 0, False);
   kmtResumen.FieldDefs.Add('res_importe_liquidar', ftFloat, 0, False);
+  kmtResumen.FieldDefs.Add('res_importe_indirecto_almacen', ftFloat, 0, False);
 
+  kmtResumen.FieldDefs.Add('res_precio_indirecto_almacen', ftFloat, 0, False);
   kmtResumen.FieldDefs.Add('res_precio_neto', ftFloat, 0, False);
   kmtResumen.FieldDefs.Add('res_precio_descuento', ftFloat, 0, False);
   kmtResumen.FieldDefs.Add('res_precio_gastos', ftFloat, 0, False);
@@ -687,6 +692,7 @@ begin
   kmtClientes.FieldDefs.Add('res_importe_financiero', ftFloat, 0, False);
   kmtClientes.FieldDefs.Add('res_importe_flete', ftFloat, 0, False);
   kmtClientes.FieldDefs.Add('res_importe_liquidar', ftFloat, 0, False);
+  kmtClientes.FieldDefs.Add('res_importe_indirecto_almacen', ftFloat, 0, False);
 
   kmtClientes.FieldDefs.Add('res_precio_bruto', ftFloat, 0, False);
   kmtClientes.FieldDefs.Add('res_precio_neto', ftFloat, 0, False);
@@ -701,6 +707,8 @@ begin
   kmtClientes.FieldDefs.Add('res_precio_financiero', ftFloat, 0, False);
   kmtClientes.FieldDefs.Add('res_precio_flete', ftFloat, 0, False);
   kmtClientes.FieldDefs.Add('res_precio_liquidar', ftFloat, 0, False);
+  kmtClientes.FieldDefs.Add('res_precio_indirecto_almacen', ftFloat, 0, False);
+
   kmtClientes.FieldDefs.Add('res_precio_kilo', ftFloat, 0, False);
   kmtClientes.FieldDefs.Add('res_total_compra', ftFloat, 0, False);
   kmtClientes.FieldDefs.Add('res_margen_kilo', ftFloat, 0, False);
@@ -751,6 +759,8 @@ begin
   kmtLiquidacion.FieldDefs.Add('liq_importe_flete', ftFloat, 0, False);
   kmtLiquidacion.FieldDefs.Add('liq_importe_liquidar', ftFloat, 0, False);
   kmtLiquidacion.FieldDefs.Add('liq_importe_por_precio', ftFloat, 0, False);      //kmtEuroKilo
+  kmtLiquidacion.FieldDefs.Add('liq_importe_indirecto_almacen', ftFloat, 0, False);
+
 
   kmtLiquidacion.FieldDefs.Add('liq_precio_bruto', ftFloat, 0, False);
   kmtLiquidacion.FieldDefs.Add('liq_precio_neto', ftFloat, 0, False);
@@ -765,6 +775,7 @@ begin
   kmtLiquidacion.FieldDefs.Add('liq_precio_financiero', ftFloat, 0, False);
   kmtLiquidacion.FieldDefs.Add('liq_precio_flete', ftFloat, 0, False);
   kmtLiquidacion.FieldDefs.Add('liq_precio_liquidar', ftFloat, 0, False);
+  kmtLiquidacion.FieldDefs.Add('liq_precio_indirecto_almacen', ftFloat, 0, False);
 
   kmtLiquidacion.IndexFieldNames:= 'liq_empresa;liq_anyo_semana;liq_proveedor;liq_canarias;liq_almacen;liq_categoria;liq_cliente_sal;liq_status;liq_entrega';
   kmtLiquidacion.CreateTable;
@@ -830,7 +841,9 @@ begin
   kmtPalet.FieldDefs.Add('pal_importe_financiero', ftFloat, 0, False);
   kmtPalet.FieldDefs.Add('pal_importe_flete', ftFloat, 0, False);
   kmtPalet.FieldDefs.Add('pal_importe_liquidar', ftFloat, 0, False);
+  kmtPalet.FieldDefs.Add('pal_importe_ind_almacen', ftFloat, 0, False);
 
+  kmtPalet.FieldDefs.Add('pal_precio_ind_almacen', ftFloat, 0, False);
   kmtPalet.FieldDefs.Add('pal_precio_neto', ftFloat, 0, False);
   kmtPalet.FieldDefs.Add('pal_precio_descuento', ftFloat, 0, False);
   kmtPalet.FieldDefs.Add('pal_precio_gastos', ftFloat, 0, False);
@@ -873,6 +886,7 @@ begin
   kmtCostesProv.FieldDefs.Add('costeEnvasado', ftFloat, 0, False);
   kmtCostesProv.FieldDefs.Add('costeOPP', ftFloat, 0, False);
   kmtCostesProv.FieldDefs.Add('costeAyuda', ftFloat, 0, False);
+  kmtCostesProv.FieldDefs.Add('costeIndirectoAlmacen', ftFloat, 0, False);
   kmtCostesProv.IndexFieldNames:='proveedor';
   kmtCostesProv.CreateTable;
 
@@ -1212,7 +1226,7 @@ begin
   qryEntregas.Close;
 end;
 
-procedure TDLLiquidaEntrega.ValorarVerde( const APrecios: boolean; const ABenificio, AFinacieroCargados, ACosteFlete: Real;const AbFinancieroCargados, AbFinancieroVolcados: boolean );
+procedure TDLLiquidaEntrega.ValorarVerde( const APrecios: boolean; const ABenificio, AFinacieroCargados, ACosteFlete: Real;const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto: boolean );
 var bProveedorCompra: boolean;
     rFinCargados, rFinVolcados: real;
 begin
@@ -1233,6 +1247,14 @@ begin
       rFinancieroCargados := rFinCargados;
 
     rFinancieroVolcados := rFinVolcados;
+
+    if (bProveedorCompra) or (AbIndirecto) then
+      bExcluirIndirecto := true
+    else
+      bExcluirIndirecto := false;
+
+    //buscamos costes proveedor
+    kmtCostesProv.Locate('proveedor', VarArrayOf([qryEntregas.FieldByName('proveedor_ec').AsString]) , []);
 
     CosteEntrega;
     qryEntregasLin.First;
@@ -1342,6 +1364,13 @@ begin
   kmtLiquidacion.FieldByName('liq_importe_beneficio').AsFloat:= bRoundTo( qryEntregasLin.FieldByName('kilos').AsFloat * rBenificio, 2);
   kmtLiquidacion.FieldByName('liq_importe_financiero').AsFloat:= bRoundTo( qryEntregasLin.FieldByName('kilos').AsFloat * rFinancieroCargados, 2);
   kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat:= bRoundTo(qryEntregasLin.FieldByName('kilos').AsFloat * rFlete, 2);
+  if bExcluirIndirecto then
+    kmtLiquidacion.FieldByName('liq_precio_indirecto_almacen').AsFloat := 0
+  else
+    kmtLiquidacion.FieldByName('liq_precio_indirecto_almacen').AsFloat := kmtCostesProv.FieldByName('costeIndirectoAlmacen').AsFloat;
+
+  kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').AsFloat := bRoundTo(qryEntregasLin.FieldByName('kilos').AsFloat * kmtLiquidacion.FieldByName('liq_precio_indirecto_almacen').AsFloat, 2);
+
 
  if kmtEuroKilo.Locate('proveedor;categoria;variedad', VarArrayOf([qryEntregasLin.FieldByName('proveedor').AsString,
                                                                    qryEntregasLin.FieldByName('categoria').ASString,
@@ -1361,7 +1390,8 @@ begin
           kmtLiquidacion.FieldByName('liq_importe_compra').AsFloat +
           kmtLiquidacion.FieldByName('liq_importe_beneficio').AsFloat +
           kmtLiquidacion.FieldByName('liq_importe_financiero').AsFloat + 
-          kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat
+          kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat +
+          kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').AsFloat
         );
   kmtLiquidacion.FieldByName('liq_precio_liquidar').AsFloat:= 0;//kmtLiquidacion.FieldByName('liq_importe_liquidar').AsFloat / rgPeso;
 
@@ -1441,6 +1471,11 @@ begin
   kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat:=  bRoundTo(qryEntregasLin.FieldByName('kilos').AsFloat * rFlete, 2) +
     kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat;
 
+  if not bExcluirIndirecto then
+    kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').AsFloat := bRoundTo(qryEntregasLin.FieldByName('kilos').AsFloat * kmtCostesProv.FieldByName('costeIndirectoAlmacen').AsFloat, 2) +
+      kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').AsFloat;
+
+
   kmtLiquidacion.FieldByName('liq_importe_liquidar').AsFloat:=
     kmtLiquidacion.FieldByName('liq_importe_neto').AsFloat -
         (
@@ -1450,7 +1485,8 @@ begin
           kmtLiquidacion.FieldByName('liq_importe_compra').AsFloat +
           kmtLiquidacion.FieldByName('liq_importe_beneficio').AsFloat +
           kmtLiquidacion.FieldByName('liq_importe_financiero').AsFloat + 
-          kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat
+          kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat +
+          kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').asFloat
         );
 
 
@@ -1484,7 +1520,7 @@ begin
   end;
 end;
 
-procedure TDLLiquidaEntrega.ValorarPalets( const APrecios: boolean; const ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete: Real;const AbFinancieroCargados, AbFinancieroVolcados: boolean);
+procedure TDLLiquidaEntrega.ValorarPalets( const APrecios: boolean; const ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete: Real;const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto: boolean);
 var rFinCargados, rFinVolcados: real;
     bProveedorCompra: Boolean;
 begin
@@ -1518,6 +1554,14 @@ begin
       rFinancieroVolcados := 0
     else
       rFinancieroVolcados := rFinVolcados;
+
+    if (bProveedorCompra) or (AbIndirecto) then
+      bExcluirIndirecto := true
+    else
+      bExcluirIndirecto := false;
+
+    //buscamos costes proveedor
+    kmtCostesProv.Locate('proveedor', VarArrayOf([qryEntregas.FieldByName('proveedor_ec').AsString]) , []);
 
     CosteEntrega;
     qryPaletsPB.First;
@@ -1578,14 +1622,14 @@ end;
 
 
 procedure TDLLiquidaEntrega.LiquidarEntregasVerdeExecute( const APrecios, AProveedores: boolean; const ABenificio, AFinacieroCargado, ACosteFlete: Real;
-                              const AbFinancieroCargados, AbFinancieroVolcados: boolean;
+                              const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto: boolean;
                               const AMinTteCliente, AMinTteCanario, AMinCosteEnvasado: Real );
 begin
   DLLiquidaIncidencias.InicializarProblemas;
   AbrirTablasTemporales;
   InicializaMinimos( AMinTteCliente, AMinTteCanario, AMinCosteEnvasado );
 
-  ValorarVerde( APrecios, ABenificio, AFinacieroCargado, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados );
+  ValorarVerde( APrecios, ABenificio, AFinacieroCargado, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto );
   DLLiquidaIncidencias.VerProblemas( sEmpresaIni, sSemanaIni, sProducto );
 
   kmtLiquidacion.SortFields:='liq_anyo_semana;liq_categoria;liq_status';
@@ -1619,7 +1663,7 @@ end;
 
 
 procedure TDLLiquidaEntrega.LiquidarEntregasExecute( const APrecios, APalets, AProveedores: boolean; const ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete: Real;
-                                                     const AbFinancieroCargados, AbFinancieroVolcados: Boolean;
+                                                     const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto: Boolean;
                                                      const AMinTteCliente, AMinTteCanario, AMinCosteEnvasado: Real );
 begin
 
@@ -1627,7 +1671,7 @@ begin
   AbrirTablasTemporales;
   InicializaMinimos( AMinTteCliente, AMinTteCanario, AMinCosteEnvasado );
 
-  ValorarPalets( APrecios, ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados );
+  ValorarPalets( APrecios, ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto );
   DLLiquidaIncidencias.VerProblemas( sEmpresaIni, sSemanaIni, sProducto );
 
   kmtPalet.SortFields:='pal_anyo_semana;pal_proveedor;pal_canarias;pal_almacen;pal_categoria;pal_cliente_sal;pal_status;pal_entrega;pal_precio_financiero';
@@ -1814,6 +1858,8 @@ begin
   kmtLiquidacion.FieldByName('liq_importe_beneficio').AsFloat:= kmtPalet.FieldByName('pal_importe_beneficio').AsFloat;
   kmtLiquidacion.FieldByName('liq_importe_financiero').AsFloat:= kmtPalet.FieldByName('pal_importe_financiero').AsFloat;
   kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat:= kmtPalet.FieldByName('pal_importe_flete').AsFloat;
+  kmtLiquidacion.FieldByName('liq_precio_indirecto_almacen').AsFloat := kmtPalet.FieldByName('pal_precio_ind_almacen').AsFloat;
+  kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').AsFloat := kmtPalet.FieldByName('pal_importe_ind_almacen').AsFloat;
 
   kmtLiquidacion.FieldByName('liq_importe_liquidar').AsFloat:= 0;
   kmtLiquidacion.FieldByName('liq_precio_liquidar').AsFloat:= 0;
@@ -1882,6 +1928,9 @@ begin
   kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat:= kmtPalet.FieldByName('pal_importe_flete').AsFloat +
     kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat;
 
+  kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').AsFloat:= kmtPalet.FieldByName('pal_importe_ind_almacen').AsFloat +
+    kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').AsFloat;
+
   if kmtEuroKilo.Locate('proveedor;categoria;variedad', VarArrayOf([kmtPalet.FieldByName('pal_proveedor').AsString,
                                                                    kmtPalet.FieldByName('pal_categoria').ASString,
                                                                    kmtPalet.FieldByName('pal_variedad').AsInteger]) , []) then
@@ -1936,7 +1985,8 @@ begin
           kmtLiquidacion.FieldByName('liq_importe_compra').AsFloat +
           kmtLiquidacion.FieldByName('liq_importe_beneficio').AsFloat +
           kmtLiquidacion.FieldByName('liq_importe_financiero').AsFloat + 
-          kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat
+          kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat +
+          kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').AsFloat
         );
       kmtLiquidacion.FieldByName('liq_precio_liquidar').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_liquidar').AsFloat / rKilos;
 
@@ -2026,6 +2076,7 @@ begin
 //  kmtResumen.FieldByName('res_precio_flete').AsFloat:= 0;
   kmtResumen.FieldByName('res_precio_flete').AsFloat:= kmtLiquidacion.FieldByName('liq_precio_flete').AsFloat;
   kmtResumen.FieldByName('res_precio_liquidar').AsFloat:= 0;
+  kmtResumen.FieldByName('res_precio_indirecto_almacen').AsFloat:= kmtLiquidacion.FieldByName('liq_precio_indirecto_almacen').AsFloat;
 
   kmtResumen.FieldByName('res_importe_neto').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_neto').AsFloat;
   kmtResumen.FieldByName('res_importe_descuento').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_descuento').AsFloat;
@@ -2035,6 +2086,7 @@ begin
   kmtResumen.FieldByName('res_importe_personal').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_personal').AsFloat;
   kmtResumen.FieldByName('res_importe_general').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_general').AsFloat;
   kmtResumen.FieldByName('res_importe_envasado').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_envasado').AsFloat;
+  kmtResumen.FieldByName('res_importe_indirecto_almacen').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').AsFloat;
 
   kmtResumen.FieldByName('res_importe_compra').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_compra').AsFloat;
   kmtResumen.FieldByName('res_importe_beneficio').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_beneficio').AsFloat;
@@ -2105,6 +2157,9 @@ begin
   kmtResumen.FieldByName('res_importe_flete').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat +
     kmtResumen.FieldByName('res_importe_flete').AsFloat;
 
+  kmtResumen.FieldByName('res_importe_indirecto_almacen').asFloat := kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').asFloat +
+    kmtResumen.FieldByName('res_importe_indirecto_almacen').asFloat;
+
 // if kmtEuroKilo.Locate('categoria', VarArrayOf([kmtResumen.FieldByName('res_categoria').ASString]) , []) then
 //   rPrecioCompra := kmtEuroKilo.FieldByName('precio').AsFloat
 // else
@@ -2151,6 +2206,7 @@ begin
       kmtResumen.FieldByName('res_precio_envasado').AsFloat:= kmtResumen.FieldByName('res_importe_envasado').AsFloat / rKilos;
       kmtResumen.FieldByName('res_precio_compra').AsFloat:= kmtResumen.FieldByName('res_importe_compra').AsFloat / rKilos;
       kmtResumen.FieldByName('res_precio_beneficio').AsFloat:= kmtResumen.FieldByName('res_importe_beneficio').AsFloat / rKilos;
+      kmtResumen.FieldByName('res_precio_indirecto_almacen').asFloat := kmtResumen.FieldByName('res_importe_indirecto_almacen').asFloat / rKilos;
 //      kmtResumen.FieldByName('res_precio_financiero').AsFloat:= kmtResumen.FieldByName('res_importe_financiero').AsFloat / rKilos;
 //      kmtResumen.FieldByName('res_precio_flete').AsFloat:= kmtResumen.FieldByName('res_importe_flete').AsFloat / rKilos;
 
@@ -2162,7 +2218,8 @@ begin
           kmtResumen.FieldByName('res_importe_compra').AsFloat +
           kmtResumen.FieldByName('res_importe_beneficio').AsFloat +
           kmtResumen.FieldByName('res_importe_financiero').AsFloat +
-          kmtResumen.FieldByName('res_importe_flete').AsFloat
+          kmtResumen.FieldByName('res_importe_flete').AsFloat +
+          kmtResumen.FieldByName('res_importe_indirecto_almacen').asFloat
         );
       kmtResumen.FieldByName('res_precio_liquidar').AsFloat:= kmtResumen.FieldByName('res_importe_liquidar').AsFloat / rKilos;
 
@@ -2252,6 +2309,7 @@ begin
   kmtClientes.FieldByName('res_precio_envasado').AsFloat:= 0;
   kmtClientes.FieldByName('res_precio_compra').AsFloat:= 0;
   kmtClientes.FieldByName('res_precio_beneficio').AsFloat:= 0;
+  kmtClientes.FieldByName('res_precio_indirecto_almacen').AsFloat:= kmtLiquidacion.FieldByName('liq_precio_indirecto_almacen').AsFloat;
 //  kmtClientes.FieldByName('res_precio_financiero').AsFloat:= 0;
   kmtClientes.FieldbyName('res_precio_financiero').AsFloat := kmtLiquidacion.FieldByName('liq_precio_financiero').AsFloat;
 //  kmtClientes.FieldByName('res_precio_flete').AsFloat:= 0;
@@ -2280,6 +2338,7 @@ begin
   kmtClientes.FieldByName('res_importe_beneficio').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_beneficio').AsFloat;
   kmtClientes.FieldByName('res_importe_financiero').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_financiero').AsFloat;
   kmtClientes.FieldByName('res_importe_flete').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_flete').AsFloat;
+  kmtClientes.FieldByName('res_importe_indirecto_almacen').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').AsFloat;
 
   kmtClientes.FieldByName('res_importe_liquidar').AsFloat:= 0;
 
@@ -2327,6 +2386,8 @@ begin
     kmtClientes.FieldByName('res_importe_flete').AsFloat;
   kmtClientes.FieldByName('res_total_compra').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_por_precio').AsFloat +
     kmtClientes.FieldByName('res_total_compra').AsFloat;
+  kmtClientes.FieldByName('res_importe_indirecto_almacen').AsFloat:= kmtLiquidacion.FieldByName('liq_importe_indirecto_almacen').AsFloat +
+    kmtClientes.FieldByName('res_importe_indirecto_almacen').AsFloat;
 
 
 
@@ -2531,6 +2592,12 @@ begin
       kmtClientes.FieldByName('res_precio_envasado').AsFloat:= kmtClientes.FieldByName('res_importe_envasado').AsFloat / rKilos;
       kmtClientes.FieldByName('res_precio_compra').AsFloat:= kmtClientes.FieldByName('res_importe_compra').AsFloat / rKilos;
       kmtClientes.FieldByName('res_precio_beneficio').AsFloat:= kmtClientes.FieldByName('res_importe_beneficio').AsFloat / rKilos;
+//      if bExcluirIndirecto then
+//        kmtClientes.FieldByName('res_precio_indirecto_almacen').AsFloat:= 0
+//      else
+//        kmtClientes.FieldByName('res_precio_indirecto_almacen').AsFloat:= kmtCostesProv.FieldByName('costeIndirectoAlmacen').AsFloat;
+      kmtClientes.FieldByName('res_precio_indirecto_almacen').asFloat := kmtClientes.FieldByName('res_precio_indirecto_almacen').AsFloat;
+      kmtClientes.FieldByName('res_importe_indirecto_almacen').asFloat := kmtClientes.FieldByName('res_precio_indirecto_almacen').AsFloat * rKilos;
 //      kmtClientes.FieldByName('res_precio_financiero').AsFloat:= kmtClientes.FieldByName('res_importe_financiero').AsFloat / rKilos;
 //      kmtClientes.FieldByName('res_precio_flete').AsFloat:= kmtClientes.FieldByName('res_importe_flete').AsFloat / rKilos;
 
@@ -2542,7 +2609,8 @@ begin
           kmtClientes.FieldByName('res_importe_compra').AsFloat +
           kmtClientes.FieldByName('res_importe_beneficio').AsFloat +
           kmtClientes.FieldByName('res_importe_financiero').AsFloat +
-          kmtClientes.FieldByName('res_importe_flete').AsFloat
+          kmtClientes.FieldByName('res_importe_flete').AsFloat +
+          kmtClientes.FieldByName('res_importe_indirecto_almacen').AsFloat
         );
       kmtClientes.FieldByName('res_precio_liquidar').AsFloat:= kmtClientes.FieldByName('res_importe_liquidar').AsFloat / rKilos;
 
@@ -2569,7 +2637,7 @@ begin
                                                              kmtClientes.FieldByName('res_coste_prod').AsFloat -
                                                              kmtClientes.FieldByName('res_coste_env').AsFloat -
                                                              kmtClientes.FieldByName('res_coste_opp').AsFloat +
-                                                             kmtClientes.FieldByName('res_coste_ayu').AsFloat; 
+                                                             kmtClientes.FieldByName('res_coste_ayu').AsFloat;
 
       kmtClientes.Post;
     end;
@@ -2592,7 +2660,7 @@ begin
   AbrirTablasTemporales;
   InicializaMinimos( 0, 0, 0 );
 
-  ValorarPalets( APrecios, 0, 0, 0, 0, False, false );
+  ValorarPalets( APrecios, 0, 0, 0, 0, False, False, False );
   DLLiquidaIncidencias.VerProblemas( sEmpresaIni, sSemanaIni, sProducto );
 
   kmtPalet.SortFields:='pal_anyo_semana;pal_proveedor;pal_canarias;pal_almacen;pal_entrega;pal_categoria;pal_cliente_sal';
@@ -2932,30 +3000,96 @@ end;
 
 
 
-procedure TDLLiquidaEntrega.GetCostesProveedor(const AProveedor: string);
+procedure TDLLiquidaEntrega.GetCostesProveedor(const AProveedor, AAnoSemana: string);
 begin
   with qryCostesProv do
   begin
     ParaMByName('proveedor').AsString := AProveedor;
+    ParamByName('fecha').AsDateTime := EncodeDateWeek(StrToInt(Copy(AAnoSemana, 0, 4)), StrToInt(Copy(AAnoSemana,5,2)));
     Open;
-    kmtCostesProv.Insert;
+    if not qryCostesProv.IsEmpty then
+    begin
+      kmtCostesProv.Insert;
+      while not eof do
+      begin
+        kmtCostesProv.FieldByName('proveedor').AsString := FieldByName('proveedor_pc').AsString;
+        if FieldByName('tipo_coste_pc').AsString = '01' then
+          kmtCostesProv.FieldByName('costeProduccion').AsFloat := FieldByName('importe_pc').AsFloat;
+        if FieldByName('tipo_coste_pc').AsString = '02' then
+          kmtCostesProv.FieldByName('costeEnvasado').AsFloat := FieldByName('importe_pc').AsFloat;
+        if FieldByName('tipo_coste_pc').AsString = '03' then
+          kmtCostesProv.FieldByName('costeOPP').AsFloat := FieldByName('importe_pc').AsFloat;
+        if FieldByName('tipo_coste_pc').AsString = '04' then
+          kmtCostesProv.FieldByName('costeayuda').AsFloat := FieldByName('importe_pc').AsFloat;
+        if FieldByName('tipo_coste_pc').AsString = '05' then
+          kmtCostesProv.FieldByName('costeIndirectoAlmacen').AsFloat := FieldByName('importe_pc').AsFloat;
+
+        Next;
+      end;
+      kmtCostesProv.Post;
+    end;
+    Close;
+  end;
+end;
+
+procedure TDLLiquidaEntrega.GetCostesProveedorTotal(const AEmpresa, AAnyoSem, AProveedor, AProductor, AProducto, AEntrega: string);
+begin
+
+  with qryAux do
+  begin
+    SQL.Clear;
+    SQL.Add(' select distinct proveedor_ec proveedor_ec  ');
+    SQL.Add('   from frf_entregas_c, frf_entregas_l   ');
+    SQL.Add('  where 1= 1                             ');
+
+    if AEntrega <> '' then
+      SQL.Add(' and codigo_ec = :entrega              ');
+    if AEmpresa <> '' then
+    begin
+      if AEmpresa = 'BAG' then
+        SQL.Add(' and empresa_ec matches ''F*''       ')
+      else
+        SQL.Add(' and empresa_ec = :empresa           ');
+    end;
+    if AAnyoSem <> '' then
+      SQL.Add(' and anyo_semana_ec = :semana          ');
+    if AProveedor <> '' then
+      SQL.Add(' and proveedor_ec = :proveedor         ');
+    if AProductor <> '' then
+      SQL.Add(' and almacen_el = :productor           ');
+
+    SQL.Add(' and producto_ec = :producto             ');
+
+    SQL.Add(' and codigo_ec = codigo_el               ');
+
+    SQL.Add(' group by 1 ');
+    SQL.Add(' order by 1 ');
+
+    if AEntrega <> '' then
+      ParamByName('entrega').AsString:= AEntrega;
+    if AEmpresa <> '' then
+      if AEmpresa <> 'BAG' then
+        ParamByName('empresa').AsString:= AEmpresa;
+    if AAnyoSem <> '' then
+      ParamByName('semana').AsString:= AAnyoSem;
+    if AProveedor <> '' then
+      ParamByName('proveedor').AsString:= AProveedor;
+    if AProductor <> '' then
+      ParamByName('productor').AsString:= AProductor;
+
+    ParamByName('producto').AsString := AProducto;
+
+    Open;
     while not eof do
     begin
-      kmtCostesProv.FieldByName('proveedor').AsString := FieldByName('proveedor_pc').AsString;
-      if FieldByName('tipo_coste_pc').AsString = '01' then
-        kmtCostesProv.FieldByName('costeProduccion').AsFloat := FieldByName('importe_pc').AsFloat;
-      if FieldByName('tipo_coste_pc').AsString = '02' then
-        kmtCostesProv.FieldByName('costeEnvasado').AsFloat := FieldByName('importe_pc').AsFloat;
-      if FieldByName('tipo_coste_pc').AsString = '03' then
-        kmtCostesProv.FieldByName('costeOPP').AsFloat := FieldByName('importe_pc').AsFloat;
-      if FieldByName('tipo_coste_pc').AsString = '04' then
-        kmtCostesProv.FieldByName('costeayuda').AsFloat := FieldByName('importe_pc').AsFloat;
+      GetCostesProveedor( qryAux.fieldbyname('proveedor_ec').AsString, AAnyoSem);
 
       Next;
     end;
-    kmtCostesProv.Post;
+
     Close;
   end;
+
 end;
 
 function TDLLiquidaEntrega.GetEnvaseProveedor( const AEmpresa, AProveedor, AProducto, AVariedad: string ): string;
@@ -3629,7 +3763,7 @@ begin
   end
   else
   begin
-    kmtPalet.FieldByName('pal_precio_financiero').AsFloat:= 0;
+    kmtPalet.FieldByName('pal_importe_financiero').AsFloat:= 0;
     kmtPalet.FieldByName('pal_precio_financiero').AsFloat:= 0;
   end;
 
@@ -3695,6 +3829,12 @@ begin
   end;
   //kmtPalet.FieldByName('pal_precio_beneficio').AsFloat:= rCosteEntrega;
 
+  if bExcluirIndirecto then
+    kmtPalet.FieldByName('pal_precio_ind_almacen').AsFloat := 0
+  else
+    kmtPalet.FieldByName('pal_precio_ind_almacen').AsFloat := kmtCostesProv.FieldByName('costeIndirectoAlmacen').AsFloat;
+  kmtPalet.FieldByName('pal_importe_ind_almacen').AsFloat := bRoundTo(rKilosPalet * kmtPalet.FieldByName('pal_precio_ind_almacen').AsFloat, 2);
+
   kmtPalet.FieldByName('pal_importe_liquidar').AsFloat:=
     kmtPalet.FieldByName('pal_importe_neto').AsFloat -
     (
@@ -3704,7 +3844,8 @@ begin
       kmtPalet.FieldByName('pal_importe_compra').AsFloat +
       kmtPalet.FieldByName('pal_importe_beneficio').AsFloat +
       kmtPalet.FieldByName('pal_importe_financiero').AsFloat +
-      kmtPalet.FieldByName('pal_importe_flete').AsFloat
+      kmtPalet.FieldByName('pal_importe_flete').AsFloat +
+      kmtPalet.FieldByName('pal_importe_ind_almacen').AsFloat
     );
 
   kmtPalet.FieldByName('pal_precio_liquidar').AsFloat:=
@@ -3716,7 +3857,8 @@ begin
       kmtPalet.FieldByName('pal_precio_compra').AsFloat +
       kmtPalet.FieldByName('pal_precio_beneficio').AsFloat +
       kmtPalet.FieldByName('pal_precio_financiero').AsFloat +
-      kmtPalet.FieldByName('pal_precio_flete').AsFloat
+      kmtPalet.FieldByName('pal_precio_flete').AsFloat +
+      kmtPalet.FieldByName('pal_precio_ind_almacen').AsFloat
     );
 
   if ( kmtPalet.FieldByName('pal_sscc_origen').AsString = '' ) or
@@ -3821,7 +3963,7 @@ begin
 end;
 
 procedure TDLLiquidaEntrega.LiquidaEntregasPlatano( AOwner: TComponent; const AEmpresa, AAnyoSem, AProveedor, AProductor, AProducto, AEntrega: string;
-                              const APrecios, AProveedores, AClientes, ADestrio, APlacero, ACargado, AVolcado, AbFinancieroCargados, AbFinancieroVolcados, AFlete: boolean;
+                              const APrecios, AProveedores, AClientes, ADestrio, APlacero, ACargado, AVolcado, AbFinancieroCargados, AbFinancieroVolcados, AFlete, AbIndirecto: boolean;
                               const ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete, AMinTteCliente, AMinTteCanario, AMinCosteEnvasado: Real );
 var
   sAux: string;
@@ -3839,7 +3981,12 @@ begin
   if (AProveedor <> '') and (EsProveedorALiquidar('F17', AProveedor)) then
   begin
     sUnicoProv := AProveedor;
-    GetCostesProveedor(AProveedor);
+    GetCostesProveedor(AProveedor, AAnyoSem);
+  end
+  else
+  begin
+    //Cargar costes para todos nuestros proveedores (ej: 421)
+    GetCostesProveedorTotal(AEmpresa, AAnyoSem, AProveedor, AProductor, AProducto, AEntrega);
   end;
 
   if  AEntrega <> '' then
@@ -3855,7 +4002,7 @@ begin
   begin
     //F17
     if SelectEntregas( 'F17', AAnyoSem, AProveedor, AProductor, AProducto, AEntrega ) then
-      DatosLiquidaRF( 'F17', APrecios, ( AProveedores or AClientes ), ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados );
+      DatosLiquidaRF( 'F17', APrecios, ( AProveedores or AClientes ), ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto );
     LimpiarTablasTemporales;
   end;
   (*
@@ -3880,7 +4027,7 @@ begin
   begin
     //F42
     if SelectEntregasVerde( 'F42', AAnyoSem, AProveedor, AProductor, AProducto, AEntrega ) then
-      DatosLiquidaVerde( 'F42', APrecios, ( AProveedores or AClientes ), ABenificio, AFinacieroCargados, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados );
+      DatosLiquidaVerde( 'F42', APrecios, ( AProveedores or AClientes ), ABenificio, AFinacieroCargados, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto );
     LimpiarTablasTemporales;
   end;
 
@@ -3929,20 +4076,7 @@ begin
     else
       bProvLiq := false;
 
-    PrevisualizarResumenClientes( AOwner, 'BAG', AProducto, APrecios, bProvLiq, rTotalDestrioTfe, rTotalDestrioTfeImporte, rTotalPeso, rTotalCompra   );
-//    PrevisualizarResumenClientesTfe( AOWner, 'BAG', APrecios, bProvLiq, rTotalDestrioTfe, rTotalPeso  );
-
-{
-    compositeReport := TQRCompositeReport.Create(AOwner);
-    compositeReport.PrinterSettings.Orientation := poLandscape;
-    compositeReport.PrinterSettings.PrintQuality := 0;
-    compositeReport.PrinterSettings.Collate := 0;
-    compositeReport.PrinterSettings.ColorOption := 0;
-
-    compositeReport.ReportTitle :=  'RESUMEN_POR_CLIENTE_' + AEmpresa  + '_SEMANA_' + AAnyoSem;
-    compositeReport.OnAddReports := CR1AddReports;
-    compositeReport.Preview;
-}
+     PrevisualizarResumenClientes( AOwner, 'BAG', AProducto, APrecios, bProvLiq, rTotalDestrioTfe, rTotalDestrioTfeImporte, rTotalPeso, rTotalCompra   );
   end;
 
   kmtResumen.SortFields:='res_anyo_semana;res_categoria;res_status';
@@ -4073,9 +4207,9 @@ begin
 end;
 
 procedure TDLLiquidaEntrega.DatosLiquidaVerde( const AEmpresa: string; const APrecios, AProveedores: boolean; const ABenificio, AFinacieroCargados, AcosteFlete: Real;
-                                               const AbFinancieroCargados, AbFinancieroVolcados: boolean );
+                                               const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto: boolean );
 begin
-  ValorarVerde( APrecios, ABenificio, AFinacieroCargados, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados );
+  ValorarVerde( APrecios, ABenificio, AFinacieroCargados, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto );
 
   kmtLiquidacion.Filter:= 'liq_empresa=' + QuotedStr( AEmpresa );
   kmtLiquidacion.Filtered:= True;
@@ -4102,9 +4236,9 @@ begin
 end;
 
 procedure TDLLiquidaEntrega.DatosLiquidaRF( const AEmpresa: string; const APrecios, AProveedores: boolean; const ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete: Real;
-                                            const AbFinancieroCargados, AbFinancieroVolcados: boolean);
+                                            const AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto: boolean);
 begin
-  ValorarPalets( APrecios, ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados );
+  ValorarPalets( APrecios, ABenificio, AFinacieroVolcados, AFinacieroCargados, ACosteFlete, AbFinancieroCargados, AbFinancieroVolcados, AbIndirecto );
 
   kmtPalet.SortFields:='pal_anyo_semana;pal_proveedor;pal_canarias;pal_almacen;pal_categoria;pal_cliente_sal;pal_status;pal_entrega';
   kmtPalet.Sort([]);

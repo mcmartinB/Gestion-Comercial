@@ -742,7 +742,8 @@ uses
   QLIntrastat in 'GComerSAT\Reports\Informes\QLIntrastat.pas' {QRLIntrastat: TQuickRep},
   uSalidaUtils in 'Comun\Salidas\uSalidaUtils.pas',
   LDeclaracionResponsable in 'Comun\Salidas\LDeclaracionResponsable.pas' {QLDeclaracionResponsable: TQuickRep},
-  UDLDeclaracionResponsable in 'Comun\Salidas\UDLDeclaracionResponsable.pas' {DLDeclaracionResponsable: TDataModule};
+  UDLDeclaracionResponsable in 'Comun\Salidas\UDLDeclaracionResponsable.pas' {DLDeclaracionResponsable: TDataModule},
+  ArticuloDesgloseSalQR in 'Comun\Salidas\ArticuloDesgloseSalQR.pas' {QRArticuloDesgloseSal: TQuickRep};
 
 (*
   AbonoDetallesDL in 'GComerSAT\Code\Facturacion\AbonoDetallesDL.pas' {DLAbonoDetalles: TDataModule},

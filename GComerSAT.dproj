@@ -1194,6 +1194,10 @@
     <DCCReference Include="Comun\Salidas\ArticuloDesgloseSalMod.pas">
       <Form>FArticuloDesgloseSalMod</Form>
     </DCCReference>
+    <DCCReference Include="Comun\Salidas\ArticuloDesgloseSalQR.pas">
+      <Form>QRArticuloDesgloseSal</Form>
+      <DesignClass>TQuickRep</DesignClass>
+    </DCCReference>
     <DCCReference Include="Comun\Salidas\CDAsignarGastosServicioVenta.pas">
       <Form>DAsignarGastosServicioVenta</Form>
       <DesignClass>TDataModule</DesignClass>

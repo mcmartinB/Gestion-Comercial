@@ -34,6 +34,7 @@ type
     QGeneral: TQuery;
     QAjustesLiq: TQuery;
     qpr_recargo_equivalencia: TQuery;
+    QArticulosDesglose: TQuery;
   private
     { Private declarations }
     function IntValue(const ASqlText: string): integer;

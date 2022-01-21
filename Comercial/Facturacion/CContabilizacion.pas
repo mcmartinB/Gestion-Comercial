@@ -1279,11 +1279,11 @@ end;
 function GetPlantaCliente( const ACtaCliente, AEmpresa: string ): string;
 begin
 // Se busca por empresa desde unificacion, ya solo existe un cliente BAG
-  if (ACtaCliente = 'BONNY-AGRO') and (AEmpresa = '080') then
-    Result:= 'F17'
-  else
+//  if (ACtaCliente = 'BONNY-AGRO') and (AEmpresa = '080') then
+//    Result:= 'F17'
+//  else
   if (ACtaCliente = 'BONNY-AGRO') and (AEmpresa = '050') then
-    Result:= 'F18'
+    Result:= 'F17'
   else
   if ACtaCliente = 'BON-AG-F23' then
     Result:= 'F23'
