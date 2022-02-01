@@ -45,7 +45,7 @@ implementation
 {$R *.dfm}
 
 uses
-  UDMAuxDB, CAuxiliarDB, UDMBaseDatos, CVariables;
+  UDMAuxDB, CAuxiliarDB, UDMBaseDatos, CVariables, CostesAgrupaProductoFD;
 
 var
   FDSeleccionarAgrupacion: TFDSeleccionarCentroAgrupacion;
@@ -70,7 +70,9 @@ end;
 procedure TFDSeleccionarCentroAgrupacion.btnOkClick(Sender: TObject);
 begin
   if ( edtAgrupacion.Text <> '' ) and ( txtEmpresa.caption <> '' ) and ( txtCentro.caption <> '' ) then
-    ModalResult:= mrOk
+  begin
+    ModalResult:= mrOk;
+  end
   else
     ShowMessage('Falta el codigo de la agrupación, empresa o centro.');
 end;

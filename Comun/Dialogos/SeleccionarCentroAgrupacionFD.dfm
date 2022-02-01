@@ -1,9 +1,9 @@
 object FDSeleccionarCentroAgrupacion: TFDSeleccionarCentroAgrupacion
   Left = 861
   Top = 341
-  Width = 405
-  Height = 349
   Caption = 'SELECCIONAR PRODUCTO'
+  ClientHeight = 310
+  ClientWidth = 389
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object FDSeleccionarCentroAgrupacion: TFDSeleccionarCentroAgrupacion
     Width = 89
     Height = 19
     AutoSize = False
-    Caption = ' Empresa'
+    Caption = ' Agrupaci'#243'n'
     Color = cl3DLight
     ParentColor = False
     Layout = tlCenter
@@ -231,7 +231,7 @@ object FDSeleccionarCentroAgrupacion: TFDSeleccionarCentroAgrupacion
     OnClick = btnCancelarClick
   end
   object btnOk: TButton
-    Left = 114
+    Left = 115
     Top = 258
     Width = 120
     Height = 25

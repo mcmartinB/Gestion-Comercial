@@ -473,23 +473,23 @@ object FDLiqProdVendidoReports: TFDLiqProdVendidoReports
   end
   object rgTipoListado: TRadioGroup
     Left = 44
-    Top = 186
+    Top = 170
     Width = 197
-    Height = 74
+    Height = 88
     Caption = ' Tipo Listado '
     ItemIndex = 1
     Items.Strings = (
       'Resumen'
       'Cosechero'
       'Plantaci'#243'n')
-    TabOrder = 16
+    TabOrder = 15
   end
   object CalendarioFlotante: TBCalendario
     Left = 440
     Top = 16
     Width = 193
     Height = 153
-    Date = 36823.610537870370000000
+    Date = 36823.426783703700000000
     ShowToday = False
     TabOrder = 0
     Visible = False
@@ -646,17 +646,6 @@ object FDLiqProdVendidoReports: TFDLiqProdVendidoReports
     MaxLength = 10
     TabOrder = 9
     OnChange = MEDesdeChange
-  end
-  object chkSepararCosecheros: TCheckBox
-    Left = 44
-    Top = 168
-    Width = 257
-    Height = 17
-    Caption = 'Separar Cosecheros en diferentes informes'
-    Checked = True
-    Enabled = False
-    State = cbChecked
-    TabOrder = 15
   end
   object ListaAcciones: TActionList
     Images = DMBaseDatos.ImgBotones

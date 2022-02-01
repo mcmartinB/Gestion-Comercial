@@ -59,7 +59,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
   PrevInitialZoom = qrZoomToFit
   object PageFooterBand1: TQRBand
     Left = 37
-    Top = 388
+    Top = 409
     Width = 1048
     Height = 17
     Frame.Color = clBlack
@@ -111,7 +111,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
   end
   object qrbndBandaDetalle: TQRBand
     Left = 37
-    Top = 229
+    Top = 230
     Width = 1048
     Height = 16
     Frame.Color = clBlack
@@ -598,7 +598,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     Left = 37
     Top = 97
     Width = 1048
-    Height = 37
+    Height = 18
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
@@ -611,42 +611,11 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     ForceNewColumn = False
     ForceNewPage = False
     Size.Values = (
-      97.895833333333330000
+      47.625000000000000000
       2772.833333333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     BandType = rbColumnHeader
-    object QRLabel3: TQRLabel
-      Left = 5
-      Top = 18
-      Width = 58
-      Height = 17
-      Frame.Color = clBlack
-      Frame.DrawTop = False
-      Frame.DrawBottom = False
-      Frame.DrawLeft = False
-      Frame.DrawRight = False
-      Size.Values = (
-        44.979166666666670000
-        13.229166666666670000
-        47.625000000000000000
-        153.458333333333300000)
-      Alignment = taLeftJustify
-      AlignToBand = False
-      AutoSize = True
-      AutoStretch = False
-      Caption = 'Producto'
-      Color = clWhite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Arial'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Transparent = False
-      WordWrap = True
-      FontSize = 10
-    end
     object QRLabel6: TQRLabel
       Left = 5
       Top = 1
@@ -706,39 +675,6 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Font.Name = 'Arial'
       Font.Style = []
       OnPrint = qtxtempresa_liqPrint
-      ParentFont = False
-      Transparent = True
-      WordWrap = True
-      FontSize = 8
-    end
-    object qtxtproducto_ent: TQRDBText
-      Left = 92
-      Top = 18
-      Width = 448
-      Height = 15
-      Frame.Color = clBlack
-      Frame.DrawTop = False
-      Frame.DrawBottom = False
-      Frame.DrawLeft = False
-      Frame.DrawRight = False
-      Size.Values = (
-        39.687500000000000000
-        243.416666666667000000
-        47.625000000000000000
-        1185.333333333330000000)
-      Alignment = taLeftJustify
-      AlignToBand = False
-      AutoSize = False
-      AutoStretch = True
-      Color = clWhite
-      DataSet = DMLiqProdVendido.qryReportPlanta
-      DataField = 'producto_ent'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Arial'
-      Font.Style = []
-      OnPrint = qtxtproducto_entPrint
       ParentFont = False
       Transparent = True
       WordWrap = True
@@ -859,9 +795,9 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     KeepOnOnePage = False
     BandType = rbPageHeader
     object PsQRLabel4: TQRLabel
-      Left = 281
+      Left = 175
       Top = 15
-      Width = 485
+      Width = 697
       Height = 33
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -870,14 +806,14 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Frame.DrawRight = False
       Size.Values = (
         87.312500000000000000
-        743.479166666666700000
+        463.020833333333300000
         39.687500000000000000
-        1283.229166666667000000)
+        1844.145833333333000000)
       Alignment = taCenter
       AlignToBand = True
       AutoSize = True
       AutoStretch = False
-      Caption = 'RESUMEN LIQUIDACI'#211'N DE HORTALIZAS'
+      Caption = 'DETALLE LIQUIDACI'#211'N DE HORTALIZAS POR PLANTACION'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -922,9 +858,9 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
   end
   object qrgrpCentro: TQRGroup
     Left = 37
-    Top = 134
+    Top = 115
     Width = 1048
-    Height = 38
+    Height = 58
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
@@ -934,18 +870,19 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     Color = clWhite
     TransparentBand = False
     ForceNewColumn = False
-    ForceNewPage = False
+    ForceNewPage = True
     Size.Values = (
-      100.541666666666700000
+      153.458333333333300000
       2772.833333333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
-    Expression = '[empresa_ent] + [producto_ent] + [centro_ent]'
+    Expression = '[empresa_ent] + [centro_ent]+ [producto_ent] '
+    FooterBand = qrbnd1
     Master = Owner
     ReprintOnNewPage = True
     object qrlbl1: TQRLabel
       Left = 13
-      Top = 0
+      Top = 18
       Width = 46
       Height = 17
       Frame.Color = clBlack
@@ -956,7 +893,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         44.979166666666670000
         34.395833333333330000
-        0.000000000000000000
+        47.625000000000000000
         121.708333333333300000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -976,7 +913,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qtxtcentro_ent: TQRDBText
       Left = 92
-      Top = 0
+      Top = 18
       Width = 449
       Height = 15
       Frame.Color = clBlack
@@ -987,7 +924,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         243.416666666666700000
-        0.000000000000000000
+        47.625000000000000000
         1187.979166666667000000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -1009,7 +946,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl27: TQRLabel
       Left = 223
-      Top = 21
+      Top = 39
       Width = 29
       Height = 15
       Frame.Color = clBlack
@@ -1020,7 +957,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         590.020833333333300000
-        55.562500000000000000
+        103.187500000000000000
         76.729166666666670000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1040,7 +977,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl28: TQRLabel
       Left = 254
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1051,7 +988,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         672.041666666666700000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1071,7 +1008,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl29: TQRLabel
       Left = 320
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1082,7 +1019,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         846.666666666666700000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1102,7 +1039,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl30: TQRLabel
       Left = 387
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1113,7 +1050,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         1023.937500000000000000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1133,7 +1070,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl36: TQRLabel
       Left = 453
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1144,7 +1081,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         1198.562500000000000000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1164,7 +1101,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl2: TQRLabel
       Left = 196
-      Top = 21
+      Top = 39
       Width = 25
       Height = 15
       Frame.Color = clBlack
@@ -1175,7 +1112,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         518.583333333333300000
-        55.562500000000000000
+        103.187500000000000000
         66.145833333333330000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -1195,7 +1132,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl3: TQRLabel
       Left = 519
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1206,7 +1143,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         1373.187500000000000000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1226,7 +1163,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl4: TQRLabel
       Left = 585
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1237,7 +1174,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         1547.812500000000000000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1257,7 +1194,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl5: TQRLabel
       Left = 651
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1268,7 +1205,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         1722.437500000000000000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1288,7 +1225,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl6: TQRLabel
       Left = 717
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1299,7 +1236,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         1897.062500000000000000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1319,7 +1256,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl7: TQRLabel
       Left = 783
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1330,7 +1267,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         2071.687500000000000000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1350,7 +1287,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl8: TQRLabel
       Left = 849
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1361,7 +1298,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         2246.312500000000000000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1381,7 +1318,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl9: TQRLabel
       Left = 915
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1392,7 +1329,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         2420.937500000000000000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1412,7 +1349,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl10: TQRLabel
       Left = 981
-      Top = 21
+      Top = 39
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1423,7 +1360,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         2595.562500000000000000
-        55.562500000000000000
+        103.187500000000000000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1441,10 +1378,74 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       WordWrap = True
       FontSize = 8
     end
+    object QRLabel3: TQRLabel
+      Left = 5
+      Top = 1
+      Width = 58
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        13.229166666666670000
+        2.645833333333333000
+        153.458333333333300000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Caption = 'Producto'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 10
+    end
+    object qtxtproducto_ent: TQRDBText
+      Left = 92
+      Top = 1
+      Width = 448
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        243.416666666666700000
+        2.645833333333333000
+        1185.333333333333000000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = True
+      Color = clWhite
+      DataSet = DMLiqProdVendido.qryReportPlanta
+      DataField = 'producto_ent'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      OnPrint = qtxtproducto_entPrint
+      ParentFont = False
+      Transparent = True
+      WordWrap = True
+      FontSize = 8
+    end
   end
   object qrgrpCosechero: TQRGroup
     Left = 37
-    Top = 172
+    Top = 173
     Width = 1048
     Height = 17
     Frame.Color = clBlack
@@ -1462,7 +1463,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       2772.833333333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
-    Expression = '[empresa_ent] + [producto_ent] + [centro_ent] + [cosechero_ent] '
+    Expression = '[empresa_ent] + [centro_ent] + [producto_ent] + [cosechero_ent] '
     FooterBand = qrbndPieCosechero
     Master = Owner
     ReprintOnNewPage = True
@@ -1535,7 +1536,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
   end
   object qrgrpPlantacion: TQRGroup
     Left = 37
-    Top = 189
+    Top = 190
     Width = 1048
     Height = 19
     Frame.Color = clBlack
@@ -1554,14 +1555,14 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     Expression = 
-      '[empresa_ent] + [producto_ent] + [centro_ent] + [cosechero_ent] ' +
+      '[empresa_ent] + [centro_ent] + [producto_ent] + [cosechero_ent] ' +
       ' + [centro_origen_ent]+[plantacion_ent] + [semana_planta_ent]'
     FooterBand = qrbndPiePlantacion
     Master = Owner
     ReprintOnNewPage = True
     object qtxtcosechero: TQRDBText
       Left = 5
-      Top = 0
+      Top = 1
       Width = 25
       Height = 15
       Frame.Color = clBlack
@@ -1572,8 +1573,8 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         13.229166666666670000
-        0.000000000000000000
-        66.145833333333320000)
+        2.645833333333333000
+        66.145833333333330000)
       Alignment = taLeftJustify
       AlignToBand = False
       AutoSize = False
@@ -1594,7 +1595,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qtxtplantacion: TQRDBText
       Left = 33
-      Top = 0
+      Top = 2
       Width = 25
       Height = 14
       Frame.Color = clBlack
@@ -1605,8 +1606,8 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         37.041666666666670000
         87.312500000000000000
-        0.000000000000000000
-        66.145833333333320000)
+        5.291666666666667000
+        66.145833333333330000)
       Alignment = taLeftJustify
       AlignToBand = False
       AutoSize = False
@@ -1627,7 +1628,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qtxtSemana_planta: TQRDBText
       Left = 59
-      Top = 0
+      Top = 2
       Width = 43
       Height = 14
       Frame.Color = clBlack
@@ -1638,7 +1639,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         37.041666666666670000
         156.104166666666700000
-        0.000000000000000000
+        5.291666666666667000
         113.770833333333300000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -1659,7 +1660,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qtxtSemana_planta1: TQRDBText
       Left = 106
-      Top = 0
+      Top = 2
       Width = 191
       Height = 14
       Frame.Color = clBlack
@@ -1670,7 +1671,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         37.041666666666670000
         280.458333333333300000
-        0.000000000000000000
+        5.291666666666667000
         505.354166666666700000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -1693,9 +1694,9 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
   end
   object qrbnd1: TQRBand
     Left = 37
-    Top = 336
+    Top = 337
     Width = 1048
-    Height = 52
+    Height = 72
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
@@ -1707,14 +1708,14 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     ForceNewColumn = False
     ForceNewPage = False
     Size.Values = (
-      137.583333333333300000
+      190.500000000000000000
       2772.833333333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
-    BandType = rbSummary
+    BandType = rbGroupFooter
     object qrshp1: TQRShape
       Left = 184
-      Top = -13
+      Top = 5
       Width = 864
       Height = 63
       Frame.Color = clBlack
@@ -1725,14 +1726,14 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         166.687500000000000000
         486.833333333333300000
-        -34.395833333333330000
+        13.229166666666670000
         2286.000000000000000000)
       Shape = qrsRectangle
       VertAdjust = 0
     end
     object qrxpr1: TQRExpr
       Left = 254
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -1743,7 +1744,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         672.041666666666700000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1765,7 +1766,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr3: TQRExpr
       Left = 320
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -1776,7 +1777,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         846.666666666666700000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1798,7 +1799,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr4: TQRExpr
       Left = 387
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -1809,7 +1810,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1023.937500000000000000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1831,7 +1832,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr5: TQRExpr
       Left = 651
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -1842,7 +1843,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1722.437500000000000000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1864,7 +1865,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr6: TQRExpr
       Left = 717
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -1875,7 +1876,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1897.062500000000000000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1897,7 +1898,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr7: TQRExpr
       Left = 585
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -1908,7 +1909,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1547.812500000000000000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1930,7 +1931,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr8: TQRExpr
       Left = 519
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -1941,7 +1942,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1373.187500000000000000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1963,7 +1964,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr9: TQRExpr
       Left = 915
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -1974,7 +1975,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2420.937500000000000000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1996,7 +1997,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr10: TQRExpr
       Left = 981
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2007,7 +2008,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2595.562500000000000000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2029,7 +2030,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr11: TQRExpr
       Left = 849
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2040,7 +2041,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2246.312500000000000000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2062,7 +2063,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr12: TQRExpr
       Left = 783
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2073,7 +2074,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2071.687500000000000000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2095,7 +2096,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr13: TQRExpr
       Left = 453
-      Top = 4
+      Top = 22
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2106,7 +2107,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1198.562500000000000000
-        10.583333333333330000
+        58.208333333333330000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2128,7 +2129,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr14: TQRExpr
       Left = 254
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2139,7 +2140,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         672.041666666666700000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2161,7 +2162,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr15: TQRExpr
       Left = 320
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2172,7 +2173,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         846.666666666666700000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2194,7 +2195,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr16: TQRExpr
       Left = 387
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2205,7 +2206,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1023.937500000000000000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2227,7 +2228,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr17: TQRExpr
       Left = 453
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2238,7 +2239,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1198.562500000000000000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2260,7 +2261,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr18: TQRExpr
       Left = 519
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2271,7 +2272,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1373.187500000000000000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2293,7 +2294,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr19: TQRExpr
       Left = 585
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2304,7 +2305,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1547.812500000000000000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2326,7 +2327,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr20: TQRExpr
       Left = 651
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2337,7 +2338,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1722.437500000000000000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2359,7 +2360,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr21: TQRExpr
       Left = 717
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2370,7 +2371,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1897.062500000000000000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2392,7 +2393,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr22: TQRExpr
       Left = 783
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2403,7 +2404,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2071.687500000000000000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2425,7 +2426,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr23: TQRExpr
       Left = 849
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2436,7 +2437,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2246.312500000000000000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2458,7 +2459,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr24: TQRExpr
       Left = 915
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2469,7 +2470,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2420.937500000000000000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2491,7 +2492,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr25: TQRExpr
       Left = 981
-      Top = 34
+      Top = 52
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2502,7 +2503,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2595.562500000000000000
-        89.958333333333330000
+        137.583333333333300000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2524,7 +2525,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl11: TQRLabel
       Left = 195
-      Top = 4
+      Top = 22
       Width = 50
       Height = 12
       Frame.Color = clBlack
@@ -2535,7 +2536,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         31.750000000000000000
         515.937500000000000000
-        10.583333333333330000
+        58.208333333333330000
         132.291666666666700000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -2555,7 +2556,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrlbl12: TQRLabel
       Left = 195
-      Top = 17
+      Top = 35
       Width = 50
       Height = 12
       Frame.Color = clBlack
@@ -2566,7 +2567,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         31.750000000000000000
         515.937500000000000000
-        44.979166666666670000
+        92.604166666666670000
         132.291666666666700000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -2586,7 +2587,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrshp2: TQRShape
       Left = 230
-      Top = 30
+      Top = 48
       Width = 817
       Height = 3
       Frame.Color = clBlack
@@ -2597,14 +2598,14 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         7.937500000000000000
         608.541666666666700000
-        79.375000000000000000
+        127.000000000000000000
         2161.645833333333000000)
       Shape = qrsHorLine
       VertAdjust = 0
     end
     object qrlbl17: TQRLabel
       Left = 33
-      Top = 4
+      Top = 22
       Width = 113
       Height = 15
       Frame.Color = clBlack
@@ -2615,7 +2616,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         39.687500000000000000
         87.312500000000000000
-        10.583333333333330000
+        58.208333333333330000
         298.979166666666700000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -2635,7 +2636,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr26: TQRExpr
       Left = 981
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2646,7 +2647,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2595.562500000000000000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2668,7 +2669,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr27: TQRExpr
       Left = 915
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2679,7 +2680,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2420.937500000000000000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2701,7 +2702,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr28: TQRExpr
       Left = 849
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2712,7 +2713,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2246.312500000000000000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2734,7 +2735,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr29: TQRExpr
       Left = 783
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2745,7 +2746,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         2071.687500000000000000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2766,7 +2767,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr30: TQRExpr
       Left = 717
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2777,7 +2778,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1897.062500000000000000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2798,7 +2799,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr31: TQRExpr
       Left = 651
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2809,7 +2810,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1722.437500000000000000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2831,7 +2832,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr32: TQRExpr
       Left = 585
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2842,7 +2843,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1547.812500000000000000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2864,7 +2865,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr33: TQRExpr
       Left = 519
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2875,7 +2876,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1373.187500000000000000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2897,7 +2898,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr34: TQRExpr
       Left = 453
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2908,7 +2909,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1198.562500000000000000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2930,7 +2931,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr35: TQRExpr
       Left = 387
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2941,7 +2942,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         1023.937500000000000000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2963,7 +2964,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr36: TQRExpr
       Left = 320
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -2974,7 +2975,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         846.666666666666700000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -2996,7 +2997,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
     end
     object qrxpr37: TQRExpr
       Left = 254
-      Top = 17
+      Top = 35
       Width = 65
       Height = 13
       Frame.Color = clBlack
@@ -3007,7 +3008,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
       Size.Values = (
         34.395833333333330000
         672.041666666666700000
-        44.979166666666670000
+        92.604166666666670000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -3030,7 +3031,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
   end
   object qrgrpFacturadoCab: TQRGroup
     Left = 37
-    Top = 208
+    Top = 209
     Width = 1048
     Height = 21
     Frame.Color = clBlack
@@ -3059,7 +3060,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
   end
   object qrbndFacturadoPie: TQRBand
     Left = 37
-    Top = 245
+    Top = 246
     Width = 1048
     Height = 20
     Frame.Color = clBlack
@@ -3529,7 +3530,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
   end
   object qrbndPiePlantacion: TQRBand
     Left = 37
-    Top = 265
+    Top = 266
     Width = 1048
     Height = 19
     Frame.Color = clBlack
@@ -3998,7 +3999,7 @@ object QRLiqProdVendidoPlan: TQRLiqProdVendidoPlan
   end
   object qrbndPieCosechero: TQRBand
     Left = 37
-    Top = 284
+    Top = 285
     Width = 1048
     Height = 52
     Frame.Color = clBlack

@@ -3,7 +3,7 @@ unit LDGastosEntregas;
 interface
 
 uses
-  Forms, SysUtils, Classes, DB, DBTables;
+  Forms, SysUtils, Classes, DB, DBTables, QuickRpt, Dialogs, kbmMemTable;
 
 type
   TDLGastosEntregas = class(TDataModule)
@@ -12,11 +12,13 @@ type
     DataSource: TDataSource;
     QDetalleLinea: TQuery;
     qryTabla: TQuery;
+    tkbmTablaCSV: TkbmMemTable;
     procedure QListadoAfterOpen(DataSet: TDataSet);
     procedure QListadoBeforeClose(DataSet: TDataSet);
   private
     { Private declarations }
     bVerDetalle: boolean;
+    procedure NuevoRegistro;
   public
     { Public declarations }
     function ObtenerDatosCompletos( const AEmpresa, ACentro, AProveedor, AProducto, AAnyoSemana, AEntrega, AGasto: string;
@@ -32,6 +34,8 @@ type
                                               const AFechaIni, AFechaFin, AFechaCorte: TDateTime; const ACorte: Boolean;
                                               const AGastoGrabado: Integer; const ATipoCodigo, AFacturaGrabada: integer; const AFechaFactura: TDateTime ): boolean;
     procedure CerrarQuery;
+    procedure CrearCSVTabla;
+    procedure TablaTemporal;
   end;
 
 var
@@ -571,144 +575,184 @@ begin
 
     SQL.Add('       sum(kilos_el) kilos, ');
 
-    (*
-    if ACostePrevisto then
+    {Filtro tipo de gasto
+      -Si se selecciona uno deja los demás a 0 y busca ese en concreto.
+      -Si no hay nada seleccionado, entra al else grande de abajo y los busca todos}
+    if AGasto = '012' then
     begin
-      SQL.Add('      sum( kilos_el * ');
-      SQL.Add('      case when categoria_el = ''1'' or categoria_el = ''I'' ');
-      SQL.Add('           then ( select coste_primera_pcp ');
-      SQL.Add('                     from frf_prev_costes_producto ');
-      SQL.Add('                     where empresa_pcp = empresa_ec ');
-      SQL.Add('                      and producto_pcp = producto_el ');
-      SQL.Add('                      and fecha_llegada_ec between fecha_ini_pcp and nvl(fecha_fin_pcp,today) ) ');
-
-      SQL.Add('           when categoria_el = ''EX'' ');
-      SQL.Add('           then ( select coste_extra_pcp ');
-      SQL.Add('                     from frf_prev_costes_producto ');
-      SQL.Add('                     where empresa_pcp = empresa_ec ');
-      SQL.Add('                      and producto_pcp = producto_el ');
-      SQL.Add('                      and fecha_llegada_ec between fecha_ini_pcp and nvl(fecha_fin_pcp,today) ) ');
-
-      SQL.Add('           when categoria_el = ''SE'' ');
-      SQL.Add('           then ( select coste_super_pcp ');
-      SQL.Add('                     from frf_prev_costes_producto ');
-      SQL.Add('                     where empresa_pcp = empresa_ec ');
-      SQL.Add('                      and producto_pcp = producto_el ');
-      SQL.Add('                      and fecha_llegada_ec between fecha_ini_pcp and nvl(fecha_fin_pcp,today) ) ');
-
-      SQL.Add('           when categoria_el = ''10'' ');
-      SQL.Add('           then ( select coste_platano10_pcp ');
-      SQL.Add('                     from frf_prev_costes_producto ');
-      SQL.Add('                     where empresa_pcp = empresa_ec ');
-      SQL.Add('                      and producto_pcp = producto_el ');
-      SQL.Add('                      and fecha_llegada_ec between fecha_ini_pcp and nvl(fecha_fin_pcp,today) ) ');
-
-      SQL.Add('           when categoria_el = ''ST'' ');
-      SQL.Add('           then ( select coste_platanost_pcp ');
-      SQL.Add('                     from frf_prev_costes_producto ');
-      SQL.Add('                     where empresa_pcp = empresa_ec ');
-      SQL.Add('                      and producto_pcp = producto_el ');
-      SQL.Add('                      and fecha_llegada_ec between fecha_ini_pcp and nvl(fecha_fin_pcp,today) ) ');
-
-      SQL.Add('           else ( select coste_resto_pcp ');
-      SQL.Add('                     from frf_prev_costes_producto ');
-      SQL.Add('                     where empresa_pcp = empresa_ec ');
-      SQL.Add('                      and producto_pcp = producto_el ');
-      SQL.Add('                      and fecha_llegada_ec between fecha_ini_pcp and nvl(fecha_fin_pcp,today) ) ');
-      SQL.Add('      end ) coste_previson, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''012'' and ( producto_ge = producto_el or producto_ge is null ) ) g012, ');
+      SQL.Add('       0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
     end
     else
+    if AGasto = '013' then
     begin
-      SQL.Add('      0 coste_previson, ');
-    end;
-    *)
-
+      SQL.Add('       0 g012, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''013'' and ( producto_ge = producto_el or producto_ge is null ) ) g013, ');
+      SQL.Add('       0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
+    else
+    if AGasto = '014' then
+    begin
+      SQL.Add('       0 g012, 0 g013,');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''014'' and ( producto_ge = producto_el or producto_ge is null ) ) g014, ');
+      SQL.Add('       0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
+    else
+    if AGasto = '015' then
+    begin
+      SQL.Add('       0 g012, 0 g013, 0 g014, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''015'' and ( producto_ge = producto_el or producto_ge is null ) ) g015, ');
+      SQL.Add('       0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
+    else
+    if AGasto = '016' then
+    begin
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''016'' and ( producto_ge = producto_el or producto_ge is null ) ) g016, ');
+      SQL.Add('       0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
+    else
+    if AGasto = '051' then
+    begin
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''051'' and ( producto_ge = producto_el or producto_ge is null ) ) g051, ');
+      SQL.Add('       0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
+    else
+    if AGasto = '052' then
+    begin
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''052'' and ( producto_ge = producto_el or producto_ge is null ) ) g052, ');
+      SQL.Add('       0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
+    else
+    if AGasto = '053' then
+    begin
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''053'' and ( producto_ge = producto_el or producto_ge is null ) ) g053, ');
+      SQL.Add('       0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
+    else
     if AGasto = '054' then
     begin
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, ');
       SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''054'' and ( producto_ge = producto_el or producto_ge is null ) ) g054, ');
-      SQL.Add('       0 g055,0 g056,0 g012,0 g057,0 g058,0 g014,0 g015,0 g059,0 g060,0 g110,0 g016 ');
+      SQL.Add('       0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
     end
     else
     if AGasto = '055' then
     begin
-      SQL.Add('       0 g054, ');
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, ');
       SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''055'' and ( producto_ge = producto_el or producto_ge is null ) ) g055, ');
-      SQL.Add('       0 g056,0 g012,0 g057,0 g058,0 g014,0 g015,0 g059,0 g060,0 g110,0 g016 ');
+      SQL.Add('       0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
     end
     else
     if AGasto = '056' then
     begin
-      SQL.Add('       0 g054,0 g055, ');
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, ');
       SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''056'' and ( producto_ge = producto_el or producto_ge is null ) ) g056, ');
-      SQL.Add('       0 g012,0 g057,0 g058,0 g014,0 g015,0 g059,0 g060,0 g110,0 g016 ');    end
-    else
-    if AGasto = '012' then
-    begin
-      SQL.Add('       0 g054,0 g055,0 g056, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and ( tipo_ge = ''012'' or  tipo_ge = ''013'' ) and ( producto_ge = producto_el or producto_ge is null ) ) g012, ');
-      SQL.Add('       0 g057,0 g058,0 g014,0 g015,0 g059,0 g060,0 g110,0 g016 ');    end
+      SQL.Add('       0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
     else
     if AGasto = '057' then
     begin
-      SQL.Add('       0 g054,0 g055,0 g056,0 g012, ');
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, ');
       SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''057'' and ( producto_ge = producto_el or producto_ge is null ) ) g057, ');
-      SQL.Add('       0 g058,0 g014,0 g015,0 g059,0 g060,0 g110,0 g016 ');    end
+      SQL.Add('       0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
     else
     if AGasto = '058' then
     begin
-      SQL.Add('       0 g054,0 g055,0 g056,0 g012,0 g057, ');
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, ');
       SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''058'' and ( producto_ge = producto_el or producto_ge is null ) ) g058, ');
-      SQL.Add('       0 g014,0 g015,0 g059,0 g060,0 g110,0 g016 ');    end
-    else
-    if AGasto = '014' then
-    begin
-      SQL.Add('       0 g054,0 g055,0 g056,0 g012,0 g057,0 g058, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''014'' and ( producto_ge = producto_el or producto_ge is null ) ) g014, ');
-      SQL.Add('       0 g015,0 g059,0 g060,0 g110,0 g016 ');    end
-    else
-    if AGasto = '015' then
-    begin
-      SQL.Add('       0 g054,0 g055,0 g056,0 g012,0 g057,0 g058,0 g014, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''015'' and ( producto_ge = producto_el or producto_ge is null ) ) g015, ');
-      SQL.Add('       0 g059,0 g060,0 g110,0 g016 ');    end
+      SQL.Add('       0 g059, 0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
     else
     if AGasto = '059' then
     begin
-      SQL.Add('       0 g054,0 g055,0 g056,0 g012,0 g057,0 g058,0 g014,0 g015, ');
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, ');
       SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''059'' and ( producto_ge = producto_el or producto_ge is null ) ) g059, ');
-      SQL.Add('       0 g060,0 g110,0 g016 ');    end
+      SQL.Add('       0 g060, 0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
     else
     if AGasto = '060' then
     begin
-      SQL.Add('       0 g054,0 g055,0 g056,0 g012,0 g057,0 g058,0 g014,0 g015,0 g059, ');
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, ');
       SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''060'' and ( producto_ge = producto_el or producto_ge is null ) ) g060, ');
-      SQL.Add('       0 g110,0 g016 ');    end
+      SQL.Add('       0 g061, 0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
     else
-    if AGasto = '110' then
+    if AGasto = '061' then
     begin
-      SQL.Add('       0 g054,0 g055,0 g056,0 g012,0 g057,0 g058,0 g014,0 g015,0 g059,0 g060, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = 110 and ( producto_ge = producto_el or producto_ge is null ) ) g110, ');
-      SQL.Add('       0 g016 ');    end
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''061'' and ( producto_ge = producto_el or producto_ge is null ) ) g060, ');
+      SQL.Add('       0 g062, 0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
     else
-    if AGasto = '016' then
+    if AGasto = '062' then
     begin
-      SQL.Add('       0 g054,0 g055,0 g056,0 g012,0 g057,0 g058,0 g014,0 g015,0 g059,0 g060,0 g110, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''016'' and ( producto_ge = producto_el or producto_ge is null ) ) g016 ');
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''062'' and ( producto_ge = producto_el or producto_ge is null ) ) g060, ');
+      SQL.Add('       0 g063,  0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
+    else
+    if AGasto = '063' then
+    begin
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''063'' and ( producto_ge = producto_el or producto_ge is null ) ) g060, ');
+      SQL.Add('       0 g064, 0 g065, 0 g066, 0 g084 ');
+    end
+    else
+    if AGasto = '064' then
+    begin
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''064'' and ( producto_ge = producto_el or producto_ge is null ) ) g060, ');
+      SQL.Add('       0 g065, 0 g066, 0 g084 ');
+    end
+    else
+    if AGasto = '065' then
+    begin
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063, 0 g064, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''065'' and ( producto_ge = producto_el or producto_ge is null ) ) g060, ');
+      SQL.Add('       0 g066, 0 g084 ');
+    end
+    else
+    if AGasto = '066' then
+    begin
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063, 0 g064, 0 g065');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''066'' and ( producto_ge = producto_el or producto_ge is null ) ) g060, ');
+      SQL.Add('       0 g084 ');
+    end
+    else
+    if AGasto = '084' then
+    begin
+      SQL.Add('       0 g012, 0 g013, 0 g014, 0 g015, 0 g016, 0 g051, 0 g052, 0 g053, 0 g054, 0 g055, 0 g056, 0 g057, 0 g058, 0 g059, 0 g060, 0 g061, 0 g062, 0 g063, 0 g064, 0 g065, 0 g066, ');
+      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''084'' and ( producto_ge = producto_el or producto_ge is null ) ) g084 ');
     end
     else
     begin
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''054'' and ( producto_ge = producto_el or producto_ge is null ) ) g054, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''055'' and ( producto_ge = producto_el or producto_ge is null ) ) g055, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''056'' and ( producto_ge = producto_el or producto_ge is null ) ) g056, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and ( tipo_ge = ''012'' or  tipo_ge = ''013'' ) and ( producto_ge = producto_el or producto_ge is null ) ) g012, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''057'' and ( producto_ge = producto_el or producto_ge is null ) ) g057, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''058'' and ( producto_ge = producto_el or producto_ge is null ) ) g058, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''014'' and ( producto_ge = producto_el or producto_ge is null ) ) g014, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''015'' and ( producto_ge = producto_el or producto_ge is null ) ) g015, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''059'' and ( producto_ge = producto_el or producto_ge is null ) ) g059, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''060'' and ( producto_ge = producto_el or producto_ge is null ) ) g060, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = 110 and ( producto_ge = producto_el or producto_ge is null ) ) g110, ');
-      SQL.Add('       ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''016'' and ( producto_ge = producto_el or producto_ge is null ) ) g016 ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''012'' and ( producto_ge = producto_el or producto_ge is null ) ) g012, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''013'' and ( producto_ge = producto_el or producto_ge is null ) ) g013, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''014'' and ( producto_ge = producto_el or producto_ge is null ) ) g014, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''015'' and ( producto_ge = producto_el or producto_ge is null ) ) g015, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''016'' and ( producto_ge = producto_el or producto_ge is null ) ) g016, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''051'' and ( producto_ge = producto_el or producto_ge is null ) ) g051, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''052'' and ( producto_ge = producto_el or producto_ge is null ) ) g052, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''053'' and ( producto_ge = producto_el or producto_ge is null ) ) g053, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''054'' and ( producto_ge = producto_el or producto_ge is null ) ) g054, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''055'' and ( producto_ge = producto_el or producto_ge is null ) ) g055, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''056'' and ( producto_ge = producto_el or producto_ge is null ) ) g056, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''057'' and ( producto_ge = producto_el or producto_ge is null ) ) g057, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''058'' and ( producto_ge = producto_el or producto_ge is null ) ) g058, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''059'' and ( producto_ge = producto_el or producto_ge is null ) ) g059, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''060'' and ( producto_ge = producto_el or producto_ge is null ) ) g060, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''061'' and ( producto_ge = producto_el or producto_ge is null ) ) g061, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''062'' and ( producto_ge = producto_el or producto_ge is null ) ) g062, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''063'' and ( producto_ge = producto_el or producto_ge is null ) ) g063, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''064'' and ( producto_ge = producto_el or producto_ge is null ) ) g064, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''065'' and ( producto_ge = producto_el or producto_ge is null ) ) g065, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''066'' and ( producto_ge = producto_el or producto_ge is null ) ) g066, ');
+      SQL.Add('    ( SELECT SUM(importe_ge) FROM FRF_gastos_entregas where codigo_ge = codigo_ec ' + sFactura + ' and tipo_ge = ''084'' and ( producto_ge = producto_el or producto_ge is null ) ) g084 ');
     end;
 
     SQL.Add('FROM FRF_entregas_c, FRF_entregas_l ');
@@ -912,6 +956,146 @@ begin
     Open;
     Result:= not IsEmpty;
   end;
+end;
+
+procedure TDLGastosEntregas.TablaTemporal;
+begin
+  tkbmTablaCSV.Fields.Clear;
+  tkbmTablaCSV.FieldDefs.Add('COD_ENTREGA', ftString, 15, False);
+  tkbmTablaCSV.FieldDefs.Add('EMPRESA', ftString, 3, False);
+  tkbmTablaCSV.FieldDefs.Add('PROVEEDOR', ftString, 3, False);
+  tkbmTablaCSV.FieldDefs.Add('FECHA_LLEGADA', ftDate, 0, False);
+  tkbmTablaCSV.FieldDefs.Add('FECHA_ORIGEN', ftDate, 0, False);
+  tkbmTablaCSV.FieldDefs.Add('PRODUCTO', ftString, 5, False);
+  tkbmTablaCSV.FieldDefs.Add('UNIDADES', ftString, 6, False);
+  tkbmTablaCSV.FieldDefs.Add('KILOS', ftString, 6, False);
+  tkbmTablaCSV.FieldDefs.Add('012', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('013', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('014', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('015', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('016', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('051', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('052', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('053', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('054', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('055', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('056', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('057', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('058', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('059', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('060', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('061', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('062', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('063', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('064', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('065', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('066', ftString, 10, False);
+  tkbmTablaCSV.FieldDefs.Add('084', ftString, 10, False);
+  tkbmTablaCSV.CreateTable;
+  tkbmTablaCSV.Open;
+
+  while not qryTabla.Eof do
+  begin
+     NuevoRegistro;
+     qryTabla.Next;
+  end;
+end;
+
+
+procedure TDLGastosEntregas.NuevoRegistro;
+begin
+      tkbmTablaCSV.Insert;
+      tkbmTablaCSV.FieldByName('COD_ENTREGA').AsString := qryTabla.FieldByName('codigo_ec').AsString;
+      tkbmTablaCSV.FieldByName('EMPRESA').AsString := qryTabla.FieldByName('empresa_ec').AsString;
+      tkbmTablaCSV.FieldByName('PROVEEDOR').AsString := qryTabla.FieldByName('proveedor_ec').AsString;
+      tkbmTablaCSV.FieldByName('FECHA_LLEGADA').AsDateTime := qryTabla.FieldByName('fecha_llegada_ec').AsDateTime;
+      tkbmTablaCSV.FieldByName('FECHA_ORIGEN').AsDateTime := qryTabla.FieldByName('fecha_origen_ec').AsDateTime;
+      tkbmTablaCSV.FieldByName('PRODUCTO').AsString := qryTabla.FieldByName('producto_el').AsString;
+      tkbmTablaCSV.FieldByName('UNIDADES').AsString := qryTabla.FieldByName('unidades').AsString;
+      tkbmTablaCSV.FieldByName('KILOS').AsString := qryTabla.FieldByName('kilos').AsString;
+      tkbmTablaCSV.FieldByName('012').AsString := qryTabla.FieldByName('g012').AsString;
+      tkbmTablaCSV.FieldByName('013').AsString := qryTabla.FieldByName('g013').AsString;
+      tkbmTablaCSV.FieldByName('014').AsString := qryTabla.FieldByName('g014').AsString;
+      tkbmTablaCSV.FieldByName('015').AsString := qryTabla.FieldByName('g015').AsString;
+      tkbmTablaCSV.FieldByName('016').AsString := qryTabla.FieldByName('g016').AsString;
+      tkbmTablaCSV.FieldByName('051').AsString := qryTabla.FieldByName('g051').AsString;
+      tkbmTablaCSV.FieldByName('052').AsString := qryTabla.FieldByName('g052').AsString;
+      tkbmTablaCSV.FieldByName('053').AsString := qryTabla.FieldByName('g053').AsString;
+      tkbmTablaCSV.FieldByName('054').AsString := qryTabla.FieldByName('g054').AsString;
+      tkbmTablaCSV.FieldByName('055').AsString := qryTabla.FieldByName('g055').AsString;
+      tkbmTablaCSV.FieldByName('056').AsString := qryTabla.FieldByName('g056').AsString;
+      tkbmTablaCSV.FieldByName('057').AsString := qryTabla.FieldByName('g057').AsString;
+      tkbmTablaCSV.FieldByName('058').AsString := qryTabla.FieldByName('g058').AsString;
+      tkbmTablaCSV.FieldByName('059').AsString := qryTabla.FieldByName('g059').AsString;
+      tkbmTablaCSV.FieldByName('060').AsString := qryTabla.FieldByName('g060').AsString;
+      tkbmTablaCSV.FieldByName('061').AsString := qryTabla.FieldByName('g061').AsString;
+      tkbmTablaCSV.FieldByName('062').AsString := qryTabla.FieldByName('g062').AsString;
+      tkbmTablaCSV.FieldByName('063').AsString := qryTabla.FieldByName('g063').AsString;
+      tkbmTablaCSV.FieldByName('064').AsString := qryTabla.FieldByName('g064').AsString;
+      tkbmTablaCSV.FieldByName('065').AsString := qryTabla.FieldByName('g065').AsString;
+      tkbmTablaCSV.FieldByName('066').AsString := qryTabla.FieldByName('g066').AsString;
+      tkbmTablaCSV.FieldByName('084').AsString := qryTabla.FieldByName('g084').AsString;
+      tkbmTablaCSV.Post;
+end;
+
+procedure TDLGastosEntregas.CrearCSVTabla;
+var
+  sAux, sTemp, OutLine : string;
+  Stream : TFileStream;
+  contador : integer;
+begin
+   with TSaveDialog.Create(Self) do
+    try
+      //puntero en el primero para recorrerlo
+      Title := '  Guardar INFORME DETALLADO.';
+      Filter := 'Documento EXCEL_CSV (*.csv)|*.csv|';
+
+      FileName:= 'TABLA_GASTOS_ENTREGAS.csv';
+      Execute;
+      Stream := TFileStream.Create(FileName, fmCreate);
+
+      try
+        OutLine := 'Detalle gastos entregas';
+        SetLength(OutLine, Length(OutLine));
+        Stream.Write(OutLine[1], Length(OutLine) * SizeOf(Char));
+        Stream.Write(sLineBreak, Length(sLineBreak));
+
+        //cabecera del csv
+        OutLine := 'CODIGO_ENTREGA;EMPRESA;PROVEEDOR;FECHA_LLEGADA;FECHA_ORIGEN;PRODUCTO;UNIDADES;KILOS;' +
+          'GASTO_012;GASTO_013;GASTO_014;GASTO_015;GASTO_016;GASTO_051;GASTO_052;GASTO_053;GASTO_054;GASTO_055;GASTO_056;GASTO_057;' +
+          'GASTO_058;GASTO_059;GASTO_060;GASTO_061;GASTO_062;GASTO_063;GASTO_064;GASTO_065;GASTO_066;GASTO_084';
+        SetLength(OutLine, Length(OutLine));
+        Stream.Write(OutLine[1], Length(OutLine) * SizeOf(Char));
+        Stream.Write(sLineBreak, Length(sLineBreak));
+
+
+        TablaTemporal;
+        tkbmTablaCSV.First;
+        while not tkbmTablaCSV.Eof do
+        begin
+          OutLine := '';
+          for contador := 0 to tkbmTablaCSV.FieldCount - 1 do
+          begin
+            sTemp := tkbmTablaCSV.Fields[contador].AsString;
+            if (sTemp = '') then
+              sTemp := '0';
+            OutLine := OutLine + sTemp + ';';
+          end;
+          //Elimina el ; final innecesaria
+          SetLength(OutLine, Length(OutLine));
+          //Escribe la línea en el fichero
+          Stream.Write(OutLine[1], Length(OutLine) * SizeOf(Char));
+          //Escribe salto de línea
+          Stream.Write(sLineBreak, Length(sLineBreak));
+          tkbmTablaCSV.Next;
+        end;
+      finally
+        Stream.Free;  // Saves the file
+      end;
+    finally
+      tkbmTablaCSV.Close;
+      Free;
+    end;
 end;
 
 end.

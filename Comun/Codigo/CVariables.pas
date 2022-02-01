@@ -178,6 +178,7 @@ var
   //Temporal --> True metodo antiguo - False metodo nuevo
   gbAjustarSeleccionado: boolean = False;
 
+  gsAuxString : string;
   function EsVisible( const AControl: TControl ): boolean;
 
 implementation

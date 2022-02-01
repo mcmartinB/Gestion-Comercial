@@ -99,7 +99,7 @@ implementation
 
 uses UDMAuxDB, Principal, CVariables, DPreview, CReportes, UDMConfig,
      CAuxiliarDB, UDMBaseDatos, LQGastosEntregas, DateUtils,
-     LQTablaGastosEntregas, LQGastosEntregasEx;
+     LQTablaGastosEntregas, LQGastosEntregasEx, LDGastosEntregas;
 
 {$R *.DFM}
 
@@ -129,9 +129,13 @@ begin
     else
     if rbTabla.Checked then
     begin
-      if not LQTablaGastosEntregas.Imprimir ( sEmpresa, sCentro, sProveedor, sProducto, sAnyoSemana, sEntrega, sGasto,
-                                       dIni, dFin, dCorte, bCorte, iGastoGrabado, cbxTipoCodigo.ItemIndex, cbbFactura.ItemIndex, dFechaFac ) then
-        ShowMessage('Sin datos.');
+      DLGastosEntregas:= TDLGastosEntregas.Create( Application );
+      DLGastosEntregas.ObtenerDatosTabla(sEmpresa, sCentro, sProveedor, sProducto, sAnyoSemana, sEntrega, sGasto,
+                                       dIni, dFin, dCorte, bCorte, iGastoGrabado, cbxTipoCodigo.ItemIndex, cbbFactura.ItemIndex, dFechaFac);
+      DLGastosEntregas.CrearCSVTabla;
+//      if not LQTablaGastosEntregas.Imprimir ( sEmpresa, sCentro, sProveedor, sProducto, sAnyoSemana, sEntrega, sGasto,
+//                                       dIni, dFin, dCorte, bCorte, iGastoGrabado, cbxTipoCodigo.ItemIndex, cbbFactura.ItemIndex, dFechaFac ) then
+//        ShowMessage('Sin datos.');
     end
     else
     begin
@@ -260,6 +264,8 @@ begin
       end;
   end;
 end;
+
+
 
 procedure TFLGastosEntregas.PonNombre(Sender: TObject);
 begin
@@ -490,6 +496,7 @@ begin
     edtFecha.Text:= DateToStr( dFecha );
   end;
 end;
+
 
 procedure TFLGastosEntregas.rbTodasClick(Sender: TObject);
 begin

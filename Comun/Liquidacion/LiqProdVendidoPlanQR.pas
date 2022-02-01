@@ -9,14 +9,12 @@ type
     PageFooterBand1: TQRBand;
     qrbndBandaDetalle: TQRBand;
     ColumnHeaderBand1: TQRBand;
-    QRLabel3: TQRLabel;
     QRSysData1: TQRSysData;
     QRBand1: TQRBand;
     PsQRLabel4: TQRLabel;
     PsQRSysData1: TQRSysData;
     QRLabel6: TQRLabel;
     qtxtempresa_liq: TQRDBText;
-    qtxtproducto_ent: TQRDBText;
     qrlbl15: TQRLabel;
     qrdbtxtfecha_fin: TQRDBText;
     qtxtkilos_pri: TQRDBText;
@@ -175,6 +173,8 @@ type
     qrxpr35: TQRExpr;
     qrxpr36: TQRExpr;
     qrxpr37: TQRExpr;
+    QRLabel3: TQRLabel;
+    qtxtproducto_ent: TQRDBText;
     procedure qtxtempresa_liqPrint(sender: TObject; var Value: String);
     procedure qtxtproducto_entPrint(sender: TObject; var Value: String);
     procedure qtxtcosechero2Print(sender: TObject; var Value: String);

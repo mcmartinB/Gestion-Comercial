@@ -720,9 +720,9 @@ begin
       EntradasSalidas;
 
       // Guardar csv con informacion de tablas temporales
-      //CrearCsv(kmtEntradas);
-      //CrearCsv(kmtSalidas);
-      //CrearCsv(kmtInOut);
+//      CrearCsv(kmtEntradas);
+//      CrearCsv(kmtSalidas);
+//      CrearCsv(kmtInOut);
 
       PreparaLiquidacion;
 
@@ -1299,9 +1299,9 @@ begin
     qryReportPlanta.SQL.Add(' and centro_ent = :centro ');
   if AProducto <> '' then
     qryReportPlanta.SQL.Add(' and producto_ent = :producto ');
-  qryReportPlanta.SQL.Add(' group by empresa_ent, producto_ent, centro_ent, centro_origen_ent, cosechero_ent, plantacion_ent, semana_planta_ent, ');
+  qryReportPlanta.SQL.Add(' group by empresa_ent, centro_ent, producto_ent, centro_origen_ent, cosechero_ent, plantacion_ent, semana_planta_ent, ');
   qryReportPlanta.SQL.Add('          facturado,  categoria_ent ');
-  qryReportPlanta.SQL.Add(' order by empresa_ent, producto_ent, centro_ent,centro_origen_ent, cosechero_ent, plantacion_ent, semana_planta_ent, ');
+  qryReportPlanta.SQL.Add(' order by empresa_ent, centro_ent, producto_ent, centro_origen_ent, cosechero_ent, plantacion_ent, semana_planta_ent, ');
   qryReportPlanta.SQL.Add('                                       facturado desc, categoria_ent ');
 
   if AEmpresa <> 'SAT' then
@@ -1384,9 +1384,9 @@ begin
     qryReportCos.SQL.Add(' and centro_ent = :centro ');
   if AProducto <> '' then
     qryReportCos.SQL.Add(' and producto_ent = :producto ');
-  qryReportCos.SQL.Add(' group by empresa_ent, producto_ent, centro_ent, centro_origen_ent, cosechero_ent,  ');
+  qryReportCos.SQL.Add(' group by empresa_ent, centro_ent, producto_ent, centro_origen_ent, cosechero_ent,  ');
   qryReportCos.SQL.Add('          facturado,  categoria_ent ');
-  qryReportCos.SQL.Add(' order by empresa_ent, producto_ent, centro_ent,centro_origen_ent, cosechero_ent,  ');
+  qryReportCos.SQL.Add(' order by empresa_ent, centro_ent, producto_ent, centro_origen_ent, cosechero_ent,  ');
   qryReportCos.SQL.Add('                                       facturado desc, categoria_ent ');
 
   if AEmpresa <> 'SAT' then

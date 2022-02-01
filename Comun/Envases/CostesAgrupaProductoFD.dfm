@@ -1,8 +1,6 @@
 object FDCostesAgrupaProducto: TFDCostesAgrupaProducto
   Left = 855
   Top = 248
-  Width = 610
-  Height = 498
   Caption = '    COSTES ENVASADO POR AGRUPACION / PRODUCTO'
   ClientHeight = 459
   ClientWidth = 594

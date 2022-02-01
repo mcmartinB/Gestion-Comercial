@@ -3,7 +3,7 @@ object FDConfigPrinter: TFDConfigPrinter
   Top = 153
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = '     CONFIGURACIÓN DE LA IMPRESORA'
+  Caption = '     CONFIGURACI'#211'N DE LA IMPRESORA'
   ClientHeight = 258
   ClientWidth = 507
   Color = clBtnFace
@@ -29,7 +29,7 @@ object FDConfigPrinter: TFDConfigPrinter
     Top = 75
     Width = 130
     Height = 13
-    Caption = 'Número de copias. (Max. 9)'
+    Caption = 'N'#250'mero de copias. (Max. 9)'
   end
   object cbImpresoras: TComboBox
     Left = 76

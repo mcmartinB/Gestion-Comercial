@@ -5,7 +5,7 @@ object FMProductos: TFMProductos
   BorderStyle = bsSingle
   Caption = '  PRODUCTOS'
   ClientHeight = 583
-  ClientWidth = 531
+  ClientWidth = 519
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -28,7 +28,7 @@ object FMProductos: TFMProductos
   object PMaestro: TPanel
     Left = 0
     Top = 0
-    Width = 531
+    Width = 519
     Height = 356
     Align = alTop
     BevelInner = bvLowered
@@ -39,6 +39,7 @@ object FMProductos: TFMProductos
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 531
     object Lproducto_p: TLabel
       Left = 40
       Top = 33
@@ -164,7 +165,7 @@ object FMProductos: TFMProductos
     object estomate_p: TDBCheckBox
       Left = 366
       Top = 132
-      Width = 50
+      Width = 94
       Height = 17
       Caption = 'NO'
       DataField = 'estomate_p'
@@ -201,10 +202,11 @@ object FMProductos: TFMProductos
     object pnlCostesAyudas: TPanel
       Left = 2
       Top = 230
-      Width = 527
+      Width = 515
       Height = 124
       Align = alBottom
       TabOrder = 11
+      ExplicitWidth = 527
       object bvl1: TBevel
         Left = 35
         Top = 56
@@ -443,7 +445,7 @@ object FMProductos: TFMProductos
       Height = 21
       Style = csDropDownList
       Enabled = False
-      ItemHeight = 0
+      ItemHeight = 13
       ItemIndex = 0
       TabOrder = 8
       Text = 'Todos'
@@ -492,26 +494,25 @@ object FMProductos: TFMProductos
   object PageControl: TPageControl
     Left = 0
     Top = 356
-    Width = 531
+    Width = 519
     Height = 227
-    ActivePage = tsCategorias
+    ActivePage = tsCostes
     Align = alClient
     TabOrder = 3
     OnChange = PageControlChange
+    ExplicitWidth = 531
     object tsCategorias: TTabSheet
       Caption = 'Categor'#237'as'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 523
       object PCategorias: TPanel
         Left = 0
         Top = 0
-        Width = 523
+        Width = 511
         Height = 57
         Align = alTop
         TabOrder = 0
         Visible = False
+        ExplicitWidth = 523
         object Label1: TLabel
           Left = 12
           Top = 20
@@ -553,7 +554,7 @@ object FMProductos: TFMProductos
       object RCategorias: TDBGrid
         Left = 0
         Top = 57
-        Width = 523
+        Width = 511
         Height = 142
         Align = alClient
         DataSource = DSCategorias
@@ -570,14 +571,11 @@ object FMProductos: TFMProductos
     object tsCalibres: TTabSheet
       Caption = 'Calibres'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 523
       object RCalibres: TDBGrid
         Left = 0
         Top = 65
-        Width = 523
+        Width = 511
         Height = 134
         Align = alClient
         DataSource = DSCalibres
@@ -593,11 +591,12 @@ object FMProductos: TFMProductos
       object PCalibres: TPanel
         Left = 0
         Top = 0
-        Width = 523
+        Width = 511
         Height = 65
         Align = alTop
         TabOrder = 0
         Visible = False
+        ExplicitWidth = 523
         object lblCalibre: TLabel
           Left = 12
           Top = 20
@@ -629,18 +628,16 @@ object FMProductos: TFMProductos
     object tsColores: TTabSheet
       Caption = 'Colores'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 523
       object PColores: TPanel
         Left = 0
         Top = 0
-        Width = 523
+        Width = 511
         Height = 57
         Align = alTop
         TabOrder = 0
         Visible = False
+        ExplicitWidth = 523
         object Label2: TLabel
           Left = 12
           Top = 20
@@ -682,7 +679,7 @@ object FMProductos: TFMProductos
       object RColores: TDBGrid
         Left = 0
         Top = 57
-        Width = 523
+        Width = 511
         Height = 142
         Align = alClient
         DataSource = DSColores
@@ -699,18 +696,16 @@ object FMProductos: TFMProductos
     object tsPaises: TTabSheet
       Caption = 'Pa'#237'ses'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 523
       object PPaises: TPanel
         Left = 0
         Top = 0
-        Width = 523
+        Width = 511
         Height = 65
         Align = alTop
         TabOrder = 0
         Visible = False
+        ExplicitWidth = 523
         object Label3: TLabel
           Left = 12
           Top = 20
@@ -728,6 +723,41 @@ object FMProductos: TFMProductos
           Width = 13
           Height = 22
           Action = ARejillaFlotante
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000000000000000000000000000000000000FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00000000000000000000000000000000000000
+            0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000000000000000000000000000000000000000
+            000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
           Control = pais_psp
           Grid = RejillaFlotante
           GridAlignment = taDownCenter
@@ -768,7 +798,7 @@ object FMProductos: TFMProductos
       object RPaises: TDBGrid
         Left = 0
         Top = 65
-        Width = 523
+        Width = 511
         Height = 134
         Align = alClient
         DataSource = dsPaises
@@ -785,18 +815,16 @@ object FMProductos: TFMProductos
     object tsVariedadCampo: TTabSheet
       Caption = 'Variedad Campo'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 523
       object PVariedadCampo: TPanel
         Left = 0
         Top = 0
-        Width = 523
+        Width = 511
         Height = 57
         Align = alTop
         TabOrder = 0
         Visible = False
+        ExplicitWidth = 523
         object Label4: TLabel
           Left = 12
           Top = 20
@@ -838,7 +866,7 @@ object FMProductos: TFMProductos
       object RVariedadCampo: TDBGrid
         Left = 0
         Top = 57
-        Width = 523
+        Width = 511
         Height = 142
         Align = alClient
         DataSource = dsVariedadCampo
@@ -855,14 +883,11 @@ object FMProductos: TFMProductos
     object tsCostes: TTabSheet
       Caption = 'Costes Agrupaci'#243'n'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 523
       object dbgrdCostes: TDBGrid
         Left = 0
         Top = 43
-        Width = 523
+        Width = 511
         Height = 156
         TabStop = False
         Align = alClient
@@ -879,16 +904,17 @@ object FMProductos: TFMProductos
       object pnlCostes: TPanel
         Left = 0
         Top = 0
-        Width = 523
+        Width = 511
         Height = 43
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 523
       end
       object btnCostes: TButton
-        Left = 438
-        Top = 8
+        Left = 433
+        Top = 3
         Width = 75
-        Height = 25
+        Height = 36
         Caption = 'Costes'
         TabOrder = 1
         OnClick = btnCostesClick
@@ -897,7 +923,7 @@ object FMProductos: TFMProductos
   end
   object RejillaFlotante: TBGrid
     Left = 440
-    Top = 24
+    Top = 29
     Width = 73
     Height = 97
     Color = clInfoBk

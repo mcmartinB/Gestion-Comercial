@@ -1089,9 +1089,9 @@ begin
   ConfigurarOpcion(  mnuLiqSepLiquidacion, DMConfig.EsLaFont, '-', 'Liquidación a Cosecheros');
 
   ConfigurarOpcion(  mnuProcesoLiquidacion, DMConfig.EsLaFont, 'V2.- Cálculo Liquidación Semanal', '');
-  ConfigurarOpcion(  mnuInformesLiquidacion, DMConfig.EsLaFont, 'V2.- Informes Liquidación', '');
+  ConfigurarOpcion(  mnuInformesLiquidacion, DMConfig.EsLaFont, 'V2.- Detalle Liquidación', '');
   ConfigurarOpcion(  mnuLiquidacionMensual, False, 'V2.- ->> OLD <<- Liquidación Mensual', '');
-  ConfigurarOpcion(  mnuLiquidacionMensual2, DMConfig.EsLaFont, 'V2.- Liquidación Mensual', '');
+  ConfigurarOpcion(  mnuLiquidacionMensual2, DMConfig.EsLaFont, 'V2.- Resumen Liquidación', '');
 end;
 
 procedure TFPrincipal.mnuLiquidacionClick(Sender: TObject);

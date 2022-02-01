@@ -58,6 +58,8 @@ begin
     {Rango de hojas a imprimir}
     Desde.Text := '1';
     Hasta.Text := IntToStr(Report.PageNumber);
+//    Hasta.Text := IntToStr(Report.PrinterSettings.LastPage);
+
 
     if ShowModal = mrOk then
     begin
@@ -70,7 +72,7 @@ begin
       begin
         //Imprimir todas los hojas
         Report.PrinterSettings.FirstPage := 1;
-        Report.PrinterSettings.LastPage := Report.PageNumber;
+        Report.PrinterSettings.LastPage := Report.PrinterSettings.LastPage; //Report.PageNumber;
       end
       else
         if RadioButton2.Checked then

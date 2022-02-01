@@ -59,7 +59,6 @@ type
     procedure centro_capChange(Sender: TObject);
   private
     { Private declarations }
-    sEmpresa, sAgrupacion, sCentro, sProducto: String;
     bAlta: boolean;
     dFechaIni: TDateTime;
 
@@ -68,6 +67,7 @@ type
 
   public
     { Public declarations }
+    sEmpresa, sAgrupacion, sCentro, sProducto: String;
     procedure LoadValues( const AAgrupacion, AEmpresa, ACentro, AProducto: string );
 
   end;
@@ -80,9 +80,11 @@ implementation
 {$R *.dfm}
 
 uses
-  bMath, UDMBaseDatos, UDMAuxDB, CAuxiliarDB, SeleccionarCentroProductoFD, SeleccionarCentroAgrupacionFD;
+  bMath, UDMBaseDatos, UDMAuxDB, CAuxiliarDB, SeleccionarCentroProductoFD, SeleccionarCentroAgrupacionFD,
+  CVariables;
 
 var
+    KCentro : string;
   FDCostesAgrupaProducto: TFDCostesAgrupaProducto;
 
 procedure ExecuteCosteAgrupacion( const AOwner: TComponent; const AAgrupacion, AEmpresa, ACentro, AProducto: string );
@@ -94,6 +96,9 @@ begin
   sCentro:= ACentro;
   if SeleccionarCentroProducto( sEmpresa, sCentro, sProducto ) then
   begin
+    if sCentro = '' then
+      sCentro := CVariables.gsAuxString;
+
     FDCostesAgrupaProducto:= TFDCostesAgrupaProducto.Create( AOwner );
     try
       FDCostesAgrupaProducto.LoadValues( AAgrupacion, sEmpresa, sCentro, sProducto );
@@ -115,7 +120,7 @@ begin
   begin
     FDCostesAgrupaProducto:= TFDCostesAgrupaProducto.Create( AOwner );
     try
-      FDCostesAgrupaProducto.LoadValues( sAgrupa, AEmpresa, ACentro, AProducto );
+      FDCostesAgrupaProducto.LoadValues( sAgrupa, AEmpresa, sCentro, AProducto );
       FDCostesAgrupaProducto.ShowModal;
     finally
       FreeAndNil(FDCostesAgrupaProducto );

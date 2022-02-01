@@ -38,7 +38,6 @@ type
     edtMeses: TBEdit;
     edtFechaFin: TBEdit;
     rgTipoListado: TRadioGroup;
-    btn1: TSpeedButton;
     procedure BBCancelarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);

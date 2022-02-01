@@ -978,7 +978,7 @@ object FLGastosEntregas: TFLGastosEntregas
     Top = 47
     Width = 197
     Height = 153
-    Date = 36717.529228680560000000
+    Date = 36717.452072326390000000
     ShowToday = False
     TabOrder = 1
     Visible = False

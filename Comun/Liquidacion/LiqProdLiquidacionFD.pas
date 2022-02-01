@@ -53,7 +53,6 @@ type
     Label4: TLabel;
     edtRangoFin: TBEdit;
     btnRangoFin: TBCalendarButton;
-    btn1: TSpeedButton;
     procedure BBCancelarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);

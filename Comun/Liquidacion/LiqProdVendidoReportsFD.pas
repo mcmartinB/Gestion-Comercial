@@ -49,7 +49,6 @@ type
     lblFechaDesde2: TLabel;
     edtFechaFin: TBEdit;
     btnFEchaFin: TBCalendarButton;
-    chkSepararCosecheros: TCheckBox;
     procedure BBCancelarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -183,21 +182,21 @@ begin
     Exit;
   if ParametrosOK then
   begin
-    if chkSepararCosecheros.Checked then
-    begin
-      case rgTipoListado.ItemIndex of
-        0: DMLiqProdVendido.ImprimirResumenSeparados( sEmpresa, sCentro, sProducto, dDesde, dHasta, bVerFacturado );
-        1: DMLiqProdVendido.ImprimirCosSeparados( sEmpresa, sCentro, sProducto, dDesde, dHasta );
-        2: DMLiqProdVendido.ImprimirPlaSeparados( sEmpresa, sCentro, sProducto, dDesde, dHasta );
-      end;
-    end
-    else
-    begin
-      case rgTipoListado.ItemIndex of
+//    if chkSepararCosecheros.Checked then
+//    begin
+//      case rgTipoListado.ItemIndex of
+//        0: DMLiqProdVendido.ImprimirResumenSeparados( sEmpresa, sCentro, sProducto, dDesde, dHasta, bVerFacturado );
+//        1: DMLiqProdVendido.ImprimirCosSeparados( sEmpresa, sCentro, sProducto, dDesde, dHasta );
+//        2: DMLiqProdVendido.ImprimirPlaSeparados( sEmpresa, sCentro, sProducto, dDesde, dHasta );
+//      end;
+//    end
+//    else
+//    begin
+    case rgTipoListado.ItemIndex of
         0: DMLiqProdVendido.ImprimirResumenJuntos ( sEmpresa, sCentro, sProducto, dDesde, dHasta , bVerFacturado);
         1: DMLiqProdVendido.ImprimirCosJuntos( sEmpresa, sCentro, sProducto, dDesde, dHasta );
         2: DMLiqProdVendido.ImprimirPlaJuntos( sEmpresa, sCentro, sProducto, dDesde, dHasta );
-      end;
+//      end;
     end;
   end;
 end;

@@ -59,7 +59,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
   PrevInitialZoom = qrZoomToFit
   object PageFooterBand1: TQRBand
     Left = 37
-    Top = 320
+    Top = 323
     Width = 1048
     Height = 17
     Frame.Color = clBlack
@@ -598,7 +598,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     Left = 37
     Top = 97
     Width = 1048
-    Height = 37
+    Height = 19
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
@@ -611,42 +611,11 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     ForceNewColumn = False
     ForceNewPage = False
     Size.Values = (
-      97.895833333333330000
+      50.270833333333330000
       2772.833333333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     BandType = rbColumnHeader
-    object QRLabel3: TQRLabel
-      Left = 5
-      Top = 18
-      Width = 58
-      Height = 17
-      Frame.Color = clBlack
-      Frame.DrawTop = False
-      Frame.DrawBottom = False
-      Frame.DrawLeft = False
-      Frame.DrawRight = False
-      Size.Values = (
-        44.979166666666670000
-        13.229166666666670000
-        47.625000000000000000
-        153.458333333333300000)
-      Alignment = taLeftJustify
-      AlignToBand = False
-      AutoSize = True
-      AutoStretch = False
-      Caption = 'Producto'
-      Color = clWhite
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Arial'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Transparent = False
-      WordWrap = True
-      FontSize = 10
-    end
     object QRLabel6: TQRLabel
       Left = 5
       Top = 1
@@ -711,39 +680,6 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       WordWrap = True
       FontSize = 8
     end
-    object qtxtproducto_ent: TQRDBText
-      Left = 67
-      Top = 18
-      Width = 448
-      Height = 15
-      Frame.Color = clBlack
-      Frame.DrawTop = False
-      Frame.DrawBottom = False
-      Frame.DrawLeft = False
-      Frame.DrawRight = False
-      Size.Values = (
-        39.687500000000000000
-        177.270833333333300000
-        47.625000000000000000
-        1185.333333333333000000)
-      Alignment = taLeftJustify
-      AlignToBand = False
-      AutoSize = False
-      AutoStretch = True
-      Color = clWhite
-      DataSet = DMLiqProdVendido.qryReportCos
-      DataField = 'producto_ent'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Arial'
-      Font.Style = []
-      OnPrint = qtxtproducto_entPrint
-      ParentFont = False
-      Transparent = True
-      WordWrap = True
-      FontSize = 8
-    end
     object qrlblperiodo: TQRLabel
       Left = 819
       Top = 1
@@ -801,7 +737,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     object PsQRLabel4: TQRLabel
       Left = 196
       Top = 15
-      Width = 611
+      Width = 693
       Height = 33
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -812,12 +748,12 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
         87.312500000000000000
         518.583333333333300000
         39.687500000000000000
-        1616.604166666667000000)
+        1833.562500000000000000)
       Alignment = taLeftJustify
       AlignToBand = False
       AutoSize = True
       AutoStretch = False
-      Caption = 'RESUMEN LIQUIDACI'#211'N DE FRUTAS Y HORTALIZAS'
+      Caption = 'DETALLE LIQUIDACI'#211'N DE HORTALIZAS POR COSECHERO'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -862,9 +798,9 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
   end
   object qrgrpCentro: TQRGroup
     Left = 37
-    Top = 134
+    Top = 116
     Width = 1048
-    Height = 38
+    Height = 56
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
@@ -874,18 +810,19 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     Color = clWhite
     TransparentBand = False
     ForceNewColumn = False
-    ForceNewPage = False
+    ForceNewPage = True
     Size.Values = (
-      100.541666666666700000
+      148.166666666666700000
       2772.833333333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
-    Expression = '[empresa_ent] + [producto_ent] + [centro_ent]'
+    Expression = '[empresa_ent] + [centro_ent] + [producto_ent] '
+    FooterBand = qrbnd1
     Master = Owner
     ReprintOnNewPage = True
     object qrlbl1: TQRLabel
       Left = 5
-      Top = 0
+      Top = 17
       Width = 46
       Height = 17
       Frame.Color = clBlack
@@ -896,7 +833,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         44.979166666666670000
         13.229166666666670000
-        0.000000000000000000
+        44.979166666666670000
         121.708333333333300000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -916,7 +853,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qtxtcentro_ent: TQRDBText
       Left = 67
-      Top = 0
+      Top = 17
       Width = 449
       Height = 15
       Frame.Color = clBlack
@@ -927,7 +864,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         177.270833333333300000
-        0.000000000000000000
+        44.979166666666670000
         1187.979166666667000000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -949,7 +886,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl27: TQRLabel
       Left = 223
-      Top = 21
+      Top = 38
       Width = 29
       Height = 15
       Frame.Color = clBlack
@@ -959,9 +896,9 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        590.020833333333200000
-        55.562500000000000000
-        76.729166666666680000)
+        590.020833333333300000
+        100.541666666666700000
+        76.729166666666670000)
       Alignment = taRightJustify
       AlignToBand = False
       AutoSize = False
@@ -980,7 +917,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl28: TQRLabel
       Left = 254
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -991,7 +928,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         672.041666666666700000
-        55.562500000000000000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1011,7 +948,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl29: TQRLabel
       Left = 320
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1021,8 +958,8 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        846.666666666666800000
-        55.562500000000000000
+        846.666666666666700000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1042,7 +979,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl30: TQRLabel
       Left = 387
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1053,7 +990,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         1023.937500000000000000
-        55.562500000000000000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1073,7 +1010,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl36: TQRLabel
       Left = 453
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1084,7 +1021,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         1198.562500000000000000
-        55.562500000000000000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1104,7 +1041,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl2: TQRLabel
       Left = 196
-      Top = 21
+      Top = 38
       Width = 25
       Height = 15
       Frame.Color = clBlack
@@ -1114,9 +1051,9 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Frame.DrawRight = False
       Size.Values = (
         39.687500000000000000
-        518.583333333333400000
-        55.562500000000000000
-        66.145833333333340000)
+        518.583333333333300000
+        100.541666666666700000
+        66.145833333333330000)
       Alignment = taLeftJustify
       AlignToBand = False
       AutoSize = False
@@ -1135,7 +1072,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl3: TQRLabel
       Left = 519
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1146,7 +1083,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         1373.187500000000000000
-        55.562500000000000000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1166,7 +1103,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl4: TQRLabel
       Left = 585
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1177,7 +1114,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         1547.812500000000000000
-        55.562500000000000000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1197,7 +1134,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl5: TQRLabel
       Left = 651
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1208,7 +1145,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         1722.437500000000000000
-        55.562500000000000000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1228,7 +1165,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl6: TQRLabel
       Left = 717
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1239,7 +1176,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         1897.062500000000000000
-        55.562500000000000000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1259,7 +1196,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl7: TQRLabel
       Left = 783
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1270,7 +1207,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         2071.687500000000000000
-        55.562500000000000000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1290,7 +1227,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl8: TQRLabel
       Left = 849
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1301,7 +1238,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         2246.312500000000000000
-        55.562500000000000000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1321,7 +1258,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl9: TQRLabel
       Left = 915
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1332,7 +1269,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         2420.937500000000000000
-        55.562500000000000000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1352,7 +1289,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     end
     object qrlbl10: TQRLabel
       Left = 981
-      Top = 21
+      Top = 38
       Width = 65
       Height = 15
       Frame.Color = clBlack
@@ -1363,7 +1300,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Size.Values = (
         39.687500000000000000
         2595.562500000000000000
-        55.562500000000000000
+        100.541666666666700000
         171.979166666666700000)
       Alignment = taRightJustify
       AlignToBand = False
@@ -1376,6 +1313,70 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       Font.Height = -11
       Font.Name = 'Arial'
       Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+      WordWrap = True
+      FontSize = 8
+    end
+    object QRLabel1: TQRLabel
+      Left = 5
+      Top = 1
+      Width = 58
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        13.229166666666670000
+        2.645833333333333000
+        153.458333333333300000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Caption = 'Producto'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 10
+    end
+    object QRDBText1: TQRDBText
+      Left = 67
+      Top = 1
+      Width = 448
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        39.687500000000000000
+        177.270833333333300000
+        2.645833333333333000
+        1185.333333333333000000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = False
+      AutoStretch = True
+      Color = clWhite
+      DataSet = DMLiqProdVendido.qryReportCos
+      DataField = 'producto_ent'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      OnPrint = qtxtproducto_entPrint
       ParentFont = False
       Transparent = True
       WordWrap = True
@@ -1402,7 +1403,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       2772.833333333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
-    Expression = '[empresa_ent] + [producto_ent] + [centro_ent] + [cosechero_ent] '
+    Expression = '[empresa_ent] + [centro_ent] + [producto_ent] + [cosechero_ent] '
     FooterBand = qrbndPieCosechero
     Master = Owner
     ReprintOnNewPage = True
@@ -1475,7 +1476,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
   end
   object qrbnd1: TQRBand
     Left = 37
-    Top = 268
+    Top = 271
     Width = 1048
     Height = 52
     Frame.Color = clBlack
@@ -1493,7 +1494,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
       2772.833333333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
-    BandType = rbSummary
+    BandType = rbGroupFooter
     object qrshp1: TQRShape
       Left = 184
       Top = 0
@@ -2850,7 +2851,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
     Expression = 
-      '[empresa_ent]+[producto_ent]+[centro_ent]+[centro_origen_ent]+[c' +
+      '[empresa_ent]+[centro_ent]+[producto_ent]+[centro_origen_ent]+[c' +
       'osechero_ent]+[facturado]'
     FooterBand = qrbndFacturadoPie
     Master = Owner
@@ -3330,7 +3331,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     Left = 37
     Top = 246
     Width = 1048
-    Height = 22
+    Height = 25
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
@@ -3342,7 +3343,7 @@ object QRLiqProdVendidoCos: TQRLiqProdVendidoCos
     ForceNewColumn = False
     ForceNewPage = False
     Size.Values = (
-      58.208333333333330000
+      66.145833333333330000
       2772.833333333333000000)
     PreCaluculateBandHeight = False
     KeepOnOnePage = False
