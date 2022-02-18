@@ -190,7 +190,8 @@ begin
     SQL.Add('       case tipo_factura_fc when 380 then ');
     SQL.Add('            Today - fecha_fac_ini_fc      ');     // Factura
     SQL.Add('       else                               ');
-    SQL.Add('             121                          ');     // Abono
+//    SQL.Add('             121                          ');     // Abono
+    SQL.Add('            Today - fecha_fac_ini_fc      ');     // Abono
     SQL.Add('       end dias_desde_factura,            ');
     SQL.Add('       Today - fecha_vencimiento_rc dias_desde_cobro, ');
     SQL.Add('       fecha_vencimiento_rc - fecha_factura_fc dias_cobro ');
