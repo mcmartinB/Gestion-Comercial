@@ -871,7 +871,7 @@ object FRejillaFacturacion: TFRejillaFacturacion
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 44453.366847581020000000
+      ReportDocument.CreationDate = 44620.616906365740000000
       OptionsView.FilterBar = False
       BuiltInReportLink = True
     end

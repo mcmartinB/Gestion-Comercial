@@ -331,6 +331,7 @@ type
     procedure TSalidasLAfterPost(DataSet: TDataSet);
     procedure TSalidasLNewRecord(DataSet: TDataSet);
     procedure TSalidasLBeforePost(DataSet: TDataSet);
+    procedure ComprobarDatosMaestro(Sender: TObject);
   private
     { Private declarations }
     bAbonos, bImpFac: Boolean;
@@ -2733,7 +2734,7 @@ end;
 
 procedure TFMSalidas.RellenaClienteFacturacion(Sender: TObject);
 begin
-     //Rellenamos cliente de facturacion
+  //Rellenamos cliente de facturacion
   if (Trim(cliente_sal_sc.Text) <> '') and (DSMaestro.State <> dsBrowse) and (Estado <> teLocalizar) then
   begin
        (* Se pelearon los colegillas
@@ -3365,6 +3366,7 @@ begin
       nota_sc.Lines.Add(UpperCase('La mercancía transportada realiza tráfico marítimo entre islas'));
     end;
     nota_sc.Lines.Add('-" EL CONDUCTOR CONFIRMA QUE LA MERCANCÍA VA SUJETA POR BARRAS".');
+    nota_sc.Lines.Add('-" TEMPERATURA DE LA CARGA: CONFORME".');
   end;
 end;
 
@@ -4337,6 +4339,8 @@ begin
     oldEnvase := '';
 end;
 
+
+
 procedure TFMSalidas.porte_bonny_scClick(Sender: TObject);
 begin
   //si el porte la pagamos nosotros ponemos el grabado por defecto
@@ -5290,6 +5294,25 @@ begin
   begin
     ShowMessage('Sin cambios.')
   end;
+end;
+
+//comprobar que los datos estén en el dataset de la cabecera correctamente
+procedure TFMSalidas.ComprobarDatosMaestro(Sender: TObject);
+begin
+  if DataSetMaestro.FieldByName('empresa_sc').AsString = '' then
+    QSalidasC.FieldByName('empresa_sc').AsString := empresa_sc.Text;
+
+  if DataSetMaestro.FieldByName('centro_salida_sc').AsString = '' then
+    QSalidasC.FieldByName('centro_salida_sc').AsString := centro_salida_sc.Text;
+
+  if DataSetMaestro.FieldByName('n_albaran_sc').AsString = '' then
+    QSalidasC.FieldByName('n_albaran_sc').AsString := n_albaran_sc.Text;
+
+  if DataSetMaestro.FieldByName('fecha_sc').AsString = '' then
+    QSalidasC.FieldByName('fecha_sc').AsString := fecha_sc.Text;
+
+  if DataSetMaestro.FieldByName('hora_sc').AsString = '' then
+    QSalidasC.FieldByName('hora_sc').AsString := hora_sc.Text;
 end;
 
 procedure TFMSalidas.comercial_slChange(Sender: TObject);

@@ -19,7 +19,18 @@ uses
   cxGridDBTableView, cxGridCustomView, cxGrid, ExtCtrls,
 
   dxSkinsCore, dxSkinscxPCPainter, dxSkinMoneyTwins, dxSkinBlue, dxSkinsdxBarPainter, dxSkinsdxRibbonPainter, dxSkinFoggy,
-  dxSkinBlueprint;
+  dxSkinBlueprint, dxSkinBlack, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom,
+  dxSkinDarkSide, dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle,
+  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis,
+  dxSkinMetropolisDark, dxSkinOffice2007Black, dxSkinOffice2007Blue,
+  dxSkinOffice2007Green, dxSkinOffice2007Pink, dxSkinOffice2007Silver,
+  dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver,
+  dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray, dxSkinOffice2013White,
+  dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
+  dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010,
+  dxSkinWhiteprint, dxSkinXmas2008Blue;
 
 type
   TFRejillaFacturacion = class(TForm)
@@ -124,8 +135,19 @@ uses UDMBaseDatos, CAuxiliarDB, UDFactura;
 {$R *.dfm}
 
 procedure TFRejillaFacturacion.btnAceptarClick(Sender: TObject);
+var
+  I, opcion: Integer;
 begin
-    ModalResult:= mrOk;
+    for I := 0 to self.tvFacturas.DataController.RecordCount - 1 do
+    begin
+      if (self.tvFacturas.DataController.Values[I, self.tvFacturas.DataController.GetItemByFieldName('importe_total_fc').Index]) = 0 then
+        opcion := MessageDlg( 'Hay una factura con importe total 0. Por favor, revísela.', mtWarning, [mbOK], 0);
+        if opcion = 1 then
+          ModalResult := mrNone
+        else
+          ModalResult := mrOk;
+    end;
+
 end;
 
 procedure TFRejillaFacturacion.btnCancelarClick(Sender: TObject);
