@@ -280,7 +280,8 @@ begin
   with QCosteEnvases do
   begin
     SQL.Clear;
-    SQL.Add(' select first 1 anyo_ec, mes_ec, nvl(material_ec,0) + nvl(personal_ec,0) + nvl(general_ec,0) coste_ec  ');
+    //SQL.Add(' select first 1 anyo_ec, mes_ec, nvl(material_ec,0) + nvl(personal_ec,0) + nvl(general_ec,0) coste_ec  ');
+    SQL.Add(' select first 1 anyo_ec, mes_ec, nvl(material_ec,0) + nvl(coste_ec,0) + nvl(secciones_ec,0) coste_ec  ');
     SQL.Add(' from frf_env_costes ');
     SQL.Add(' where empresa_ec = :empresa_sl ');
     SQL.Add(' and centro_ec = :centro_salida_sl ');

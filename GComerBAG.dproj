@@ -501,6 +501,9 @@
     <DCCReference Include="Comun\EDI\VerOrdenFD.pas">
       <Form>FDVerOrden</Form>
     </DCCReference>
+    <DCCReference Include="Comun\Envasado\CosteEnvasado.pas">
+      <Form>FCosteEnvasado</Form>
+    </DCCReference>
     <DCCReference Include="Comun\Envases\ArticuloDesglose.pas">
       <Form>FArticuloDesglose</Form>
     </DCCReference>
@@ -1677,9 +1680,6 @@
     <DCCReference Include="GComerBAG\Code\EntregasTerceros\ValorarStockProveedorQL.pas">
       <Form>QLValorarStockProveedor</Form>
       <DesignClass>TQuickRep</DesignClass>
-    </DCCReference>
-    <DCCReference Include="GComerBAG\Code\Envasado\CosteEnvasado.pas">
-      <Form>FCosteEnvasado</Form>
     </DCCReference>
     <DCCReference Include="GComerBAG\Code\Envases\EnvSeccionesContables.pas">
       <Form>FEnvSeccionesContables</Form>

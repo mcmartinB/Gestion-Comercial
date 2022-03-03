@@ -85,11 +85,10 @@ begin
 
   qryCostes.SQL.Clear;
 
-  if CGlobal.gProgramVersion = CGlobal.pvBAG then
-    qryCostes.SQL.Add(' select personal_ec envasado, material_ec material, general_ec secciones')
-  else
-    qryCostes.SQL.Add(' select coste_ec envasado, material_ec material, secciones_ec secciones');
-
+//  if CGlobal.gProgramVersion = CGlobal.pvBAG then
+//    qryCostes.SQL.Add(' select personal_ec envasado, material_ec material, general_ec secciones')
+//  else
+  qryCostes.SQL.Add(' select coste_ec envasado, material_ec material, secciones_ec secciones');
   qryCostes.SQL.Add(' from frf_env_costes ');
   qryCostes.SQL.Add(' where anyo_ec = :anyo ');
   qryCostes.SQL.Add(' and mes_ec = :mes ');

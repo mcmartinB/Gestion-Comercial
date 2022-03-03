@@ -2,7 +2,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
   Left = 0
   Top = 0
   Width = 794
-  Height = 1144
+  Height = 1123
   Frame.Color = clBlack
   Frame.DrawTop = False
   Frame.DrawBottom = False
@@ -200,7 +200,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
       FontSize = 10
     end
     object QRDBText3: TQRDBText
-      Left = 344
+      Left = 341
       Top = 485
       Width = 70
       Height = 17
@@ -211,7 +211,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
       Frame.DrawRight = False
       Size.Values = (
         44.979166666666670000
-        910.166666666666700000
+        902.229166666666700000
         1283.229166666667000000
         185.208333333333300000)
       Alignment = taLeftJustify
@@ -456,7 +456,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
     end
     object QRLabel25: TQRLabel
       Left = 13
-      Top = 669
+      Top = 692
       Width = 670
       Height = 17
       Frame.Color = clBlack
@@ -467,7 +467,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
       Size.Values = (
         44.979166666666670000
         34.395833333333330000
-        1770.062500000000000000
+        1830.916666666667000000
         1772.708333333333000000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -483,7 +483,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
     end
     object QRLabel26: TQRLabel
       Left = 13
-      Top = 689
+      Top = 712
       Width = 680
       Height = 17
       Frame.Color = clBlack
@@ -494,7 +494,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
       Size.Values = (
         44.979166666666670000
         34.395833333333330000
-        1822.979166666667000000
+        1883.833333333333000000
         1799.166666666667000000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -510,7 +510,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
     end
     object QRLabel27: TQRLabel
       Left = 13
-      Top = 709
+      Top = 732
       Width = 434
       Height = 17
       Frame.Color = clBlack
@@ -521,7 +521,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
       Size.Values = (
         44.979166666666670000
         34.395833333333330000
-        1875.895833333333000000
+        1936.750000000000000000
         1148.291666666667000000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -537,7 +537,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
     end
     object QRLabel28: TQRLabel
       Left = 13
-      Top = 749
+      Top = 772
       Width = 382
       Height = 17
       Frame.Color = clBlack
@@ -548,7 +548,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
       Size.Values = (
         44.979166666666670000
         34.395833333333330000
-        1981.729166666667000000
+        2042.583333333333000000
         1010.708333333333000000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -563,8 +563,8 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
       FontSize = 10
     end
     object QRDBText4: TQRDBText
-      Left = 408
-      Top = 749
+      Left = 401
+      Top = 772
       Width = 73
       Height = 17
       Frame.Color = clBlack
@@ -574,8 +574,8 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
       Frame.DrawRight = False
       Size.Values = (
         44.979166666666670000
-        1079.500000000000000000
-        1981.729166666667000000
+        1060.979166666667000000
+        2042.583333333333000000
         193.145833333333300000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -590,7 +590,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
     end
     object QRLabel29: TQRLabel
       Left = 104
-      Top = 780
+      Top = 803
       Width = 160
       Height = 17
       Frame.Color = clBlack
@@ -601,7 +601,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
       Size.Values = (
         44.979166666666670000
         275.166666666666700000
-        2063.750000000000000000
+        2124.604166666667000000
         423.333333333333300000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -1361,7 +1361,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
     end
     object QRLabel32: TQRLabel
       Left = 52
-      Top = 43
+      Top = 52
       Width = 564
       Height = 17
       Frame.Color = clBlack
@@ -1372,7 +1372,7 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
       Size.Values = (
         44.979166666666670000
         137.583333333333300000
-        113.770833333333300000
+        137.583333333333300000
         1492.250000000000000000)
       Alignment = taLeftJustify
       AlignToBand = False
@@ -3916,6 +3916,101 @@ object QLDeclaracionResponsable: TQLDeclaracionResponsable
         10FE5F4563C150CE182676719FB093F1821AD021A75DDF97D01A5A64FD95A73D
         F1435EF75F383C267E8383D3FFD9}
       Stretch = True
+    end
+    object QRLabel42: TQRLabel
+      Left = 312
+      Top = 27
+      Width = 63
+      Height = 19
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        50.270833333333330000
+        825.500000000000000000
+        71.437500000000000000
+        166.687500000000000000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Caption = 'ANEXO IV'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 10
+    end
+    object QRLabel43: TQRLabel
+      Left = 37
+      Top = 646
+      Width = 626
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        97.895833333333330000
+        1709.208333333333000000
+        1656.291666666667000000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Caption = 
+        '5.  Que dispone de la documentaci'#243'n que as'#237' lo acredita, y que l' +
+        'a pondr'#225' a disposici'#243'n de la Administraci'#243'n'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 10
+    end
+    object QRLabel45: TQRLabel
+      Left = 56
+      Top = 663
+      Width = 143
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        148.166666666666700000
+        1754.187500000000000000
+        378.354166666666700000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Caption = 'cuando le sea requerida.'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 10
     end
   end
   object ChildBand1: TQRChildBand

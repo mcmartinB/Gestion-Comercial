@@ -218,24 +218,25 @@ begin
     SQL.Add('   ( select agrupacion_e from frf_envases where envase_e = envase_ec ) agrupacion, ');
     SQL.Add('   envase_Ec envase, ( select descripcion_e from frf_envases where envase_e = envase_ec ) des_envase, ');
     SQL.Add('   anyo_ec * 100 + mes_Ec anyo_mes, ');
-    if gProgramVersion = pvSAT then
+//    if gProgramVersion = pvSAT then
+//    begin
+    if APromedios then
     begin
-      if APromedios then
-      begin
-        SQL.Add('   pcoste_ec + pmaterial_ec envasado, ');
-        SQL.Add('   psecciones_ec secciones ');
-      end
-      else
-      begin
-        SQL.Add('   coste_ec + material_ec envasado, ');
-        SQL.Add('   secciones_ec secciones ');
-      end;
+      SQL.Add('   pcoste_ec + pmaterial_ec envasado, ');
+      SQL.Add('   psecciones_ec secciones ');
     end
     else
     begin
-      SQL.Add('   material_ec envasado, ');
-      SQL.Add('   personal_ec + general_ec secciones ');
+      SQL.Add('   coste_ec + material_ec envasado, ');
+      SQL.Add('   secciones_ec secciones ');
     end;
+//  end
+//    else
+//    begin
+//      SQL.Add('   material_ec envasado, ');
+//      SQL.Add('   personal_ec + general_ec secciones ');
+//      SQL.Add('   coste_ec + secciones_ec secciones ');
+//    end;
     SQL.Add(' from frf_env_costes ');
     SQL.Add(' where empresa_ec = :empresa ');
     SQL.Add(' and ( anyo_ec * 100 + mes_Ec ) between  :anyomesini and :anyomesfin ');

@@ -104,7 +104,8 @@ begin
     SQL.Add('  and envase_ec = envase_sl ');
     SQL.Add('  and producto_ec = producto_sl ');
     SQL.Add(' ) material, ');
-    SQL.Add(' ( select personal_ec  from frf_env_costes ');
+    //SQL.Add(' ( select personal_ec  from frf_env_costes ');
+    SQL.Add(' ( select coste_ec from frf_env_costes ');
     SQL.Add('  where empresa_ec = empresa_sl ');
     SQL.Add('  and centro_ec = centro_salida_sl ');
     SQL.Add('  and ( anyo_ec * 100 ) + mes_ec = ( select max( ( anyo_ec * 100 ) + mes_ec ) from frf_env_costes');
@@ -118,7 +119,8 @@ begin
     SQL.Add('  and envase_ec = envase_sl ');
     SQL.Add('  and producto_ec = producto_sl');
     SQL.Add(' ) personal, ');
-    SQL.Add(' ( select general_ec from frf_env_costes ');
+//  SQL.Add(' ( select general_ec from frf_env_costes ');
+    SQL.Add(' ( select secciones_ec from frf_env_costes ');
     SQL.Add('  where empresa_ec = empresa_sl ');
     SQL.Add('  and centro_ec = centro_salida_sl ');
     SQL.Add('  and ( anyo_ec * 100 ) + mes_ec = ( select max( ( anyo_ec * 100 ) + mes_ec ) from frf_env_costes');

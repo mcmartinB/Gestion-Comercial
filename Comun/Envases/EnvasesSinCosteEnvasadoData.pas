@@ -99,7 +99,8 @@ begin
     SQL.Add('         and centro_ec ' + SQLEqualS(ACentro));
     SQL.Add('         and producto_ec = producto_p ');
     SQL.Add('         and envase_ec = envase_sl) material, ');
-    SQL.Add('        (select personal_ec ');
+    //SQL.Add('        (select personal_ec ');
+    SQL.Add('        (select coste_ec ');
     SQL.Add('         from frf_env_costes ');
     SQL.Add('         where anyo_ec ' + SQLEqualN(AAnyo));
     SQL.Add('         and mes_ec ' + SQLEqualN(AMes));
@@ -107,7 +108,8 @@ begin
     SQL.Add('         and centro_ec ' + SQLEqualS(ACentro));
     SQL.Add('         and producto_ec = producto_p ');
     SQL.Add('         and envase_ec = envase_sl) personal, ');
-    SQL.Add('        (select general_ec ');
+//    SQL.Add('        (select general_ec ');
+    SQL.Add('        (select secciones_ec ');
     SQL.Add('         from frf_env_costes ');
     SQL.Add('         where anyo_ec ' + SQLEqualN(AAnyo));
     SQL.Add('         and mes_ec ' + SQLEqualN(AMes));

@@ -1773,6 +1773,10 @@ object FAltaFacturas: TFAltaFacturas
       object tsTextoFactura: TcxTabSheet
         Caption = 'Texto Factura'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object mmxNotas: TcxMemo
           Left = 0
           Top = 0

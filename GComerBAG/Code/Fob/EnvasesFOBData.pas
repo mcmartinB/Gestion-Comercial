@@ -152,7 +152,8 @@ begin
   with QCosteEnvase do
   begin
     SQL.Clear;
-    SQL.Add('select first 1 anyo_ec, mes_ec, material_ec, personal_ec, general_ec ');
+    //SQL.Add('select first 1 anyo_ec, mes_ec, material_ec, personal_ec, general_ec ');
+    SQL.Add('select first 1 anyo_ec, mes_ec, material_ec, coste_ec, secciones_ec ');
     SQL.Add('from frf_env_costes ');
     SQL.Add('where empresa_ec = :empresa ');
     SQL.Add('and centro_ec = :centro ');
@@ -578,8 +579,10 @@ begin
     ParamByName('mes').AsInteger := iMes;
     try
       Open;
-      AEnvasado := FieldByName('material_ec').AsFloat + FieldByName('personal_ec').AsFloat;
-      ASecciones := FieldByName('general_ec').AsFloat;
+      //AEnvasado := FieldByName('material_ec').AsFloat + FieldByName('personal_ec').AsFloat;
+      AEnvasado := FieldByName('material_ec').AsFloat + FieldByName('coste_ec').AsFloat;
+      //ASecciones := FieldByName('general_ec').AsFloat;
+      ASecciones := FieldByName('secciones_ec').AsFloat;
     finally
       Close;
     end;

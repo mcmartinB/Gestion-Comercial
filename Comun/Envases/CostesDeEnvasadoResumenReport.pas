@@ -111,8 +111,10 @@ begin
     begin
       SQL.Add('        sum(material_ec) coste_envases, ');
       SQL.Add('        sum( case when nvl( material_ec, 0 ) <> 0 then 1 else 0 end ) meses_envases, ');
-      SQL.Add('        sum(personal_ec + general_ec) coste_secciones, ');
-      SQL.Add('        sum( case when nvl( personal_ec + general_ec, 0 ) <> 0 then 1 else 0 end ) meses_secciones ');
+      //SQL.Add('        sum(personal_ec + general_ec) coste_secciones, ');
+      SQL.Add('        sum(coste_ec + secciones_ec) coste_secciones, ');
+      //SQL.Add('        sum( case when nvl( personal_ec + general_ec, 0 ) <> 0 then 1 else 0 end ) meses_secciones ');
+      SQL.Add('        sum( case when nvl( coste_ec + secciones_ec, 0 ) <> 0 then 1 else 0 end ) meses_secciones ');
     end;
 
 

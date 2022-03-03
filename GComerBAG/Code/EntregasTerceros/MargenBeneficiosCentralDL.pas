@@ -248,7 +248,8 @@ begin
   with QCostesEnvasado do
   begin
     SQL.Clear;
-    SQL.Add(' select ec1.material_ec, ec1.personal_ec, ec1.general_ec ');
+    //SQL.Add(' select ec1.material_ec, ec1.personal_ec, ec1.general_ec ');
+    SQL.Add(' select ec1.material_ec, ec1.coste_ec, ec1.secciones_ec ');
     SQL.Add(' from frf_env_costes ec1 ');
     SQL.Add(' where ec1.empresa_ec = :planta ');
     SQL.Add(' and ( ec1.anyo_ec * 100 + ec1.mes_Ec ) =  ( select max( ( ec2.anyo_ec * 100 ) + ec2.mes_Ec ) ');
@@ -606,7 +607,8 @@ begin
     with QCostesEnvasado do
     begin
       SQL.Clear;
-      SQL.Add(' select ec1.material_ec, ec1.personal_ec, ec1.general_ec ');
+      //SQL.Add(' select ec1.material_ec, ec1.personal_ec, ec1.general_ec ');
+      SQL.Add(' select ec1.material_ec, ec1.coste_ec, ec1.secciones_ec ');
       SQL.Add(' from frf_env_costes ec1 ');
       SQL.Add(' where ec1.empresa_ec = :planta ');
       SQL.Add(' and ( ec1.anyo_ec * 100 + ec1.mes_Ec ) =  ( select max( ( ec2.anyo_ec * 100 ) + ec2.mes_Ec ) ');
@@ -629,8 +631,8 @@ begin
       Open;
 
       VPrecioMaterial:= FieldByName('material_ec').AsFloat;
-      VPrecioPersonal:= FieldByName('personal_ec').AsFloat;
-      VPrecioGeneral:= FieldByName('general_ec').AsFloat;
+      VPrecioPersonal:= FieldByName('coste_ec').AsFloat;
+      VPrecioGeneral:= FieldByName('secciones_ec').AsFloat;
 
       mtCostesEnvasado.Insert;
       mtCostesEnvasado.FieldByname('anyomes').AsInteger:= iAnyoMes;

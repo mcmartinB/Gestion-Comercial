@@ -93,16 +93,16 @@ begin
   with QCosteEnvase do
   begin
     SQL.Clear;
-    if CGlobal.gProgramVersion = CGlobal.pvBAG then
-    begin
-      SQL.Add('select empresa_ec, centro_ec, anyo_ec, mes_ec, ( material_ec + personal_Ec ) coste_ec, general_ec secciones_ec, ');
-      SQL.Add('                                ( material_ec + personal_Ec ) pcoste_ec, general_ec psecciones_ec ');
-    end
-    else
-    begin
-      SQL.Add('select empresa_ec, centro_ec, anyo_ec, mes_ec, ( material_ec + coste_ec ) coste_ec, secciones_ec, ');
-      SQL.Add('                                ( pmaterial_ec + pcoste_ec ) pcoste_ec, psecciones_ec ');
-    end;
+    //if CGlobal.gProgramVersion = CGlobal.pvBAG then
+    //begin
+      //SQL.Add('select empresa_ec, centro_ec, anyo_ec, mes_ec, ( material_ec + personal_Ec ) coste_ec, general_ec secciones_ec, ');
+      //SQL.Add('                                ( material_ec + personal_Ec ) pcoste_ec, general_ec psecciones_ec ');
+//    end
+//    else
+//    begin
+    SQL.Add('select empresa_ec, centro_ec, anyo_ec, mes_ec, ( material_ec + coste_ec ) coste_ec, secciones_ec, ');
+    SQL.Add('                                ( pmaterial_ec + pcoste_ec ) pcoste_ec, psecciones_ec ');
+    //end;
     SQL.Add('from frf_env_costes ');
     SQL.Add('where empresa_ec = :empresa ');
     SQL.Add('and envase_ec = :envase ');
@@ -115,14 +115,14 @@ begin
   with qryCosteSeccion do
   begin
     SQL.Clear;
-    if CGlobal.gProgramVersion = CGlobal.pvBAG then
-    begin
-      SQL.Add('select first 1 anyo_ec, mes_ec, envase_ec, general_ec secciones_ec, general_ec psecciones_ec ');
-    end
-    else
-    begin
-      SQL.Add('select first 1 anyo_ec, mes_ec, envase_ec, secciones_ec, psecciones_ec ');
-    end;
+//    if CGlobal.gProgramVersion = CGlobal.pvBAG then
+//    begin
+//      SQL.Add('select first 1 anyo_ec, mes_ec, envase_ec, general_ec secciones_ec, general_ec psecciones_ec ');
+//    end
+//    else
+//    begin
+    SQL.Add('select first 1 anyo_ec, mes_ec, envase_ec, secciones_ec, psecciones_ec ');
+//  end;
     SQL.Add('from frf_env_costes ');
     SQL.Add('where empresa_Ec = :empresa ');
     SQL.Add('and centro_ec = :centro ');

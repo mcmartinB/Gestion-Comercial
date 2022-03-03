@@ -73,7 +73,6 @@ uses
   ControlIntrastatDL in 'GComerBAG\Code\EntregasTerceros\ControlIntrastatDL.pas' {DLControlIntrastat: TDataModule},
   ControlIntrastatFL in 'GComerBAG\Code\EntregasTerceros\ControlIntrastatFL.pas' {FLControlIntrastat},
   ControlIntrastatQL in 'GComerBAG\Code\EntregasTerceros\ControlIntrastatQL.pas' {QLControlIntrastat: TQuickRep},
-  CosteEnvasado in 'GComerBAG\Code\Envasado\CosteEnvasado.pas' {FCosteEnvasado},
   CosteEnvasadoPromedioDM in 'Comun\Envases\CosteEnvasadoPromedioDM.pas' {DMCosteEnvasadoPromedio: TDataModule},
   CosteFrutaProductoDL in 'GComerBAG\Code\EntregasTerceros\CosteFrutaProductoDL.pas' {DLCosteFrutaProducto: TDataModule},
   CosteFrutaProductoFL in 'GComerBAG\Code\EntregasTerceros\CosteFrutaProductoFL.pas' {FLCosteFrutaProducto},
@@ -743,7 +742,8 @@ uses
   uSalidaUtils in 'Comun\Salidas\uSalidaUtils.pas',
   LDeclaracionResponsable in 'Comun\Salidas\LDeclaracionResponsable.pas' {QLDeclaracionResponsable: TQuickRep},
   UDLDeclaracionResponsable in 'Comun\Salidas\UDLDeclaracionResponsable.pas' {DLDeclaracionResponsable: TDataModule},
-  ArticuloDesgloseSalQR in 'Comun\Salidas\ArticuloDesgloseSalQR.pas' {QRArticuloDesgloseSal: TQuickRep};
+  ArticuloDesgloseSalQR in 'Comun\Salidas\ArticuloDesgloseSalQR.pas' {QRArticuloDesgloseSal: TQuickRep},
+  CosteEnvasado in 'Comun\Envasado\CosteEnvasado.pas' {FCosteEnvasado};
 
 (*
   AbonoDetallesDL in 'GComerSAT\Code\Facturacion\AbonoDetallesDL.pas' {DLAbonoDetalles: TDataModule},

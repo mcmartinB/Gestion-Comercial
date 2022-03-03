@@ -470,7 +470,6 @@ uses
   ConfirmaRecepcionDL in 'GComerSAT\Code\Pedidos\ConfirmaRecepcionDL.pas' {DLConfirmaRecepcion: TDataModule},
   ConfirmaRecepcionFL in 'GComerSAT\Code\Pedidos\ConfirmaRecepcionFL.pas' {FLConfirmaRecepcion},
   ConfirmaRecepcionQL in 'GComerSAT\Code\Pedidos\ConfirmaRecepcionQL.pas' {QLConfirmaRecepcion: TQuickRep},
-  CosteEnvasado in 'GComerSAT\Code\Envasado\CosteEnvasado.pas' {FCosteEnvasado},
   CostesDeEnvasadoMensual in 'SAT\Envases\CostesDeEnvasadoMensual.pas' {FCostesDeEnvasadoMensual},
   CostesDeEnvasadoMensualReport in 'SAT\Envases\CostesDeEnvasadoMensualReport.pas' {QRCostesDeEnvasadoMensual: TQuickRep},
   CReportes in 'GComerSAT\Modulos\CReportes.pas',
@@ -846,7 +845,8 @@ uses
   LiqProdVendidoDM in 'Comun\Liquidacion\LiqProdVendidoDM.pas' {DMLiqProdVendido: TDataModule},
   UDLDeclaracionResponsable in 'Comun\Salidas\UDLDeclaracionResponsable.pas' {DLDeclaracionResponsable: TDataModule},
   LDeclaracionResponsable in 'Comun\Salidas\LDeclaracionResponsable.pas' {QLDeclaracionResponsable: TQuickRep},
-  ArticuloDesgloseSalQR in 'Comun\Salidas\ArticuloDesgloseSalQR.pas' {QRArticuloDesgloseSal: TQuickRep};
+  ArticuloDesgloseSalQR in 'Comun\Salidas\ArticuloDesgloseSalQR.pas' {QRArticuloDesgloseSal: TQuickRep},
+  CosteEnvasado in 'Comun\Envasado\CosteEnvasado.pas' {FCosteEnvasado};
 
 (*COMERBAG*)
 

@@ -86,6 +86,7 @@ type
     function ClaveFactura( const AEmpresa, AImpuesto, ATipoFact, ASerie: String;
                            const AFecha: TDateTime; var ANumero: integer ): boolean;
     procedure PutFechaVencimiento( const AEmpresa, ACliente: string; const AFechaFactura: TDateTime; var AFechaCobro, AFechaTesoreria: TDateTime );
+    function GetFechaTesoreria(const AEmpresa, ACliente: string): integer;
   end;
 
   procedure RellenaMemCabeceraFacturas(ARepFactura: Boolean);
@@ -1511,8 +1512,29 @@ begin
   finally
     Free;
   end;
-
 end;
+
+function TDFactura.GetFechaTesoreria(const AEmpresa, ACliente: string): Integer;
+var
+  QFechaVen: TBonnyQuery;
+begin
+  QFechaVen := TBonnyQuery.Create(Self);
+  with QFechaVen do
+  try
+    SQL.Add(' select dias_tesoreria_ct ');
+    SQL.Add(' from frf_clientes_tes ');
+    SQL.Add(' where cliente_ct = :cliente ');
+    SQL.Add('   and empresa_ct = :empresa   ');
+    ParamByName('empresa').AsString:= AEmpresa;
+    ParamByName('cliente').AsString:= ACliente;
+    Open;
+    result := FieldByName('dias_tesoreria_ct').asInteger;
+  finally
+    Free;
+  end;
+end;
+
+
 
 function GetNumeroFactura(empresa, tipofac, tipo, serie: string; fecha: TDate; var AMsg: string): integer;
 var

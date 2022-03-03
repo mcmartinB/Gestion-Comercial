@@ -256,7 +256,7 @@ type
     function UnidadFacturacion: String;
     procedure CambioEnvase;
     procedure RecalcularUnidades(const ASender: TObject; const AImporte: boolean = false);
-    
+
 
 
   public
@@ -1131,10 +1131,14 @@ begin
     DFactura.PutFechaVencimiento( edtEmpresa.Text, edtcliente.Text, dFecha, dCobro, dTesoreria );
     edtNumFacIni.Text:= '';
     deFechaFacIni.Text:= DateToStr( dFecha  );
-    if dePrevisionCobro.Text = ''  then
-      dePrevisionCobro.Text:= DateToStr( dCobro  );
-    if dePrevisionTeso.Text = ''  then
-      dePrevisionTeso.Text:= DateToStr( dTesoreria  );
+//    if dePrevisionCobro.Text = ''  then
+    dePrevisionCobro.Text:= DateToStr( dCobro  );
+//    if dePrevisionTeso.Text = ''  then
+    if rgTipoFactura.Properties.Items[rgTipoFactura.ItemIndex].Value = '381' then
+        dePrevisionTeso.Text:= DateToStr( dFecha  )
+    else
+        dePrevisionTeso.Text:= DateToStr( dTesoreria );
+
   end;
 end;
 
@@ -2126,6 +2130,11 @@ begin
     if dePrevisionTeso.Text = '' then
       QCabFactura.FieldByName('prevision_tesoreria_fc').AsDateTime := dTeso;
   end;
+  //fecha tesoreria
+  if (rgTipoFactura.Properties.Items[rgTipoFactura.ItemIndex].Value = '381') and (Length(edtCliente.Text) = 3) then
+    dePrevisionTeso.Text:= deFechaFactura.Text
+  else
+    dePrevisionTeso.Text:= DateToStr( dFecha + DFactura.GetFechaTesoreria(edtEmpresa.Text, edtCliente.Text) );
 end;
 
 procedure TFAltaFacturas.edtMonedaPropertiesChange(Sender: TObject);
@@ -2179,6 +2188,7 @@ begin
 end;
 
 procedure TFAltaFacturas.rgTipoFacPropertiesChange(Sender: TObject);
+var dFecha, dCobro, dTesoreria: TDateTime;
 begin
   if rgTipoFactura.ItemIndex <> -1 then
   begin
@@ -2187,16 +2197,24 @@ begin
       lbFechaFactura.Caption := 'Fecha Abono';
       lbNumeroFactura.Caption:= 'Numero Abono';
       edtNumeroFactura.Style.Font.Color:= clRed;
+      dePrevisionTeso.Text := deFechaFactura.Text;
     end
     else
     begin
       lbFechaFactura.Caption := 'Fecha Factura';
       lbNumeroFactura.Caption:= 'Numero Factura';
       edtNumeroFactura.Style.Font.Color:= clNavy;
+      if deFechaFactura.Text = '' then
+        deFechaFactura.Text:= DateToStr( Date )
+      else
+      begin
+        dTesoreria := strtodate(deFechaFactura.Text) + DFactura.GetFechaTesoreria(edtEmpresa.Text, edtCliente.Text);
+        dePrevisionTeso.Text := datetostr(dTesoreria);
+      end;
     end;
   end;
-  if deFechaFactura.Text = '' then
-      deFechaFactura.Text:= DateToStr( Date );
+//  if deFechaFactura.Text = '' then
+//      deFechaFactura.Text:= DateToStr( Date );
 end;
 
 procedure TFAltaFacturas.cxPageControlEnter(Sender: TObject);
@@ -2310,6 +2328,7 @@ begin
   txFactura.Enabled := False;
   pnlAltaLineas.Visible := false;
   cxPageControl.ActivePage := tsDetalleFactura;
+  deFechaFactura.Text := datetostr(Date);
 end;
 
 function TFAltaFacturas.CanFacturarFecha(AEmpresa, ADate, ASerie: string): Boolean;

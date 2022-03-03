@@ -154,7 +154,10 @@ begin
   with QCosteEnvase do
   begin
     SQL.Clear;
-    SQL.Add('select first 1 anyo_ec, mes_ec, ( material_ec + personal_ec + general_ec ) coste_ec ');
+    //SQL.Add('select first 1 anyo_ec, mes_ec,
+    
+     ( material_ec + personal_ec + general_ec ) coste_ec ');
+    SQL.Add('select first 1 anyo_ec, mes_ec, ( material_ec + coste_ec + secciones_ec ) coste_ec ');
     SQL.Add('from frf_env_costes ');
     SQL.Add('where empresa_ec = :empresa ');
     SQL.Add('and centro_ec = :centro ');

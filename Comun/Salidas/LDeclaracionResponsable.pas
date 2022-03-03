@@ -70,6 +70,9 @@ type
     QRShape3: TQRShape;
     QRLabel2: TQRLabel;
     QRImage1: TQRImage;
+    QRLabel42: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRLabel45: TQRLabel;
   private
     dmDatos: TDLDeclaracionResponsable;
   public
