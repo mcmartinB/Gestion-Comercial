@@ -680,7 +680,7 @@ object FCosteEnvasado: TFCosteEnvasado
       OnClick = btnTodosClick
     end
     object btnCargarCSV: TButton
-      Left = 136
+      Left = 129
       Top = 7
       Width = 89
       Height = 25

@@ -792,7 +792,7 @@ begin
     sAux := registros[puntero];
     //si existe el registro
     if not CheckExisteRegistros(sAux) then
-       raise Exception.Create('Ya hay registros para el mes ' + Copy(sAux, 10, 2) + ' y año ' + Copy(sAux, 5, 4) + #10#13 +'. Revise los datos del regisro número ' + IntToStr( puntero+1 ) + '.');
+       raise Exception.Create('Ya hay registros para el mes ' + Copy(sAux, 10, 2) + ', el año ' + Copy(sAux, 5, 4) + ' y la empresa ' + Copy(sAux, 1, 3) + '.' + #10#13 + 'Revise los datos del regisro número ' + IntToStr( puntero+1 ) + '.');
     sAux := '';
   end;
 
@@ -941,7 +941,7 @@ var
   sentenciaComprobacion : string;
   QComprobacion : TQuery;
 begin
-  sentenciaComprobacion := 'select count(*) as total from frf_env_costes where anyo_ec = :anyo and mes_ec = :mes';
+  sentenciaComprobacion := 'select count(*) as total from frf_env_costes where anyo_ec = :anyo and mes_ec = :mes and empresa_ec = :empresa';
   QComprobacion := TQuery.Create(nil);
   with QComprobacion do
   begin
@@ -949,6 +949,7 @@ begin
     SQL.Text := sentenciaComprobacion;
     ParamByName('anyo').asInteger := StrToInt(Copy(registro, 5, 4));
     ParamByName('mes').asInteger := StrToInt(Copy(registro, 10, 2));
+    ParamByName('empresa').asString := Copy(registro, 1, 3);
     Open;
     if (FieldByName('total').asInteger = 0) then
       result := true
