@@ -279,7 +279,7 @@ begin
     SMTP.Host := Host;
     SMTP.Port := Port;
     //TIdSMTPAuthenticationType = (atNone, atDefault, atSASL);
-    SMTP.AuthType := atDefault;
+    SMTP.AuthType := satSASL;
     //SMTP.AuthenticationType := atLogin;
     SMTP.Username := User;
     SMTP.Password := Pass;
