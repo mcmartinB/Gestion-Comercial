@@ -1318,15 +1318,19 @@ begin
   with qryAuxCentral do
   begin
     SQL.Clear;
-    SQL.Add('select ean13_ee from frf_ean13_edi ');
-    SQL.Add('where empresa_ee = :empresa ');
-    SQL.Add('and cliente_fac_ee = :cliente ');
-    SQL.Add('and envase_ee = :envase ');
+    SQL.Add('select ref_cliente_ce from frf_clientes_env ');
+    SQL.Add('where empresa_ce = :empresa ');
+    SQL.Add('and cliente_ce = :cliente ');
+    SQL.Add('and envase_ce = :envase ');
+//    SQL.Add('select ean13_ee from frf_ean13_edi ');
+//    SQL.Add('where empresa_ee = :empresa ');
+//    SQL.Add('and cliente_fac_ee = :cliente ');
+//    SQL.Add('and envase_ee = :envase ');
     ParamByName('empresa').AsString:= sEmpresa;
     ParamByName('cliente').AsString:= qryCabOrden.FieldByName('cliente').AsString;
     ParamByName('envase').AsString:= qryPacking.FieldByName('envase_pl').AsString;
     Open;
-    result:= FieldByName('ean13_ee').AsString + '#';
+    result:= FieldByName('ref_cliente_ce').AsString + '#';
     Close;
   end;
   //result:= qryPacking.FieldByName('ean13_pl').AsString + '#';
@@ -1338,15 +1342,19 @@ begin
   with qryAuxCentral do
   begin
     SQL.Clear;
-    SQL.Add('select dun14_ee from frf_ean13_edi ');
-    SQL.Add('where empresa_ee = :empresa ');
-    SQL.Add('and cliente_fac_ee = :cliente ');
-    SQL.Add('and envase_ee = :envase ');
+    SQL.Add('select dun14_ce from frf_clientes_env ');
+    SQL.Add('where empresa_ce = :empresa ');
+    SQL.Add('and cliente_ce = :cliente ');
+    SQL.Add('and envase_ce = :envase ');
+//    SQL.Add('select dun14_ee from frf_ean13_edi ');
+//    SQL.Add('where empresa_ee = :empresa ');
+//    SQL.Add('and cliente_fac_ee = :cliente ');
+//    SQL.Add('and envase_ee = :envase ');
     ParamByName('empresa').AsString:= sEmpresa;
     ParamByName('cliente').AsString:= qryCabOrden.FieldByName('cliente').AsString;
     ParamByName('envase').AsString:= qryPacking.FieldByName('envase_pl').AsString;
     Open;
-    result:= FieldByName('dun14_ee').AsString + '#';
+    result:= FieldByName('dun14_ce').AsString + '#';
     Close;
   end;
 end;
@@ -1383,15 +1391,19 @@ begin
   with qryAuxCentral do
   begin
     SQL.Clear;
-    SQL.Add('select descripcion_ee from frf_ean13_edi ');
-    SQL.Add('where empresa_ee = :empresa ');
-    SQL.Add('and cliente_fac_ee = :cliente ');
-    SQL.Add('and envase_ee = :envase ');
+    SQL.Add('select descripcion_ce from frf_clientes_env ');
+    SQL.Add('where empresa_ce = :empresa ');
+    SQL.Add('and cliente_ce = :cliente ');
+    SQL.Add('and envase_ce = :envase ');
+//    SQL.Add('select descripcion_ee from frf_ean13_edi ');
+//    SQL.Add('where empresa_ee = :empresa ');
+//    SQL.Add('and cliente_fac_ee = :cliente ');
+//    SQL.Add('and envase_ee = :envase ');
     ParamByName('empresa').AsString:= sEmpresa;
     ParamByName('cliente').AsString:= qryCabOrden.FieldByName('cliente').AsString;
     ParamByName('envase').AsString:= qryPacking.FieldByName('envase_pl').AsString;
     Open;
-    sDescripcion:= FieldByName('descripcion_ee').AsString;
+    sDescripcion:= FieldByName('descripcion_ce').AsString;
     Close;
   end;
   if sDescripcion <> '' then

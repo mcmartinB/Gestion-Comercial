@@ -23,8 +23,8 @@ object FDLiqProdVendido: TFDLiqProdVendido
   PixelsPerInch = 96
   TextHeight = 13
   object SpeedButton1: TSpeedButton
-    Left = 335
-    Top = 305
+    Left = 338
+    Top = 300
     Width = 80
     Height = 28
     Action = BAceptar
@@ -69,7 +69,7 @@ object FDLiqProdVendido: TFDLiqProdVendido
   end
   object SpeedButton2: TSpeedButton
     Left = 421
-    Top = 305
+    Top = 300
     Width = 80
     Height = 28
     Action = BCancelar
@@ -485,7 +485,7 @@ object FDLiqProdVendido: TFDLiqProdVendido
     Top = 16
     Width = 193
     Height = 153
-    Date = 36823.641501261580000000
+    Date = 36823.535170115740000000
     ShowToday = False
     TabOrder = 0
     Visible = False

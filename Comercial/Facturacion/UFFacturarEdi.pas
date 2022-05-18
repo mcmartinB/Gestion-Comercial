@@ -786,7 +786,7 @@ begin
         QLinEdi.FieldByName('fecha_factura').AsString + '|' +
         QLinEdi.FieldByName('num_linea_fd').AsString + '|' +
         Ean13Code +
-        Copy(QCodEdi.FieldByName('descripcion_ee').AsString, 1, 34) + '|' +
+        Copy(QCodEdi.FieldByName('descripcion_ce').AsString, 1, 34) + '|' +
         '|' +                                                     //var_prom_fel
         Dun14Code +
         GetCantidad +                                              //cantidad_fel
@@ -814,13 +814,13 @@ begin
   begin
     if CGlobal.gProgramVersion = CGlobal.pvSAT then
     begin
-      if (QCodEdi.FieldByName('dun14_ee').AsString) <> '' then
-        result := QCodEdi.FieldByName('dun14_ee').AsString + '|'
+      if (QCodEdi.FieldByName('dun14_ce').AsString) <> '' then
+        result := QCodEdi.FieldByName('dun14_ce').AsString + '|'
       else
-        result := '0' + QCodEdi.FieldByName('ean13_ee').AsString + '|';
+        result := '0' + QCodEdi.FieldByName('ref_cliente_ce').AsString + '|';
     end
     else
-      result := QCodEdi.FieldByName('dun14_ee').AsString + '|';
+      result := QCodEdi.FieldByName('dun14_ce').AsString + '|';
   end;
 end;
 
@@ -828,25 +828,25 @@ function TFFacturarEdi.Ean13Code: string;
 begin
   if QCabEdi.FieldByName('cod_cliente_fc').AsString = 'AMA' then
   begin
-    if (QCodEdi.FieldByName('dun14_ee').AsString) <> '' then
-      result := QCodEdi.FieldByName('dun14_ee').AsString + '|'
+    if (QCodEdi.FieldByName('dun14_ce').AsString) <> '' then
+      result := QCodEdi.FieldByName('dun14_ce').AsString + '|'
     else
     begin
       if CGlobal.gProgramVersion = CGlobal.pvSAT then
-        result := '0' + QCodEdi.FieldByName('ean13_ee').AsString + '|'
+        result := '0' + QCodEdi.FieldByName('ref_cliente_ce').AsString + '|'
       else
-        result := QCodEdi.FieldByName('ean13_ee').AsString + '|';
+        result := QCodEdi.FieldByName('ref_cliente_ce').AsString + '|';
     end;
   end
   else if QCabEdi.FieldByName('cod_cliente_fc').AsString = 'LID' then
   begin
-    if (QCodEdi.FieldByName('dun14_ee').AsString) <> '' then
-      result := QCodEdi.FieldByName('dun14_ee').AsString + '|'
+    if (QCodEdi.FieldByName('dun14_ce').AsString) <> '' then
+      result := QCodEdi.FieldByName('dun14_ce').AsString + '|'
     else
-      result := QCodEdi.FieldByName('ean13_ee').AsString + '|';
+      result := QCodEdi.FieldByName('ref_cliente_ce').AsString + '|';
   end
   else
-    result := QCodEdi.FieldByName('ean13_ee').AsString + '|';
+    result := QCodEdi.FieldByName('ref_cliente_ce').AsString + '|';
 end;
 
 function TFFacturarEdi.GetMedida: string;
@@ -1312,15 +1312,22 @@ begin
   QCodEdi := TBonnyQuery.Create(Self);
   with QCodEdi do
   begin
-    SQL.Add(' select ean13_ee, dun14_ee, descripcion_ee ');
-    SQL.Add('   from frf_ean13_edi');
+    SQL.Add(' select ref_cliente_ce, dun14_ce, descripcion_ce ');
+    SQL.Add('   from frf_clientes_env');
 
-    SQL.Add(' where empresa_ee = :empresa ');
-    SQL.Add('   and cliente_fac_ee = :cliente ');
-    SQL.Add('   and envase_ee = :envase ');
-    SQL.Add(' and (producto_ee =  :producto or ');
-    SQL.Add('      producto_ee IS NULL) ');
-    SQL.Add(' and fecha_baja_ee is null ');
+    SQL.Add(' where empresa_ce = :empresa    ');
+    SQL.Add('   and cliente_ce = :cliente    ');
+    SQL.Add('   and envase_ce = :envase      ');
+    SQL.Add('   and producto_ce =  :producto ');
+
+//    SQL.Add(' select ean13_ee, dun14_ee, descripcion_ee ');
+//    SQL.Add('   from frf_ean13_edi');
+//    SQL.Add(' where empresa_ee = :empresa ');
+//    SQL.Add('   and cliente_fac_ee = :cliente ');
+//    SQL.Add('   and envase_ee = :envase ');
+//    SQL.Add(' and (producto_ee =  :producto or ');
+//    SQL.Add('      producto_ee IS NULL) ');
+//    SQL.Add(' and fecha_baja_ee is null ');
   end;
 end;
 
@@ -1338,7 +1345,7 @@ begin
 
     Open;
 
-    Result := not (IsEmpty) and (FieldByName('ean13_ee').AsString <> '')
+    Result := not (IsEmpty) and (FieldByName('ref_cliente_ce').AsString <> '')
 
   end;
 end;

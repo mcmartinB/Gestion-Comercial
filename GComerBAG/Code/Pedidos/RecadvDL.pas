@@ -410,15 +410,15 @@ begin
     SQL.Add(' select ');
     SQL.Add('         envase_sl envase, ');
     (*PRODBASE*)
-    SQL.Add('        ( select ean13_ee from frf_ean13_edi ');
-    SQL.Add('          where empresa_ee = :empresa  and cliente_fac_ee = :cliente and envase_ee = envase_sl ) codigo, ');
+    SQL.Add('        ( select ref_cliente_ce from frf_clientes_env ');
+    SQL.Add('          where empresa_ce = :empresa  and cliente_ce = :cliente and envase_ce = envase_sl ) codigo, ');
 
     SQL.Add('         nvl( ( select descripcion_ce from frf_clientes_env ');
     SQL.Add('           where empresa_ce = :empresa and cliente_ce = cliente_sl ');
     SQL.Add('             and envase_ce = envase_sl and producto_ce = producto_sl ), ');
     (*PRODBASE*)
-    SQL.Add('           ( select descripcion_ee from frf_ean13_edi ');
-    SQL.Add('             where empresa_ee = :empresa  and cliente_fac_ee = :cliente and envase_ee = envase_sl ) )descripcion, ');
+    SQL.Add('           ( select descripcion_ce from frf_clientes_env ');
+    SQL.Add('             where empresa_ce = :empresa  and cliente_ce = :cliente and envase_ce = envase_sl ) )descripcion, ');
 
     SQL.Add('         nvl( ( select unidad_fac_ce from frf_clientes_env ');
     SQL.Add('           where empresa_ce = :empresa and cliente_ce = cliente_sl ');

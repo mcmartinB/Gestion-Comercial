@@ -248,7 +248,7 @@ function ObtenerPrecioVenta(const fecha, cliente, envase: string): real;
 function DesTipoCliente(const ATipoCliente: string): string;
 
 function DesComercial(const AComercial: string): string;
-function  GetCodeComercial( const AEmpresa, ACliente: string ): string;
+function  GetCodeComercial( const AProducto, ACliente: string ; AFecha : TDateTime): string;
 function DesUsuario(const usuario:string): string;
 procedure InsertarPBLog( const empresa, centro, sscc, usuario, documento:String; const peso, cajas: Real; const tipoMovimiento: integer);
 procedure InsertarPCLog( const empresa, centro, sscc, usuario, documento:String; const peso, cajas: Real; const tipoMovimiento: integer);
@@ -2665,20 +2665,65 @@ begin
   end;
 end;
 
-function GetCodeComercial( const AEmpresa, ACliente: string ): string;
+
+//devuelve el cod_comercial_cc buscando por cliente y producto, producto ó cliente
+function GetCodeComercial( const AProducto, ACliente: string; AFecha: TDateTime): string;
 begin
-  DMAuxDB.QAux.SQL.Clear;
-  DMAuxDB.QAux.SQL.Add(' select cod_comercial_cc ');
-  DMAuxDB.QAux.SQL.Add(' from frf_clientes_comercial ');
-  DMAuxDB.QAux.SQL.Add(' where cod_empresa_cc = :empresa ');
-  DMAuxDB.QAux.SQL.Add(' and cod_cliente_cc = :cliente ');
-  DMAuxDB.QAux.ParamByName('empresa').AsString:= AEmpresa;
-  DMAuxDB.QAux.ParamByName('cliente').AsString:= ACliente;
-  DMAuxDB.QAux.Open;
-  try
-    result:= DMAuxDB.QAux.FieldByName('cod_comercial_cc').AsString;
-  finally
-    DMAuxDB.QAux.Close;
+  with DMAuxDB.QAux do
+  begin
+    if Active then
+    begin
+      Cancel;
+      Close;
+    end;
+    SQL.Clear;
+    SQL.Add(' select cod_comercial_cc from frf_clientes_comercial ');
+    SQL.Add(' where cod_cliente_cc = :cliente ');
+    SQL.Add(' and cod_producto_cc = :producto ');
+//    SQL.Add(' and :fecha between fecha_ini_cc and nvl(fecha_fin_cc, ' + QuotedStr(DateToStr(AFecha)) + ')');
+//    ParamByName('fecha').AsDateTime := AFecha;
+    ParamByName('cliente').asString := ACliente;
+    ParamByName('producto').asString := AProducto;
+    Open;
+    if isEmpty then
+    begin
+      if Active then
+      begin
+        Cancel;
+        Close;
+      end;
+      SQL.Clear;
+      SQL.Add(' select cod_comercial_cc from frf_clientes_comercial ');
+      SQL.Add(' where cod_producto_cc = :producto');
+      SQL.Add('   and cod_cliente_cc is null     ');
+//      SQL.Add(' and :fecha between fecha_ini_cc and nvl(fecha_fin_cc, ' + QuotedStr(DateToStr(AFecha)) + ')');
+//      ParamByName('fecha').asDateTime := AFecha;
+      ParamByName('producto').asString := AProducto;
+      Open;
+    end;
+      if isEmpty then
+      begin
+        if Active then
+        begin
+          Cancel;
+          Close;
+        end;
+        SQL.Clear;
+        SQL.Add(' select cod_comercial_cc from frf_clientes_comercial ');
+        SQL.Add(' where cod_cliente_cc = :cliente');
+        SQL.Add('   and cod_producto_cc is null  ');
+//        SQL.Add(' and :fecha between fecha_ini_cc and nvl(fecha_fin_cc, ' + QuotedStr(DateToStr(AFecha)) + ')');
+//        ParamByName('fecha').asDateTime := AFecha;
+        ParamByName('cliente').asString := ACliente;
+        Open;
+      end;
+
+      if not isEmpty then
+         result := FieldByName('cod_comercial_cc').AsString
+      else
+          result := '000';
+
+      Close;
   end;
 end;
 

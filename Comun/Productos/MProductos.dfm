@@ -39,7 +39,6 @@ object FMProductos: TFMProductos
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 531
     object Lproducto_p: TLabel
       Left = 40
       Top = 33
@@ -107,8 +106,8 @@ object FMProductos: TFMProductos
       Layout = tlCenter
     end
     object lblNombre9: TLabel
-      Left = 250
-      Top = 181
+      Left = 246
+      Top = 179
       Width = 90
       Height = 19
       AutoSize = False
@@ -116,6 +115,65 @@ object FMProductos: TFMProductos
       Color = clBtnFace
       ParentColor = False
       Layout = tlCenter
+    end
+    object lblNombre1: TLabel
+      Left = 231
+      Top = 199
+      Width = 105
+      Height = 19
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Area  '
+      Color = clBtnFace
+      ParentColor = False
+      Layout = tlCenter
+    end
+    object btnArea: TBGridButton
+      Left = 443
+      Top = 197
+      Width = 13
+      Height = 21
+      Action = ARejillaFlotante
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00000000000000000000000000000000000000
+        0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF0000000000000000000000000000000000000000000000
+        000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+      Control = area_p
+      Grid = RejillaFlotante
+      GridAlignment = taDownLeft
+      GridWidth = 150
+      GridHeigth = 100
     end
     object producto_p: TBDEdit
       Tag = 1
@@ -205,8 +263,7 @@ object FMProductos: TFMProductos
       Width = 515
       Height = 124
       Align = alBottom
-      TabOrder = 11
-      ExplicitWidth = 527
+      TabOrder = 12
       object bvl1: TBevel
         Left = 35
         Top = 56
@@ -440,7 +497,7 @@ object FMProductos: TFMProductos
     end
     object cbxVer: TComboBox
       Left = 342
-      Top = 179
+      Top = 177
       Width = 73
       Height = 21
       Style = csDropDownList
@@ -490,20 +547,29 @@ object FMProductos: TFMProductos
       ValueChecked = 'S'
       ValueUnchecked = 'N'
     end
+    object area_p: TBDEdit
+      Left = 342
+      Top = 198
+      Width = 100
+      Height = 21
+      ColorEdit = clMoneyGreen
+      ReadOnly = True
+      TabOrder = 11
+      DataField = 'area_p'
+      DataSource = DSMaestro
+    end
   end
   object PageControl: TPageControl
     Left = 0
     Top = 356
     Width = 519
     Height = 227
-    ActivePage = tsCostes
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 3
     OnChange = PageControlChange
-    ExplicitWidth = 531
     object tsCategorias: TTabSheet
       Caption = 'Categor'#237'as'
-      ExplicitWidth = 523
       object PCategorias: TPanel
         Left = 0
         Top = 0
@@ -512,7 +578,6 @@ object FMProductos: TFMProductos
         Align = alTop
         TabOrder = 0
         Visible = False
-        ExplicitWidth = 523
         object Label1: TLabel
           Left = 12
           Top = 20
@@ -571,7 +636,6 @@ object FMProductos: TFMProductos
     object tsCalibres: TTabSheet
       Caption = 'Calibres'
       ImageIndex = 1
-      ExplicitWidth = 523
       object RCalibres: TDBGrid
         Left = 0
         Top = 65
@@ -596,7 +660,6 @@ object FMProductos: TFMProductos
         Align = alTop
         TabOrder = 0
         Visible = False
-        ExplicitWidth = 523
         object lblCalibre: TLabel
           Left = 12
           Top = 20
@@ -628,7 +691,6 @@ object FMProductos: TFMProductos
     object tsColores: TTabSheet
       Caption = 'Colores'
       ImageIndex = 2
-      ExplicitWidth = 523
       object PColores: TPanel
         Left = 0
         Top = 0
@@ -637,7 +699,6 @@ object FMProductos: TFMProductos
         Align = alTop
         TabOrder = 0
         Visible = False
-        ExplicitWidth = 523
         object Label2: TLabel
           Left = 12
           Top = 20
@@ -696,7 +757,6 @@ object FMProductos: TFMProductos
     object tsPaises: TTabSheet
       Caption = 'Pa'#237'ses'
       ImageIndex = 3
-      ExplicitWidth = 523
       object PPaises: TPanel
         Left = 0
         Top = 0
@@ -705,7 +765,6 @@ object FMProductos: TFMProductos
         Align = alTop
         TabOrder = 0
         Visible = False
-        ExplicitWidth = 523
         object Label3: TLabel
           Left = 12
           Top = 20
@@ -815,7 +874,6 @@ object FMProductos: TFMProductos
     object tsVariedadCampo: TTabSheet
       Caption = 'Variedad Campo'
       ImageIndex = 4
-      ExplicitWidth = 523
       object PVariedadCampo: TPanel
         Left = 0
         Top = 0
@@ -824,7 +882,6 @@ object FMProductos: TFMProductos
         Align = alTop
         TabOrder = 0
         Visible = False
-        ExplicitWidth = 523
         object Label4: TLabel
           Left = 12
           Top = 20
@@ -883,7 +940,6 @@ object FMProductos: TFMProductos
     object tsCostes: TTabSheet
       Caption = 'Costes Agrupaci'#243'n'
       ImageIndex = 6
-      ExplicitWidth = 523
       object dbgrdCostes: TDBGrid
         Left = 0
         Top = 43
@@ -908,7 +964,6 @@ object FMProductos: TFMProductos
         Height = 43
         Align = alTop
         TabOrder = 0
-        ExplicitWidth = 523
       end
       object btnCostes: TButton
         Left = 433
@@ -918,6 +973,77 @@ object FMProductos: TFMProductos
         Caption = 'Costes'
         TabOrder = 1
         OnClick = btnCostesClick
+      end
+    end
+    object TabSheet1: TTabSheet
+      Caption = 'Comerciales'
+      ImageIndex = 6
+      object DBGrid1: TDBGrid
+        Left = 0
+        Top = 41
+        Width = 511
+        Height = 158
+        TabStop = False
+        Align = alClient
+        DataSource = dsComercial
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        ReadOnly = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'cod_comercial_cc'
+            Title.Caption = 'Comercial'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'des_comercial'
+            Title.Caption = 'Descripcion'
+            Width = 200
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'cod_cliente_cc'
+            Title.Caption = 'Cliente'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'cod_producto_cc'
+            Title.Caption = 'Producto'
+            Visible = True
+          end>
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 511
+        Height = 41
+        Align = alTop
+        TabOrder = 1
+        object btnComercial: TBitBtn
+          Left = 333
+          Top = 8
+          Width = 130
+          Height = 27
+          Caption = 'Mant. comerciales'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+          TabStop = False
+          OnClick = btnComercialClick
+        end
       end
     end
   end
@@ -991,26 +1117,26 @@ object FMProductos: TFMProductos
     SQL.Strings = (
       ''
       ' ')
-    Left = 400
-    Top = 328
+    Left = 320
+    Top = 520
   end
   object DSCalibres: TDataSource
     DataSet = QCalibres
-    Left = 368
-    Top = 328
+    Left = 320
+    Top = 488
   end
   object QCategorias: TQuery
     OnNewRecord = QCategoriasNewRecord
     DatabaseName = 'BDProyecto'
     DataSource = DSMaestro
     RequestLive = True
-    Left = 16
-    Top = 430
+    Left = 144
+    Top = 521
   end
   object DSCategorias: TDataSource
     DataSet = QCategorias
-    Left = 80
-    Top = 464
+    Left = 144
+    Top = 488
   end
   object QColores: TQuery
     OnNewRecord = QColoresNewRecord
@@ -1020,13 +1146,13 @@ object FMProductos: TFMProductos
     SQL.Strings = (
       ''
       ' ')
-    Left = 144
-    Top = 344
+    Left = 184
+    Top = 520
   end
   object DSColores: TDataSource
     DataSet = QColores
-    Left = 176
-    Top = 345
+    Left = 184
+    Top = 489
   end
   object QPaises: TQuery
     OnNewRecord = QPaisesNewRecord
@@ -1036,13 +1162,13 @@ object FMProductos: TFMProductos
     SQL.Strings = (
       'SELECT * '
       'FROM   frf_paises_producto')
-    Left = 185
-    Top = 376
+    Left = 225
+    Top = 520
   end
   object dsPaises: TDataSource
     DataSet = QPaises
-    Left = 321
-    Top = 376
+    Left = 225
+    Top = 488
   end
   object QVariedadCampo: TQuery
     OnNewRecord = QVariedadCampoNewRecord
@@ -1053,13 +1179,13 @@ object FMProductos: TFMProductos
       ''
       ' '
       ' ')
-    Left = 285
-    Top = 408
+    Left = 277
+    Top = 520
   end
   object dsVariedadCampo: TDataSource
     DataSet = QVariedadCampo
-    Left = 317
-    Top = 409
+    Left = 277
+    Top = 489
   end
   object qryCostesProducto: TQuery
     DatabaseName = 'BDProyecto'
@@ -1067,12 +1193,45 @@ object FMProductos: TFMProductos
     SQL.Strings = (
       'SELECT * FROM frf_monedas '
       'ORDER BY moneda_m, descripcion_m')
-    Left = 392
-    Top = 289
+    Left = 360
+    Top = 521
   end
   object dsCostesProducto: TDataSource
     DataSet = qryCostesProducto
-    Left = 424
-    Top = 290
+    Left = 360
+    Top = 490
+  end
+  object qryComercial: TQuery
+    OnCalcFields = qryComercialCalcFields
+    DatabaseName = 'BDProyecto'
+    DataSource = DSMaestro
+    SQL.Strings = (
+      'SELECT * FROM frf_monedas '
+      'ORDER BY moneda_m, descripcion_m')
+    Left = 400
+    Top = 521
+    object qryComercialcod_comercial_cc: TStringField
+      FieldName = 'cod_comercial_cc'
+      Size = 3
+    end
+    object qryComercialdes_comercial: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'des_comercial'
+      Size = 50
+      Calculated = True
+    end
+    object qryComercialcod_cliente_cc: TStringField
+      FieldName = 'cod_cliente_cc'
+      Size = 9
+    end
+    object qryComercialcod_producto_cc: TStringField
+      FieldName = 'cod_producto_cc'
+      Size = 9
+    end
+  end
+  object dsComercial: TDataSource
+    DataSet = qryComercial
+    Left = 400
+    Top = 490
   end
 end

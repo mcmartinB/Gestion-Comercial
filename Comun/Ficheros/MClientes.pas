@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs
   , Db, ExtCtrls, StdCtrls, Mask, DBCtrls, CMaestroDetalle, Buttons,
   ActnList, BSpeedButton, Grids, DBGrids, BGridButton, BGrid, BDEdit,
-  ComCtrls, BEdit, CVariables, derror, DBTables;
+  ComCtrls, BEdit, CVariables, derror, DBTables, nbLabels, CUAMenuUtils;
 
 const
   kNavigation: Integer = 0;
@@ -269,6 +269,16 @@ type
     Label14: TLabel;
     dias_trayecto_ds: TBDEdit;
     QSuministrodias_trayecto_ds: TIntegerField;
+    TabSheet1: TTabSheet;
+    DBGrid2: TDBGrid;
+    QComercial: TQuery;
+    dsQComercial: TDataSource;
+    QComercialcod_comercial_cc: TStringField;
+    QComercialcod_cliente_cc: TStringField;
+    QComercialcod_producto_cc: TStringField;
+    QComercialdes_comercial: TStringField;
+    Panel2: TPanel;
+    BitBtn1: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -315,6 +325,9 @@ type
     procedure rbVerDireccionActivos(Sender: TObject);
     procedure QSuministroCalcFields(DataSet: TDataSet);
     procedure albaran_factura_cChange(Sender: TObject);
+    procedure QComercialCalcFields(DataSet: TDataSet);
+    procedure btnComercialClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
     ListaComponentes: TList;
@@ -338,6 +351,7 @@ type
     procedure CerrarTablas;
     procedure PonPaneles( const ATipo: Integer );
     procedure CambioRegistro;
+
 
   protected
     procedure SincronizarWeb; override;
@@ -375,7 +389,7 @@ uses ShellApi, CGestionPrincipal, UDMBaseDatos, DPreview, CAuxiliarDB, Principal
      DescuentosClientesProductoFD,     UDMConfig, DescuentosClientesFD, TesoreriaClientesFD, RecargoClientesFD,
      UFFormaPago, UDMMaster, SeleccionarClonarSuministroFD, SeleccionarClonarClienteFD,
      SeleccionarProductoFD, RiesgoClientesFD, GastosClientesFD,
-     SincronizacionBonny;
+     SincronizacionBonny, MComerciales;
 
 {$R *.DFM}
 
@@ -508,6 +522,16 @@ begin
     SQl.Add('Select * from frf_clientes_tes');
     SQl.Add('where cliente_ct = :cliente_c ');
     SQL.Add(' order by empresa_ct ');
+
+    if not Prepared then
+      Prepare;
+  end;
+
+  with QComercial do
+  begin
+    SQL.Clear;
+    SQl.Add('Select * from frf_clientes_comercial');
+    SQl.Add('where cod_cliente_cc = :cliente_c ');
 
     if not Prepared then
       Prepare;
@@ -679,7 +703,8 @@ begin
   begin
     Restaurar;
   end;
-
+  QClientes.Close;
+  QClientes.Open;
 end;
 
 procedure TFMClientes.Restaurar;
@@ -761,6 +786,12 @@ begin
       UnPrepare;
   end;
   with QTesoreria do
+  begin
+    Close;
+    if Prepared then
+      UnPrepare;
+  end;
+  with QComercial do
   begin
     Close;
     if Prepared then
@@ -1677,7 +1708,7 @@ begin
     PDetalle2.Enabled:= True;
     PMaestro.Visible := false;
     pnlCabDetalle.Visible := true;
-    pnlCabDetalle.Height := 210;
+    pnlCabDetalle.Height := 221;
     tsSuministro.TabVisible:= True;
     tsDescuentos.TabVisible:= False;
     tsRecargo.TabVisible:= False;
@@ -1751,6 +1782,7 @@ begin
   QRecargo.Open;
   QUnidades.Open;
   QTesoreria.Open;
+  QComercial.Open;
   QRiesgo.Open;
   QGastos.Open;
 end;
@@ -1761,8 +1793,14 @@ begin
   QRecargo.Close;
   QUnidades.Close;
   QTesoreria.Close;
+  QComercial.Close;
   QRiesgo.Close;
   QGastos.Close;
+end;
+
+procedure TFMClientes.QComercialCalcFields(DataSet: TDataSet);
+begin
+  QComercial.FieldByName('des_comercial').AsString:= desComercial(QComercial.FieldByName('cod_comercial_cc').AsString);
 end;
 
 procedure TFMClientes.QSuministroBeforePost(DataSet: TDataSet);
@@ -1805,6 +1843,20 @@ begin
   else
   begin
     ShowMessage('Seleccione primero un cliente');
+  end;
+end;
+
+procedure TFMClientes.btnComercialClick(Sender: TObject);
+begin
+  if not QClientes.IsEmpty and (QClientes.State = dsBrowse) then
+  begin
+    ComercialDesdeCliente(Self, cliente_c.Text );
+    QComercial.Close;
+    QComercial.Open;
+  end
+  else
+  begin
+    ShowMessage('Seleccione primero un producto');
   end;
 end;
 
@@ -1880,6 +1932,19 @@ end;
 procedure TFMClientes.banco_cChange(Sender: TObject);
 begin
   txtBanco.Caption:= desBanco( banco_c.Text );
+end;
+
+procedure TFMClientes.BitBtn1Click(Sender: TObject);
+var FMComerciales: TFMComerciales;
+    sComercial: String;
+begin
+  sComercial := QComercial.FieldByName('cod_comercial_cc').AsString;
+  LockWindowUpdate(Self.Handle);
+  try
+   FMComerciales := TFMComerciales.Create(Application, sComercial);
+  finally
+    LockWindowUpdate(0);
+  end;
 end;
 
 procedure TFMClientes.btnGastosClick(Sender: TObject);

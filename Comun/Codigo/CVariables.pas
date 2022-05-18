@@ -129,6 +129,7 @@ const
   kAgrupacion = 72;
   kSerie = 73;
   kCamion = 74;
+  kArea = 75;
 
 
 

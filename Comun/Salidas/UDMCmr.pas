@@ -73,7 +73,7 @@ begin
   begin
     SQL.Clear;
     SQl.Add(' SELECT marca_sl, producto_sl, descripcion_m, envase_comercial_e, envase_sl, categoria_sl, tipo_palets_sl, ' +
-      '        SUM(n_palets_sl) palets, SUM(cajas_sl) cajas, SUM(kilos_sl) pesoNetoProducto ' +
+      '        SUM(n_palets_sl) palets, SUM(cajas_sl) cajas, SUM(kilos_reales_sl) pesoNetoProducto ' +
       ' FROM frf_salidas_l, OUTER frf_envases, OUTER frf_marcas ' +
       ' WHERE  (envase_sl = envase_e) ' +
       '   AND  (marca_sl = codigo_m) ' +

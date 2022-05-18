@@ -8,22 +8,11 @@ uses
   ExtCtrls, Buttons, ActnList, ComCtrls, ToolWin, DBCtrls, cxGraphics,
   cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
   dxSkinsCore, dxSkinBlue, dxSkinBlueprint, dxSkinFoggy, dxSkinMoneyTwins,
-  Menus, cxButtons, SimpleSearch, cxTextEdit, cxDBEdit, dxSkinBlack,
-  dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
-  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinGlassOceans,
-  dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky,
-  dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis, dxSkinMetropolisDark,
-  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
-  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
-  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinOffice2013DarkGray,
-  dxSkinOffice2013LightGray, dxSkinOffice2013White, dxSkinPumpkin, dxSkinSeven,
-  dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
-  dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
-  dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
-  dxSkinXmas2008Blue, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
+  Menus, cxButtons, SimpleSearch, cxTextEdit, cxDBEdit,
+  cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxNavigator, cxDBData, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridLevel, cxClasses, cxGridCustomView,
-  cxGrid;
+  cxGrid, BSpeedButton, BGridButton, BEdit, BDEdit, BGrid, dError;
 
 type
   TFCliEnvases = class(TForm)
@@ -92,7 +81,8 @@ type
     nbLabel13: TnbLabel;
     ref_cliente_ce: TnbDBAlfa;
     Queryref_cliente_ce: TStringField;
-    Panel2: TPanel;
+    nbLabel15: TnbLabel;
+    dun14_ce: TnbDBAlfa;
     cxGrid1: TcxGrid;
     tvDetalle: TcxGridDBTableView;
     tvEmpresa: TcxGridDBColumn;
@@ -109,6 +99,27 @@ type
     tvPalets: TcxGridDBColumn;
     tvKgPalets: TcxGridDBColumn;
     lvDetalle: TcxGridLevel;
+    centro_ce: TBDEdit;
+    BGBCentro: TBGridButton;
+    lblDesCentro: TStaticText;
+    nbLabel16: TnbLabel;
+    Querycentro_ce: TStringField;
+    Querydun14_ce: TStringField;
+    RejillaFlotante: TBGrid;
+    ARejillaFlotante: TAction;
+    nbLabel18: TnbLabel;
+    tipo_palet_ce: TBDEdit;
+    BGBTipoPalet: TBGridButton;
+    lblDesTipoPalet: TStaticText;
+    nbLabel19: TnbLabel;
+    cajas_palet_ce: TnbDBAlfa;
+    tvDun14: TcxGridDBColumn;
+    tvCentro: TcxGridDBColumn;
+    tvComercial: TcxGridDBColumn;
+    tvTipoPalet: TcxGridDBColumn;
+    Querycajas_palet_ce: TIntegerField;
+    Querytipo_palet_ce: TStringField;
+    tvCajaPalet: TcxGridDBColumn;
     procedure empresaChange(Sender: TObject);
     procedure clienteChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -129,10 +140,16 @@ type
     procedure ssEnvaseAntesEjecutar(Sender: TObject);
     procedure cxGrid1Enter(Sender: TObject);
     procedure cxGrid1Exit(Sender: TObject);
+    procedure ARejillaFlotanteExecute(Sender: TObject);
+    procedure ponNombre(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     sEmpresa, sCliente, sEnvase: string;
     function LoadData: Boolean;
+    function  VerificarDatos: boolean;
+
   public
     { Public declarations }
   end;
@@ -144,7 +161,7 @@ implementation
 
 {$R *.dfm}
 
-uses UDMBaseDatos, UDMAuxDB, bSQLUtils, bTextUtils, SincronizacionBonny;
+uses UDMBaseDatos, UDMAuxDB, bSQLUtils, bTextUtils, SincronizacionBonny, cvariables, CAuxiliarDB;
 
 procedure EnvaseClientePorCliente(const AEmpresa, ACliente: string);
 begin
@@ -181,6 +198,7 @@ begin
   lblEmpresa.Caption := desEmpresa(empresa.Text);
   clienteChange( cliente );
   envaseChange( envase );
+  PonNombre (centro_ce);
 end;
 
 procedure TFCliEnvases.clienteChange(Sender: TObject);
@@ -190,12 +208,12 @@ end;
 
 procedure TFCliEnvases.cxGrid1Enter(Sender: TObject);
 begin
-  AModificar.ShortCut := TexttoShortCut('');
+//  AModificar.ShortCut := TexttoShortCut('');
 end;
 
 procedure TFCliEnvases.cxGrid1Exit(Sender: TObject);
 begin
-  AModificar.ShortCut := ShortCut(Word('M'), []);
+//  AModificar.ShortCut := ShortCut(Word('M'), []);
 end;
 
 procedure TFCliEnvases.DataSourceDataChange(Sender: TObject; Field: TField);
@@ -349,11 +367,22 @@ begin
   btnCancelar.Enabled:= True;
 end;
 
+procedure TFCliEnvases.ARejillaFlotanteExecute(Sender: TObject);
+begin
+  case ActiveControl.Tag of
+    kCentro: DespliegaRejilla(BGBCentro, [empresa.Text]);
+    kTipoPalet: DespliegaRejilla(BGBTipoPalet);
+  end;
+
+end;
+
 procedure TFCliEnvases.AAceptarExecute(Sender: TObject);
 begin
     //si no se inserta una referencia de cliente, tomará el valor del envase
     if ref_cliente_ce.Text = '' then
       Query.FieldByName('ref_cliente_ce').AsString :=  Query.FieldByName('envase_ce').AsString;
+
+  if not VerificarDatos then exit;
 
   Query.Post;
   SincroBonnyAurora.SincronizarUnidadFacturacion(
@@ -434,6 +463,38 @@ begin
   //AAnyadir.ShortCut := ShortCut(VK_ADD, []);
   //AModificar.ShortCut := ShortCut(Word('M'), []);
   AAceptar.ShortCut := ShortCut(VK_F1, []);
+  centro_ce.Tag := kCentro;
+  tipo_palet_ce.Tag := kTipoPalet;
+
+end;
+
+procedure TFCliEnvases.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+{*}//Si la rejilla esta desplegada no hacemos nada
+  if (RejillaFlotante <> nil) then
+    if (RejillaFlotante.Visible) then
+           //No hacemos nada
+      Exit;
+
+  case key of
+    vk_Return, vk_down:
+      begin
+        Key := 0;
+        PostMessage(Handle, WM_NEXTDLGCTL, 0, 0);
+      end;
+    vk_up:
+      begin
+        Key := 0;
+        PostMessage(Handle, WM_NEXTDLGCTL, 1, 0);
+      end;
+  end;
+
+end;
+
+procedure TFCliEnvases.FormShow(Sender: TObject);
+begin
+  cxGrid1.SetFocus;
 end;
 
 procedure TFCliEnvases.QueryBeforePost(DataSet: TDataSet);
@@ -487,9 +548,45 @@ begin
       ssEnvase.SQLAdi := ' producto_e = ' +  QuotedStr(producto_ce.Text);
 end;
 
+function TFCliEnvases.VerificarDatos: boolean;
+begin
+  //Comprobar si los campos se han rellenado correctamente
+  Result := False;
+
+  if (centro_ce.Text <> '') and (lblDesCentro.Caption = '') then
+  begin
+    ShowError('El código del centro es incorrecto.');
+    centro_ce.SetFocus;
+  end
+  else
+  if (tipo_palet_ce.Text <> '') and (lblDesTipoPalet.Caption = '') then
+  begin
+    ShowError('El código de palet es incorrecto.');
+    tipo_palet_ce.SetFocus;
+  end
+  else
+    result := True;
+
+end;
+
 procedure TFCliEnvases.producto_ceChange(Sender: TObject);
 begin
   lblProducto.Caption:= desProducto( empresa.Text, producto_ce.Text );
 end;
+
+procedure TFCliEnvases.PonNombre(Sender: TObject);
+begin
+    if (gRF <> nil) then
+      if esVisible( gRF ) then
+        Exit;
+    if (gCF <> nil) then
+      if esVisible( gCF ) then
+        Exit;
+  case TComponent(Sender).Tag of
+    kCentro:lblDesCentro.Caption := desCentro(Query.FieldByName('empresa_ce').AsString, centro_ce.Text);
+    kTipoPalet: lblDesTipoPalet.Caption := desTipoPalet(tipo_palet_ce.Text );
+  end;
+end;
+
 
 end.

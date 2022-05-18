@@ -273,11 +273,15 @@ begin
   ECosteComercial.Text:= '0,014';
   ECosteProduccion.Text:= '0,010';
   ECosteAdministrativo.Text:= '0,050';
-  *)
-
+  * ANTERIOR A 01/01/2022
   ECosteComercial.Text:= '0,008';
   ECosteProduccion.Text:= '0,025';
   ECosteAdministrativo.Text:= '0,067';
+  *)
+
+  ECosteComercial.Text:= '0,008';
+  ECosteProduccion.Text:= '0,039';
+  ECosteAdministrativo.Text:= '0,111';
 
   if DMconfig.eslosllanos then
   begin

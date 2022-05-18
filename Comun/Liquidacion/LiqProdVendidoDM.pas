@@ -480,11 +480,13 @@ begin
     qryALiquidar.SQL.Add(' and ( case when producto_tl = ''TOM'' then ''TOM'' else producto_tl end ) = :producto ');
   qryALiquidar.SQL.Add(' group by empresa, centro, producto ');
 
-{ Carmen
+// Carmen
+{
   qryALiquidar.SQL.Add('   union ');
 
   qryALiquidar.SQL.Add(' select  empresa_ic empresa, centro_ic centro, ( case when producto_ic = ''E'' then ''T'' else producto_ic end ) producto ');
   qryALiquidar.SQL.Add('  from frf_inventarios_c ');
+  qryALiquidar.SQL.Add(' left join frf_inventarios_l on empresa_ic = empresa_il and centro_ic = centro_il and producto_ic = producto_il and fecha_ic = fecha_il ');
   qryALiquidar.SQL.Add(' where empresa_ic = :empresa ');
   if ACentro <> '' then
     qryALiquidar.SQL.Add(' and centro_ic = :centro ');
@@ -496,15 +498,16 @@ begin
     qryALiquidar.SQL.Add('     nvl(kilos_cim_c1_ic,0) + nvl(kilos_cia_c1_ic,0) + ');
     qryALiquidar.SQL.Add('     nvl(kilos_cim_c2_ic,0) + nvl(kilos_cia_c2_ic,0) + ');
     qryALiquidar.SQL.Add('     nvl(kilos_zd_c3_ic,0) + ');
-    qryALiquidar.SQL.Add('     nvl(kilos_zd_d_ic,0) ) <> 0 ');
- }
+    qryALiquidar.SQL.Add('     nvl(kilos_zd_d_ic,0) + nvl(kilos_ce_c1_il,0) + nvl(kilos_ce_c2_il,0) ) <> 0 ');
+}
+ //
   qryALiquidar.SQL.Add(' order by empresa, centro, producto ');
 
   if AEmpresa <> 'SAT' then
     qryALiquidar.ParamByName('empresa').AssTRING:= AEmpresa;
   qryALiquidar.ParamByName('fechaini').AsDateTime := ADesde;
   qryALiquidar.ParamByName('fechafin').AsDateTime := AHasta;
-//qryALiquidar.ParamByName('fecha').AsDateTime:= ( ADesde - 1 );
+//  qryALiquidar.ParamByName('fecha').AsDateTime:= ( ADesde - 1 );
   if ACentro <> '' then
     qryALiquidar.ParamByName('centro').AssTRING:= ACentro;
   if AProducto <> '' then
@@ -700,8 +703,16 @@ begin
       end
       else
       begin
-        rObjetivo:= rKilosEntradas.rKilosTotal-rMerma;
-        rMermaAux:= rMerma;
+//        if rKilosEntradas.rKilosTotal > 0 then
+//        begin
+          rObjetivo:= rKilosEntradas.rKilosTotal-rMerma;
+          rMermaAux:= rMerma;
+//        end
+//        else
+//        begin
+//          rObjetivo:= rKilosIni-rMerma;
+//          rMermaAux:= rMerma;
+//        end;
       end;
 
       //Aplicar porcentaje de merma por igual a todas las entradas

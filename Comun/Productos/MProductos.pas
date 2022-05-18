@@ -6,14 +6,14 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs
   , Db, ExtCtrls, StdCtrls, Mask, DBCtrls, CMaestroDetalle, Buttons,
   ActnList, BSpeedButton, Grids, DBGrids, BGridButton, BGrid, BEdit, BDEdit,
-  dbtables, DError, ComCtrls;
+  dbtables, DError, ComCtrls, CUAMenuUtils;
 
 type
   TFMProductos = class(TMaestroDetalle)
     PMaestro: TPanel;
     DSMaestro: TDataSource;
     ACosecheros: TActionList;
-    ARejillaFlotante: TAction;
+    ARejillaFlotante: TAction;                                               
     QProductos: TQuery;
     PageControl: TPageControl;
     tsCategorias: TTabSheet;
@@ -102,6 +102,19 @@ type
     tipo_compra_p: TDBCheckBox;
     tipo_venta_p: TDBCheckBox;
     producto_desglose_p: TDBCheckBox;
+    TabSheet1: TTabSheet;
+    DBGrid1: TDBGrid;
+    qryComercial: TQuery;
+    dsComercial: TDataSource;
+    qryComercialcod_comercial_cc: TStringField;
+    qryComercialcod_cliente_cc: TStringField;
+    qryComercialcod_producto_cc: TStringField;
+    qryComercialdes_comercial: TStringField;
+    Panel1: TPanel;
+    btnComercial: TBitBtn;
+    lblNombre1: TLabel;
+    area_p: TBDEdit;
+    btnArea: TBGridButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -127,6 +140,9 @@ type
     procedure btnCostesClick(Sender: TObject);
     procedure eshortaliza_pClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnProductoComercialClick(Sender: TObject);
+    procedure qryComercialCalcFields(DataSet: TDataSet);
+    procedure btnComercialClick(Sender: TObject);
   private
     { Private declarations }
     ListaComponentes, ListaDetalle: TList;
@@ -186,7 +202,7 @@ uses CVariables, CGestionPrincipal, UDMBaseDatos, CReportes,
   CAuxiliarDB, Principal, DPreview, UDMAuxDB, bSQLUtils,
   CMaestro, UDMConfig, LProducto, AdvertenciaFD,
   ImportarProductosFD, UComerToSgpDM, CGlobal, CostesAgrupaProductoFD,
-  SincronizacionBonny;
+  SincronizacionBonny, MComerciales;
 
 {$R *.DFM}
 
@@ -306,6 +322,14 @@ begin
     SQL.Add(' order by 3, 1, 2 ');
   end;
 
+  with qryComercial do
+  begin
+    SQL.clear;
+    SQL.Add(' select  * ');
+    SQL.Add(' from frf_clientes_comercial');
+    SQL.Add(' where cod_producto_cc = :producto_p ');
+  end;
+
   try
     AbrirTablas;
   except
@@ -355,6 +379,7 @@ begin
   {+}FocoLocalizar := producto_p;
 
   pais_psp.Tag:= kPais;
+  area_p.Tag := kArea;
   bFlag:= False;
 
   if CGlobal.gProgramVersion = CGlobal.pvSAT then
@@ -388,6 +413,8 @@ begin
   end;
   BHGrupoDesplazamientoMaestro(PCMaestro);
   BHGrupoDesplazamientoDetalle(PCDetalle);
+  QProductos.Close;
+  QProductos.Open;
 end;
 
 procedure TFMProductos.FormDeactivate(Sender: TObject);
@@ -784,6 +811,9 @@ begin
   if QProductos.Fieldbyname('tipo_venta_p').AsString = '' then
       raise Exception.Create('Por favor marque si el producto es de venta o no.');
 
+  if QProductos.Fieldbyname('area_p').AsString = '' then
+      raise Exception.Create('Se debe selecionar un area para el producto..');
+
 
   if QProductos.State = dsInsert then
   begin
@@ -807,6 +837,19 @@ begin
   end;
 end;
 
+
+procedure TFMProductos.btnComercialClick(Sender: TObject);
+Var FMComerciales: TFMComerciales;
+    sComercial: String;
+begin
+  sComercial := qryComercial.FieldByName('cod_comercial_cc').AsString;
+  LockWindowUpdate(Self.Handle);
+  try
+   FMComerciales := TFMComerciales.Create(Application, sComercial);
+  finally
+    LockWindowUpdate(0);
+  end;
+end;
 
 procedure TFMProductos.Borrar;
 var botonPulsado: Word;
@@ -989,7 +1032,8 @@ end;
 procedure TFMProductos.ARejillaFlotanteExecute(Sender: TObject);
 begin
   case ActiveControl.Tag of
-    kPais: DespliegaRejilla(btnpais);
+    kPais: DespliegaRejilla( btnpais );
+    kArea: DespliegaRejilla( btnArea );
   end;
 end;
 
@@ -1119,6 +1163,7 @@ begin
   QPaises.Open;
   QVariedadCampo.Open;
   qryCostesProducto.Open;
+  qryComercial.Open;
 end;
 
 procedure TFMProductos.QProductosBeforeClose(DataSet: TDataSet);
@@ -1129,6 +1174,7 @@ begin
   QPaises.Close;
   QVariedadCampo.Close;
   qryCostesProducto.Close;
+  qryComercial.Close;
 end;
 
 procedure TFMProductos.VerDetalle;
@@ -1315,6 +1361,11 @@ begin
   QProductos.FieldByName('valorar_entrega_por_kilos_p').AsInteger:= 1;
 end;
 
+procedure TFMProductos.qryComercialCalcFields(DataSet: TDataSet);
+begin
+  qryComercial.FieldByName('des_comercial').AsString:= desComercial(qryComercial.FieldByName('cod_comercial_cc').AsString);
+end;
+
 procedure TFMProductos.pais_pspChange(Sender: TObject);
 begin
   stPais.Caption:= desPais( pais_psp.Text );
@@ -1366,6 +1417,20 @@ begin
       qryCostesProducto.FieldByName('agrupacion').AsString, qryCostesProducto.FieldByName('centro').AsString );
     qryCostesProducto.close;
     qryCostesProducto.Open;
+  end;
+end;
+
+procedure TFMProductos.btnProductoComercialClick(Sender: TObject);
+begin
+  if not QProductos.IsEmpty and (QProductos.State = dsBrowse) then
+  begin
+    ComercialDesdeProducto(Self, producto_p.Text );
+    qryComercial.Close;
+    qryComercial.Open;
+  end
+  else
+  begin
+    ShowMessage('Seleccione primero un producto');
   end;
 end;
 

@@ -301,7 +301,7 @@ begin
       Add('                                          then 0.65 ');
       Add('                                          else peso_envase_e ');
       Add('                                     end ');
-      Add('                                    ,0) ), 2 ) + kilos_sl ) as brutoResumen,  ');
+      Add('                                    ,0) ), 2 ) + kilos_reales_sl ) as brutoResumen,  ');
 
       //Add('        sum(  round( ( cajas_sl * nvl(peso_envase_e,0) ), 2 ) + kilos_sl ) as brutoResumen, ');
       Add('        unidad_precio_sl unidadPrecio ');
@@ -340,7 +340,7 @@ begin
       Add('                                          then 0.65 ');
       Add('                                          else peso_envase_e ');
       Add('                                     end ');
-      Add('                                    ,0) ), 2 ) + kilos_sl ) as brutoResumen,  ');
+      Add('                                    ,0) ), 2 ) + kilos_reales_sl ) as brutoResumen,  ');
       Add('        unidad_precio_sl unidadPrecio ');
 
       Add(' FROM frf_salidas_l , frf_productos , frf_envases ');

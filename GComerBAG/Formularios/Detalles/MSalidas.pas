@@ -331,7 +331,9 @@ type
     procedure TSalidasLAfterPost(DataSet: TDataSet);
     procedure TSalidasLNewRecord(DataSet: TDataSet);
     procedure TSalidasLBeforePost(DataSet: TDataSet);
+    procedure ActualizarComercial(Sender: TObject);
     procedure ComprobarDatosMaestro(Sender: TObject);
+
   private
     { Private declarations }
     bAbonos, bImpFac: Boolean;
@@ -3640,6 +3642,12 @@ begin
     CambioDeEnvase(envase_SL);
 end;
 
+//actualiza el campo comercial según cliente y producto según SI-1282
+procedure TFMSalidas.ActualizarComercial(Sender: TObject);
+begin
+    comercial_sl.Text := GetCodeComercial(producto_sl.Text, cliente_sal_sc.Text, StrToDate(fecha_sc.Text));
+end;
+
 procedure TFMSalidas.GastosClick(const AFacturable: boolean);
 //Var tip:String;
 begin
@@ -4429,7 +4437,7 @@ end;
 procedure TFMSalidas.TSalidasLNewRecord(DataSet: TDataSet);
 begin
   DataSet.FieldByName('emp_procedencia_sl').AsString := empresa_sc.Text;
-  DataSet.FieldByName('comercial_sl').AsString := GetCodeComercial(empresa_sc.Text, cliente_sal_sc.Text);
+  DataSet.FieldByName('comercial_sl').AsString := GetCodeComercial(producto_sl.Text, cliente_sal_sc.Text, strtodate(fecha_sc.text));
   DataSet.FieldByName('desEnvase').AsString := desEnvase(DataSet.FieldByName('empresa_sl').AsString, DataSet.FieldByName('envase_sl').AsString);
   DataSet.FieldByName('empresa_sl').AsString := QSalidasC.FieldByName('empresa_sc').AsString;
   DataSet.FieldByName('centro_salida_sl').AsString := QSalidasC.FieldByName('centro_salida_sc').AsString;

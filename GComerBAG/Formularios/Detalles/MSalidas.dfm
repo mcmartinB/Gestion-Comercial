@@ -822,6 +822,7 @@ object FMSalidas: TFMSalidas
       MaxLength = 3
       TabOrder = 2
       OnChange = CambioProducto
+      OnExit = ActualizarComercial
       DataField = 'producto_sl'
       DataSource = DSDetalle
       PrimaryKey = True
@@ -3003,7 +3004,7 @@ object FMSalidas: TFMSalidas
     Width = 212
     Height = 143
     AutoSize = True
-    Date = 36748.436302500000000000
+    Date = 36748.592560196760000000
     ShowToday = False
     TabOrder = 13
     Visible = False

@@ -567,7 +567,7 @@ begin
   registros := ConsultaOpen(DMAuxDB.QGeneral,
     ' select empresa_sl empresa, producto_sl producto, marca_sl marca, tipo_palets_sl tipo_palet, n_palets_sl palets, ' +
     '        envase_sl envase, cajas_sl cajas, unidades_caja_sl unidades_caja, ( cajas_sl * unidades_caja_sl ) unidades, calibre_sl calibre, ' +
-    '        kilos_sl kilos, unidad_precio_sl unidad, precio_sl precio, importe_neto_sl neto' +
+    '        kilos_sl kilos, kilos_reales_sl kilosReales, unidad_precio_sl unidad, precio_sl precio, importe_neto_sl neto' +
     ' from frf_salidas_l ' +
     ' where empresa_sl= ' + SQLString(empresa) +
     '   and centro_salida_sl= ' + SQLString(centro) +
@@ -633,7 +633,7 @@ begin
         StringGrid1.Cells[10, fila] := FloatToStr( FieldByName('unidades').AsInteger );
         StringGrid1.Cells[11, fila] := FloatToStr( FieldByName('kilos').AsFloat );
         StringGrid1.Cells[12, fila] := FloatToStr( GetPesoBruto( FieldByName('empresa').AsString, FieldByName('envase').AsString, FieldByName('tipo_palet').AsString,
-                      strToDate(fecha), FieldByName('kilos').AsFloat,FieldByName('cajas').AsFloat,FieldByName('palets').AsFloat) );
+                      strToDate(fecha), FieldByName('kilosReales').AsFloat,FieldByName('cajas').AsFloat,FieldByName('palets').AsFloat) );
 
         StringGrid1.Cells[13, fila] :=  Uppercase(FieldByName('producto').AsString);       //producto_sl
         Inc(fila);

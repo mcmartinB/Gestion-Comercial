@@ -71,9 +71,9 @@ begin
   else
   if AOpcion = 'mnuFchClientesEDI' then
     CrearVentana( AForm, TFMClientes_edi )
-  else
-  if AOpcion = 'mnuFchProductoEDI' then
-    CrearVentana( AForm, TFMEAN13Edi )
+//  else
+//  if AOpcion = 'mnuFchProductoEDI' then
+//    CrearVentana( AForm, TFMEAN13Edi )
   else
   if AOpcion = 'mnuFchComerciales' then
     CrearVentana( AForm, TFMComerciales )

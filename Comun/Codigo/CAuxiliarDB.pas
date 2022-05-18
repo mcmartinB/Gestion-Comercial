@@ -1450,6 +1450,15 @@ begin
         DMBaseDatos.QDespegables.SQL.Add(' from frf_agrupacion ');
         DMBaseDatos.QDespegables.SQL.Add(' order by 1 ');
       end;
+    kArea:
+      begin
+        boton.Grid.ColumnResult := 0;
+        boton.Grid.ColumnFind := 0;
+        DMBaseDatos.QDespegables.SQL.Clear;
+        DMBaseDatos.QDespegables.SQL.Add(' select area_a       ');
+        DMBaseDatos.QDespegables.SQL.Add(' from frf_productos_area ');
+        DMBaseDatos.QDespegables.SQL.Add(' order by 1 ');
+      end;
     kOtros:
       begin
         DMBaseDatos.QDespegables.SQL.Clear;

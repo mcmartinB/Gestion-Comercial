@@ -2259,6 +2259,7 @@ object FMSalidas: TFMSalidas
       MaxLength = 3
       TabOrder = 0
       OnChange = CambioProducto
+      OnExit = ActualizarComercial
       DataField = 'producto_sl'
       DataSource = DSDetalle
       PrimaryKey = True

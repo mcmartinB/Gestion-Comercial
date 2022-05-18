@@ -37,7 +37,7 @@ object FMClientes: TFMClientes
       Top = 2
       Width = 1092
       Height = 311
-      ActivePage = tsSuministro
+      ActivePage = TabSheet1
       Align = alClient
       TabOrder = 0
       object tsSuministro: TTabSheet
@@ -121,9 +121,9 @@ object FMClientes: TFMClientes
             Layout = tlCenter
           end
           object LTelefonoD: TLabel
-            Left = 547
-            Top = 117
-            Width = 90
+            Left = 565
+            Top = 95
+            Width = 80
             Height = 21
             AutoSize = False
             Caption = ' Pa'#237's'
@@ -190,9 +190,9 @@ object FMClientes: TFMClientes
             Layout = tlCenter
           end
           object lblNif: TLabel
-            Left = 547
+            Left = 565
             Top = 51
-            Width = 90
+            Width = 80
             Height = 21
             AutoSize = False
             Caption = ' NIF'
@@ -223,9 +223,9 @@ object FMClientes: TFMClientes
             Layout = tlCenter
           end
           object lblNombre8: TLabel
-            Left = 547
-            Top = 11
-            Width = 87
+            Left = 559
+            Top = 15
+            Width = 80
             Height = 19
             AutoSize = False
             Caption = ' Fecha de Baja'
@@ -245,9 +245,9 @@ object FMClientes: TFMClientes
             Layout = tlCenter
           end
           object Label14: TLabel
-            Left = 547
-            Top = 85
-            Width = 90
+            Left = 565
+            Top = 73
+            Width = 80
             Height = 21
             AutoSize = False
             Caption = ' D'#237'as trayecto'
@@ -395,7 +395,7 @@ object FMClientes: TFMClientes
           end
           object pais_ds: TBDEdit
             Left = 645
-            Top = 117
+            Top = 95
             Width = 41
             Height = 21
             ColorEdit = clMoneyGreen
@@ -407,7 +407,7 @@ object FMClientes: TFMClientes
           end
           object STPaisD: TStaticText
             Left = 687
-            Top = 118
+            Top = 97
             Width = 237
             Height = 19
             AutoSize = False
@@ -450,7 +450,7 @@ object FMClientes: TFMClientes
           end
           object fecha_baja_ds: TBDEdit
             Left = 645
-            Top = 9
+            Top = 15
             Width = 73
             Height = 21
             InputType = itDate
@@ -461,7 +461,7 @@ object FMClientes: TFMClientes
           object plataforma_ds: TBDEdit
             Left = 133
             Top = 189
-            Width = 408
+            Width = 387
             Height = 21
             ColorEdit = clMoneyGreen
             MaxLength = 40
@@ -471,7 +471,7 @@ object FMClientes: TFMClientes
           end
           object dias_trayecto_ds: TBDEdit
             Left = 645
-            Top = 85
+            Top = 74
             Width = 42
             Height = 21
             ColorEdit = clMoneyGreen
@@ -623,10 +623,6 @@ object FMClientes: TFMClientes
       object tsDescuentos: TTabSheet
         Caption = 'Descuentos'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object lbl5: TLabel
           Left = 904
           Top = 102
@@ -860,12 +856,8 @@ object FMClientes: TFMClientes
       object tsUnidades: TTabSheet
         Caption = 'Unidades'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object BtnUniFac: TBitBtn
-          Left = 887
+          Left = 879
           Top = 15
           Width = 130
           Height = 27
@@ -1023,10 +1015,6 @@ object FMClientes: TFMClientes
       object tsRecargo: TTabSheet
         Caption = 'Recargo'
         ImageIndex = 4
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgRecargo: TDBGrid
           Left = 0
           Top = 0
@@ -1098,10 +1086,6 @@ object FMClientes: TFMClientes
       object tsFormaPago: TTabSheet
         Caption = 'Forma Pago'
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object pnlFormaPago: TPanel
           Left = 0
           Top = 0
@@ -1305,10 +1289,6 @@ object FMClientes: TFMClientes
       object ts1: TTabSheet
         Caption = 'Riesgo Cliente'
         ImageIndex = 5
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgRiesgo: TDBGrid
           Left = 0
           Top = 0
@@ -1412,10 +1392,6 @@ object FMClientes: TFMClientes
       object tsGastos: TTabSheet
         Caption = 'Gastos Fijos'
         ImageIndex = 6
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object DBGrid1: TDBGrid
           Left = 0
           Top = 0
@@ -1512,6 +1488,80 @@ object FMClientes: TFMClientes
           TabOrder = 3
           TabStop = False
           OnClick = btnGastosClick
+        end
+      end
+      object TabSheet1: TTabSheet
+        Caption = 'Comerciales'
+        ImageIndex = 7
+        object DBGrid2: TDBGrid
+          Left = 0
+          Top = 41
+          Width = 1084
+          Height = 242
+          TabStop = False
+          Align = alClient
+          DataSource = dsQComercial
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'cod_comercial_cc'
+              Title.Caption = 'Comercial'
+              Width = 65
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'des_comercial'
+              Title.Caption = 'Descripcion'
+              Width = 318
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cod_cliente_cc'
+              Title.Caption = 'Cliente'
+              Width = 65
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cod_producto_cc'
+              Title.Caption = 'Producto'
+              Width = 65
+              Visible = True
+            end>
+        end
+        object Panel2: TPanel
+          Left = 0
+          Top = 0
+          Width = 1084
+          Height = 41
+          Align = alTop
+          TabOrder = 1
+          object BitBtn1: TBitBtn
+            Left = 400
+            Top = 8
+            Width = 130
+            Height = 27
+            Caption = 'Mant. comerciales'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+            TabStop = False
+            OnClick = BitBtn1Click
+          end
         end
       end
     end
@@ -3171,13 +3221,13 @@ object FMClientes: TFMClientes
       end>
   end
   object DSSuministros: TDataSource
-    Left = 1061
-    Top = 536
+    Left = 712
+    Top = 596
   end
   object DSDescuentos: TDataSource
     DataSet = QDescuentos
-    Left = 1056
-    Top = 584
+    Left = 649
+    Top = 597
   end
   object QAuxCli: TQuery
     DatabaseName = 'BDProyecto'
@@ -3194,8 +3244,8 @@ object FMClientes: TFMClientes
     SQL.Strings = (
       'select *'
       'from frf_clientes_env')
-    Left = 1051
-    Top = 460
+    Left = 680
+    Top = 625
     object strngfldQUnidadesempresa_ce: TStringField
       FieldName = 'empresa_ce'
       Origin = 'COMERCIALIZACION.frf_clientes_env.empresa_ce'
@@ -3261,8 +3311,8 @@ object FMClientes: TFMClientes
   object DSUnidades: TDataSource
     AutoEdit = False
     DataSet = QUnidades
-    Left = 1028
-    Top = 580
+    Left = 681
+    Top = 596
   end
   object QRecargo: TQuery
     DatabaseName = 'BDProyecto'
@@ -3274,13 +3324,13 @@ object FMClientes: TFMClientes
       'where empresa_cd = '#39'050'#39
       'and cliente_cd = '#39'ED'#39
       'order by inicio desc')
-    Left = 1024
-    Top = 504
+    Left = 840
+    Top = 624
   end
   object DSRecargo: TDataSource
     DataSet = QRecargo
-    Left = 1024
-    Top = 544
+    Left = 840
+    Top = 592
   end
   object QClientes: TQuery
     AfterOpen = QClientesAfterOpen
@@ -3303,14 +3353,14 @@ object FMClientes: TFMClientes
       'select facturable_dc facturable, no_facturable_dc descuento,  '
       '        fecha_ini_dc inicio, fecha_fin_dc fin  '
       ' from frf_descuentos_cliente')
-    Left = 1064
-    Top = 504
+    Left = 648
+    Top = 625
   end
   object DSTesoreria: TDataSource
     DataSet = QTesoreria
     OnDataChange = DSTesoreriaDataChange
-    Left = 988
-    Top = 612
+    Left = 777
+    Top = 595
   end
   object QTesoreria: TQuery
     OnCalcFields = QTesoreriaCalcFields
@@ -3319,8 +3369,8 @@ object FMClientes: TFMClientes
     SQL.Strings = (
       'select *'
       'from frf_clientes_tes')
-    Left = 992
-    Top = 504
+    Left = 776
+    Top = 624
     object QTesoreriaempresa_ct: TStringField
       FieldName = 'empresa_ct'
       Origin = 'BDPROYECTO.frf_clientes_tes.empresa_ct'
@@ -3358,8 +3408,8 @@ object FMClientes: TFMClientes
   end
   object dsRiesgo: TDataSource
     DataSet = QRiesgo
-    Left = 1036
-    Top = 620
+    Left = 808
+    Top = 594
   end
   object QRiesgo: TQuery
     DatabaseName = 'BDProyecto'
@@ -3370,8 +3420,8 @@ object FMClientes: TFMClientes
         'echa_fin_cr, case when seguro_cr = 0 then '#39'NO'#39' else '#39'SI'#39' end seg' +
         'uro'
       '  from frf_clientes_rie')
-    Left = 992
-    Top = 464
+    Left = 808
+    Top = 624
     object QRiesgoempresa_cr: TStringField
       FieldName = 'empresa_cr'
       Origin = 'BDPROYECTO.frf_clientes_rie.empresa_cr'
@@ -3403,8 +3453,8 @@ object FMClientes: TFMClientes
   end
   object dsGastos: TDataSource
     DataSet = qGastos
-    Left = 992
-    Top = 584
+    Left = 745
+    Top = 595
   end
   object qGastos: TQuery
     DatabaseName = 'BDProyecto'
@@ -3413,8 +3463,8 @@ object FMClientes: TFMClientes
       'select no_facturable_gc gasto,  '
       '        fecha_ini_gc inicio, fecha_fin_gc fin  '
       ' from frf_gastos_cliente')
-    Left = 960
-    Top = 504
+    Left = 744
+    Top = 624
   end
   object QSuministro: TQuery
     OnCalcFields = QSuministroCalcFields
@@ -3425,8 +3475,8 @@ object FMClientes: TFMClientes
       'select facturable_dc facturable, no_facturable_dc descuento,  '
       '        fecha_ini_dc inicio, fecha_fin_dc fin  '
       ' from frf_descuentos_cliente')
-    Left = 959
-    Top = 464
+    Left = 711
+    Top = 624
     object QSuministrocliente_ds: TStringField
       FieldName = 'cliente_ds'
     end
@@ -3502,5 +3552,42 @@ object FMClientes: TFMClientes
     object QSuministrodias_trayecto_ds: TIntegerField
       FieldName = 'dias_trayecto_ds'
     end
+  end
+  object QComercial: TQuery
+    OnCalcFields = QComercialCalcFields
+    DatabaseName = 'BDProyecto'
+    DataSource = DSMaestro
+    SQL.Strings = (
+      'select descuento_cd descuento, facturable_cd facturable,'
+      '       fecha_ini_cd inicio, fecha_fin_cd fin'
+      'from frf_clientes_descuento'
+      'where empresa_cd = '#39'050'#39
+      'and cliente_cd = '#39'ED'#39
+      'order by inicio desc')
+    Left = 872
+    Top = 624
+    object QComercialcod_comercial_cc: TStringField
+      FieldName = 'cod_comercial_cc'
+      Size = 3
+    end
+    object QComercialdes_comercial: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'des_comercial'
+      Size = 50
+      Calculated = True
+    end
+    object QComercialcod_cliente_cc: TStringField
+      FieldName = 'cod_cliente_cc'
+      Size = 9
+    end
+    object QComercialcod_producto_cc: TStringField
+      FieldName = 'cod_producto_cc'
+      Size = 9
+    end
+  end
+  object dsQComercial: TDataSource
+    DataSet = QComercial
+    Left = 872
+    Top = 592
   end
 end

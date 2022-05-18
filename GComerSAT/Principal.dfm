@@ -547,10 +547,6 @@ object FPrincipal: TFPrincipal
           Caption = 'C'#243'digos EDI de Clientes'
           OnClick = mnuFicherosClick
         end
-        object mnuFchProductoEDI: TMenuItem
-          Caption = 'C'#243'digos Facturaci'#243'n EDI'
-          OnClick = mnuFicherosClick
-        end
         object N1: TMenuItem
           Caption = '-'
         end
