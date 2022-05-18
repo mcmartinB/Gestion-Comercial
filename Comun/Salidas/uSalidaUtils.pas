@@ -203,18 +203,22 @@ function TieneGGN ( empresa, producto: string) :boolean;
 var QAux: TQuery;
 begin
 
-  QAux := TQuery.Create(nil);
-  QAux.DatabaseName := 'BDProyecto';
-  QAux.SQL.Add('select * from frf_productos_ggn');
-  QAux.sql.add('where empresa_pg = :empresa ');
-  QAux.sql.add('and producto_pg = :producto ');
+  try
+      QAux := TQuery.Create(nil);
+      QAux.DatabaseName := 'BDProyecto';
+      QAux.SQL.Add('select * from frf_productos_ggn');
+      QAux.sql.add('where empresa_pg = :empresa ');
+      QAux.sql.add('and producto_pg = :producto ');
 
-  QAux.Params[0].AsString := empresa;
-  QAux.Params[1].AsString := producto;
+      QAux.Params[0].AsString := empresa;
+      QAux.Params[1].AsString := producto;
 
-  QAux.Open;
+      QAux.Open;
 
-  result := not QAux.IsEmpty;
+      result := not QAux.IsEmpty;
+  finally
+      freeandnil(QAux);
+  end;
 
 end;
 
