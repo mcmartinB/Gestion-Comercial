@@ -411,7 +411,7 @@ begin
     QFacturas.SQL.Add(' AND cod_cliente_fc <> ''MER'' ');
 
   QFacturas.SQL.Add( Filtro + ' ' + GetPais +
-    ' order by moneda_f, empresa_f, serie_f, n_factura_f, fecha_factura_f, tipo_impuesto_f ');
+    ' order by moneda_f, empresa_f, serie_f, fecha_factura_f, n_factura_f, tipo_impuesto_f ');
   result := True;
 end;
 

@@ -759,7 +759,7 @@ object FDListadoFacturas: TFDListadoFacturas
     Top = 8
     Width = 197
     Height = 153
-    Date = 36717.812769988430000000
+    Date = 36717.345018078700000000
     ShowToday = False
     TabOrder = 1
     Visible = False
